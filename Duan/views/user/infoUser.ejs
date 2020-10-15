@@ -1,0 +1,303 @@
+<% include ../common/nav.ejs %>
+<div class="container emp-profile">
+    <form method="post" action="/users/info/<%= userIf._id %>/update" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="<%= userIf.avatar %>" style="max-width:200px; max-height:150px" alt="avatar"
+                         class="avatar"/>
+                    <div class="file btn btn-lg btn-primary" style="max-width:200px; max-height:150px">
+                        Change Photo
+                        <input type="file" name="avatar" class="file-upload"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="profile-head">
+                    <h2 style="margin-top: 0px">
+                        <%= userIf.fullName %>
+                    </h2>
+                    <h4>
+                        Chức vụ: <%= userIf.role %>
+                    </h4>
+                    <ul class="nav " id="myTab">
+                        <li class="nav-item">
+                            <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                               aria-controls="profile" aria-selected="true">Edit Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " id="home-tab" data-toggle="tab" href="#changePassword" role="tab"
+                               aria-controls="changePassword" aria-selected="true">Change Password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>PROFILE</p>
+                    <p>Address</p>
+                    <p><%= userIf.address %></p>
+                    <p>Phone</p>
+                    <p><%= userIf.phone %></p>
+                    <p>CMND</p>
+                    <p><%= userIf.soCMND %></p>
+                </div>
+            </div>
+            <div class="col-md-8" style="margin-top: -40px">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade " id="profile" role="tabpanel">
+                        <form class="form" method="post">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="first_name"><h4>Full name</h4></label>
+                                    <input type="text" class="form-control" name="fullname"
+                                           value="<%= userIf.fullName %>">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="last_name"><h4>Số CMND</h4></label>
+                                    <input type="text" class="form-control" name="cmnd" value="<%= userIf.soCMND %>"
+                                    >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Chức vụ</h4></label>
+                                    <input type="text" class="form-control" name="role"
+                                           value="<%= userIf.role %>">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Age</h4></label>
+                                    <input type="number" class="form-control" name="age" value="<%= userIf.age %>"
+                                           placeholder="Enter age number" title="Enter your age.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="phone"><h4>Phone Number</h4></label>
+                                    <input type="text" class="form-control" name="phone" value="<%= userIf.phone %>"
+                                           placeholder="Enter phone number" title="Enter your phone number if any.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Address</h4></label>
+                                    <input type="text" name="address" class="form-control" value="<%= userIf.address %>"
+                                           placeholder="Address" title="enter a location">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="password"><h4>Password</h4></label>
+                                    <input type="password" class="form-control" name="password" id="password"
+                                           placeholder="Password" title="enter your password.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="password2"><h4>Confirm password</h4></label>
+                                    <input type="password" class="form-control" name="password2" id="password2"
+                                           placeholder="Confirm password" title="enter your password2.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                                class="glyphicon glyphicon-ok-sign"></i> Save
+                                    </button>
+                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="changePassword" role="tabpanel">
+                        <form class="form" action="/users/info/<%= userIf._id %>/changepass" method="post">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="first_name"><h4>Current password</h4></label>
+                                    <input type="password" class="form-control" name="currentpass"
+                                           placeholder="Current password">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="last_name"><h4>A new password</h4></label>
+                                    <input type="password" class="form-control" name="newpass" id="password"
+                                           placeholder="A new password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="phone"><h4>Confirm password</h4></label>
+                                    <input type="password" class="form-control" name="confirmpass"
+                                           placeholder="Confirm password">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success" type="submit"><i
+                                                class="glyphicon glyphicon-ok-sign"></i> Change Password
+                                    </button>
+                                    <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i>
+                                        Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <% if (err){ %>
+        <div data-browse="qq"></div>
+    <% } %>
+</div>
+<style>
+    body {
+        background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    }
+
+    .emp-profile {
+        padding: 3%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        border-radius: 0.5rem;
+        background: #fff;
+    }
+
+    .profile-img {
+        text-align: center;
+    }
+
+    .profile-img img {
+        width: 70%;
+        height: 100%;
+    }
+
+    .profile-img .file {
+        position: relative;
+        overflow: hidden;
+        margin-top: -20%;
+        width: 70%;
+        border: none;
+        border-radius: 0;
+        font-size: 15px;
+        background: #212529b8;
+    }
+
+    .profile-img .file input {
+        position: absolute;
+        opacity: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .profile-head h5 {
+        color: #333;
+    }
+
+    .profile-head h6 {
+        color: #0062cc;
+    }
+
+    .profile-edit-btn {
+        border: none;
+        border-radius: 1.5rem;
+        width: 70%;
+        padding: 2%;
+        font-weight: 600;
+        color: #6c757d;
+        cursor: pointer;
+    }
+
+    .proile-rating {
+        font-size: 12px;
+        color: #818182;
+        margin-top: 5%;
+    }
+
+    .proile-rating span {
+        color: #495057;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+    .profile-head .nav-tabs {
+        margin-bottom: 5%;
+    }
+
+    .profile-head .nav-tabs .nav-link {
+        font-weight: 600;
+        border: none;
+    }
+
+    .profile-head .nav-tabs .nav-link.active {
+        border: none;
+        border-bottom: 2px solid #0062cc;
+    }
+
+    .profile-work {
+        padding: 14%;
+        margin-top: -15%;
+    }
+
+    .profile-work p {
+        font-size: 12px;
+        color: #818182;
+        font-weight: 600;
+        margin-top: 10%;
+    }
+
+    .profile-work a {
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .profile-work ul {
+        list-style: none;
+    }
+
+    .profile-tab label {
+        font-weight: 600;
+    }
+
+    .profile-tab p {
+        font-weight: 600;
+        color: #0062cc;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        var readURL = function (input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.avatar').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(".file-upload").on('change', function () {
+            readURL(this);
+        });
+    });
+    $('div[data-browse]').each(function () {
+        alert('Mật khẩu cũ không chính xác');
+    });
+
+</script>
