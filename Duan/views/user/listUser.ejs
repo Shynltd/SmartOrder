@@ -10,14 +10,10 @@
                                 class="rounded"></div>
                     <div class="ml-3 w-100">
                         <h4 class="mb-0 mt-0"><%= users[i].fullName %></h4> <span>Chức vụ: <%=users[i].role%></span>
-                        <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
-                            <div class="d-flex flex-column"><span class="articles">Articles</span> <span
-                                        class="number1">38</span></div>
-                            <div class="d-flex flex-column"><span class="followers">Followers</span> <span
-                                        class="number2">980</span>
-                            </div>
-                            <div class="d-flex flex-column"><span class="rating">Rating</span> <span
-                                        class="number3">8.9</span></div>
+                        <div class="p-2 mt-2 d-flex justify-content-between rounded stats">
+                            <div class="d-flex flex-column"><span class="articles">Phone:</span> <span
+                                        class="number1"><%=users[i].phone%></span></div>
+
                         </div>
                         <div class="button mt-2 d-flex flex-row align-items-center">
                             <% if (users[i].role != "Admin"){%>

@@ -47,9 +47,9 @@ module.exports.updateUser = async (req, res) => {
             var cmnd = req.body.cmnd;
             var role = req.body.role;
             if (req.files){
-                fs.unlinkSync(`./uploads/${findUser.avatar}`);
+                // fs.unlinkSync(`./uploads/${findUser.avatar}`);
                 avatar = req.files.avatar;
-                let filename ="/user/"+ uniqid()+ "-" +avatar.name;
+                let filename ="/users/"+ uniqid()+ "-" +avatar.name;
                 avatar.mv(`./uploads/${filename}`)
                 avatar = filename;
             }
