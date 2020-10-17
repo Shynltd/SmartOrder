@@ -4,15 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/imgLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="320dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="@id/form"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/form"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginTop="136dp"
+        android:background="@drawable/bg_form_login"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@id/form"
+            app:layout_constraintRight_toRightOf="@id/form"
+            app:layout_constraintTop_toTopOf="@id/form" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/baseline_account_circle_black_18dp"
+            app:layout_constraintHorizontal_bias="0.036"
+            app:layout_constraintLeft_toLeftOf="@id/edtPhone"
+            app:layout_constraintRight_toRightOf="@id/edtPhone"
+            app:layout_constraintTop_toTopOf="@id/edtPhone" />
+
+        <EditText
+            android:id="@+id/edtPhone"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="Phone Number"
+            android:paddingLeft="30dp"
+            android:textSize="15dp"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/white_50"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintLeft_toLeftOf="@id/form"
+            app:layout_constraintRight_toRightOf="@id/form"
+            app:layout_constraintTop_toBottomOf="@id/tvLogin" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/baseline_lock_black_18dp"
+            app:layout_constraintHorizontal_bias="0.036"
+            app:layout_constraintLeft_toLeftOf="@id/edtPassword"
+            app:layout_constraintRight_toRightOf="@id/edtPassword"
+            app:layout_constraintTop_toTopOf="@id/edtPassword" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:paddingLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textPassword"
+            android:paddingBottom="15dp"
+            android:textColorHint="@color/white_50"
+            android:textSize="15dp"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintLeft_toLeftOf="@id/form"
+            app:layout_constraintRight_toRightOf="@id/form"
+            app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+        <CheckBox
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:text="@string/chkRemember"
+            android:id="@+id/chkRemember"
+            app:layout_constraintLeft_toLeftOf="@id/form"
+            app:layout_constraintRight_toRightOf="@id/form"
+            app:layout_constraintBottom_toTopOf="@id/btnLogin"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:id="@+id/btnLogin"
+            android:background="@drawable/bg_btn_login"
+            app:layout_constraintBottom_toBottomOf="@id/form"
+            app:layout_constraintLeft_toLeftOf="@id/form"
+            app:layout_constraintRight_toRightOf="@id/form" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

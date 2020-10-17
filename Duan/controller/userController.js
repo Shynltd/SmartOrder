@@ -100,6 +100,9 @@ module.exports.changePassword = async (req, res) => {
         }
     }
 }
-module.exports.test = (req, res) => {
+module.exports.getCreateUser = (req, res) => {
+res.render('user/createUser')
+}
+module.exports.postCreateUser = (req, res) => {
 
 }
