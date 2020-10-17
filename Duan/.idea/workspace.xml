@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../SmartOrder/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values-night/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values-night/themes.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values/themes.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values/themes.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,6 +88,9 @@
       <workItem from="1602767304831" duration="3138000" />
       <workItem from="1602780864528" duration="823000" />
       <workItem from="1602873256124" duration="4833000" />
+      <workItem from="1602932296174" duration="1595000" />
+      <workItem from="1602960260819" duration="4149000" />
+      <workItem from="1602964844218" duration="352000" />
     </task>
     <servers />
   </component>
@@ -129,22 +126,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="793" y="217" key="Github.UntrackedFilesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601137908216" />
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1602913857928">
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom" timestamp="1602964686288">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602913857928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1602913857928">
+    <state width="1877" height="278" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1602964686288" />
+    <state width="1877" height="278" key="GridCell.Tab.0.center" timestamp="1602964686287">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602913857928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1602913857928">
+    <state width="1877" height="278" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1602964686287" />
+    <state width="1877" height="278" key="GridCell.Tab.0.left" timestamp="1602964686287">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602913857928" />
-    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1602913857928">
+    <state width="1877" height="278" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1602964686287" />
+    <state width="1877" height="278" key="GridCell.Tab.0.right" timestamp="1602964686287">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602913857928" />
+    <state width="1877" height="278" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1602964686287" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1602223727124">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

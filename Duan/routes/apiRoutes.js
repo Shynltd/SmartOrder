@@ -2,6 +2,6 @@ let express = require('express');
 let router = express.Router();
 let apiController = require('../api/userApi');
 
-router.get('/login',apiController.checkLogin);;
+router.post('/login',apiController.checkLogin);;
 
 module.exports = router;
