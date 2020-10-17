@@ -30,6 +30,12 @@ android {
 
 dependencies {
 
+    //Thư viện retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    //Thư viện chuyển đổi gson (phải cùng phiên bản với retrofit)
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
