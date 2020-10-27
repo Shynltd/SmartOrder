@@ -8,7 +8,8 @@ var fileUpload = require('express-fileupload');
 
 var authRoutes = require('./routes/authRoutes');
 var userRoutes = require('./routes/userRoutes');
-var menuRoute = require('./routes/menuRoutes');
+var menuRoutes = require('./routes/menuRoutes');
+var tableRoutes = require('./routes/tableRoutes');
 var apiRoutes = require('./routes/apiRoutes');
 var mongoose = require('./monggo/monggosv');
 var authMiddle = require('./middleware/authMiddle');
@@ -33,7 +34,8 @@ app.use(fileUpload({
 app.use('/', authRoutes);
 app.use('/users',userRoutes);
 app.use('/api', apiRoutes);
-app.use('/menus', menuRoute);
+app.use('/menus', menuRoutes);
+app.use('/table', tableRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

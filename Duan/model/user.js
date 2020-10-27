@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 var userSchema = new mongoose.Schema({
-    userName: {
-        type: String,
-        required: true,
-    },
+    // userName: {
+    //     type: String,
+    //     required: true,
+    // },
     passWord: {
         type: String,
         required: true,

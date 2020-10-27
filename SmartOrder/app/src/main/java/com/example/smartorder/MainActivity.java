@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText edtPassword;
     private CheckBox chkRemember;
     private ImageButton btnLogin;
-    private String link = "http://192.168.1.3:2001/api/";
+    private String link = "http://192.168.1.3:2000/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

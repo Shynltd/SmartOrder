@@ -2,6 +2,7 @@ var user = require('../model/user')
 module.exports.getLogin =  (req, res) => {
     res.render('login', {error:false});
 }
+
 module.exports.checkLogin = async (req, res) => {
     var email = req.body.email;
     var userId = await user.findOne({userName : email });
@@ -28,6 +29,7 @@ module.exports.checkLogin = async (req, res) => {
     }
 
 }
+
 module.exports.logOut = (req, res) => {
     if (req.signedCookies.id){
         res.clearCookie('id');

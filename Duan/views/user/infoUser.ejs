@@ -59,15 +59,27 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="last_name"><h4>Số CMND</h4></label>
-                                    <input type="text" class="form-control" name="cmnd" value="<%= userIf.soCMND %>"
+                                    <input
+                                    <% if (role != "Admin"){ %>
+                                        disabled
+                                            <% } %>
+                                        type="text" class="form-control" name="cmnd" value="<%= userIf.soCMND %>"
                                     >
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label><h4>Chức vụ</h4></label>
-                                    <input type="text" class="form-control" name="role"
-                                           value="<%= userIf.role %>">
+                                    <select
+                                    <% if (role != "Admin"){ %>
+                                        disabled
+                                            <% } %>
+                                        class="form-control" name="role"
+                                        value="<%= userIf.role %>">
+                                        <option <%if (userIf.role == "Admin"){%> selected <%}%>value="Admin">Admin</option>
+                                        <option <%if (userIf.role == "Staff"){%> selected <%}%> value="Staff">Staff</option>
+                                        <option <%if (userIf.role == "Cashier"){%> selected <%}%> value="Cashier">Cashier</option>
+                                    </select>
                                 </div>
                             </div>
 

@@ -1,0 +1,53 @@
+<% include ../common/nav.ejs %>
+<h2 class="container">Thêm mới món ăn</h2>
+<br>
+<form method="post" action="/menus/create" class="container" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Tên món ăn</label>
+        <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="Tên món ăn">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Loại</label>
+        <select class="form-control" name="type" id="select" onchange="myFunction()">
+            <option value="Drink">Nước uống</option>
+            <option value="Food">Thức ăn</option>
+
+        </select>
+    </div>
+    <div class="form-group" id="formAmount" >
+        <label for="formGroupExampleInput">Số lượng</label>
+        <input type="Number" class="form-control"  name="amount" placeholder="Số lượng">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Giá</label>
+        <input type="number" class="form-control" id="formGroupExampleInput" name="price" placeholder="Giá">
+    </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Image</label>
+        <input type="file" class="form-control" id="formGroupExampleInput" name="image">
+    </div>
+    <% if (err){%>
+        <div class="alert alert-danger" role="alert">
+            <%= msg %>
+        </div>
+    <%  }%>
+    <div class="text-center">
+        <button class="btn-primary btn-sm" type="submit">Thêm món ăn</button>
+        &nbsp;
+        <a href="/menus" class="btn-primary btn-sm">Hủy</a>
+    </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("select").value;
+        if (x != "Drink") {
+            document.getElementById("formAmount").hidden = true;
+        } else {
+            document.getElementById("formAmount").hidden = false;
+        }
+    }
+
+</script>

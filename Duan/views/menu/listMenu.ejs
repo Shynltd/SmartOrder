@@ -1,0 +1,83 @@
+<% include ../common/nav.ejs %>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                <div class="page-section">
+                    <h1 class="page-title">Food Menu</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
+                <div class="menu-block">
+                    <h3 class="menu-title">Food</h3>
+                    <% for (var i = 0; i < listFood.length; i++){ %>
+                        <div class="menu-content">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="dish-img"><a href="#"><img src="<%= listFood[i].image%>" alt=""
+                                                                           class="img-circle"></a></div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="dish-content">
+                                        <h5 class="dish-title"><a href="/menus/<%=listFood[i]._id%>/update"><%= listFood[i].name %></a></h5>
+                                        <span class="dish-meta"> Type: <%= listFood[i].type %></span>
+                                        <div class="dish-price">
+                                            <p><%= listFood[i].price %>đ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
+                <div class="menu-block">
+                    <h3 class="menu-title">Drink</h3>
+                    <% for (var i = 0; i < listDrink.length; i++){ %>
+                        <div class="menu-content">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                    <div class="dish-img"><a href="#"><img src="<%= listDrink[i].image%>" alt=""
+                                                                           class="img-circle"></a></div>
+                                </div>
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="dish-content">
+                                        <h5 class="dish-title"><a href="#"><%= listDrink[i].name%></a></h5>
+                                        <span class="dish-meta">Số lượng: <%= listDrink[i].amount%></span>
+                                        <div class="dish-price">
+                                            <p>Giá: <%= listDrink[i].price%>đ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="get" action="/menus/create">
+    <button class="kc_fab_main_btn" type="submit">+</button>
+</form>
+<style>
+    .kc_fab_main_btn {
+        background-color: #F44336;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background: #F44336;
+        border: none;
+        outline: none;
+        color: #FFF;
+        font-size: 36px;
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+    }
+</style>
+
+

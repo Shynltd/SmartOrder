@@ -10,6 +10,14 @@ var menuSchema = new mongoose.Schema({
     },
     image: {
         type: String
+    },
+    type: {
+        type:String,
+        required:true
+    },
+    amount: {
+        type: Number
     }
+
 })
 module.exports = mongoose.model('Menu', menuSchema, 'menu');

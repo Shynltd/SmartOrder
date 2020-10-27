@@ -1,4 +1,11 @@
 <% include ../common/nav.ejs%>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+        <div class="page-section">
+            <h1 class="page-title">Danh sách nhân viên</h1>
+        </div>
+    </div>
+</div>
 <div class="container mt-5 d-flex justify-content-center">
     <div class="card-group">
         <div class="card-columns">
@@ -28,3 +35,22 @@
         </div>
     </div>
 </div>
+<form method="get" action="/users/create">
+    <button class="kc_fab_main_btn" type="submit">+</button>
+</form>
+<style>
+    .kc_fab_main_btn {
+        background-color: #F44336;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background: #F44336;
+        border: none;
+        outline: none;
+        color: #FFF;
+        font-size: 36px;
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+    }
+</style>
