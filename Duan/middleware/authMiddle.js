@@ -1,4 +1,6 @@
 var user = require('../model/user');
+let jwt = require('jsonwebtoken');
+let axios = require('axios');
 
 module.exports.checkAdmin = async (req, res, next) => {
     var findAdmin = await user.findOne({_id: req.signedCookies.id});
@@ -33,4 +35,21 @@ module.exports.reqAuth = async (req, res, next) => {
          res.redirect('/');
          return;
      }
+}
+module.exports.testToken = async (req, res, next) => {
+    if (req.headers && req.headers.authorization){
+    jwt.verify(req.headers.authorization,'duan', (err, decoded) => {
+        if (err){
+            res.status(500).json({error:err.message})
+        }
+        if (decoded){
+            user.findOne({_id: decoded.id}).then(data => {
+                if (data.role === 'Admin'){
+                    next();
+                }
+            });
+
+        }
+    })
+    }
 }

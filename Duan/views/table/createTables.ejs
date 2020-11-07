@@ -1,0 +1,27 @@
+<% include ../common/nav.ejs %>
+<h2 class="container">Thêm mới bàn</h2>
+<br>
+<form method="post" action="/tables/create" class="container" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="formGroupExampleInput">Số bàn</label>
+        <input type="number" class="form-control" id="formGroupExampleInput" name="tableCode" value="<%=findAllTables.length +1 %>" placeholder="Bàn số">
+    </div>
+
+    <div class="form-group" id="formAmount" >
+        <label for="formGroupExampleInput">Số ghế</label>
+        <input type="Number" class="form-control"  name="tableSeats" placeholder="Số ghế">
+    </div>
+    <% if (err){%>
+        <div class="alert alert-danger" role="alert">
+            <%= msg %>
+        </div>
+    <%  }%>
+    <div class="text-center">
+        <button class="btn-primary btn-sm" type="submit">Thêm bàn</button>
+        &nbsp;
+        <a href="/menus" class="btn-primary btn-sm">Hủy</a>
+    </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+

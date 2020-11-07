@@ -1,0 +1,52 @@
+<% include ../common/nav.ejs %>
+<h2 class="container">Update món ăn</h2>
+<br>
+<form method="post" action="/menus/<%=findFood._id%>/update" class="container" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Tên món ăn</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="Tên món ăn" value="<%=findFood.name%>">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Loại</label>
+            <select class="form-control" name="type" id="select" onchange="myFunction()">
+                <option <%if (findFood.type == "Drink") { %> selected <%}%> value="Drink">Nước uống</option>
+                <option <%if (findFood.type == "Food") { %> selected <%}%> value="Food">Thức ăn</option>
+            </select>
+        </div>
+        <div class="form-group" id="formAmount" <%if (findFood.type == "Food") { %> hidden <%}%>>
+            <label for="formGroupExampleInput">Số lượng</label>
+            <input  type="Number" class="form-control" name="amount" placeholder="Số lượng" value="<%=findFood.amount%>">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Giá</label>
+            <input type="number" class="form-control" id="formGroupExampleInput" name="price" placeholder="Giá" value="<%=findFood.price%>">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Image</label>
+            <input type="file" class="form-control" id="formGroupExampleInput" name="image">
+        </div>
+    <% if (err){ %>
+        <div class="alert alert-danger" role="alert">
+            <%= msg %>
+        </div>
+    <% } %>
+    <div class="text-center">
+        <button class="btn-primary btn-sm" type="submit">Update món ăn</button>
+        &nbsp;
+        <a href="/menus" class="btn-primary btn-sm">Hủy</a>
+    </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+
+    function myFunction() {
+        var x = document.getElementById("select").value;
+        if (x != "Drink") {
+            document.getElementById("formAmount").hidden = true;
+        } else {
+            document.getElementById("formAmount").hidden = false;
+        }
+    }
+
+</script>

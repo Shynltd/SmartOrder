@@ -1,0 +1,48 @@
+<% include ../common/nav.ejs %>
+<div class="container-fluid">
+    <header class="container">
+    </header>
+    <main class="container">
+        <h4>Danh sách bàn</h4>
+        <table class="table table-striped">
+            <thead>
+            <th>Number</th>
+            <th>Seat</th>
+            </thead>
+            <tbody>
+            <% for (let i = 0; i < listTable.length; i++){ %>
+                <tr>
+                    <td><%= listTable[i].tableCode %></td>
+                    <td><%= listTable[i].tableSeats %></td>
+                    <td>
+                        &nbsp
+                        <a href="/tables/<%= listTable[i]._id %>/delete"
+                           onclick="return confirm('Bạn có muốn xóa bàn này')" class="btn btn-danger btn-sm">Xóa</a>
+                        &nbsp;
+                        <a href="/tables/<%= listTable[i]._id %>/update" class="btn btn-sm btn-primary">Update</a>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </main>
+</div>
+<form method="get" action="/tables/create">
+    <button class="kc_fab_main_btn" type="submit">+</button>
+</form>
+<style>
+    .kc_fab_main_btn {
+        background-color: #F44336;
+        width: 60px;
+        height: 60px;
+        border-radius: 100%;
+        background: #F44336;
+        border: none;
+        outline: none;
+        color: #FFF;
+        font-size: 36px;
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+    }
+</style>

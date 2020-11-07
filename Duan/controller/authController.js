@@ -1,24 +1,26 @@
-var user = require('../model/user')
+let user = require('../model/user');
+
+
 module.exports.getLogin =  (req, res) => {
     res.render('login', {error:false});
 }
 
 module.exports.checkLogin = async (req, res) => {
-    var email = req.body.email;
-    var userId = await user.findOne({userName : email });
-    if (userId){
-        var password = req.body.password;
-        if (userId.passWord == password){
-            if (userId.role == 'Admin'){
-                res.cookie('id',userId._id,{
+    let phone = req.body.phone;
+    let findUser = await user.findOne({phone : phone });
+    if (findUser){
+        let password = req.body.password;
+        if (findUser.passWord === password){
+            if (findUser.role === 'Admin'){
+                res.cookie('id',findUser._id,{
                     signed:true
                 });
                 res.redirect('/users');
             } else {
-                res.cookie('id',userId._id, {
+                res.cookie('id',findUser._id, {
                     signed: true
                 });
-                res.redirect('users/info/'+userId._id);
+                res.redirect('users/info/'+findUser._id);
             }
 
         } else {

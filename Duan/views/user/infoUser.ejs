@@ -42,7 +42,7 @@
                     <p>Phone</p>
                     <p><%= userIf.phone %></p>
                     <p>CMND</p>
-                    <p><%= userIf.soCMND %></p>
+                    <p><%= userIf.indentityCardNumber %></p>
                 </div>
             </div>
             <div class="col-md-8" style="margin-top: -40px">
@@ -63,7 +63,7 @@
                                     <% if (role != "Admin"){ %>
                                         disabled
                                             <% } %>
-                                        type="text" class="form-control" name="cmnd" value="<%= userIf.soCMND %>"
+                                        type="text" class="form-control" name="cmnd" value="<%= userIf.indentityCardNumber %>"
                                     >
                                 </div>
                             </div>

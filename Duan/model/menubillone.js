@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 
-let menuSchema = new mongoose.Schema({
+let billOneSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -10,15 +10,21 @@ let menuSchema = new mongoose.Schema({
         required: true,
     },
     image: {
-        type: String
+        type: String,
+        required: true,
     },
     type: {
         type:String,
         required:true
     },
     amount: {
-        type: Number
+        type: Number,
+        required: true
+    },
+    totalMoney: {
+        type: Number,
+        required: true
     }
 
 })
-module.exports = mongoose.model('Menu', menuSchema, 'menu');
+module.exports = mongoose.model('billOne', billOneSchema, 'billOne');

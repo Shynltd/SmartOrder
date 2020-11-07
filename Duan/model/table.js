@@ -1,10 +1,10 @@
-var mongoose = require('mongoose');
-var tableSchema = new mongoose.Schema({
-    number: {
+let mongoose = require('mongoose');
+let tableSchema = new mongoose.Schema({
+    tableCode: {
         type: Number,
         required: true,
     },
-    seats: {
+    tableSeats: {
         type: Number,
         required:true
     }

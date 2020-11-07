@@ -1,9 +1,5 @@
-var mongoose = require('mongoose');
-var userSchema = new mongoose.Schema({
-    // userName: {
-    //     type: String,
-    //     required: true,
-    // },
+let mongoose = require('mongoose');
+let userSchema = new mongoose.Schema({
     passWord: {
         type: String,
         required: true,
@@ -16,7 +12,7 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    soCMND: {
+    indentityCardNumber: {
         type: Number,
         required: true,
     },
@@ -29,8 +25,7 @@ var userSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type:String,
-        required: true
+        type:String
     },
     age: {
         type:Number,

@@ -24,8 +24,10 @@
                                         <h5 class="dish-title"><a href="/menus/<%=listFood[i]._id%>/update"><%= listFood[i].name %></a></h5>
                                         <span class="dish-meta"> Type: <%= listFood[i].type %></span>
                                         <div class="dish-price">
-                                            <p><%= listFood[i].price %>đ</p>
+                                            <p>Giá: <%= listFood[i].price %>đ</p>
                                         </div>
+                                        <a onclick="return confirm('Bạn có muốn xóa món ăn này')" href="/menus/<%=listFood[i]._id%>/delete" class="btn btn-sm btn-danger w-100 col-lg-3 col-md-3 col-sm-3 col-xs-4 ">Delete</a>
+
                                     </div>
                                 </div>
                             </div>
@@ -45,11 +47,12 @@
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
                                     <div class="dish-content">
-                                        <h5 class="dish-title"><a href="#"><%= listDrink[i].name%></a></h5>
+                                        <h5 class="dish-title"><a href="/menus/<%=listDrink[i]._id%>/update"><%= listDrink[i].name%></a></h5>
                                         <span class="dish-meta">Số lượng: <%= listDrink[i].amount%></span>
                                         <div class="dish-price">
                                             <p>Giá: <%= listDrink[i].price%>đ</p>
                                         </div>
+                                        <a onclick="return confirm('Bạn có muốn xóa thông tin người này')" href="/menus/<%=listDrink[i]._id%>/delete" class="btn btn-sm btn-danger w-100 col-lg-3 col-md-3 col-sm-3 col-xs-4 ">Delete</a>
                                     </div>
                                 </div>
                             </div>

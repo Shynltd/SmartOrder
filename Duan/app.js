@@ -11,6 +11,7 @@ var userRoutes = require('./routes/userRoutes');
 var menuRoutes = require('./routes/menuRoutes');
 var tableRoutes = require('./routes/tableRoutes');
 var apiRoutes = require('./routes/apiRoutes');
+var billRoutes = require('./routes/billRoutes');
 var mongoose = require('./monggo/monggosv');
 var authMiddle = require('./middleware/authMiddle');
 
@@ -35,7 +36,8 @@ app.use('/', authRoutes);
 app.use('/users',userRoutes);
 app.use('/api', apiRoutes);
 app.use('/menus', menuRoutes);
-app.use('/table', tableRoutes);
+app.use('/tables', tableRoutes);
+app.use('/bills', billRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
