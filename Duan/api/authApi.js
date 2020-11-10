@@ -7,7 +7,7 @@ module.exports.checkLogin = async (req, res) => {
     if (findUser) {
         let password = req.body.password;
         if (findUser.passWord === password) {
-            const token = jwt.sign({id: findUser._id}, 'duan', {algorithm: 'HS256'});
+            const token = jwt.sign({id: findUser._id}, 'duan', {algorithm: 'HS256', expiresIn:60*60*24});
             res.json({
                 status: 'OK',
                 token,
