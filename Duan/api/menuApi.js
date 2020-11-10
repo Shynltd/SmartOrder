@@ -5,14 +5,6 @@ module.exports.getListMenu = async (req, res) => {
     let listDrink = await menu.find({type: "Drink"});
     res.json({listFood, listDrink});
 }
-module.exports.getInfoMenu = async (req, res) => {
-    let findFood = await menu.findById(req.params.id);
-    if (findFood){
-        res.json(findFood);
-    } else {
-        res.status(500).json({message: 'Food does not exist'})
-    }
-}
 module.exports.postCreate = async (req, res) => {
     let name = req.body.name;
     let type = req.body.type;
@@ -30,7 +22,6 @@ module.exports.postCreate = async (req, res) => {
             });
         } else {
             res.status(200).json({
-                data: menus,
                 message: `Add new food successfully`
             });
         }

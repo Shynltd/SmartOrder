@@ -39,7 +39,7 @@ module.exports.updateUser = async (req, res) => {
                 age: req.body.age,
                 address: req.body.address,
                 role: req.body.role,
-                indentityCardNumber: req.body.cmnd
+                indentityCardNumber: req.body.indentityCardNumber
             },
         }, {new: true});
         if (updated) {
@@ -62,8 +62,10 @@ module.exports.changePassword = async (req, res) => {
             let confirmPassword = req.body.confirmpass;
             if (newPassword === confirmPassword) {
                 const updated = await user.findOneAndUpdate({_id: req.params.id}, {
-                    passWord: newPassword,
-                })
+                    $set: {
+                        passWord: req.body.newPass,
+                    }
+                }, {new: true});
                 if (updated) {
                     res.status(200).json({message: 'Password Updated'})
                 } else {
@@ -98,7 +100,6 @@ module.exports.postCreateUser = async (req, res) => {
                 res.status(500).json({message: `Error is ${err}`});
             } else {
                 res.status(200).json({
-                    data: users,
                     message: `Register new user successfully`,
                 });
             }
