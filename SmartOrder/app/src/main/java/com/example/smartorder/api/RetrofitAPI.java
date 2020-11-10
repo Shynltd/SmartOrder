@@ -1,6 +1,7 @@
 package com.example.smartorder.api;
 
 import com.example.smartorder.model.Auth;
+import com.example.smartorder.model.Table;
 import com.example.smartorder.model.User;
 import com.example.smartorder.model.menu.Menu;
 
@@ -25,7 +26,7 @@ public interface RetrofitAPI {
     Call<List<User>> getAllUser();
 
     @GET("table")
-    Call<List<Menu>> getAllTable();
+    Call<List<Table>> getAllTable();
 
     @GET("bill")
     Call<List<Menu>> getAllBill();

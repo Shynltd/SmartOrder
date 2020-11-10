@@ -17,10 +17,7 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.Auth;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
 
-import java.net.URISyntaxException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
