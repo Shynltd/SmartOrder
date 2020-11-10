@@ -6,38 +6,117 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
 
-    @SerializedName("status")
+    @SerializedName("_id")
     @Expose
-    private String status;
-    @SerializedName("message")
+    private String id;
+    @SerializedName("passWord")
     @Expose
-    private String message;
-    @SerializedName("user")
+    private String passWord;
+    @SerializedName("role")
     @Expose
-    private User_ user;
+    private String role;
+    @SerializedName("fullName")
+    @Expose
+    private String fullName;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("address")
+    @Expose
+    private String address;
+    @SerializedName("age")
+    @Expose
+    private Integer age;
+    @SerializedName("avatar")
+    @Expose
+    private String avatar;
+    @SerializedName("indentityCardNumber")
+    @Expose
+    private Integer indentityCardNumber;
 
-    public String getStatus() {
-        return status;
+    public User(String id, String passWord, String role, String fullName, String phone, String address, Integer age, String avatar, Integer indentityCardNumber) {
+        this.id = id;
+        this.passWord = passWord;
+        this.role = role;
+        this.fullName = fullName;
+        this.phone = phone;
+        this.address = address;
+        this.age = age;
+        this.avatar = avatar;
+        this.indentityCardNumber = indentityCardNumber;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public String getId() {
+        return id;
     }
 
-    public String getMessage() {
-        return message;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public User_ getUser() {
-        return user;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
-    public void setUser(User_ user) {
-        this.user = user;
+    public String getRole() {
+        return role;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Integer getIndentityCardNumber() {
+        return indentityCardNumber;
+    }
+
+    public void setIndentityCardNumber(Integer indentityCardNumber) {
+        this.indentityCardNumber = indentityCardNumber;
+    }
+
 
 }

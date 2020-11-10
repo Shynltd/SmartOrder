@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "507824693043",
+    "firebase_url": "https://duan2-4eb44.firebaseio.com",
+    "project_id": "duan2-4eb44",
+    "storage_bucket": "duan2-4eb44.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507824693043:android:ac4c7c8fe0eec892402846",
+        "android_client_info": {
+          "package_name": "com.example.smartorder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507824693043-b8md315n0cqok5q1c2lvn1nkuvbh7fdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQoB2IK3fbbOaBseAjfsoLHAMQ_Y80nvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507824693043-b8md315n0cqok5q1c2lvn1nkuvbh7fdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -4,109 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="320dp"
-        android:src="@drawable/logo"
-        app:layout_constraintBottom_toBottomOf="@id/form"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/form"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_marginTop="136dp"
-        android:background="@drawable/bg_form_login"
+        android:layout_height="50dp"
+        android:background="@color/bg_bottombar"
+        android:id="@+id/appbarlayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tvLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
-            android:text="@string/login"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="@id/form"
-            app:layout_constraintRight_toRightOf="@id/form"
-            app:layout_constraintTop_toTopOf="@id/form" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <androidx.appcompat.widget.Toolbar
+                    android:layout_width="match_parent"
+                    app:title="Màn hình"
+                    android:id="@+id/toolbar"
+                    android:layout_height="wrap_content"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="5dp"
+                    app:civ_border_color="@color/purple_700"
+                    app:civ_border_width="2dp"
+                    android:src="@color/design_default_color_primary"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="30dp"
+                    android:id="@+id/imgProfile"/>
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/baseline_account_circle_black_18dp"
-            app:layout_constraintHorizontal_bias="0.036"
-            app:layout_constraintLeft_toLeftOf="@id/edtPhone"
-            app:layout_constraintRight_toRightOf="@id/edtPhone"
-            app:layout_constraintTop_toTopOf="@id/edtPhone" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-        <EditText
-            android:id="@+id/edtPhone"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="Phone Number"
-            android:paddingLeft="30dp"
-            android:textSize="15dp"
-            android:paddingBottom="15dp"
-            android:textColorHint="@color/white_50"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintLeft_toLeftOf="@id/form"
-            app:layout_constraintRight_toRightOf="@id/form"
-            app:layout_constraintTop_toBottomOf="@id/tvLogin" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/baseline_lock_black_18dp"
-            app:layout_constraintHorizontal_bias="0.036"
-            app:layout_constraintLeft_toLeftOf="@id/edtPassword"
-            app:layout_constraintRight_toRightOf="@id/edtPassword"
-            app:layout_constraintTop_toTopOf="@id/edtPassword" />
+    <me.ibrahimsn.lib.SmoothBottomBar
+        android:id="@+id/nbBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:backgroundColor="@color/bg_bottombar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_menu" />
 
-        <EditText
-            android:id="@+id/edtPassword"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/password"
-            android:paddingLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:inputType="textPassword"
-            android:paddingBottom="15dp"
-            android:textColorHint="@color/white_50"
-            android:textSize="15dp"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintLeft_toLeftOf="@id/form"
-            app:layout_constraintRight_toRightOf="@id/form"
-            app:layout_constraintTop_toBottomOf="@id/edtPhone" />
-        <CheckBox
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:text="@string/chkRemember"
-            android:id="@+id/chkRemember"
-            app:layout_constraintLeft_toLeftOf="@id/form"
-            app:layout_constraintRight_toRightOf="@id/form"
-            app:layout_constraintBottom_toTopOf="@id/btnLogin"/>
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
-            android:id="@+id/btnLogin"
-            android:background="@drawable/bg_btn_login"
-            app:layout_constraintBottom_toBottomOf="@id/form"
-            app:layout_constraintLeft_toLeftOf="@id/form"
-            app:layout_constraintRight_toRightOf="@id/form" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <FrameLayout
+        android:id="@+id/frm"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/nbBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbarlayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
