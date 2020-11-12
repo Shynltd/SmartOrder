@@ -1,6 +1,5 @@
 var user = require('../model/user');
 let jwt = require('jsonwebtoken');
-let axios = require('axios');
 
 module.exports.checkAdmin = async (req, res, next) => {
     var findAdmin = await user.findOne({_id: req.signedCookies.id});

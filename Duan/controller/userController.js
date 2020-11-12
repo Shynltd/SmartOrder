@@ -2,6 +2,14 @@
 let user = require('../model/user');
 let fs = require('fs');
 let uniqid = require('uniqid');
+// let storage =multer.diskStorage({
+//     destination: (req, file, callback) => {
+//         callback(null, '../uploads')
+//     },
+//     filename: (req, file, callback) => {
+//         callback(null, "/users/" + uniqid()+file.originalname)
+//     }
+// })
 
 module.exports.getUser = async (req, res) => {
     let findAllUser = await user.find();
@@ -105,7 +113,11 @@ module.exports.changePassword = async (req, res) => {
 module.exports.getCreateUser = (req, res) => {
     res.render('user/createUser', {err: false})
 }
-module.exports.postCreateUser = async (req, res) => {
+
+
+
+
+module.exports.postCreateUser =  async (req, res) => {
     let phone = req.body.phone;
     let checkPhone = await user.findOne({phone:phone});
     if (checkPhone) {
@@ -117,7 +129,7 @@ module.exports.postCreateUser = async (req, res) => {
         let indentityCardNumber = req.body.soCMND;
         let address = req.body.address;
         let age = req.body.age;
-        let avatar = null
+        let avatar =null;
         if (req.files){
         avatar =req.files.avatar;
         let filename = "/users/" + uniqid() + "-" + avatar.name;

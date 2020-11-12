@@ -4,6 +4,7 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let lodash = require('lodash');
+let multer = require('multer');
 let fileUpload = require('express-fileupload');
 let authRoutes = require('./routes/authRoutes');
 let userRoutes = require('./routes/userRoutes');

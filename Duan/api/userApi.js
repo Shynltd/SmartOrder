@@ -1,4 +1,6 @@
 let user = require('../model/user');
+let multer = require('multer');
+let uniqid = require('uniqid');
 
 module.exports.getAllUser = async (req, res) => {
     let findUser = await user.find({});
@@ -81,7 +83,7 @@ module.exports.changePassword = async (req, res) => {
         res.status(500).json({message: 'User does not exist'})
     }
 }
-module.exports.postCreateUser = async (req, res) => {
+module.exports.postCreateUser =  async (req, res) => {
     let phone = req.body.phone;
     let checkPhone = await user.findOne({phone: phone});
     if (checkPhone) {
@@ -93,7 +95,12 @@ module.exports.postCreateUser = async (req, res) => {
         let indentityCardNumber = req.body.soCMND;
         let address = req.body.address;
         let age = req.body.age;
-        let avatar = null
+        let avatar = null;
+        if (req.files){
+            let avatarName = "/users/" + uniqid() + "-"+ req.files.avatar.name;
+            req.files.avatar.mv(`./uploads${avatarName}`)
+            avatar = avatarName;
+        }
         const users = new user({passWord, role, fullName, indentityCardNumber, phone, address, age, avatar});
         users.save((err) => {
             if (err) {

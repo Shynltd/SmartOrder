@@ -2,6 +2,7 @@ package com.example.smartorder.fragment;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.TableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.model.ServerResponse;
 import com.example.smartorder.model.Table;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -110,7 +113,27 @@ public class TableFragment extends Fragment {
                 } else {
                     int tableCode = Integer.parseInt(edtTableCode.getText().toString().trim());
                     int tableSeats = Integer.parseInt(edtTableSeats.getText().toString().trim());
-                    Log.e( "onClick: ",tableCode + " " + tableSeats );
+                    retrofitAPI.createTable(tableCode, tableSeats).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            if (response.code() == 200){
+                                tableAdapter.notifyDataSetChanged();
+                                alertDialog.dismiss();
+                                alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                    @Override
+                                    public void onDismiss(DialogInterface dialogInterface) {
+                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
         });
@@ -122,4 +145,5 @@ public class TableFragment extends Fragment {
         });
         alertDialog.show();
     }
+
 }

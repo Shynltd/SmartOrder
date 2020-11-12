@@ -11,12 +11,12 @@ router.post('/login', authApi.checkLogin);
 
 router.get('/user', authMiddle.verifyToken, userApi.getAllUser);
 router.get('/user/:id',  userApi.getUserInfo);
-router.post('/user/create', userApi.postCreateUser);
+router.post('/user/create',authMiddle.verifyToken, userApi.postCreateUser);
 router.delete('/user/delete/:id', userApi.deleteUser);
 router.put('/user/update/:id', userApi.updateUser);
 
 router.get('/menu', authMiddle.verifyToken, menuApi.getListMenu);
-router.post('/menu/create', menuApi.postCreate);
+router.post('/menu/create',authMiddle.verifyToken, menuApi.postCreate);
 router.delete('/menu/delete/:id', menuApi.deleteMenu);
 router.put('/menu/update/:id', menuApi.postUpdate);
 
