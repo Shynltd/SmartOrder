@@ -1,7 +1,7 @@
 <% include ../common/nav.ejs %>
-<h2 class="container">Update món ăn</h2>
+<h2 class="container" style="text-align: center">Update món ăn</h2>
 <br>
-<form method="post" action="/menus/<%=findFood._id%>/update" class="container" enctype="multipart/form-data">
+<form method="post" action="/menus/<%=findFood._id%>/update" class="form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="formGroupExampleInput">Tên món ăn</label>
             <input type="text" class="form-control" id="formGroupExampleInput" name="name" placeholder="Tên món ăn" value="<%=findFood.name%>">
@@ -36,6 +36,22 @@
         <a href="/menus" class="btn-primary btn-sm">Hủy</a>
     </div>
 </form>
+<style>
+    body {
+        height: 100vh;
+        background: -webkit-linear-gradient(deepskyblue,lightpink);
+    }
+    .form{
+        margin: 0px auto;
+        width: 500px;
+        height: auto;
+        border: 1px solid black;
+        background-color: whitesmoke;
+        padding: 10px;
+        border-radius: 25px;
+        box-shadow: 5px 5px 20px black;
+    }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>

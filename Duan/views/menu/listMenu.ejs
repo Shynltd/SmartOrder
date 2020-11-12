@@ -15,18 +15,22 @@
                     <% for (var i = 0; i < listFood.length; i++){ %>
                         <div class="menu-content">
                             <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="dish-img"><a href="#"><img src="<%= listFood[i].image%>" alt=""
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="dish-img"><a href="#"><img src="<%= listFood[i].image %>" alt=""
                                                                            class="img-circle"></a></div>
                                 </div>
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="dish-content">
-                                        <h5 class="dish-title"><a href="/menus/<%=listFood[i]._id%>/update"><%= listFood[i].name %></a></h5>
+                                        <h5 class="dish-title"><a
+                                                    href="/menus/<%= listFood[i]._id %>/update"><%= listFood[i].name %></a>
+                                        </h5>
                                         <span class="dish-meta"> Type: <%= listFood[i].type %></span>
                                         <div class="dish-price">
                                             <p>Giá: <%= listFood[i].price %>đ</p>
                                         </div>
-                                        <a onclick="return confirm('Bạn có muốn xóa món ăn này')" href="/menus/<%=listFood[i]._id%>/delete" class="btn btn-sm btn-danger w-100 col-lg-3 col-md-3 col-sm-3 col-xs-4 ">Delete</a>
+                                        <a onclick="return confirm('Bạn có muốn xóa món ăn này')"
+                                           href="/menus/<%= listFood[i]._id %>/delete"
+                                           class="btn btn-sm btn-danger">Delete</a>
 
                                     </div>
                                 </div>
@@ -41,18 +45,22 @@
                     <% for (var i = 0; i < listDrink.length; i++){ %>
                         <div class="menu-content">
                             <div class="row">
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-                                    <div class="dish-img"><a href="#"><img src="<%= listDrink[i].image%>" alt=""
+                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                    <div class="dish-img"><a href="#"><img src="<%= listDrink[i].image %>" alt=""
                                                                            class="img-circle"></a></div>
                                 </div>
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="dish-content">
-                                        <h5 class="dish-title"><a href="/menus/<%=listDrink[i]._id%>/update"><%= listDrink[i].name%></a></h5>
-                                        <span class="dish-meta">Số lượng: <%= listDrink[i].amount%></span>
+                                        <h5 class="dish-title"><a
+                                                    href="/menus/<%= listDrink[i]._id %>/update"><%= listDrink[i].name %></a>
+                                        </h5>
+                                        <span class="dish-meta">Số lượng: <%= listDrink[i].amount %></span>
                                         <div class="dish-price">
-                                            <p>Giá: <%= listDrink[i].price%>đ</p>
+                                            <p>Giá: <%= listDrink[i].price %>đ</p>
                                         </div>
-                                        <a onclick="return confirm('Bạn có muốn xóa thông tin người này')" href="/menus/<%=listDrink[i]._id%>/delete" class="btn btn-sm btn-danger w-100 col-lg-3 col-md-3 col-sm-3 col-xs-4 ">Delete</a>
+                                        <a onclick="return confirm('Bạn có muốn xóa thông tin người này')"
+                                           href="/menus/<%= listDrink[i]._id %>/delete"
+                                           class="btn btn-sm btn-danger ">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -81,6 +89,31 @@
         bottom: 40px;
         right: 40px;
     }
+
+    body {
+        height: auto;
+        background-image: linear-gradient(deepskyblue, lightpink);
+    }
+
+    .menu-block {
+        text-align: center;
+        border-radius: 25px;
+        border: 1px solid black;
+        background-color: whitesmoke;
+        box-shadow: 5px 5px 20px black;
+    }
+
+    .menu-content {
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        padding: 10px;
+        height: 250px;
+    }
+
+    .dish-content{
+        margin-top: 25px;
+    }
+
 </style>
 
 

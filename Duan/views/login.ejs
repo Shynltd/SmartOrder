@@ -1,40 +1,34 @@
+<% include ../public/stylesheets/style.ejs %>
 <% include ../public/stylesheets/boostrap.ejs %>
-<div class="container">
-    <div class="card card-login mx-auto text-center bg-dark">
-        <div class="card-header mx-auto bg-dark">
-            <span> <img src="/images/logo.png"  style="width: 160px" alt="Logo"> </span><br/>
 
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img  src="/images/logo.png" id="icon" alt="User Icon" />
         </div>
-        <div class="card-body">
-            <form action="/auth" method="post" onsubmit="return validateForm()">
-                <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="text" name="phone" class="form-control" placeholder="Phone Number">
-                </div>
-                <div class="username"></div>
-                <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" name="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="password"></div>
-                <% if (error){%>
+
+        <!-- Login Form -->
+        <form action="/auth" method="post" onsubmit="return validateForm()">
+            <input type="text" id="login" class="fadeIn second" name="phone" placeholder="Phone">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Password">
+            <% if (error){%>
                 <div class="alert alert-danger" role="alert">
                     <%= msg %>
                 </div>
-                <%  }%>
-                <div class="form-group">
-                    <input type="submit" name="btn" value="Login" class="btn btn-outline-danger float-right login_btn">
-                </div>
+            <%  }%>
+            <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
 
-            </form>
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Forgot Password?</a>
         </div>
+
     </div>
 </div>
-<% include ../public/stylesheets/style %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     function validateForm(){
