@@ -17,16 +17,10 @@ public class ListFood {
     private Integer price;
     @SerializedName("image")
     @Expose
-    private Object image;
+    private String image;
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("amount")
-    @Expose
-    private Object amount;
-    @SerializedName("__v")
-    @Expose
-    private Integer v;
 
     public String getId() {
         return id;
@@ -52,13 +46,11 @@ public class ListFood {
         this.price = price;
     }
 
-    public Object getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Object image) {
-        this.image = image;
-    }
+
 
     public String getType() {
         return type;
@@ -68,20 +60,15 @@ public class ListFood {
         this.type = type;
     }
 
-    public Object getAmount() {
-        return amount;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public void setAmount(Object amount) {
-        this.amount = amount;
+    public ListFood(String id, String name, Integer price, String image, String type) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.type = type;
     }
-
-    public Integer getV() {
-        return v;
-    }
-
-    public void setV(Integer v) {
-        this.v = v;
-    }
-
 }

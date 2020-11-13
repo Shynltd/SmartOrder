@@ -24,9 +24,7 @@ public class ListDrink {
     @SerializedName("amount")
     @Expose
     private Integer amount;
-    @SerializedName("__v")
-    @Expose
-    private Integer v;
+
 
     public String getId() {
         return id;
@@ -76,12 +74,12 @@ public class ListDrink {
         this.amount = amount;
     }
 
-    public Integer getV() {
-        return v;
+    public ListDrink(String id, String name, Integer price, String image, String type, Integer amount) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+        this.type = type;
+        this.amount = amount;
     }
-
-    public void setV(Integer v) {
-        this.v = v;
-    }
-
 }

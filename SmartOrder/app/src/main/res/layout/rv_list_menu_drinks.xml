@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
+    <TextView
+        android:id="@+id/tvNameMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_toRightOf="@id/imgLogo"
+        android:text="Tên"
+        android:textSize="17dp" />
+
+    <TextView
+        android:id="@+id/tvPriceMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvNameMenu"
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/imgLogo"
+        android:text="Giá:" />
+
+    <TextView
+        android:id="@+id/tvAmountMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPriceMenu"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@id/imgLogo"
+        android:text="Số lượng:" />
+
+
+</RelativeLayout>
