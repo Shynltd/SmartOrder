@@ -56,9 +56,8 @@ public class MenuFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        rvListFood(linearLayoutManager);
-        rvListDrinks(linearLayoutManager);
+        rvListFood();
+        rvListDrinks();
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         retrofitAPI.getAllMenu().enqueue(new Callback<Menu>() {
             @Override
@@ -68,6 +67,7 @@ public class MenuFragment extends Fragment {
                     List<ListFood> foods = response.body().getListFood();
                     getListDrinksFromServer(drinks);
                     getListFoodFromServer(foods);
+
                 }
             }
 
@@ -101,18 +101,18 @@ public class MenuFragment extends Fragment {
         fabAddMenu = (FloatingActionButton) view.findViewById(R.id.fabAddMenu);
     }
 
-    private void rvListFood(LinearLayoutManager linearLayoutManager) {
+    private void rvListFood() {
         listFoods = new ArrayList<>();
         menuFoodAdapter = new MenuFoodAdapter(listFoods, getContext());
-        rvListMenuFood.setLayoutManager(linearLayoutManager);
+        rvListMenuFood.setLayoutManager(new LinearLayoutManager(getContext()));
         rvListMenuFood.setHasFixedSize(true);
         rvListMenuFood.setAdapter(menuFoodAdapter);
     }
 
-    private void rvListDrinks(LinearLayoutManager linearLayoutManager) {
+    private void rvListDrinks() {
         listDrinks = new ArrayList<>();
         menuDrinksAdapter = new MenuDrinksAdapter(listDrinks, getContext());
-        rvListMenuDrink.setLayoutManager(linearLayoutManager);
+        rvListMenuDrink.setLayoutManager(new LinearLayoutManager(getContext()));
         rvListMenuDrink.setHasFixedSize(true);
         rvListMenuDrink.setAdapter(menuDrinksAdapter);
     }

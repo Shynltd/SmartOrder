@@ -1,6 +1,7 @@
 package com.example.smartorder.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.ListFood;
 
@@ -36,7 +38,8 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-        Glide.with(context).load(listFoods.get(position).getImage()).into(holder.imgLogo);
+        Glide.with(context).load(Constants.LINK+listFoods.get(position).getImage()).into(holder.imgLogo);
+
         holder.tvNameMenu.setText(listFoods.get(position).getName());
         holder.tvPriceMenu.setText(listFoods.get(position).getPrice()+"");
     }
