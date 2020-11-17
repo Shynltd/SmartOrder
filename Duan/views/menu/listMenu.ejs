@@ -4,20 +4,22 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                 <div class="page-section">
-                    <h1 class="page-title">Food Menu</h1>
+                    <h1 class="page-title" style="margin-top: 20px">Food Menu</h1>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
                 <div class="menu-block">
-                    <h3 class="menu-title">Food</h3>
+                    <h4 class="menu-title">Food</h4>
                     <% for (var i = 0; i < listFood.length; i++){ %>
                         <div class="menu-content">
                             <div class="row">
                                 <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-                                    <div class="dish-img"><a href="#"><img src="<%= listFood[i].image %>" alt=""
-                                                                           class="img-circle"></a></div>
+                                    <div class="dish-img img-circle"><a href="#"><img src="<%= listFood[i].image %>"
+                                                                                      alt=""
+                                                                                      width="250px" height="200px"></a>
+                                    </div>
                                 </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                     <div class="dish-content">
@@ -41,15 +43,15 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
                 <div class="menu-block">
-                    <h3 class="menu-title">Drink</h3>
+                    <h4 class="menu-title">Drink</h4>
                     <% for (var i = 0; i < listDrink.length; i++){ %>
                         <div class="menu-content">
                             <div class="row">
-                                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                     <div class="dish-img"><a href="#"><img src="<%= listDrink[i].image %>" alt=""
-                                                                           class="img-circle"></a></div>
+                                                                           width="250px" height="200px"></a></div>
                                 </div>
-                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <div class="dish-content">
                                         <h5 class="dish-title"><a
                                                     href="/menus/<%= listDrink[i]._id %>/update"><%= listDrink[i].name %></a>
@@ -101,16 +103,16 @@
         border: 1px solid black;
         background-color: whitesmoke;
         box-shadow: 5px 5px 20px black;
+        margin-top: 20px;
     }
 
     .menu-content {
-        border-bottom: 1px solid black;
         border-top: 1px solid black;
         padding: 10px;
-        height: 250px;
+        height: auto;
     }
 
-    .dish-content{
+    .dish-content {
         margin-top: 25px;
     }
 

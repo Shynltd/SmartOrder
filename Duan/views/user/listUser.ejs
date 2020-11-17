@@ -17,7 +17,7 @@
                                             src="<%=users[i].avatar%>"
                                             class="rounded"></div>
                     <div class="ml-3 w-100" id="name">
-                        <h4 class="mb-0 mt-0"><%= users[i].fullName %></h4> <span>Chức vụ: <%=users[i].role%></span>
+                        <h6 class="mb-0 mt-0"><%= users[i].fullName %></h6> <span>Chức vụ: <%=users[i].role%></span>
                         <div class="p-2 mt-2 d-flex justify-content-between rounded stats">
                             <div class="d-flex flex-column"><span class="articles">Phone:</span> <span
                                         class="number1"><%=users[i].phone%></span></div>
@@ -58,6 +58,7 @@
         height: 100vh;
         background-image: linear-gradient(deepskyblue, lightpink);}
     #item_User{
+
         border-radius: 25px;
         background: whitesmoke;
         box-shadow: 5px 5px 5px black;

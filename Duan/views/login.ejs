@@ -13,7 +13,7 @@
         <!-- Login Form -->
         <form action="/auth" method="post" onsubmit="return validateForm()">
             <input type="text" id="login" class="fadeIn second" name="phone" placeholder="Phone">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Password">
+            <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
             <% if (error){%>
                 <div class="alert alert-danger" role="alert">
                     <%= msg %>
@@ -23,9 +23,7 @@
         </form>
 
         <!-- Remind Passowrd -->
-        <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
-        </div>
+
 
     </div>
 </div>

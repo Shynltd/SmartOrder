@@ -8,24 +8,24 @@
                          class="avatar"/>
                     <div class="file btn btn-lg btn-primary" style="max-width:200px; max-height:150px">
                         Change Photo
-                        <input type="file" name="avatar" class="file-upload"/>
+                        <input type="file" name="avatar" class="file-upload" style="max-width:200px; max-height:150px"/>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="profile-head">
-                    <h2 style="margin-top: 0px">
+                    <h4 style="margin-top: 0px">
                         <%= userIf.fullName %>
-                    </h2>
-                    <h4>
-                        Chức vụ: <%= userIf.role %>
                     </h4>
-                    <ul class="nav " id="myTab">
-                        <li class="nav-item">
+                    <h5>
+                        Chức vụ: <%= userIf.role %>
+                    </h5>
+                    <ul class="nav" id="myTab" >
+                        <li class="nav-item" style="margin: 0px">
                             <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="true">Edit Profile</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="margin: 0px">
                             <a class="nav-link " id="home-tab" data-toggle="tab" href="#changePassword" role="tab"
                                aria-controls="changePassword" aria-selected="true">Change Password</a>
                         </li>
@@ -45,20 +45,20 @@
                     <p><%= userIf.indentityCardNumber %></p>
                 </div>
             </div>
-            <div class="col-md-8" style="margin-top: -40px">
+            <div class="col-md-8" style="margin-top: 20px">
                 <div class="tab-content profile-tab" id="myTabContent">
                     <div class="tab-pane fade " id="profile" role="tabpanel">
                         <form class="form" method="post">
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="first_name"><h4>Full name</h4></label>
+                                    <label for="first_name"><h6>Full name</h6></label>
                                     <input type="text" class="form-control" name="fullname"
                                            value="<%= userIf.fullName %>">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="last_name"><h4>Số CMND</h4></label>
+                                    <label for="last_name"><h6>Số CMND</h6></label>
                                     <input
                                     <% if (role != "Admin"){ %>
                                         disabled
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label><h4>Chức vụ</h4></label>
+                                    <label><h6>Chức vụ</h6></label>
                                     <select
                                     <% if (role != "Admin"){ %>
                                         disabled
@@ -85,35 +85,35 @@
 
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label><h4>Age</h4></label>
+                                    <label><h6>Age</h6></label>
                                     <input type="number" class="form-control" name="age" value="<%= userIf.age %>"
                                            placeholder="Enter age number" title="Enter your age.">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="phone"><h4>Phone Number</h4></label>
+                                    <label for="phone"><h6>Phone Number</h6></label>
                                     <input type="text" class="form-control" name="phone" value="<%= userIf.phone %>"
                                            placeholder="Enter phone number" title="Enter your phone number if any.">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="email"><h4>Address</h4></label>
+                                    <label for="email"><h6>Address</h6></label>
                                     <input type="text" name="address" class="form-control" value="<%= userIf.address %>"
                                            placeholder="Address" title="enter a location">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="password"><h4>Password</h4></label>
+                                    <label for="password"><h6>Password</h6></label>
                                     <input type="password" class="form-control" name="password" id="password"
                                            placeholder="Password" title="enter your password.">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="password2"><h4>Confirm password</h4></label>
+                                    <label for="password2"><h6>Confirm password</h6></label>
                                     <input type="password" class="form-control" name="password2" id="password2"
                                            placeholder="Confirm password" title="enter your password2.">
                                 </div>
@@ -135,7 +135,7 @@
                         <form class="form" action="/users/info/<%= userIf._id %>/changepass" method="post">
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="first_name"><h4>Current password</h4></label>
+                                    <label for="first_name"><h6>Current password</h6></label>
                                     <input type="password" class="form-control" name="currentpass"
                                            placeholder="Current password">
                                 </div>
@@ -144,14 +144,14 @@
 
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="last_name"><h4>A new password</h4></label>
+                                    <label for="last_name"><h6>A new password</h6></label>
                                     <input type="password" class="form-control" name="newpass" id="password"
                                            placeholder="A new password">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-12">
-                                    <label for="phone"><h4>Confirm password</h4></label>
+                                    <label for="phone"><h6>Confirm password</h6></label>
                                     <input type="password" class="form-control" name="confirmpass"
                                            placeholder="Confirm password">
                                 </div>
@@ -211,17 +211,18 @@
     }
 
     .profile-img .file input {
+        height: 40px;
         position: absolute;
         opacity: 0;
         right: 0;
         top: 0;
     }
 
-    .profile-head h5 {
-        color: #333;
+    .profile-head h4 {
+        color: #1d2124;
     }
 
-    .profile-head h6 {
+    .profile-head h5 {
         color: #0062cc;
     }
 
@@ -262,8 +263,9 @@
     }
 
     .profile-work {
-        padding: 14%;
-        margin-top: -15%;
+
+        margin-top: 10px;
+        margin-left: 60px;
     }
 
     .profile-work p {
