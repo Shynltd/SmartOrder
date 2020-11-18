@@ -39,9 +39,8 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
         Glide.with(context).load(Constants.LINK+listFoods.get(position).getImage()).into(holder.imgLogo);
-
         holder.tvNameMenu.setText(listFoods.get(position).getName());
-        holder.tvPriceMenu.setText(listFoods.get(position).getPrice()+"");
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) +listFoods.get(position).getPrice());
     }
 
     @Override

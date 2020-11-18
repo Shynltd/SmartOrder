@@ -2,8 +2,6 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../controller/userController');
 var authMiddle = require('../middleware/authMiddle');
-let multer = require('multer');
-let upload = multer({dest:'./uploads/user'});
 
 router.get('/',
     authMiddle.reqAuth,

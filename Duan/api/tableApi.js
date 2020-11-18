@@ -32,7 +32,7 @@ module.exports.postUpdate = async (req, res) => {
             },
         }, {new: true});
         if (updated) {
-            res.status(200).json({message: 'Table Updated'})
+            res.status(200).json({message: 'Table Has Been Updated'})
         } else {
             res.status(500).json({message: 'Update Table Fail'})
         }
@@ -45,7 +45,7 @@ module.exports.deleteTable = async (req, res) => {
     if (findTable) {
         const deleteTable = await table.findOneAndRemove({_id: req.params.id});
         if (deleteTable) {
-            res.status(200).json({message: 'Table Deleted'})
+            res.status(200).json({message: 'Table Has Been Deleted'})
         } else {
             res.status(500).json({message: 'Delete Table Fail'})
         }

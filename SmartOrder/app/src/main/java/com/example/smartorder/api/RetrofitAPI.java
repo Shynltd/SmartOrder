@@ -2,28 +2,31 @@ package com.example.smartorder.api;
 
 import com.example.smartorder.model.Auth;
 import com.example.smartorder.model.ServerResponse;
-import com.example.smartorder.model.Table;
-import com.example.smartorder.model.User;
+import com.example.smartorder.model.table.Table;
+import com.example.smartorder.model.user.User;
 import com.example.smartorder.model.menu.Menu;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface RetrofitAPI {
     //Login
     @FormUrlEncoded
     @POST("login")
-    Call<Auth> checkLogin (@Field("phone") String phone,
-                           @Field("password") String passWord);
+    Call<Auth> checkLogin(@Field("phone") String phone,
+                          @Field("password") String passWord);
 
     //Menu
     @GET("menu")
@@ -33,20 +36,34 @@ public interface RetrofitAPI {
     @GET("user")
     Call<List<User>> getAllUser();
 
+    @Multipart
+    @POST("user/create")
+    Call<ServerResponse> createUser(
+            @Part("fullName") String fullName,
+            @Part("phone") String phone,
+            @Part("soCMND") Integer cmnd,
+            @Part("age") Integer age,
+            @Part("address") String address,
+            @Part("role") String role,
+            @Part MultipartBody.Part file
+    );
+
+
     //Table
     @GET("table")
     Call<List<Table>> getAllTable();
 
     @FormUrlEncoded
     @POST("table/create")
-    Call<ServerResponse> createTable (@Field("tableCode") int tableCode,
-                                      @Field("tableSeats") int tableSeats);
+    Call<ServerResponse> createTable(@Field("tableCode") int tableCode,
+                                     @Field("tableSeats") int tableSeats);
 
     @PUT("table/update/{id}")
-    Call<ServerResponse> updateTable (@Part("_id") String id,
-                                      @Body Table table);
+    Call<ServerResponse> updateTable(@Path("id") String id,
+                                     @Body Table table);
+
     @DELETE("table/delete/{id}")
-    Call<ServerResponse> deleteTable (@Part("_id") String id);
+    Call<ServerResponse> deleteTable(@Path("id") String id);
 
     //Bill
     @GET("bill")

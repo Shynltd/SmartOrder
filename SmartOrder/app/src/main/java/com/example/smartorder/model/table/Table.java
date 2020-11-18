@@ -1,5 +1,5 @@
 
-package com.example.smartorder.model;
+package com.example.smartorder.model.table;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,5 +1,4 @@
 let user = require('../model/user');
-let multer = require('multer');
 let uniqid = require('uniqid');
 
 module.exports.getAllUser = async (req, res) => {
@@ -83,21 +82,25 @@ module.exports.changePassword = async (req, res) => {
         res.status(500).json({message: 'User does not exist'})
     }
 }
-module.exports.postCreateUser =  async (req, res) => {
-    let phone = req.body.phone;
+module.exports.postCreateUser = async (req, res) => {
+    let phone1 = req.body.phone;
+    let phone = phone1.substring(1, phone1.length - 1);
     let checkPhone = await user.findOne({phone: phone});
     if (checkPhone) {
-        res.json({status: 'Fail', message: 'User already exists'});
+        res.json({message: 'User already exists'});
     } else {
         let passWord = "123456";
-        let role = req.body.role;
-        let fullName = req.body.fullName;
+        let role1 = req.body.role;
+        let role = role1.substring(1, role1.length - 1);
+        let fullName1 = req.body.fullName;
+        let fullName = fullName1.substring(1, fullName1.length - 1);
         let indentityCardNumber = req.body.soCMND;
-        let address = req.body.address;
+        let address1 = req.body.address;
+        let address = address1.substring(1, address1.length - 1);
         let age = req.body.age;
         let avatar = null;
-        if (req.files){
-            let avatarName = "/users/" + uniqid() + "-"+ req.files.avatar.name;
+        if (req.files) {
+            let avatarName = "/users/" + uniqid() + "-" + req.files.avatar.name;
             req.files.avatar.mv(`./uploads${avatarName}`)
             avatar = avatarName;
         }

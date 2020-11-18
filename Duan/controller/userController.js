@@ -1,15 +1,5 @@
-
 let user = require('../model/user');
-let fs = require('fs');
 let uniqid = require('uniqid');
-// let storage =multer.diskStorage({
-//     destination: (req, file, callback) => {
-//         callback(null, '../uploads')
-//     },
-//     filename: (req, file, callback) => {
-//         callback(null, "/users/" + uniqid()+file.originalname)
-//     }
-// })
 
 module.exports.getUser = async (req, res) => {
     let findAllUser = await user.find();

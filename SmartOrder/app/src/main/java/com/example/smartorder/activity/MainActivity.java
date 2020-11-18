@@ -1,27 +1,20 @@
 package com.example.smartorder.activity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.PopupMenu;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
-import com.example.smartorder.Support;
+import com.example.smartorder.support.Support;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.BillFragment;
 import com.example.smartorder.fragment.MenuFragment;
-import com.example.smartorder.fragment.StaffFragment;
+import com.example.smartorder.fragment.UserFragment;
 import com.example.smartorder.fragment.TableFragment;
-
-import java.net.Socket;
-import java.net.URISyntaxException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -34,29 +27,50 @@ public class MainActivity extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar toolbar;
     private CircleImageView imgProfile;
     private SmoothBottomBar nbBar;
-    private FrameLayout frm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        Glide.with(MainActivity.this).load(Constants.LINK + Constants.AvatarUser).into(imgProfile);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Quản lý món ăn");
-        Glide.with(MainActivity.this).load(Constants.LINK + Constants.AvatarUser).into(imgProfile);
+        imgProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCustomPopupMenu(view);
+            }
+        });
         Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment());
         getFragmentItem();
 
-    }
 
+    }
 
     private void initView() {
-        toolbar =  findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         imgProfile = (CircleImageView) findViewById(R.id.imgProfile);
         nbBar = (SmoothBottomBar) findViewById(R.id.nbBar);
-        frm = (FrameLayout) findViewById(R.id.frm);
     }
 
+    private void showCustomPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
+        popupMenu.inflate(R.menu.my_menu);
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.profile:
+                    break;
+                case R.id.logOut:
+                    break;
+            }
+            return false;
+        }
+    });
+        popupMenu.show();
+    }
     public void getFragmentItem() {
         nbBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -71,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         getSupportActionBar().setTitle("Quản lý bàn");
                         break;
                     case 2:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new StaffFragment());
+                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment());
                         getSupportActionBar().setTitle("Quản lý nhân viên");
                         break;
                     case 3:

@@ -37,11 +37,10 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-        Glide.with(context).load(Constants.LINK +listDrinks.get(position).getImage()).into(holder.imgLogo);
-        Log.e("onBindViewHolder: ",Constants.URL+listDrinks.get(position).getImage() );
+        Glide.with(context).load(Constants.LINK + listDrinks.get(position).getImage()).into(holder.imgLogo);
         holder.tvNameMenu.setText(listDrinks.get(position).getName());
-        holder.tvPriceMenu.setText(listDrinks.get(position).getPrice()+"");
-        holder.tvAmountMenu.setText(listDrinks.get(position).getAmount()+"");
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price)+ listDrinks.get(position).getPrice());
+        holder.tvAmountMenu.setText(context.getString(R.string.text_adapter_amount) + listDrinks.get(position).getAmount());
     }
 
     @Override
@@ -49,7 +48,6 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
         if (listDrinks == null) return 0;
         return listDrinks.size();
     }
-
 
 
     public static class MenuHolder extends RecyclerView.ViewHolder {

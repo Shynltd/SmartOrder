@@ -5,31 +5,25 @@ let userSchema = new mongoose.Schema({
         required: true,
     },
     role: {
-        type: String,
-        required: true,
+        type: String
     },
     fullName: {
-        type: String,
-        required: true,
+        type: String
     },
     indentityCardNumber: {
-        type: Number,
-        required: true,
+        type: Number
     },
     phone: {
-        type: String,
-        required: true
+        type: String
     },
     address: {
-        type:String,
-        required: true
+        type:String
     },
     avatar: {
         type:String
     },
     age: {
-        type:Number,
-        required: true
+        type:Number
     }
 })
 module.exports = mongoose.model('User', userSchema, 'user');

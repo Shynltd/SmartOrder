@@ -3,8 +3,6 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
-let lodash = require('lodash');
-let multer = require('multer');
 let fileUpload = require('express-fileupload');
 let authRoutes = require('./routes/authRoutes');
 let userRoutes = require('./routes/userRoutes');
@@ -13,7 +11,6 @@ let tableRoutes = require('./routes/tableRoutes');
 let apiRoutes = require('./routes/apiRoutes');
 let billRoutes = require('./routes/billRoutes');
 let mongoose = require('./monggo/monggosv');
-let authMiddle = require('./middleware/authMiddle');
 
 let app = express();
 

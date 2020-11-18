@@ -1,23 +1,33 @@
-package com.example.smartorder;
+package com.example.smartorder.activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.smartorder.activity.MainActivity;
+import com.example.smartorder.R;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.Auth;
-
+import com.example.smartorder.support.Support;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +40,10 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox chkRemember;
     private ImageButton btnLogin;
     private RetrofitAPI retrofitAPI;
+    private ImageView imgLogo;
+    private TextView tvLogin;
+    private ConstraintLayout form;
+
 
 
     @Override
@@ -37,14 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        initPermission();
+        setAnimation();
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         btnLogin.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
                     @Override
                     public void onResponse(Call<Auth> call, Response<Auth> response) {
@@ -66,9 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(LoginActivity.this, auth.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-
                     }
-
                     @Override
                     public void onFailure(Call<Auth> call, Throwable t) {
                         Log.e("onFailure", t.getMessage());
@@ -85,6 +96,9 @@ public class LoginActivity extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         chkRemember = (CheckBox) findViewById(R.id.chkRemember);
         btnLogin = (ImageButton) findViewById(R.id.btnLogin);
+        imgLogo = (ImageView) findViewById(R.id.imgLogo);
+        tvLogin = (TextView) findViewById(R.id.tvLogin);
+        form = (ConstraintLayout) findViewById(R.id.form);
     }
 
     private void setSharedPreferences(SharedPreferences sharedPreferences) {
@@ -106,8 +120,48 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getSharedPreferences(SharedPreferences sharedPreferences) {
         edtPhone.setText(sharedPreferences.getString("phone", ""));
+        edtPhone.setSelection(sharedPreferences.getString("phone","").length());
         edtPassword.setText(sharedPreferences.getString("password", ""));
         chkRemember.setChecked(sharedPreferences.getBoolean("checked", false));
 
+    }
+
+    public void initPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "Permission isn't granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permisson don't granted and dont show dialog again ", Toast.LENGTH_SHORT).show();
+                }
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            }
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(this, "Permission isn't granted", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permisson don't granted and dont show dialog again ", Toast.LENGTH_SHORT).show();
+                }
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permision File is Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permision File is Denied", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+    private void setAnimation(){
+        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_bottom_to_top,1500,0));
+        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_top_to_bottom,1500,0));
+        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.alpha_hide_to_show,1500,1600));
     }
 }

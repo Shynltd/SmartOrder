@@ -13,18 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.User;
+import com.example.smartorder.model.table.Table;
+import com.example.smartorder.model.user.User;
 
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     private Context context;
     private List<User> userList;
+    private OnClickListener onClickListener;
 
 
-    public UserAdapter(Context context, List<User> userList) {
+    public UserAdapter(Context context, List<User> userList, OnClickListener onClickListener) {
         this.context = context;
         this.userList = userList;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -38,7 +41,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     public void onBindViewHolder(@NonNull UserHolder holder, int position) {
         Glide.with(context).load(Constants.LINK + userList.get(position).getAvatar()).into(holder.imgUser);
         holder.tvNameUser.setText(userList.get(position).getFullName());
-        holder.tvRole.setText(userList.get(position).getRole());
+        holder.tvRole.setText("Chức vụ: "+userList.get(position).getRole());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickListener.onClick(position);
+            }
+        });
     }
 
     @Override
@@ -59,6 +68,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
             tvRole = (TextView) itemView.findViewById(R.id.tvRole);
         }
     }
-
+    public interface OnClickListener {
+        void  onClick (int position);
+    }
 
 }
