@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.support.Support;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.fragment.BillFragment;
-import com.example.smartorder.fragment.MenuFragment;
-import com.example.smartorder.fragment.UserFragment;
-import com.example.smartorder.fragment.TableFragment;
+import com.example.smartorder.fragment.admin.BillFragment;
+import com.example.smartorder.fragment.admin.MenuFragment;
+import com.example.smartorder.fragment.admin.UserFragment;
+import com.example.smartorder.fragment.admin.TableFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 

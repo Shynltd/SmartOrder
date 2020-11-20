@@ -1,7 +1,6 @@
 package com.example.smartorder.activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -26,7 +23,7 @@ import com.example.smartorder.R;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.Auth;
+import com.example.smartorder.model.login.Auth;
 import com.example.smartorder.support.Support;
 
 import retrofit2.Call;
@@ -74,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             } else if (auth.getRole().equals("Cashier")) {
                                 Toast.makeText(LoginActivity.this, "Cashier", Toast.LENGTH_SHORT).show();
                             } else if (auth.getRole().equals("Staff")) {
-                                Toast.makeText(LoginActivity.this, "Staff", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this, StaffActivity.class));
                             }
                         } else {
                             Toast.makeText(LoginActivity.this, auth.getMessage(), Toast.LENGTH_SHORT).show();
@@ -160,8 +157,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void setAnimation(){
-        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_bottom_to_top,1500,0));
-        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_top_to_bottom,1500,0));
-        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.alpha_hide_to_show,1500,1600));
+        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_bottom_to_top,1000,0));
+        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_top_to_bottom,1000,0));
+        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.alpha_hide_to_show,1000,1100));
     }
 }

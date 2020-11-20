@@ -1,7 +1,8 @@
 package com.example.smartorder.api;
 
-import com.example.smartorder.model.Auth;
-import com.example.smartorder.model.ServerResponse;
+import com.example.smartorder.model.login.Auth;
+import com.example.smartorder.model.menu.MenuOrder;
+import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.model.menu.Menu;
@@ -69,5 +70,11 @@ public interface RetrofitAPI {
     @GET("bill")
     Call<List<Menu>> getAllBill();
 
+    //staff
+    @GET("menus")
+    Call<List<MenuOrder>> getAllMenuOrder();
+    @FormUrlEncoded
+    @POST("bill/create")
+    Call<ServerResponse> order(@Field("tableCodes") String tableCodes);
 
 }

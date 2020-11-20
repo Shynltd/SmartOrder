@@ -1,4 +1,4 @@
-package com.example.smartorder.fragment;
+package com.example.smartorder.fragment.admin;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -24,10 +24,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
-import com.example.smartorder.adapter.UserAdapter;
+import com.example.smartorder.adapter.admin.UserAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
-import com.example.smartorder.model.ServerResponse;
+import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
 import com.google.android.material.textfield.TextInputEditText;

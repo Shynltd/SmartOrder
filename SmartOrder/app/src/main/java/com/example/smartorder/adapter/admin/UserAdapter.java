@@ -1,4 +1,4 @@
-package com.example.smartorder.adapter;
+package com.example.smartorder.adapter.admin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 
 import java.util.List;

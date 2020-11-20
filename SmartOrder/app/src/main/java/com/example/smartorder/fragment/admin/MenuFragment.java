@@ -1,4 +1,4 @@
-package com.example.smartorder.fragment;
+package com.example.smartorder.fragment.admin;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -8,21 +8,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.smartorder.R;
-import com.example.smartorder.adapter.MenuDrinksAdapter;
-import com.example.smartorder.adapter.MenuFoodAdapter;
-import com.example.smartorder.adapter.TabMenuAdapter;
+import com.example.smartorder.adapter.admin.TabMenuAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
-import com.example.smartorder.model.menu.ListDrink;
-import com.example.smartorder.model.menu.ListFood;
 import com.google.android.material.tabs.TabLayout;
 import com.melnykov.fab.FloatingActionButton;
-
-import java.util.List;
 
 public class MenuFragment extends Fragment {
 

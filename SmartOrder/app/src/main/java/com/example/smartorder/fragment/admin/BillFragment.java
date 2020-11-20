@@ -1,4 +1,4 @@
-package com.example.smartorder.fragment;
+package com.example.smartorder.fragment.admin;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -6,7 +6,7 @@
     app:startDestination="@id/first_fragment">
     <fragment
         android:id="@+id/first_fragment"
-        android:name="com.example.smartorder.fragment.UserFragment"
+        android:name="com.example.smartorder.fragment.admin.UserFragment"
         android:label="First Fragment"
         tools:layout="@layout/fragment_staff" />
     <fragment

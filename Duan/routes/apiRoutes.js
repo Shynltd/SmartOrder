@@ -15,6 +15,7 @@ router.delete('/user/delete/:id', authMiddle.verifyToken, userApi.deleteUser);
 router.put('/user/update/:id', authMiddle.verifyToken, userApi.updateUser);
 
 router.get('/menu', authMiddle.verifyToken, menuApi.getListMenu);
+router.get('/menus', authMiddle.verifyToken, menuApi.getListMenuAll);
 router.post('/menu/create', authMiddle.verifyToken, menuApi.postCreate);
 router.delete('/menu/delete/:id', authMiddle.verifyToken, menuApi.deleteMenu);
 router.put('/menu/update/:id', authMiddle.verifyToken, menuApi.postUpdate);

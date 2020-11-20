@@ -6,7 +6,7 @@ module.exports.getAllUser = async (req, res) => {
     if (findUser) {
         res.json(findUser)
     } else {
-        res.status(404).json({message: 'Get User Fail'});
+        res.status(500).json({message: 'Get User Fail'});
     }
 }
 module.exports.getUserInfo = async (req, res) => {

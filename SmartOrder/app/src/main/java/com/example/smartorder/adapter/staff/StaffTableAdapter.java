@@ -1,12 +1,10 @@
-package com.example.smartorder.adapter;
+package com.example.smartorder.adapter.staff;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,13 +15,13 @@ import com.example.smartorder.model.table.Table;
 
 import java.util.List;
 
-public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableHolder> {
+public class StaffTableAdapter extends RecyclerView.Adapter<StaffTableAdapter.TableHolder> {
     private Context context;
     private List<Table> tableList;
     private OnClickListener onClickListener;
 
 
-    public TableAdapter(Context context, List<Table> tableList, OnClickListener onClickListener) {
+    public StaffTableAdapter(Context context, List<Table> tableList, OnClickListener onClickListener) {
         this.context = context;
         this.tableList = tableList;
         this.onClickListener = onClickListener;
@@ -42,23 +40,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableHolder>
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PopupMenu popupMenu = new PopupMenu(context, holder.imgTable);
-                popupMenu.getMenuInflater().inflate(R.menu.update_delete, popupMenu.getMenu());
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.delete:
-                                onClickListener.delete(position, tableList.get(position).getId());
-                                break;
-                            case R.id.update:
-                                onClickListener.update(position, tableList);
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                popupMenu.show();
+                onClickListener.order(position);
             }
         });
     }
@@ -80,7 +62,6 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableHolder>
         }
     }
     public interface OnClickListener {
-        void  delete (int position ,String id);
-        void  update (int position , List<Table> tableList);
+        void  order (int position);
     }
 }

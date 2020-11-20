@@ -5,6 +5,14 @@ module.exports.getListMenu = async (req, res) => {
     let listDrink = await menu.find({type: "Drink"});
     res.json({listFood, listDrink});
 }
+module.exports.getListMenuAll = async (req, res) => {
+    let findMenu = await menu.find({});
+    if (findMenu){
+    res.json(findMenu);
+    } else {
+        res.status(500).json({message: 'Get Menu Fail'});
+    }
+}
 module.exports.postCreate = async (req, res) => {
     let name = req.body.name;
     let type = req.body.type;

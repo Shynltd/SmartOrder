@@ -1,4 +1,4 @@
-package com.example.smartorder.adapter;
+package com.example.smartorder.adapter.admin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -6,9 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.smartorder.R;
-import com.example.smartorder.fragment.menu.MenuDrinkFragment;
-import com.example.smartorder.fragment.menu.MenuFoodFragment;
+import com.example.smartorder.fragment.admin.menu.MenuDrinkFragment;
+import com.example.smartorder.fragment.admin.menu.MenuFoodFragment;
 
 public class TabMenuAdapter extends FragmentStatePagerAdapter {
     private String listTab[] = {"Đồ ăn", "Đồ uống"};

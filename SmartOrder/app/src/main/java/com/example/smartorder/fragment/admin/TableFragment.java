@@ -1,4 +1,4 @@
-package com.example.smartorder.fragment;
+package com.example.smartorder.fragment.admin;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,10 +18,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
-import com.example.smartorder.adapter.TableAdapter;
+import com.example.smartorder.adapter.admin.TableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
-import com.example.smartorder.model.ServerResponse;
+import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 import com.melnykov.fab.FloatingActionButton;
 

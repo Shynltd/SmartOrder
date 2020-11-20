@@ -1,6 +1,5 @@
-package com.example.smartorder.fragment.menu;
+package com.example.smartorder.fragment.admin.menu;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.smartorder.R;
-import com.example.smartorder.adapter.MenuFoodAdapter;
+import com.example.smartorder.adapter.admin.MenuFoodAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.model.menu.ListFood;
