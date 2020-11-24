@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --inspect bin/www"
+    "start": "node bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -12,15 +12,13 @@
     "express": "~4.16.1",
     "express-fileupload": "^1.2.0",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "8.5.1",
     "lodash": "^4.17.20",
     "mongoose": "^5.10.7",
     "morgan": "~1.9.1",
-    "uniqid": "^5.2.0",
-    "jsonwebtoken": "8.5.1"
+    "uniqid": "^5.2.0"
   },
   "devDependencies": {
-
     "jsonwebtoken": "8.5.1"
-
   }
 }

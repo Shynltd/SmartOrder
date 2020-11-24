@@ -1,8 +1,11 @@
 let menu = require('../model/menu');
+let uniqid = require('uniqid');
 
 module.exports.getListMenu = async (req, res) => {
     let listFood = await menu.find({type: "Food"});
     let listDrink = await menu.find({type: "Drink"});
+    console.log(listDrink);
+
     res.json({listFood, listDrink});
 }
 module.exports.getListMenuAll = async (req, res) => {
@@ -22,7 +25,14 @@ module.exports.postCreate = async (req, res) => {
         amount = req.body.amount;
     }
     let image = null;
+    if (req.files) {
+        let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
+        req.files.avatar.mv(`./uploads${avatarName}`);
+        image = avatarName;
+    }
+
     const menus = new menu({name, type, price, amount, image});
+    console.log(menus);
     menus.save((err) => {
         if (err) {
             res.status(500).json({
