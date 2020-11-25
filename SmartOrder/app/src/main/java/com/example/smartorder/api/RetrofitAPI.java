@@ -33,6 +33,16 @@ public interface RetrofitAPI {
     @GET("menu")
     Call<Menu> getAllMenu();
 
+    @Multipart
+    @POST("menu/create")
+    Call<ServerResponse> createFood(
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part("amount") Integer amount,
+            @Part("type") String type
+//            @Part MultipartBody.Part file
+    );
+
     //User
     @GET("user")
     Call<List<User>> getAllUser();
