@@ -22,9 +22,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Support {
-    public static void replaceFragment(FragmentManager fragmentManager, int layoutId, Fragment fragment) {
+    public static void replaceFragment(FragmentManager fragmentManager, int layoutId, Fragment fragment, boolean backStack, int enter, int exit, int popEnter, int popExit) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(enter, exit, popEnter, popExit);
         fragmentTransaction.replace(layoutId, fragment);
+        if (backStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
         fragmentTransaction.commit();
     }
 

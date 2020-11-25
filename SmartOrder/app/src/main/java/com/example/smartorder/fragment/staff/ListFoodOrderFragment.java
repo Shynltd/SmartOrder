@@ -1,10 +1,13 @@
 package com.example.smartorder.fragment.staff;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,9 +21,10 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.staff.MenuOrderAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.menu.MenuOrder;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.example.smartorder.model.table.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListFoodOrderFragment extends Fragment {
+public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
 
 
     private TextView tvTableCodes;
@@ -37,14 +41,11 @@ public class ListFoodOrderFragment extends Fragment {
     private LinearLayout lnButton;
     private Button btnCancel;
     private Button btnOrder;
+    private EditText edtSearch;
     private RetrofitAPI retrofitAPI;
     private List<MenuOrder> menuOrders;
     private MenuOrderAdapter menuOrderAdapter;
     private int tabldeCodes;
-
-    public ListFoodOrderFragment(int tabldeCodes) {
-        this.tabldeCodes = tabldeCodes;
-    }
 
     @Nullable
     @Override
@@ -59,7 +60,7 @@ public class ListFoodOrderFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        tvTableCodes.setText("Bàn số "+tabldeCodes+":");
+        tvTableCodes.setText("Bàn số " + tabldeCodes);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         menuOrders = new ArrayList<>();
         menuOrderAdapter = new MenuOrderAdapter(menuOrders, getContext());
@@ -79,7 +80,44 @@ public class ListFoodOrderFragment extends Fragment {
 
             }
         });
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
+                if (fragment != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
+                            .remove(fragment)
+                            .commit();
+                }
+            }
+        });
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                filter(editable.toString());
+            }
+        });
+    }
+
+    private void filter(String toString) {
+        List<MenuOrder> menuOrderFilter = new ArrayList<>();
+        for (MenuOrder order : menuOrders){
+            if (order.getName().toLowerCase().contains(toString.toLowerCase())){
+                menuOrderFilter.add(order);
+            }
+        }
+        menuOrderAdapter.filterList(menuOrderFilter, getContext());
     }
 
     private void getListMenuOrder(List<MenuOrder> orders) {
@@ -101,5 +139,12 @@ public class ListFoodOrderFragment extends Fragment {
         lnButton = (LinearLayout) view.findViewById(R.id.lnButton);
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
         btnOrder = (Button) view.findViewById(R.id.btnOrder);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
+
+    @Override
+    public void getTable(Table table) {
+        this.tabldeCodes = table.getTableCode();
+    }
+
 }

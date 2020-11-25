@@ -59,23 +59,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Auth> call, Response<Auth> response) {
                         Auth auth = response.body();
-                        if (auth.getStatus().equalsIgnoreCase("OK")) {
-                            setSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
-                            Constants.TOKEN = auth.getToken();
-                            Constants.NameUser = auth.getName();
-                            if (auth.getAvatar() != null) {
-                                Constants.AvatarUser = auth.getAvatar();
-                            }
-                            if (auth.getRole().equals("Admin")) {
-                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            } else if (auth.getRole().equals("Cashier")) {
-                                Toast.makeText(LoginActivity.this, "Cashier", Toast.LENGTH_SHORT).show();
-                            } else if (auth.getRole().equals("Staff")) {
-                                startActivity(new Intent(LoginActivity.this, StaffActivity.class));
-                            }
-                        } else {
-                            Toast.makeText(LoginActivity.this, auth.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                        checkLogin(auth);
+
                     }
                     @Override
                     public void onFailure(Call<Auth> call, Throwable t) {
@@ -86,6 +71,26 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void checkLogin(Auth auth) {
+        if (auth.getStatus().equalsIgnoreCase("OK")) {
+            setSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
+            Constants.TOKEN = auth.getToken();
+            Constants.NameUser = auth.getName();
+            if (auth.getAvatar() != null) {
+                Constants.AvatarUser = auth.getAvatar();
+            }
+            if (auth.getRole().equals("Admin")) {
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            } else if (auth.getRole().equals("Cashier")) {
+                Toast.makeText(LoginActivity.this, "Cashier", Toast.LENGTH_SHORT).show();
+            } else if (auth.getRole().equals("Staff")) {
+                startActivity(new Intent(LoginActivity.this, StaffActivity.class));
+            }
+        } else {
+            Toast.makeText(LoginActivity.this, auth.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void initView() {
@@ -156,9 +161,10 @@ public class LoginActivity extends AppCompatActivity {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
+
     private void setAnimation(){
-        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_bottom_to_top,1000,0));
-        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.translate_top_to_bottom,1000,0));
-        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.alpha_hide_to_show,1000,1100));
+        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.form_login_translate_bottom_to_top,1000,0));
+        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.logo_translate_top_to_bottom,1000,0));
+        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.btn_login_alpha_hide_to_show,1000,1100));
     }
 }

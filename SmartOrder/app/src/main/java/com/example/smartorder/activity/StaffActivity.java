@@ -1,7 +1,6 @@
 package com.example.smartorder.activity;
 
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +17,8 @@ import com.example.smartorder.adapter.staff.StaffTableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.fragment.admin.UserFragment;
 import com.example.smartorder.fragment.staff.ListFoodOrderFragment;
+import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.table.Table;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -45,6 +42,7 @@ public class StaffActivity extends AppCompatActivity {
     private CircleImageView imgProfile;
     private LinearLayout lnlTest;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,16 +64,14 @@ public class StaffActivity extends AppCompatActivity {
         staffTableAdapter = new StaffTableAdapter(StaffActivity.this, tableList, new StaffTableAdapter.OnClickListener() {
             @Override
             public void order(int position) {
-                Log.e("TAG", "order: " );
-                ListFoodOrderFragment fragmentStatistical = new ListFoodOrderFragment(tableList.get(position).getTableCode());
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(
-                        R.anim.slide_in_test,R.anim.slide_out_right
-                ).add(R.id.frmTest,fragmentStatistical,"sfd").addToBackStack(null).commit();
+                ListFoodOrderFragment listFoodOrderFragment = new ListFoodOrderFragment();
+                CallbackTalble callbackTalble = listFoodOrderFragment;
+                callbackTalble.getTable(tableList.get(position));
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.list_food_bottom_to_top,0).add(R.id.frmTest,listFoodOrderFragment, Constants.fragmentListFood).commit();
             }
         });
         rvListTableStaff.setHasFixedSize(true);
         rvListTableStaff.setAdapter(staffTableAdapter);
-
         retrofitAPI.getAllTable().enqueue(new Callback<List<Table>>() {
             @Override
             public void onResponse(Call<List<Table>> call, Response<List<Table>> response) {
@@ -119,5 +115,9 @@ public class StaffActivity extends AppCompatActivity {
             }
         });
         popupMenu.show();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }

@@ -8,18 +8,23 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.menu.ListFood;
 import com.example.smartorder.model.menu.MenuOrder;
 
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.MenuHolder> {
     private List<MenuOrder> menuOrders;
@@ -40,10 +45,11 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
+        Glide.with(context).load(Constants.LINK+menuOrders.get(position).getImage()).into(holder.imgFoodOrder);
         holder.chkOrder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-
+                compoundButton.
                 if (b) {
 
                     final int[] slOrder = {1};
@@ -77,13 +83,19 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
             }
         });
         holder.tvNameMenu.setText(menuOrders.get(position).getName());
-        holder.tvPriceMenu.setText("Giá: " + menuOrders.get(position).getPrice());
+        holder.tvPriceMenu.setText(menuOrders.get(position).getPrice()+"đ");
     }
 
     @Override
     public int getItemCount() {
         if (menuOrders == null) return 0;
         return menuOrders.size();
+    }
+
+    public void filterList(List<MenuOrder> menuOrderFilter, Context context) {
+        menuOrders = menuOrderFilter;
+        this.context = context;
+        notifyDataSetChanged();
     }
 
 
@@ -94,6 +106,7 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
         private ImageButton btnTang;
         private TextView tvSl;
         private ImageButton btnGiam;
+        private CircleImageView imgFoodOrder;
 
         public MenuHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,6 +116,7 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
             btnTang = (ImageButton) itemView.findViewById(R.id.btnTang);
             tvSl = (TextView) itemView.findViewById(R.id.tvSl);
             btnGiam = (ImageButton) itemView.findViewById(R.id.btnGiam);
+            imgFoodOrder = (CircleImageView) itemView.findViewById(R.id.imgFoodOrder);
         }
     }
 }

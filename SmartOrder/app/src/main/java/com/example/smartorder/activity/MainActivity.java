@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 showCustomPopupMenu(view);
             }
         });
-        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment());
+//        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment());
         getFragmentItem();
 
 
@@ -77,19 +77,19 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemSelect(int i) {
                 switch (i) {
                     case 0:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment());
+//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false, );
                         getSupportActionBar().setTitle("Quản lý món ăn");
                         break;
                     case 1:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new TableFragment());
+//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new TableFragment());
                         getSupportActionBar().setTitle("Quản lý bàn");
                         break;
                     case 2:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment());
+//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment());
                         getSupportActionBar().setTitle("Quản lý nhân viên");
                         break;
                     case 3:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new BillFragment());
+//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new BillFragment());
                         getSupportActionBar().setTitle("Quản lý hóa đơn");
                         break;
 

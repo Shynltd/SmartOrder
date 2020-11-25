@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/frmTest"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.admin.TableFragment">
+
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/bg_bottombar"
-        android:id="@+id/appbarlayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,32 +19,36 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                app:title="Màn hình"
                 android:id="@+id/toolbar"
-                android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:title="Màn hình" />
+
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgProfile"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginTop="5dp"
-                app:civ_border_color="@color/purple_700"
-                app:civ_border_width="2dp"
-                android:src="@color/design_default_color_primary"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="30dp"
-                android:id="@+id/imgProfile"/>
+                android:src="@color/design_default_color_primary"
+                app:civ_border_color="@color/purple_700"
+                app:civ_border_width="2dp" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListTableStaff"
+    <RelativeLayout
+        android:id="@+id/frmTest"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbarlayout"/>
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvListTableStaff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+</LinearLayout>
