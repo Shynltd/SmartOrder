@@ -57,7 +57,7 @@ public class ListFoodOrderFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Hello",Toast.LENGTH_SHORT).show();
+
             }
         });
         initView(view);

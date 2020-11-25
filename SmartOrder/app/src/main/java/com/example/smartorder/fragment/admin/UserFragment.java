@@ -185,33 +185,20 @@ public class UserFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                String fullName = edtFullName.getText().toString().trim();
-                String phone = edtPhone.getText().toString().trim();
-                Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
-                Integer age = Integer.valueOf(edtAge.getText().toString().trim());
-                String address = edtAddress.getText().toString().trim();
-                File file = new File(Support.getPathFromUri(getContext(), mUriImage));
-                RequestBody requestBody = RequestBody.create(MediaType.parse(getContext().getContentResolver().getType(mUriImage)), file);
-                MultipartBody.Part filePart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
-//                retrofitAPI.createUser(fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
-//                    @Override
-//                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-//                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-//                        alertDialog.dismiss();
-//                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                        fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
-//                    }
 //
-//                    @Override
-//                    public void onFailure(Call<ServerResponse> call, Throwable t) {
-//                        Log.e("onFailure: ", t.getMessage());
-//                    }
-//                });
                 if(edtPhone.getText().toString().isEmpty()||edtAddress.getText().toString().isEmpty()||
                 edtAge.getText().toString().isEmpty()||edtFullName.getText().toString().isEmpty()
                         ||edtCmnd.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
+                    String fullName = edtFullName.getText().toString().trim();
+                    String phone = edtPhone.getText().toString().trim();
+                    Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
+                    Integer age = Integer.valueOf(edtAge.getText().toString().trim());
+                    String address = edtAddress.getText().toString().trim();
+                    File file = new File(Support.getPathFromUri(getContext(), mUriImage));
+                    RequestBody requestBody = RequestBody.create(MediaType.parse(getContext().getContentResolver().getType(mUriImage)), file);
+                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
                     retrofitAPI.createUser(fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

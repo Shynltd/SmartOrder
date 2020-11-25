@@ -1,7 +1,7 @@
 package com.example.smartorder.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,8 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,7 +19,6 @@ import com.example.smartorder.adapter.staff.StaffTableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.fragment.admin.UserFragment;
 import com.example.smartorder.fragment.staff.ListFoodOrderFragment;
 import com.example.smartorder.model.table.Table;
 import com.melnykov.fab.FloatingActionButton;
@@ -111,8 +109,15 @@ public class StaffActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.profile:
+
                         break;
                     case R.id.logOut:
+                        Intent intent = new Intent(StaffActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+
+                        ActivityCompat.finishAffinity(StaffActivity.this);
+                        finish();
                         break;
                 }
                 return false;
