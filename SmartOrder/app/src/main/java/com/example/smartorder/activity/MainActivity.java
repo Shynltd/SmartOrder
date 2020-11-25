@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 showCustomPopupMenu(view);
             }
         });
-//        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment());
+        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(),false);
         getFragmentItem();
 
 
@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemSelect(int i) {
                 switch (i) {
                     case 0:
-                        if (i > 0)
                         Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false);
                         getSupportActionBar().setTitle("Quản lý món ăn");
                         break;
