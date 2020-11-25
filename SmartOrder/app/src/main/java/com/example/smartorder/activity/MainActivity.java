@@ -67,14 +67,11 @@ public class MainActivity extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.profile:
-
-                    FragmentManager manager = getSupportFragmentManager();
-                    FragmentTransaction transaction = manager.beginTransaction();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     ProfileFragment profileFragment = new ProfileFragment();
-                    transaction.replace(R.id.frm,profileFragment);
+                    transaction.add(R.id.frm,profileFragment);
                     transaction.commit();
                     transaction.addToBackStack(null);
-
                     break;
                 case R.id.logOut:
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -97,19 +94,20 @@ public class MainActivity extends AppCompatActivity {
             public boolean onItemSelect(int i) {
                 switch (i) {
                     case 0:
-//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false, );
+                        if (i > 0)
+                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false);
                         getSupportActionBar().setTitle("Quản lý món ăn");
                         break;
                     case 1:
-//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new TableFragment());
+                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new TableFragment(), false);
                         getSupportActionBar().setTitle("Quản lý bàn");
                         break;
                     case 2:
-//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment());
+                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment(), false);
                         getSupportActionBar().setTitle("Quản lý nhân viên");
                         break;
                     case 3:
-//                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new BillFragment());
+                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new BillFragment(), false);
                         getSupportActionBar().setTitle("Quản lý hóa đơn");
                         break;
 

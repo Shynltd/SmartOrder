@@ -4,8 +4,6 @@ let uniqid = require('uniqid');
 module.exports.getListMenu = async (req, res) => {
     let listFood = await menu.find({type: "Food"});
     let listDrink = await menu.find({type: "Drink"});
-    console.log(listDrink);
-
     res.json({listFood, listDrink});
 }
 module.exports.getListMenuAll = async (req, res) => {
@@ -17,8 +15,8 @@ module.exports.getListMenuAll = async (req, res) => {
     }
 }
 module.exports.postCreate = async (req, res) => {
-    let name = req.body.name;
-    let type = req.body.type;
+    let name = req.body.name.substring(1, req.body.name.length - 1);
+    let type = req.body.type.substring(1, req.body.type.length - 1);
     let price = req.body.price;
     let amount = null;
     if (type == "Drink") {
@@ -48,13 +46,20 @@ module.exports.postCreate = async (req, res) => {
 module.exports.postUpdate = async (req, res) => {
     let findFood = await menu.findById(req.params.id);
     if (findFood) {
+        let image = findFood.image;
+        if (req.files){
+            let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
+            req.files.avatar.mv(`./uploads${avatarName}`);
+            image = avatarName;
+        }
         let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
             $set: {
-                name: req.body.name,
-                type: req.body.type,
+                name: req.body.name.substring(1, req.body.name.length - 1),
+                type: req.body.type.substring(1, req.body.type.length - 1),
                 amount: req.body.amount,
                 price: req.body.price,
-                image: null,
+                image: image,
+
             },
         }, {new: true});
         if (updated) {

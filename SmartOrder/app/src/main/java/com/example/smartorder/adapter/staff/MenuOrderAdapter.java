@@ -49,7 +49,6 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
         holder.chkOrder.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                compoundButton.
                 if (b) {
 
                     final int[] slOrder = {1};

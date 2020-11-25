@@ -22,9 +22,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Support {
-    public static void replaceFragment(FragmentManager fragmentManager, int layoutId, Fragment fragment, boolean backStack, int enter, int exit, int popEnter, int popExit) {
+    public static void replaceFragment(FragmentManager fragmentManager, int layoutId, Fragment fragment, boolean backStack) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(enter, exit, popEnter, popExit);
         fragmentTransaction.replace(layoutId, fragment);
         if (backStack) {
             fragmentTransaction.addToBackStack(null);
@@ -32,12 +31,6 @@ public class Support {
         fragmentTransaction.commit();
     }
 
-    public static void replaceFragmentAndBackStack(FragmentManager fragmentManager, int layoutId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(layoutId, fragment);
-        fragmentTransaction.commit();
-        fragmentTransaction.addToBackStack(null);
-    }
 
     public static Animation setAnimation(Context context, int animResult, long duration, long offSet) {
         Animation animation = AnimationUtils.loadAnimation(context, animResult);

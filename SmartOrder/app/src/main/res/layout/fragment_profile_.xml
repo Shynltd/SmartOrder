@@ -8,15 +8,14 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:padding="30dp"
         android:background="@color/light_blue_600"
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="100dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_bottom_staff"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@color/black"/>
     </LinearLayout>
     <Button
         android:layout_marginTop="-30dp"

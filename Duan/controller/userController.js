@@ -105,11 +105,9 @@ module.exports.getCreateUser = (req, res) => {
 }
 
 
-
-
-module.exports.postCreateUser =  async (req, res) => {
+module.exports.postCreateUser = async (req, res) => {
     let phone = req.body.phone;
-    let checkPhone = await user.findOne({phone:phone});
+    let checkPhone = await user.findOne({phone: phone});
     if (checkPhone) {
         res.render('user/createUser', {err: true, msg: "Số điện thoại này đã tồn tại"});
     } else {
@@ -119,14 +117,14 @@ module.exports.postCreateUser =  async (req, res) => {
         let indentityCardNumber = req.body.soCMND;
         let address = req.body.address;
         let age = req.body.age;
-        let avatar =null;
-        if (req.files){
-        avatar =req.files.avatar;
-        let filename = "/users/" + uniqid() + "-" + avatar.name;
-        avatar.mv(`./uploads/${filename}`)
-        avatar = filename;
+        let avatar = null;
+        if (req.files) {
+            avatar = req.files.avatar;
+            let filename = "/users/" + uniqid() + "-" + avatar.name;
+            avatar.mv(`./uploads/${filename}`)
+            avatar = filename;
         }
-        let addUser = await user.create({passWord,role,fullName,indentityCardNumber,phone,address,age,avatar});
+        let addUser = await user.create({passWord, role, fullName, indentityCardNumber, phone, address, age, avatar});
         if (addUser) {
             res.redirect('/users');
         } else {

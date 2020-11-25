@@ -33,6 +33,12 @@ module.exports.deleteUser = async (req, res) => {
 module.exports.updateUser = async (req, res) => {
     let findUser = await user.findById(req.params.id);
     if (findUser) {
+        let avatar = findUser.avatar;
+        if (req.files) {
+            let avatarName = "/users/" + uniqid() + "-" + req.files.avatar.name;
+            req.files.avatar.mv(`./uploads${avatarName}`)
+            avatar = avatarName;
+        }
         let updated = await user.findOneAndUpdate({_id: req.params.id}, {
             $set: {
                 fullName: req.body.fullName,
@@ -40,7 +46,8 @@ module.exports.updateUser = async (req, res) => {
                 age: req.body.age,
                 address: req.body.address,
                 role: req.body.role,
-                indentityCardNumber: req.body.indentityCardNumber
+                indentityCardNumber: req.body.indentityCardNumber,
+                avatar: avatar,
             },
         }, {new: true});
         if (updated) {
@@ -64,7 +71,7 @@ module.exports.changePassword = async (req, res) => {
             if (newPassword === confirmPassword) {
                 const updated = await user.findOneAndUpdate({_id: req.params.id}, {
                     $set: {
-                        passWord: req.body.newPass,
+                        passWord: newPassword,
                     }
                 }, {new: true});
                 if (updated) {
@@ -83,20 +90,16 @@ module.exports.changePassword = async (req, res) => {
     }
 }
 module.exports.postCreateUser = async (req, res) => {
-    let phone1 = req.body.phone;
-    let phone = phone1.substring(1, phone1.length - 1);
+    let phone = req.body.phone.substring(1, req.body.phone.length - 1);
     let checkPhone = await user.findOne({phone: phone});
     if (checkPhone) {
         res.json({message: 'User already exists'});
     } else {
         let passWord = "123456";
-        let role1 = req.body.role;
-        let role = role1.substring(1, role1.length - 1);
-        let fullName1 = req.body.fullName;
-        let fullName = fullName1.substring(1, fullName1.length - 1);
+        let role = req.body.role.substring(1, req.body.role.length - 1);
+        let fullName = req.body.fullName.substring(1, req.body.fullName.length - 1);
         let indentityCardNumber = req.body.soCMND;
-        let address1 = req.body.address;
-        let address = address1.substring(1, address1.length - 1);
+        let address = req.body.address.substring(1, req.body.address.length - 1);
         let age = req.body.age;
         let avatar = null;
         if (req.files) {
