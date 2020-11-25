@@ -58,7 +58,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Hello",Toast.LENGTH_SHORT).show();
+
             }
         });
         initView(view);

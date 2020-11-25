@@ -2,9 +2,11 @@ package com.example.smartorder.adapter.admin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,6 +41,28 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
         Glide.with(context).load(Constants.LINK+listFoods.get(position).getImage()).into(holder.imgLogo);
         holder.tvNameMenu.setText(listFoods.get(position).getName());
         holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) +listFoods.get(position).getPrice());
+        holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(context, holder.imgLogo);
+                popupMenu.getMenuInflater().inflate(R.menu.update_delete, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.delete:
+//                                onClickListener.delete(position, tableList.get(position).getId());
+                                break;
+                            case R.id.update:
+//                                onClickListener.update(position, tableList);
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
     }
 
     @Override

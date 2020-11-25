@@ -1,14 +1,19 @@
 package com.example.smartorder.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
+import com.example.smartorder.fragment.ProfileFragment;
 import com.example.smartorder.support.Support;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.admin.BillFragment;
@@ -62,9 +67,24 @@ public class MainActivity extends AppCompatActivity {
         public boolean onMenuItemClick(MenuItem item) {
             switch (item.getItemId()){
                 case R.id.profile:
+
+                    FragmentManager manager = getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    ProfileFragment profileFragment = new ProfileFragment();
+                    transaction.replace(R.id.frm,profileFragment);
+                    transaction.commit();
+                    transaction.addToBackStack(null);
+
                     break;
                 case R.id.logOut:
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                    ActivityCompat.finishAffinity(MainActivity.this);
+                    finish();
                     break;
+
             }
             return false;
         }
