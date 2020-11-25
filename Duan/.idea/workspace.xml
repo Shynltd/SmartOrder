@@ -19,21 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/menuApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/menuApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/userApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/userApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/www" beforeDir="false" afterPath="$PROJECT_DIR$/bin/www" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/apiRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/apiRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/tableRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tableRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/support/Support.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/support/Support.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_profile_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_profile_.xml" afterDir="false" />
-    </list>
+    <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -167,7 +153,7 @@
       <workItem from="1606205599358" duration="435000" />
       <workItem from="1606208126643" duration="3224000" />
       <workItem from="1606227236179" duration="4522000" />
-      <workItem from="1606292856961" duration="1968000" />
+      <workItem from="1606292856961" duration="2299000" />
     </task>
     <servers />
   </component>
