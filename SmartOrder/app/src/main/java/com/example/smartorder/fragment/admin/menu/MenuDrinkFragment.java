@@ -1,9 +1,12 @@
 package com.example.smartorder.fragment.admin.menu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,13 +14,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.MenuDrinksAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.fragment.admin.TableFragment;
 import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.Menu;
+import com.example.smartorder.model.response.ServerResponse;
+import com.example.smartorder.model.table.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,7 +82,39 @@ public class MenuDrinkFragment extends Fragment {
 
     private void rvListDrinks() {
         listDrinks = new ArrayList<>();
-        menuDrinksAdapter = new MenuDrinksAdapter(listDrinks, getContext());
+        menuDrinksAdapter = new MenuDrinksAdapter(listDrinks, getContext(), new MenuDrinksAdapter.OnClickListener() {
+            @Override
+            public void deleteDrink(int position, String id) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Bạn có muốn xóa đồ uống "+listDrinks.get(position).getName()+" không ?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                retrofitAPI.deleteDrink(id).enqueue(new Callback<ServerResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                        ft.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        })
+                        .create().show();
+            }
+
+            @Override
+            public void updateDrink(int position, List<ListDrink> listDrinks) {
+
+            }
+        });
         rvListMenuDrink.setLayoutManager(new LinearLayoutManager(getContext()));
         rvListMenuDrink.setHasFixedSize(true);
         rvListMenuDrink.setAdapter(menuDrinksAdapter);

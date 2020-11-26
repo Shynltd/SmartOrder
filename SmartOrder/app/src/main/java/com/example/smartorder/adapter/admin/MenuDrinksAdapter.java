@@ -23,11 +23,13 @@ import java.util.List;
 public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.MenuHolder> {
     private List<ListDrink> listDrinks;
     private Context context;
+    private OnClickListener onClickListener;
 
 
-    public MenuDrinksAdapter(List<ListDrink> listDrinks, Context context) {
+    public MenuDrinksAdapter(List<ListDrink> listDrinks, Context context, OnClickListener listener) {
         this.listDrinks = listDrinks;
         this.context = context;
+        this.onClickListener =listener;
     }
 
     @NonNull
@@ -53,10 +55,10 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-//                                onClickListener.delete(position, tableList.get(position).getId());
+                                onClickListener.deleteDrink(position,listDrinks.get(position).getId());
                                 break;
                             case R.id.update:
-//                                onClickListener.update(position, tableList);
+                               onClickListener.updateDrink(position,listDrinks);
                                 break;
                         }
                         return false;
@@ -88,8 +90,8 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
             tvAmountMenu = (TextView) itemView.findViewById(R.id.tvAmountMenu);
         }
     }
-//    public interface OnClickListener {
-//        void  delete (int position ,String id);
-//        void  update (int position , List<Table> tableList);
-//    }
+    public interface OnClickListener {
+        void  deleteDrink (int position ,String id);
+        void  updateDrink(int position , List<ListDrink> listDrinks);
+    }
 }

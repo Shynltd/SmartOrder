@@ -115,7 +115,8 @@ public class MenuFragment extends Fragment {
         btnAdd = alert.findViewById(R.id.btnAddFood);
         btnCancel = alert.findViewById(R.id.btnCancel);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, mListSpinner);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
         spnType.setAdapter(arrayAdapter);
 
         spnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -146,7 +147,8 @@ public class MenuFragment extends Fragment {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_LOAD_IMAGE);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+                        REQUEST_CODE_LOAD_IMAGE);
             }
         });
 
@@ -161,35 +163,46 @@ public class MenuFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String tenmon = edtTenMon.getText().toString();
-                Integer amonut;
-                Integer pricae = Integer.parseInt(edtPrice.getText().toString());
-                File file = new File(Support.getPathFromUri(getContext(), uriImage));
-                RequestBody requestBody = RequestBody.create(MediaType.parse(
-                        getContext().getContentResolver().getType(uriImage)), file);
-                MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                        "avatar", file.getName(), requestBody);
-                if(type.equals("Food")){
-                    amonut = 0 ;
-                } else {
-                    amonut = Integer.parseInt(edAmonut.getText().toString().trim());
+
+                if(edAmonut.getText().toString().isEmpty()||edtTenMon.getText().toString().isEmpty()||
+                        edtPrice.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                }else {
+                    String tenmon = edtTenMon.getText().toString();
+                    Integer pricae = Integer.parseInt(edtPrice.getText().toString());
+                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
+                    RequestBody requestBody = RequestBody.create(MediaType.parse(
+                            getContext().getContentResolver().getType(uriImage)), file);
+                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                            "avatar", file.getName(), requestBody);
+                    Integer amonut;
+                    if (type.equals("Food")) {
+                        amonut = 0;
+                    } else {
+                        amonut = Integer.parseInt(edAmonut.getText().toString().trim());
+                    }
+
+                    retrofitAPI.createFood(tenmon, pricae, amonut, type,filePart)
+                            .enqueue(new Callback<ServerResponse>() {
+                                @Override
+                                public void onResponse(Call<ServerResponse> call,
+                                                       Response<ServerResponse> response) {
+                                    Toast.makeText(getContext(), response.body().getMessage(),
+                                            Toast.LENGTH_SHORT).show();
+                                    FragmentTransaction fragmentTransaction = getFragmentManager().
+                                            beginTransaction();
+                                    fragmentTransaction.detach(MenuFragment.this).
+                                            attach(MenuFragment.this).commit();
+                                    alertDialog.dismiss();
+                                }
+
+                                @Override
+                                public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                    Log.e("onFailure: ", t.getMessage());
+
+                                }
+                            });
                 }
-               retrofitAPI.createFood(tenmon,pricae,amonut,type)
-                   .enqueue(new Callback<ServerResponse>() {
-               @Override
-               public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                   Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                   alertDialog.dismiss();
-//                   FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                   fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
-               }
-
-               @Override
-               public void onFailure(Call<ServerResponse> call, Throwable t) {
-                   Log.e("onFailure: ", t.getMessage());
-
-               }
-           });
             }
         });
         alertDialog.show();

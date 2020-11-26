@@ -39,9 +39,11 @@ public interface RetrofitAPI {
             @Part("name") String name,
             @Part("price") Integer price,
             @Part("amount") Integer amount,
-            @Part("type") String type
-//            @Part MultipartBody.Part file
+            @Part("type") String type,
+            @Part MultipartBody.Part file
     );
+    @DELETE("menu/delete/{id}")
+    Call<ServerResponse> deleteDrink(@Path("id") String id);
 
     //User
     @GET("user")
