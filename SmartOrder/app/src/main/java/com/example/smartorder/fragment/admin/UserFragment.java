@@ -1,6 +1,7 @@
 package com.example.smartorder.fragment.admin;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -30,6 +31,7 @@ import com.example.smartorder.adapter.admin.UserAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.model.response.ServerResponse;
+import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
 import com.google.android.material.textfield.TextInputEditText;
@@ -77,10 +79,39 @@ public class UserFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvListUser.setLayoutManager(linearLayoutManager);
         userAdapter = new UserAdapter(getContext(), userList, new UserAdapter.OnClickListener() {
-            @Override
-            public void onClick(int position) {
 
+            @Override
+            public void deleteUser(int position, String id) {
+                //Sam Official
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Bạn có muốn nhân viên " + userList.get(position).getFullName() + " không ?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                retrofitAPI.deleteUser(id).enqueue(new Callback<ServerResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                        ft.detach(UserFragment.this).attach(UserFragment.this).commit();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        })
+                        .create().show();
             }
+
+            @Override
+            public void updateUser(int position, List<User> userList) {
+                dialogUpdateUser(position,userList);
+            }
+
+
         });
         rvListUser.setHasFixedSize(true);
         rvListUser.setAdapter(userAdapter);
@@ -215,6 +246,92 @@ public class UserFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+        alertDialog.show();
+    }
+    private void dialogUpdateUser(int position, List<User> userList) {
+        User user = userList.get(position);
+
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_staff, null);
+        alertDialog.setTitle("Chỉnh sửa thông tin nhân viên");
+        alertDialog.setView(alert);
+        alertDialog.setCancelable(false);
+
+        List<String> roles = new ArrayList<>();
+        roles.add("Admin");
+        roles.add("Staff");
+        roles.add("Cashier");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item, roles);
+
+        imgAvatar = alert.findViewById(R.id.imgAvatar);
+        EditText edtFullName = (EditText) alert.findViewById(R.id.edtNameUser);
+        EditText edtPhone = (EditText) alert.findViewById(R.id.edtPhoneUser);
+        EditText edtAge = (EditText) alert.findViewById(R.id.edtAge);
+        EditText edtAddress = (EditText) alert.findViewById(R.id.edtAddress);
+        EditText edtCmnd = (EditText) alert.findViewById(R.id.edtCmnd);
+        Spinner spnRole = (Spinner) alert.findViewById(R.id.spnRole);
+        Button btnCancel = alert.findViewById(R.id.btnCancel);
+        Button btnUpdateUser = alert.findViewById(R.id.btnAddUser);
+
+
+        btnUpdateUser.setText("Cập nhật");
+        edtFullName.setText(String.valueOf(user.getFullName()));
+        edtAddress.setText(String.valueOf(user.getAddress()));
+        edtAge.setText(String.valueOf(user.getAge()));
+        edtCmnd.setText(String.valueOf(user.getIndentityCardNumber()));
+        edtPhone.setText(String.valueOf(user.getPhone()));
+
+
+        spnRole.setAdapter(arrayAdapter);
+        spnRole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                role = roles.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_LOAD_IMAGE);
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        btnUpdateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.setFullName(edtFullName.getText().toString());
+                user.setAge(Integer.valueOf(edtAge.getText().toString()));
+                retrofitAPI.updateUser(user.getId(),user).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Log.e("onFailure: ", t.getMessage());
+                    }
+                });
             }
         });
         alertDialog.show();
