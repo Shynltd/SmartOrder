@@ -2,9 +2,11 @@ package com.example.smartorder.adapter.admin;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 
 import java.util.List;
@@ -44,7 +47,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickListener.onClick(position);
+                PopupMenu popupMenu = new PopupMenu(context, holder.itemView);
+                popupMenu.getMenuInflater().inflate(R.menu.update_delete, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.delete:
+                                onClickListener.deleteUser(position, userList.get(position).getId());
+                                break;
+                            case R.id.update:
+                                onClickListener.updateUser(position,userList);
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
             }
         });
     }
@@ -68,7 +87,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         }
     }
     public interface OnClickListener {
-        void  onClick (int position);
+        void  deleteUser(int position ,String id);
+        void  updateUser(int position , List<User> userList);
     }
 
 }

@@ -58,6 +58,11 @@ public interface RetrofitAPI {
             @Part("role") String role,
             @Part MultipartBody.Part file
     );
+    @PUT("user/update/{id}")
+    Call<ServerResponse> updateUser(@Path("id") String id,
+                                     @Body User user);
+    @DELETE("user/delete/{id}")
+    Call<ServerResponse> deleteUser(@Path("id") String id);
 
 
     //Table
