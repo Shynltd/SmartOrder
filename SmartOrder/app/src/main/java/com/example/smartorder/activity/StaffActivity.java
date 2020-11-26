@@ -10,6 +10,7 @@ import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +20,7 @@ import com.example.smartorder.adapter.staff.StaffTableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.fragment.ProfileFragment;
 import com.example.smartorder.fragment.staff.ListFoodOrderFragment;
 import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.table.Table;
@@ -109,7 +111,11 @@ public class StaffActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.profile:
-
+//                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                        ProfileFragment profileFragment = new ProfileFragment();
+//                        transaction.replace(R.id.frm,profileFragment);
+//                        transaction.commit();
+//                        transaction.addToBackStack(null);
                         break;
                     case R.id.logOut:
                         Intent intent = new Intent(StaffActivity.this, LoginActivity.class);

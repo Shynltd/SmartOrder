@@ -1,9 +1,12 @@
 package com.example.smartorder.fragment.admin.menu;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.MenuFoodAdapter;
@@ -18,6 +22,7 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.model.menu.ListFood;
 import com.example.smartorder.model.menu.Menu;
+import com.example.smartorder.model.response.ServerResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +77,37 @@ public class MenuFoodFragment extends Fragment {
 
     private void rvListFood() {
         listFoods = new ArrayList<>();
-        menuFoodAdapter = new MenuFoodAdapter(listFoods, getContext());
+        menuFoodAdapter = new MenuFoodAdapter(listFoods, getContext(), new MenuFoodAdapter.OnClickListener() {
+            @Override
+            public void deleteFood(int position, String id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Bạn có muốn xóa món ăn"+listFoods.get(position).getName()+" không?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                retrofitAPI.deleteFood(id).enqueue(new Callback<ServerResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                        ft.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        })
+                        .create().show();
+            }
+
+            @Override
+            public void updateFood(int position, List<ListFood> listFoods) {
+
+            }
+        });
         rvListMenuFood.setLayoutManager(new LinearLayoutManager(getContext()));
         rvListMenuFood.setHasFixedSize(true);
         rvListMenuFood.setAdapter(menuFoodAdapter);

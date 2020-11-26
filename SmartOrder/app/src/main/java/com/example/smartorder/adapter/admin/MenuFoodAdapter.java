@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.ListFood;
 
 import java.util.List;
@@ -22,11 +23,12 @@ import java.util.List;
 public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHolder> {
     private List<ListFood> listFoods;
     private Context context;
+    private OnClickListener onClickListener;
 
-
-    public MenuFoodAdapter(List<ListFood> listFoods, Context context) {
+    public MenuFoodAdapter(List<ListFood> listFoods, Context context, OnClickListener onClickListener) {
         this.listFoods = listFoods;
         this.context = context;
+        this.onClickListener = onClickListener;
     }
 
     @NonNull
@@ -51,10 +53,10 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-//                                onClickListener.delete(position, tableList.get(position).getId());
+                                onClickListener.deleteFood(position,listFoods.get(position).getId());
                                 break;
                             case R.id.update:
-//                                onClickListener.update(position, tableList);
+                                onClickListener.updateFood(position, listFoods);
                                 break;
                         }
                         return false;
@@ -84,6 +86,11 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
             tvNameMenu = (TextView) itemView.findViewById(R.id.tvNameMenu);
             tvPriceMenu = (TextView) itemView.findViewById(R.id.tvPriceMenu);
         }
+    }
+
+    public interface OnClickListener {
+        void  deleteFood (int position ,String id);
+        void  updateFood (int position , List<ListFood> listFoods);
     }
 
 }
