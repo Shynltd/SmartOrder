@@ -89,7 +89,6 @@ public class TableFragment extends Fragment {
             public void update(int position, List<Table> tableList) {
                 dialogUpdateTable(position, tableList);
 
-
             }
         });
         rvListTable.setHasFixedSize(true);
@@ -141,19 +140,23 @@ public class TableFragment extends Fragment {
         btnUpdateTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                table.setTableCode(Integer.valueOf(edtTableCode.getText().toString()));
-                table.setTableSeats(Integer.valueOf(edtTableSeats.getText().toString()));
-                retrofitAPI.updateTable(table.getId(), table).enqueue(new Callback<ServerResponse>() {
-                    @Override
-                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                if(edtTableCode.getText().toString().isEmpty()||edtTableSeats.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                }else {
+                    table.setTableCode(Integer.valueOf(edtTableCode.getText().toString()));
+                    table.setTableSeats(Integer.valueOf(edtTableSeats.getText().toString()));
+                    retrofitAPI.updateTable(table.getId(), table).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void onFailure(Call<ServerResponse> call, Throwable t) {
-                        Log.e("onFailure: ", t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            Log.e("onFailure: ", t.getMessage());
+                        }
+                    });
+                }
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
