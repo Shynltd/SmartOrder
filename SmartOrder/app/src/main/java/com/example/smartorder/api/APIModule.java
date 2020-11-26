@@ -1,6 +1,8 @@
 package com.example.smartorder.api;
 
 import com.example.smartorder.constants.Constants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 
@@ -32,7 +34,7 @@ public class APIModule {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constants.URL)
                     .client(okHttpClient())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                     .build();
         }
         return retrofit;

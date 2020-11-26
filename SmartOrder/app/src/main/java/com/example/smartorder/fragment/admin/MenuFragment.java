@@ -174,7 +174,7 @@ public class MenuFragment extends Fragment {
                 } else {
                     amonut = Integer.parseInt(edAmonut.getText().toString().trim());
                 }
-               retrofitAPI.createFood(tenmon,pricae,amonut,type)
+               retrofitAPI.createFood(tenmon,pricae,amonut,type,filePart)
                    .enqueue(new Callback<ServerResponse>() {
                @Override
                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

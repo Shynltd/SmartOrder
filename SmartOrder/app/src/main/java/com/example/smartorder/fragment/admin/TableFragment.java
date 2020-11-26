@@ -77,8 +77,12 @@ public class TableFragment extends Fragment {
                                     }
                                 });
                             }
-                        })
-                        .create().show();
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        
+                    }
+                }).create().show();
             }
 
             @Override

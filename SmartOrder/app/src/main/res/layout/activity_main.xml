@@ -8,7 +8,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_40sdp"
         android:background="@color/bg_bottombar"
         android:id="@+id/appbarlayout"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,8 +24,8 @@
                     android:id="@+id/toolbar"
                     android:layout_height="wrap_content"/>
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     app:civ_border_color="@color/purple_700"
                     app:civ_border_width="@dimen/_2sdp"
@@ -40,7 +40,7 @@
     <me.ibrahimsn.lib.SmoothBottomBar
         android:id="@+id/nbBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_height="@dimen/_50sdp"
         app:backgroundColor="@color/bg_bottombar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

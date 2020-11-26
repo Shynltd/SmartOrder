@@ -5,7 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class MenuOrder {
-
+    private boolean isChecked;
+    private int sl;
     @SerializedName("_id")
     @Expose
     private String id;
@@ -73,6 +74,22 @@ public class MenuOrder {
         this.amount = amount;
     }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public int getSl() {
+        return sl;
+    }
+
+    public void setSl(int sl) {
+        this.sl = sl;
+    }
+
     public MenuOrder(String id, String name, Integer price, String image, String type, Integer amount) {
         this.id = id;
         this.name = name;
@@ -81,4 +98,6 @@ public class MenuOrder {
         this.type = type;
         this.amount = amount;
     }
+
+
 }
