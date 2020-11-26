@@ -29,6 +29,9 @@ android {
 }
 
 dependencies {
+    //auto dimen
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.ssp:ssp-android:1.0.6'
     //FloatingActionButton
     implementation 'com.melnykov:floatingactionbutton:1.3.0'
 

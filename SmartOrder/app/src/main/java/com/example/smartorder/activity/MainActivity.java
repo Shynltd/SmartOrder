@@ -2,13 +2,13 @@ package com.example.smartorder.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
@@ -23,6 +23,7 @@ import com.example.smartorder.fragment.admin.TableFragment;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import me.ibrahimsn.lib.OnItemReselectedListener;
 import me.ibrahimsn.lib.OnItemSelectedListener;
 import me.ibrahimsn.lib.SmoothBottomBar;
 
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 showCustomPopupMenu(view);
             }
         });
-        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(),false);
+        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false, 0, 0);
         getFragmentItem();
 
 
@@ -63,55 +64,81 @@ public class MainActivity extends AppCompatActivity {
         PopupMenu popupMenu = new PopupMenu(MainActivity.this, view);
         popupMenu.inflate(R.menu.my_menu);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            switch (item.getItemId()){
-                case R.id.profile:
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    ProfileFragment profileFragment = new ProfileFragment();
-                    transaction.add(R.id.frm,profileFragment);
-                    transaction.commit();
-                    transaction.addToBackStack(null);
-                    break;
-                case R.id.logOut:
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.profile:
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        ProfileFragment profileFragment = new ProfileFragment();
+                        transaction.add(R.id.frm, profileFragment);
+                        transaction.commit();
+                        transaction.addToBackStack(null);
+                        break;
+                    case R.id.logOut:
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
 
-                    ActivityCompat.finishAffinity(MainActivity.this);
-                    finish();
-                    break;
+                        ActivityCompat.finishAffinity(MainActivity.this);
+                        finish();
+                        break;
 
+                }
+                return false;
             }
-            return false;
-        }
-    });
+        });
         popupMenu.show();
     }
+
     public void getFragmentItem() {
         nbBar.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public boolean onItemSelect(int i) {
                 switch (i) {
-                    case 0:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new MenuFragment(), false);
-                        getSupportActionBar().setTitle("Quản lý món ăn");
-                        break;
+                        case 0:
+                    Support.replaceFragment(
+                            getSupportFragmentManager(),
+                            R.id.frm, new MenuFragment(),
+                            false,
+                            R.anim.admin_fragment_main_translate_enter_right_to_left,
+                            R.anim.admin_fragment_main_translate_exit_right_to_left
+                    );
+                    getSupportActionBar().setTitle("Quản lý món ăn");
+                    break;
                     case 1:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new TableFragment(), false);
+                        Support.replaceFragment(
+                                getSupportFragmentManager(),
+                                R.id.frm, new TableFragment(),
+                                false,
+                                R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left
+                        );
                         getSupportActionBar().setTitle("Quản lý bàn");
+
                         break;
                     case 2:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new UserFragment(), false);
+                        Support.replaceFragment(
+                                getSupportFragmentManager(),
+                                R.id.frm, new UserFragment(),
+                                false,
+                                R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left
+                        );
                         getSupportActionBar().setTitle("Quản lý nhân viên");
                         break;
                     case 3:
-                        Support.replaceFragment(getSupportFragmentManager(), R.id.frm, new BillFragment(), false);
+                        Support.replaceFragment(
+                                getSupportFragmentManager(),
+                                R.id.frm, new BillFragment(),
+                                false,
+                                R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left
+                        );
                         getSupportActionBar().setTitle("Quản lý hóa đơn");
                         break;
 
                 }
-                return true;
+                return false;
             }
         });
     }

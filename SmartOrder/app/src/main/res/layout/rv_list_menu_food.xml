@@ -6,26 +6,24 @@
 
     <ImageView
         android:id="@+id/imgLogo"
-        android:layout_width="90dp"
-        android:layout_height="90dp" />
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_90sdp" />
 
     <TextView
         android:id="@+id/tvNameMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/_8sdp"
         android:layout_toRightOf="@id/imgLogo"
-        android:text="Tên"
-        android:textSize="17dp" />
+        android:textSize="@dimen/_17sdp" />
 
     <TextView
         android:id="@+id/tvPriceMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNameMenu"
-        android:layout_marginLeft="8dp"
-        android:layout_toRightOf="@id/imgLogo"
-        android:text="Giá:" />
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_toRightOf="@id/imgLogo"/>
 
 
 </RelativeLayout>
