@@ -121,7 +121,6 @@ public class StaffActivity extends AppCompatActivity {
                         Intent intent = new Intent(StaffActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-
                         ActivityCompat.finishAffinity(StaffActivity.this);
                         finish();
                         break;

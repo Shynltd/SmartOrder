@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
-
                         ActivityCompat.finishAffinity(MainActivity.this);
                         finish();
                         break;

@@ -182,24 +182,24 @@ public class MenuFragment extends Fragment {
                         amonut = Integer.parseInt(edAmonut.getText().toString().trim());
                     }
 
-                   
-                }
-               retrofitAPI.createFood(tenmon,pricae,amonut,type,filePart)
-                   .enqueue(new Callback<ServerResponse>() {
-               @Override
-               public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                   Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                   alertDialog.dismiss();
+                    retrofitAPI.createFood(tenmon,pricae,amonut,type,filePart)
+                            .enqueue(new Callback<ServerResponse>() {
+                                @Override
+                                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                    Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                    alertDialog.dismiss();
 //                   FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 //                   fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
-               }
+                                }
 
-               @Override
-               public void onFailure(Call<ServerResponse> call, Throwable t) {
-                   Log.e("onFailure: ", t.getMessage());
+                                @Override
+                                public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                    Log.e("onFailure: ", t.getMessage());
 
-               }
-           });
+                                }
+                            });
+                }
+
             }
         });
         alertDialog.show();
