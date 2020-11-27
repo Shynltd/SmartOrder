@@ -8,4 +8,7 @@ public class Constants {
     public static String AvatarUser = "";
     public static String fragmentListFood = "fragment_list_food";
 
+
+//    public static final String URL = "http://192.168.1.105:2000/api/";
+//    public static final String LINK = "http://192.168.1.105:2000";
 }

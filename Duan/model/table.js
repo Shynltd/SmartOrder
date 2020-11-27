@@ -9,4 +9,4 @@ let tableSchema = new mongoose.Schema({
         required:true
     }
 })
-module.exports = mongoose.model('Table', tableSchema, 'table');
+module.exports = mongoose.model('table', tableSchema, 'table');

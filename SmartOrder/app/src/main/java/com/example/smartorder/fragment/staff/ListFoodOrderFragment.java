@@ -27,7 +27,9 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.callback.CallbackTalble;
+import com.example.smartorder.model.menu.ListMenuOrder;
 import com.example.smartorder.model.menu.MenuOrder;
+import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 
 import java.util.ArrayList;
@@ -49,14 +51,14 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     private int tabldeCodes;
     private View view;
 
-    private List<MenuOrder>listMenuOder = new ArrayList<>();
+    private List<MenuOrder> listMenuOder = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-         view = inflater.inflate(R.layout.fragment_list_food_order, container, false);
+        view = inflater.inflate(R.layout.fragment_list_food_order, container, false);
         btnCancel = view.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,13 +74,13 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     private void init() {
         tvTableCodes.setText("Bàn số " + tabldeCodes);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        rvListFoodOrder.setLayoutManager(new GridLayoutManager(view.getContext(),1));
+        rvListFoodOrder.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
         rvListFoodOrder.setHasFixedSize(true);
         retrofitAPI.getAllMenuOrder().enqueue(new Callback<List<MenuOrder>>() {
             @Override
             public void onResponse(Call<List<MenuOrder>> call, Response<List<MenuOrder>> response) {
                 menuOrders = response.body();
-                menuOrderAdapter = new MenuOrderAdapter(ListFoodOrderFragment.this,menuOrders);
+                menuOrderAdapter = new MenuOrderAdapter(ListFoodOrderFragment.this, menuOrders);
                 rvListFoodOrder.setAdapter(menuOrderAdapter);
                 menuOrderAdapter.notifyDataSetChanged();
             }
@@ -121,16 +123,28 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
             @Override
             public void onClick(View view) {
                 listMenuOder.clear();
-                for (int i = 0 ; i < menuOrders.size() ; i++){
-                    if(menuOrders.get(i).isChecked()){
-                     listMenuOder.add(menuOrders.get(i));
-                    }
-                }
+                for (int i = 0; i < menuOrders.size(); i++) {
+                    if (menuOrders.get(i).isChecked()) {
+                        listMenuOder.add(menuOrders.get(i));
 
-                for (int j = 0 ; j < listMenuOder.size() ; j++){
-                    Log.d("TAG", "onClick: list menu sau oder: "+listMenuOder.get(j).getName());
-                    Log.d("TAG", "onClick: list menu sau oder: "+listMenuOder.get(j).getSl());
+                    }
+
                 }
+                ListMenuOrder menuOrder = new ListMenuOrder();
+                menuOrder.setTableCodes(tabldeCodes);
+                menuOrder.setMenuOrders(listMenuOder);
+
+                retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        Log.e("onResponse: ", String.valueOf(response));
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Log.e("onFailure: ", t.getMessage());
+                    }
+                });
             }
         });
     }

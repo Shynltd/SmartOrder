@@ -93,7 +93,6 @@ public class TableFragment extends Fragment {
         });
         rvListTable.setHasFixedSize(true);
         rvListTable.setAdapter(tableAdapter);
-
         retrofitAPI.getAllTable().enqueue(new Callback<List<Table>>() {
             @Override
             public void onResponse(Call<List<Table>> call, Response<List<Table>> response) {

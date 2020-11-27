@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class MenuOrder {
     private boolean isChecked;
+    @SerializedName("sl")
+    @Expose
     private int sl;
     @SerializedName("_id")
     @Expose

@@ -1,6 +1,10 @@
 let mongoose = require('mongoose');
 
 let billOneSchema = new mongoose.Schema({
+    billCode: {
+        type: String,
+        required:true
+    },
     name: {
         type: String,
         required: true,
@@ -14,10 +18,10 @@ let billOneSchema = new mongoose.Schema({
         required: true,
     },
     type: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     },
-    amount: {
+    sl: {
         type: Number,
         required: true
     },

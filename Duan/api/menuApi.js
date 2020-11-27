@@ -30,7 +30,6 @@ module.exports.postCreate = async (req, res) => {
     }
 
     const menus = new menu({name, type, price, amount, image});
-    console.log(menus);
     menus.save((err) => {
         if (err) {
             res.status(500).json({

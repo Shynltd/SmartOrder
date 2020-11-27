@@ -5,6 +5,7 @@ let authMiddle = require('../middleware/authMiddle');
 let userApi = require('../api/userApi');
 let menuApi = require('../api/menuApi');
 let tableApi = require('../api/tableApi');
+let billApi = require('../api/billApi');
 
 //auth
 router.post('/login', authApi.checkLogin);
@@ -28,5 +29,10 @@ router.post('/table/create', authMiddle.verifyToken, tableApi.postCreate);
 router.delete('/table/delete/:id', authMiddle.verifyToken, tableApi.deleteTable);
 router.put('/table/update/:id', authMiddle.verifyToken, tableApi.postUpdate);
 
+//bill
+router.post('/bill/create', authMiddle.verifyToken, billApi.postOrder);
+router.get('/bill/listUnpaid', authMiddle.verifyToken, billApi.getListBillUnpaid);
+router.get('/bill/listPaid', authMiddle.verifyToken, billApi.getListBillPaid);
+router.post('/bill/paid/:id', authMiddle.verifyToken,billApi.postPaid);
 
 module.exports = router;
