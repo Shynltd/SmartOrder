@@ -2,6 +2,7 @@ package com.example.smartorder.api;
 
 import androidx.annotation.IntRange;
 
+import com.example.smartorder.model.bill.Bill;
 import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.login.Auth;
 import com.example.smartorder.model.menu.ListMenuOrder;
@@ -106,11 +107,11 @@ public interface RetrofitAPI {
     Call<ServerResponse> payBill(@Path("id") String id,
                                  @Field("nameCashier") String name);
 
-//    @GET("bill/listPaid")
-//    Call<List<>> getListPaid();
-//
-//    @GET("bill/listUnpaid")
-//    Call<List<>> getListUnpaid();
+    @GET("bill/listPaid")
+    Call<List<Bill>> getListPaid();
+
+    @GET("bill/listUnpaid")
+    Call<List<Bill>> getListUnpaid();
 
     //staff
     @GET("menus")

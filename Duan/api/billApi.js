@@ -25,16 +25,16 @@ module.exports.getListBillPaid = async (req, res) => {
 module.exports.postPaid = async (req, res) => {
     let {id} = req.params;
     let {nameCashier} = req.body;
-    let paid = await bill.findOneAndUpdate({_id:id}, {
+    let paid = await bill.findOneAndUpdate({_id: id}, {
         $set: {
             nameCashier,
             status: "Đã thanh toán"
         },
     }, {new: true});
     if (paid) {
-        res.status(200).json({message: 'Đã thanh toán'});
+        res.status(200).json({message: 'Thanh toán thành công'});
     } else {
-        res.status(500).json({message: 'Fail'});
+        res.status(500).json({message: 'Thanh toán thất bại'});
     }
 }
 module.exports.postOrder = async (req, res) => {
@@ -58,6 +58,7 @@ module.exports.postOrder = async (req, res) => {
                         totalMoney,
                     },
                 }, {new: true});
+
             } else {
                 let {sl} = list_menu[i];
                 let {image} = list_menu[i];
@@ -76,7 +77,13 @@ module.exports.postOrder = async (req, res) => {
             $set: {
                 totalPrice,
             },
-        }, {new: true});
+        }, {new: true}).then((resolve, reject) => {
+            if (resolve) {
+                res.status(200).json({message: `Order thêm bàn ${tableCode}`})
+            } else if (reject) {
+                res.status(500).json({message: 'Fail'})
+            }
+        });
     } else {
         let currentdate = new Date();
         let list = await bill.find({});
@@ -95,7 +102,13 @@ module.exports.postOrder = async (req, res) => {
             totalPrice += totalMoney;
         }
         let addBill = new bill({billCode, nameCashier, tableCode, totalPrice, status});
-        addBill.save();
+        addBill.save().then((resolve, reject) => {
+            if (resolve) {
+                res.status(200).json({message: `Order thành công bàn ${tableCode}`})
+            } else if (reject) {
+                res.status(500).json({message: 'Fail'})
+            }
+        });
     }
 }
 

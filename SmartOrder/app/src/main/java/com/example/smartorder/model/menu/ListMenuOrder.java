@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ListMenuOrder {
-    @SerializedName("cashierName")
-    @Expose
-    private String cashierName;
     @SerializedName("tableCode")
     @Expose
     private Integer tableCodes;
@@ -32,11 +29,4 @@ public class ListMenuOrder {
         this.menuOrders = menuOrders;
     }
 
-    public String getCashierName() {
-        return cashierName;
-    }
-
-    public void setCashierName(String cashierName) {
-        this.cashierName = cashierName;
-    }
 }

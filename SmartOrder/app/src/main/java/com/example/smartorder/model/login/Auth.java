@@ -24,6 +24,9 @@ public class Auth {
     @SerializedName("avatar")
     @Expose
     private String avatar;
+    @SerializedName("id")
+    @Expose
+    private String id;
 
     public String getStatus() {
         return status;
@@ -71,5 +74,13 @@ public class Auth {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

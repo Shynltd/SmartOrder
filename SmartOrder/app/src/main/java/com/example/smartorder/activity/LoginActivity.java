@@ -78,13 +78,12 @@ public class LoginActivity extends AppCompatActivity {
             setSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
             Constants.TOKEN = auth.getToken();
             Constants.NameUser = auth.getName();
-            if (auth.getAvatar() != null) {
-                Constants.AvatarUser = auth.getAvatar();
-            }
+            Constants.AvatarUser = auth.getAvatar();
+            Constants.idLogin = auth.getId();
             if (auth.getRole().equals("Admin")) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             } else if (auth.getRole().equals("Cashier")) {
-                Toast.makeText(LoginActivity.this, "Cashier", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, CashierActivity.class));
             } else if (auth.getRole().equals("Staff")) {
                 startActivity(new Intent(LoginActivity.this, StaffActivity.class));
             }

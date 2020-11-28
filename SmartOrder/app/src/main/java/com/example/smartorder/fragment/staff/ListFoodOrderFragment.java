@@ -137,7 +137,15 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                 retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
                     @Override
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                        Log.e("onResponse: ", String.valueOf(response));
+                        Log.e("trả về: ",response.body().getMessage());
+                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
+                        if (fragment != null) {
+                            getActivity().getSupportFragmentManager().beginTransaction()
+                                    .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
+                                    .remove(fragment)
+                                    .commit();
+                        }
                     }
 
                     @Override

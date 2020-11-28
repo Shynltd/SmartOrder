@@ -11,6 +11,7 @@ module.exports.checkLogin = async (req, res) => {
             res.json({
                 status: 'OK',
                 token,
+                id:findUser._id,
                 role: findUser.role,
                 name: findUser.fullName,
                 avatar: findUser.avatar,
