@@ -1,4 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+          integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <style>
+        .kc_fab_main_btn {
+            background-color: #F44336;
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+            background: #F44336;
+            border: none;
+            outline: none;
+            color: #FFF;
+            font-size: 36px;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+        }
+
+
+        body {
+            height: auto;
+            margin-bottom: 20px;
+            background-image: linear-gradient(deepskyblue, lightpink);
+        }
+
+        .menu-block {
+            text-align: center;
+            border-radius: 25px;
+            border: 1px solid black;
+            background-color: whitesmoke;
+            box-shadow: 5px 5px 20px black;
+            margin-top: 20px;
+        }
+
+        .menu-content {
+            border-top: 1px solid black;
+            padding: 10px;
+            height: auto;
+        }
+
+        .dish-content {
+            margin-top: 25px;
+        }
+
+        .profile-tab label {
+            font-weight: 600;
+        }
+
+        .profile-tab p {
+            font-weight: 600;
+            color: #0062cc;
+        }
+
+        @media screen and (min-width: 34em) {
+            .nav justify-content-end {
+
+            }
+
+        }
+
+    </style>
+</head>
+<body>
 <% include ../common/nav.ejs %>
+
 <div class="content">
     <div class="container">
         <div class="row">
@@ -6,10 +76,24 @@
                 <div class="page-section">
                     <h1 class="page-title" style="margin-top: 20px">Food Menu</h1>
                 </div>
+                <ul class="nav justify-content-end" id="myTab">
+                    <li class="nav-tabs show active" style="margin: 0px">
+                        <a class="nav-link " id="profile-tab" data-toggle="tab" href="#all" role="tab"
+                           aria-controls="profile" aria-selected="true">All</a>
+                    </li>
+                    <li class="nav-tabs" style="margin: 0px">
+                        <a class="nav-link " id="profile-tab" data-toggle="tab" href="#food" role="tab"
+                           aria-controls="profile" aria-selected="true">Food</a>
+                    </li>
+                    <li class="nav-tabs" style="margin: 0px">
+                        <a class="nav-link " id="home-tab" data-toggle="tab" href="#drink" role="tab"
+                           aria-controls="changePassword" aria-selected="true">Drink</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
+        <div class="tab-content profile-tab" id="myTabContent">
+            <div class="tab-pane fade " id="food" role="tabpanel">
                 <div class="menu-block">
                     <h4 class="menu-title">Food</h4>
                     <% for (var i = 0; i < listFood.length; i++){ %>
@@ -41,7 +125,9 @@
                     <% } %>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb40">
+
+
+            <div class="tab-pane fade " id="drink" role="tabpanel">
                 <div class="menu-block">
                     <h4 class="menu-title">Drink</h4>
                     <% for (var i = 0; i < listDrink.length; i++){ %>
@@ -70,52 +156,91 @@
                     <% } %>
                 </div>
             </div>
+            <div class="tab-pane show active" id="all" role="tabpanel">
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 ">
+                        <div class="menu-block">
+                            <h4 class="menu-title">Food</h4>
+                            <% for (var i = 0; i < listFood.length; i++){ %>
+                                <div class="menu-content">
+                                    <div class="row">
+                                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                                            <div class="dish-img img-circle"><a href="#"><img
+                                                            src="<%= listFood[i].image %>"
+                                                            alt=""
+                                                            width="250px" height="200px"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+                                            <div class="dish-content">
+                                                <h5 class="dish-title"><a
+                                                            href="/menus/<%= listFood[i]._id %>/update"><%= listFood[i].name %></a>
+                                                </h5>
+                                                <span class="dish-meta"> Type: <%= listFood[i].type %></span>
+                                                <div class="dish-price">
+                                                    <p>Giá: <%= listFood[i].price %>đ</p>
+                                                </div>
+                                                <a onclick="return confirm('Bạn có muốn xóa món ăn này')"
+                                                   href="/menus/<%= listFood[i]._id %>/delete"
+                                                   class="btn btn-sm btn-danger">Delete</a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 ">
+                        <div class="menu-block">
+                            <h4 class="menu-title">Drink</h4>
+                            <% for (var i = 0; i < listDrink.length; i++){ %>
+                                <div class="menu-content">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                            <div class="dish-img"><a href="#"><img src="<%= listDrink[i].image %>"
+                                                                                   alt=""
+                                                                                   width="250px" height="200px"></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                            <div class="dish-content">
+                                                <h5 class="dish-title"><a
+                                                            href="/menus/<%= listDrink[i]._id %>/update"><%= listDrink[i].name %></a>
+                                                </h5>
+                                                <span class="dish-meta">Số lượng: <%= listDrink[i].amount %></span>
+                                                <div class="dish-price">
+                                                    <p>Giá: <%= listDrink[i].price %>đ</p>
+                                                </div>
+                                                <a onclick="return confirm('Bạn có muốn xóa thông tin người này')"
+                                                   href="/menus/<%= listDrink[i]._id %>/delete"
+                                                   class="btn btn-sm btn-danger ">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<form method="get" action="/menus/create">
-    <button class="kc_fab_main_btn" type="submit">+</button>
-</form>
-<style>
-    .kc_fab_main_btn {
-        background-color: #F44336;
-        width: 60px;
-        height: 60px;
-        border-radius: 100%;
-        background: #F44336;
-        border: none;
-        outline: none;
-        color: #FFF;
-        font-size: 36px;
-        position: fixed;
-        bottom: 40px;
-        right: 40px;
-    }
+    <form method="get" action="/menus/create">
+        <button class="kc_fab_main_btn" type="submit">+</button>
+    </form>
 
-    body {
-        height: auto;
-        background-image: linear-gradient(deepskyblue, lightpink);
-    }
-
-    .menu-block {
-        text-align: center;
-        border-radius: 25px;
-        border: 1px solid black;
-        background-color: whitesmoke;
-        box-shadow: 5px 5px 20px black;
-        margin-top: 20px;
-    }
-
-    .menu-content {
-        border-top: 1px solid black;
-        padding: 10px;
-        height: auto;
-    }
-
-    .dish-content {
-        margin-top: 25px;
-    }
-
-</style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+            integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
+            crossorigin="anonymous"></script>
+</body>
+</html>
 
 
