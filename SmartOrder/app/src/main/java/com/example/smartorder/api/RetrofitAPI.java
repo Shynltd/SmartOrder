@@ -50,6 +50,8 @@ public interface RetrofitAPI {
             @Part("type") String type,
             @Part MultipartBody.Part file
     );
+
+    @Multipart
     @PUT("user/update/{id}")
     Call<ServerResponse> updateDrink(
                                      @Part("name") String name,
