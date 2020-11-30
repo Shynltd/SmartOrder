@@ -71,7 +71,7 @@ public class StaffActivity extends AppCompatActivity {
                 ListFoodOrderFragment listFoodOrderFragment = new ListFoodOrderFragment();
                 CallbackTalble callbackTalble = listFoodOrderFragment;
                 callbackTalble.getTable(tableList.get(position));
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.list_food_bottom_to_top,0).add(R.id.frmTest,listFoodOrderFragment, Constants.fragmentListFood).commit();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.list_food_bottom_to_top, 0).add(R.id.frmTest, listFoodOrderFragment, Constants.fragmentListFood).commit();
             }
         });
         rvListTableStaff.setHasFixedSize(true);
@@ -87,7 +87,6 @@ public class StaffActivity extends AppCompatActivity {
                     tableList.add(new Table(id, tableCode, tableSeats));
                     staffTableAdapter.notifyDataSetChanged();
                 }
-
             }
 
             @Override

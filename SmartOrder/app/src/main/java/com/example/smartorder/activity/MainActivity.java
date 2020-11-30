@@ -70,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.profile:
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                         ProfileFragment profileFragment = new ProfileFragment();
+                        transaction.setCustomAnimations(R.anim.list_food_bottom_to_top,0);
                         transaction.add(R.id.frm, profileFragment);
                         transaction.commit();
                         transaction.addToBackStack(null);
+                        nbBar.setVisibility(View.GONE);
                         break;
                     case R.id.logOut:
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -81,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         ActivityCompat.finishAffinity(MainActivity.this);
                         finish();
                         break;
-
                 }
                 return false;
             }
