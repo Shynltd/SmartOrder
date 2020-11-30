@@ -68,6 +68,9 @@ public interface RetrofitAPI {
     @GET("user")
     Call<List<User>> getAllUser();
 
+    @GET("user/{id}")
+    Call<User> getInfoUser(@Path("id") String id);
+
     @Multipart
     @POST("user/create")
     Call<ServerResponse> createUser(

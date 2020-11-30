@@ -21,7 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/routes/apiRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/apiRoutes.js" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,8 +172,12 @@
       <workItem from="1606382437396" duration="1198000" />
       <workItem from="1606442550809" duration="36573000" />
       <workItem from="1606543589642" duration="7268000" />
+<<<<<<< Updated upstream
       <workItem from="1606543589642" duration="6669000" />
       <workItem from="1606721519954" duration="2036000" />
+=======
+      <workItem from="1606724372756" duration="1238000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
