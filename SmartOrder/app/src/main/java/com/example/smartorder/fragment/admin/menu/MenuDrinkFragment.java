@@ -3,6 +3,7 @@ package com.example.smartorder.fragment.admin.menu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -19,6 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.smartorder.R;
@@ -27,6 +32,7 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.fragment.admin.MenuFragment;
 import com.example.smartorder.fragment.admin.TableFragment;
+import com.example.smartorder.fragment.admin.UserFragment;
 import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
@@ -44,14 +50,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
+
 public class MenuDrinkFragment extends Fragment {
 
     private RecyclerView rvListMenuDrink;
     private MenuDrinksAdapter menuDrinksAdapter;
     private RetrofitAPI retrofitAPI;
     private List<ListDrink> listDrinks;
-
-
+    private ImageView imvFood;
+    private  Uri uriImage= null;
+    private int REQUEST_CODE_LOAD_IMAGE = 01234;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,8 +93,6 @@ public class MenuDrinkFragment extends Fragment {
     }
 
 
-
-
     private void initView(View view) {
         rvListMenuDrink = (RecyclerView) view.findViewById(R.id.rvListMenuDrink);
     }
@@ -98,7 +105,7 @@ public class MenuDrinkFragment extends Fragment {
             public void deleteDrink(int position, String id) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa đồ uống "+listDrinks.get(position).getName()+" không ?")
+                builder.setMessage("Bạn có muốn xóa đồ uống " + listDrinks.get(position).getName() + " không ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -123,7 +130,7 @@ public class MenuDrinkFragment extends Fragment {
 
             @Override
             public void updateDrink(int position, List<ListDrink> listDrinks) {
-                dialogUpdateDrink();
+                dialogUpdateDrink(position, listDrinks);
             }
         });
         rvListMenuDrink.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -144,117 +151,101 @@ public class MenuDrinkFragment extends Fragment {
         }
     }
 
-    private void dialogUpdateDrink() {
+    private void dialogUpdateDrink(int position, List<ListDrink> listDrinks) {
+
+        ListDrink listDrink = listDrinks.get(position);
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_menu, null);
         alertDialog.setView(alert);
         alertDialog.setTitle("Chỉnh sửa thông tin Menu");
         alertDialog.setCancelable(false);
 
-//        List<String> mListSpinner = new ArrayList<>();
-//        mListSpinner.add("Drink");
-//        mListSpinner.add("Food");
-//        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
-//                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
-//        spnType.setAdapter(arrayAdapter);
+        EditText edtTenMon = alert.findViewById(R.id.edtNameFood);
+        edtTenMon.setText(listDrinks.get(position).getName());
+
+        EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
+        edtPrice.setText(String.valueOf(listDrinks.get(position).getPrice()));
+
+        Spinner spnType = alert.findViewById(R.id.spnTypeFood);
+        List<String> mListSpinner = new ArrayList<>();
+        mListSpinner.add("Drink");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
+        spnType.setAdapter(arrayAdapter);
+        String type = mListSpinner.get(position);
+
+        EditText edAmonut = alert.findViewById(R.id.edtAmountFood);
+        edAmonut.setText(String.valueOf(listDrinks.get(position).getAmount()));
+
+        imvFood = alert.findViewById(R.id.imgAvtFood);
+        imvFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"),
+                        REQUEST_CODE_LOAD_IMAGE);
+            }
+        });
+
+        Button btnUpdate = alert.findViewById(R.id.btnAddFood);
+        btnUpdate.setText("Chỉnh sửa");
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+
+                if (edAmonut.getText().toString().isEmpty() || edtTenMon.getText().toString().isEmpty() ||
+                        edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else {
+                    String tenmon = edtTenMon.getText().toString();
+                    Integer pricae = Integer.parseInt(edtPrice.getText().toString());
+                    Integer amonut = Integer.parseInt(edAmonut.getText().toString().trim());
+                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
+                    RequestBody requestBody = RequestBody.create(MediaType.parse(
+                            getContext().getContentResolver().getType(uriImage)), file);
+                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                            "avatar", file.getName(), requestBody);
+                    retrofitAPI.updateDrink(tenmon,pricae,amonut,type,filePart).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            alertDialog.dismiss();
+                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+        });
+
+        Button btnCancel = alert.findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
 
 
-//        tvAmount = alert.findViewById(R.id.tvAmountFood);
-//        edtTenMon = alert.findViewById(R.id.edtNameFood);
-//        edtPrice = alert.findViewById(R.id.edtPriceFood);
-//        edAmonut = alert.findViewById(R.id.edtAmountFood);
-//        imvFood = alert.findViewById(R.id.imgAvtFood);
-//        spnType = alert.findViewById(R.id.spnTypeFood);
-//        btnAdd = alert.findViewById(R.id.btnAddFood);
-//        btnCancel = alert.findViewById(R.id.btnCancel);
-
-
-//        spnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                type = mListSpinner.get(position);
-//                switch (position) {
-//                    case 0:
-//                        tvAmount.setVisibility(View.VISIBLE);
-//                        edAmonut.setVisibility(View.VISIBLE);
-//                        break;
-//                    case 1:
-//                        tvAmount.setVisibility(View.INVISIBLE);
-//                        edAmonut.setVisibility(View.INVISIBLE);
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-//
-//        imvFood.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"),
-//                        REQUEST_CODE_LOAD_IMAGE);
-//            }
-//        });
-//
-//        btnCancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//
-//        btnAdd.setOnClickListener(new View.OnClickListener() {
-//            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-//            @Override
-//            public void onClick(View v) {
-//
-//                if(edAmonut.getText().toString().isEmpty()||edtTenMon.getText().toString().isEmpty()||
-//                        edtPrice.getText().toString().isEmpty()){
-//                    Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
-//                }else {
-//                    String tenmon = edtTenMon.getText().toString();
-//                    Integer pricae = Integer.parseInt(edtPrice.getText().toString());
-//                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
-//                    RequestBody requestBody = RequestBody.create(MediaType.parse(
-//                            getContext().getContentResolver().getType(uriImage)), file);
-//                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-//                            "avatar", file.getName(), requestBody);
-//                    Integer amonut;
-//                    if (type.equals("Food")) {
-//                        amonut = 0;
-//                    } else {
-//                        amonut = Integer.parseInt(edAmonut.getText().toString().trim());
-//                    }
-//
-//                    retrofitAPI.createFood(tenmon, pricae, amonut, type,filePart)
-//                            .enqueue(new Callback<ServerResponse>() {
-//                                @Override
-//                                public void onResponse(Call<ServerResponse> call,
-//                                                       Response<ServerResponse> response) {
-//                                    Toast.makeText(getContext(), response.body().getMessage(),
-//                                            Toast.LENGTH_SHORT).show();
-//                                    FragmentTransaction fragmentTransaction = getFragmentManager().
-//                                            beginTransaction();
-//                                    fragmentTransaction.detach(MenuFragment.this).
-//                                            attach(MenuFragment.this).commit();
-//                                    alertDialog.dismiss();
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Call<ServerResponse> call, Throwable t) {
-//                                    Log.e("onFailure: ", t.getMessage());
-//
-//                                }
-//                            });
-//                }
-//            }
-//        });
         alertDialog.show();
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
+            Uri uri = data.getData();
+            uriImage = uri;
+            imvFood.setImageURI(uri);
+        }
+    }
+
 }

@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.smartorder.R;
@@ -106,6 +107,7 @@ public class MenuFoodFragment extends Fragment {
             @Override
             public void updateFood(int position, List<ListFood> listFoods) {
 
+                dialogUpdateFoods();
             }
         });
         rvListMenuFood.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -124,5 +126,22 @@ public class MenuFoodFragment extends Fragment {
             listFoods.add(new ListFood(id, name, price, image, type));
             menuFoodAdapter.notifyDataSetChanged();
         }
+    }
+    private void dialogUpdateFoods(){
+        AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_menu, null);
+        alertDialog.setView(alert);
+        alertDialog.setTitle("Chỉnh sửa thông tin Món ăn");
+        alertDialog.setCancelable(false);
+
+        Button btnCancel = alert.findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
     }
 }
