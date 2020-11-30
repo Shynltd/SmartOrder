@@ -11,7 +11,9 @@ let billApi = require('../api/billApi');
 router.post('/login', authApi.checkLogin);
 
 //user
+
 router.get('/user', authMiddle.verifyToken, userApi.getAllUser);
+router.get('/user/:id', authMiddle.verifyToken, userApi.getUserInfo);
 router.post('/user/create', authMiddle.verifyToken, userApi.postCreateUser);
 router.delete('/user/delete/:id', authMiddle.verifyToken, userApi.deleteUser);
 router.put('/user/update/:id', authMiddle.verifyToken, userApi.updateUser);

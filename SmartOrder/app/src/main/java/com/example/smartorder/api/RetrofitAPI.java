@@ -5,6 +5,8 @@ import androidx.annotation.IntRange;
 import com.example.smartorder.model.bill.Bill;
 import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.login.Auth;
+import com.example.smartorder.model.menu.ListDrink;
+import com.example.smartorder.model.menu.ListFood;
 import com.example.smartorder.model.menu.ListMenuOrder;
 import com.example.smartorder.model.menu.MenuOrder;
 import com.example.smartorder.model.response.ServerResponse;
@@ -49,6 +51,15 @@ public interface RetrofitAPI {
             @Part MultipartBody.Part file
     );
 
+    @Multipart
+    @PUT("user/update/{id}")
+    Call<ServerResponse> updateDrink(
+                                     @Part("name") String name,
+                                     @Part("price") Integer price,
+                                     @Part("amount") Integer amount,
+                                     @Part("type") String type,
+                                     @Part MultipartBody.Part file);
+
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);
 
@@ -58,6 +69,9 @@ public interface RetrofitAPI {
     //User
     @GET("user")
     Call<List<User>> getAllUser();
+
+    @GET("user/{id}")
+    Call<User> getInfoUser(@Path("id") String id);
 
     @Multipart
     @POST("user/create")

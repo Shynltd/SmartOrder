@@ -310,6 +310,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+
             }
         });
 
