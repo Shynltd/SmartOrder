@@ -8,8 +8,8 @@ module.exports.getListMenu = async (req, res) => {
 }
 module.exports.getListMenuAll = async (req, res) => {
     let findMenu = await menu.find({});
-    if (findMenu){
-    res.json(findMenu);
+    if (findMenu) {
+        res.json(findMenu);
     } else {
         res.status(500).json({message: 'Get Menu Fail'});
     }
@@ -46,7 +46,7 @@ module.exports.postUpdate = async (req, res) => {
     let findFood = await menu.findById(req.params.id);
     if (findFood) {
         let image = findFood.image;
-        if (req.files){
+        if (req.files) {
             let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
             req.files.avatar.mv(`./uploads${avatarName}`);
             image = avatarName;
