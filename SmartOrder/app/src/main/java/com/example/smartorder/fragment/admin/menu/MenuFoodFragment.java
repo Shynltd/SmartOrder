@@ -86,7 +86,7 @@ public class MenuFoodFragment extends Fragment {
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                retrofitAPI.deleteFood(id).enqueue(new Callback<ServerResponse>() {
+                                retrofitAPI.deleteDrink(id).enqueue(new Callback<ServerResponse>() {
                                     @Override
                                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
