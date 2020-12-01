@@ -52,13 +52,9 @@ public interface RetrofitAPI {
     );
 
     @Multipart
-    @PUT("user/update/{id}")
-    Call<ServerResponse> updateDrink(
-                                     @Part("name") String name,
-                                     @Part("price") Integer price,
-                                     @Part("amount") Integer amount,
-                                     @Part("type") String type,
-                                     @Part MultipartBody.Part file);
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateDrink(@Path("id") String id,
+                                    @Body ListDrink listDrink);
 
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);

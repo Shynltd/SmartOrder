@@ -9,6 +9,6 @@ public class Constants {
     public static String fragmentListFood = "fragment_list_food";
     public static String idLogin = "";
 
-    public static final String URL = "http://192.168.1.3:2000/api/";
-    public static final String LINK = "http://192.168.1.3:2000";
+    public static final String URL = "http://192.168.13.2:2000/api/";
+    public static final String LINK = "http://192.168.13.2:2000";
 }

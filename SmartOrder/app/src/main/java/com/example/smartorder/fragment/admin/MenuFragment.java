@@ -177,7 +177,7 @@ public class MenuFragment extends Fragment {
                             "avatar", file.getName(), requestBody);
                     Integer amonut;
                     if (type.equals("Food")) {
-                        amonut = 0;
+                        amonut = Integer.parseInt("0");
                     } else {
                         amonut = Integer.parseInt(edAmonut.getText().toString().trim());
                     }
