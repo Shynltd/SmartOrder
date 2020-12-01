@@ -171,6 +171,7 @@ public class UserFragment extends Fragment {
 
     private void dialogAddStaff() {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
+
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_staff, null);
         List<String> roles = new ArrayList<>();
         roles.add("Admin");
@@ -222,36 +223,35 @@ public class UserFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-//
                 if(edtPhone.getText().toString().isEmpty()||edtAddress.getText().toString().isEmpty()||
                 edtAge.getText().toString().isEmpty()||edtFullName.getText().toString().isEmpty()
                         ||edtCmnd.getText().toString().isEmpty()){
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
-                    String fullName = edtFullName.getText().toString().trim();
-                    String phone = edtPhone.getText().toString().trim();
-                    Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
-                    Integer age = Integer.valueOf(edtAge.getText().toString().trim());
-                    String address = edtAddress.getText().toString().trim();
-                    File file = new File(Support.getPathFromUri(getContext(), mUriImage));
-                    RequestBody requestBody = RequestBody.create(MediaType.parse(getContext().getContentResolver().getType(mUriImage)), file);
-                    MultipartBody.Part filePart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
-                    retrofitAPI.createUser(fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        alertDialog.dismiss();
-                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                        fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
-                        }
+                }  else{
+                        String fullName = edtFullName.getText().toString().trim();
+                        String phone = edtPhone.getText().toString().trim();
+                        Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
+                        Integer age = Integer.valueOf(edtAge.getText().toString().trim());
+                        String address = edtAddress.getText().toString().trim();
+                        File file = new File(Support.getPathFromUri(getContext(), mUriImage));
+                        RequestBody requestBody = RequestBody.create(MediaType.parse(getContext().getContentResolver().getType(mUriImage)), file);
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
+                        retrofitAPI.createUser(fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
+                            }
 
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Log.e("onFailure: ", t.getMessage());
+                            }
+                        });
+                    }
                 }
-            }
         });
         alertDialog.show();
     }
@@ -320,10 +320,13 @@ public class UserFragment extends Fragment {
         });
 
         btnUpdateUser.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 user.setFullName(edtFullName.getText().toString());
                 user.setAge(Integer.valueOf(edtAge.getText().toString()));
+                user.setRole(role);
+
                 retrofitAPI.updateUser(user.getId(),user).enqueue(new Callback<ServerResponse>() {
                     @Override
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

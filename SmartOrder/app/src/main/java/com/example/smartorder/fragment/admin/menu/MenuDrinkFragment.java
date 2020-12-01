@@ -40,6 +40,7 @@ import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
+import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
 
 import java.io.File;
@@ -61,7 +62,16 @@ public class MenuDrinkFragment extends Fragment {
     private MenuDrinksAdapter menuDrinksAdapter;
     private RetrofitAPI retrofitAPI;
     private List<ListDrink> listDrinks;
+    private EditText edtTenMon;
+    private EditText edtPrice;
+    private EditText edAmonut;
     private ImageView imvFood;
+    private Spinner spnType;
+    private TextView tvAmount;
+    private Button btnUpdate, btnCancel;
+
+    private String type;
+
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
 
@@ -159,12 +169,16 @@ public class MenuDrinkFragment extends Fragment {
     }
 
     private void dialogUpdateDrink(int position, List<ListDrink> listDrinks) {
-        ListDrink listDrink = listDrinks.get(position);
+
+        ListDrink drink = listDrinks.get(position);
+
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
+        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_menu, null);
+        alertDialog.setTitle("Chỉnh sửa thông tin món ăn");
+
         alertDialog.setView(alert);
-        alertDialog.setTitle("Chỉnh sửa thông tin Menu");
         alertDialog.setCancelable(false);
+
         EditText edtTenMon = alert.findViewById(R.id.edtNameFood);
         edtTenMon.setText(listDrink.getName());
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
@@ -175,16 +189,60 @@ public class MenuDrinkFragment extends Fragment {
         edAmonut.setText(String.valueOf(listDrink.getAmount()));
         imvFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK+listDrink.getImage()).into(imvFood);
+
+
+        edtTenMon = alert.findViewById(R.id.edtNameFood);
+        edtPrice = alert.findViewById(R.id.edtPriceFood);
+        edAmonut = alert.findViewById(R.id.edtAmountFood);
+        tvAmount = alert.findViewById(R.id.tvAmountFood);
+        imvFood = alert.findViewById(R.id.imgAvtFood);
+        spnType = alert.findViewById(R.id.spnTypeFood);
+        btnUpdate = alert.findViewById(R.id.btnAddFood);
+        btnCancel = alert.findViewById(R.id.btnCancel);
+
+        btnUpdate.setText("Cập nhật");
+        edtTenMon.setText(String.valueOf(drink.getName()));
+        edtPrice.setText(String.valueOf(drink.getPrice()));
+        edAmonut.setText(String.valueOf(drink.getAmount()));
+
+        List<String> mListSpinner = new ArrayList<>();
+        mListSpinner.add("Drink");
+        mListSpinner.add("Food");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
+        spnType.setAdapter(arrayAdapter);
+        spnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                type = mListSpinner.get(position);
+                switch (position) {
+                    case 0:
+                        tvAmount.setVisibility(View.VISIBLE);
+                        edAmonut.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        tvAmount.setVisibility(View.INVISIBLE);
+                        edAmonut.setVisibility(View.INVISIBLE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         imvFood.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"),
-                        REQUEST_CODE_LOAD_IMAGE);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_LOAD_IMAGE);
             }
         });
+
         Button btnUpdate = alert.findViewById(R.id.btnAddFood);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -230,20 +288,41 @@ public class MenuDrinkFragment extends Fragment {
                     }
                 }
 
-        });
 
-        Button btnCancel = alert.findViewById(R.id.btnCancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 alertDialog.dismiss();
+
             }
         });
+//
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                drink.setName(edtTenMon.getText().toString());
+                drink.setPrice(Integer.parseInt(edtPrice.getText().toString()));
+                drink.setType(type);
+                drink.setAmount(Integer.parseInt(edAmonut.getText().toString()));
 
+                retrofitAPI.updateDrink(drink.getId(),drink).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        alertDialog.dismiss();
+                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                        fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                    }
 
-        alertDialog.show();
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Log.e("onFailure: ", t.getMessage());
+                    }
+                });
+            }
+        });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

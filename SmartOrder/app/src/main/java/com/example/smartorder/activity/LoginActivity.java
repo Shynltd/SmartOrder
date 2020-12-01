@@ -55,18 +55,22 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
-                    @Override
-                    public void onResponse(Call<Auth> call, Response<Auth> response) {
-                        Auth auth = response.body();
-                        checkLogin(auth);
+               if(edtPhone.getText().toString().isEmpty()||edtPassword.getText().toString().isEmpty()){
+                   Toast.makeText(LoginActivity.this,"Please Enter Phone or Password",Toast.LENGTH_SHORT).show();
+               } else {
+                   retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
+                       @Override
+                       public void onResponse(Call<Auth> call, Response<Auth> response) {
+                           Auth auth = response.body();
+                           checkLogin(auth);
 
-                    }
-                    @Override
-                    public void onFailure(Call<Auth> call, Throwable t) {
-                        Log.e("onFailure", t.getMessage());
-                    }
-                });
+                       }
+                       @Override
+                       public void onFailure(Call<Auth> call, Throwable t) {
+                           Log.e("onFailure", t.getMessage());
+                       }
+                   });
+               }
             }
         });
 

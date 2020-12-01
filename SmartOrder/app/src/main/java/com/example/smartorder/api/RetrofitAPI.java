@@ -90,6 +90,8 @@ public interface RetrofitAPI {
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);
 
+    @DELETE("menu/delete/{id}")
+    Call<ServerResponse> deleteFood(@Path("id") String id);
 
     //User
     @GET("user")

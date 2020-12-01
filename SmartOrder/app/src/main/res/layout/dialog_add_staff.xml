@@ -28,6 +28,7 @@
             android:text="Số điện thoại" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/edtPhoneUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
             android:text="Tuổi" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/edtAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,6 +66,7 @@
             android:text="Số CMND" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/edtCmnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
