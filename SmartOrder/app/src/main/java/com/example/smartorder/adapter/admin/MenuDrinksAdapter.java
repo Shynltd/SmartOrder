@@ -58,7 +58,7 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
                                 onClickListener.deleteDrink(position,listDrinks.get(position).getId());
                                 break;
                             case R.id.update:
-                               onClickListener.updateDrink(position,listDrinks);
+                                onClickListener.updateDrink(position,listDrinks);
                                 break;
                         }
                         return false;
