@@ -211,7 +211,6 @@ public class MenuDrinkFragment extends Fragment {
                     retrofitAPI.updateDrink(tenmon,pricae,amonut,type,filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
