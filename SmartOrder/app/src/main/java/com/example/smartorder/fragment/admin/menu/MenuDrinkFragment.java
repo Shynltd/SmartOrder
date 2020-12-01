@@ -24,12 +24,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.MenuDrinksAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.admin.MenuFragment;
 import com.example.smartorder.fragment.admin.TableFragment;
 import com.example.smartorder.fragment.admin.UserFragment;
@@ -59,8 +62,9 @@ public class MenuDrinkFragment extends Fragment {
     private RetrofitAPI retrofitAPI;
     private List<ListDrink> listDrinks;
     private ImageView imvFood;
-    private  Uri uriImage= null;
+    private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -103,7 +107,6 @@ public class MenuDrinkFragment extends Fragment {
         menuDrinksAdapter = new MenuDrinksAdapter(listDrinks, getContext(), new MenuDrinksAdapter.OnClickListener() {
             @Override
             public void deleteDrink(int position, String id) {
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Bạn có muốn xóa đồ uống " + listDrinks.get(position).getName() + " không ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -124,8 +127,12 @@ public class MenuDrinkFragment extends Fragment {
                                     }
                                 });
                             }
-                        })
-                        .create().show();
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).create().show();
             }
 
             @Override
@@ -152,32 +159,22 @@ public class MenuDrinkFragment extends Fragment {
     }
 
     private void dialogUpdateDrink(int position, List<ListDrink> listDrinks) {
-
         ListDrink listDrink = listDrinks.get(position);
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_menu, null);
+        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setView(alert);
         alertDialog.setTitle("Chỉnh sửa thông tin Menu");
         alertDialog.setCancelable(false);
-
         EditText edtTenMon = alert.findViewById(R.id.edtNameFood);
-        edtTenMon.setText(listDrinks.get(position).getName());
-
+        edtTenMon.setText(listDrink.getName());
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edtPrice.setText(String.valueOf(listDrinks.get(position).getPrice()));
-
-        Spinner spnType = alert.findViewById(R.id.spnTypeFood);
-        List<String> mListSpinner = new ArrayList<>();
-        mListSpinner.add("Drink");
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
-                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
-        spnType.setAdapter(arrayAdapter);
-        String type = mListSpinner.get(position);
-
+        edtPrice.setText(String.valueOf(listDrink.getPrice()));
+        TextView tvType = alert.findViewById(R.id.tvType);
+        tvType.setText(listDrink.getType());
         EditText edAmonut = alert.findViewById(R.id.edtAmountFood);
-        edAmonut.setText(String.valueOf(listDrinks.get(position).getAmount()));
-
+        edAmonut.setText(String.valueOf(listDrink.getAmount()));
         imvFood = alert.findViewById(R.id.imgAvtFood);
+        Glide.with(getContext()).load(Constants.LINK+listDrink.getImage()).into(imvFood);
         imvFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -188,43 +185,51 @@ public class MenuDrinkFragment extends Fragment {
                         REQUEST_CODE_LOAD_IMAGE);
             }
         });
-
         Button btnUpdate = alert.findViewById(R.id.btnAddFood);
-        btnUpdate.setText("Chỉnh sửa");
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-
-                if (edAmonut.getText().toString().isEmpty() || edtTenMon.getText().toString().isEmpty() ||
-                        edtPrice.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
                     String tenmon = edtTenMon.getText().toString();
-                    Integer pricae = Integer.parseInt(edtPrice.getText().toString());
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
                     Integer amonut = Integer.parseInt(edAmonut.getText().toString().trim());
-                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
-                    RequestBody requestBody = RequestBody.create(MediaType.parse(
-                            getContext().getContentResolver().getType(uriImage)), file);
-                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                            "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateDrink(tenmon,pricae,amonut,type,filePart).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-
-                        }
-                    });
+                    String type = tvType.getText().toString();
+                    if (uriImage != null) {
+                        File file = new File(Support.getPathFromUri(getContext(), uriImage));
+                        RequestBody requestBody = RequestBody.create(MediaType.parse(
+                                getContext().getContentResolver().getType(uriImage)), file);
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                                "avatar", file.getName(), requestBody);
+                        retrofitAPI.updateDrink(listDrink.getId(),tenmon, price, amonut, type, filePart).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                            }
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Log.e( "onFailure: ", t.getMessage());
+                            }
+                        });
+                    } else {
+                        retrofitAPI.updateDrinkNoImage(listDrink.getId(), tenmon, price, amonut, type).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                            }
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Log.e("onFailureNoImage: ", t.getMessage());
+                            }
+                        });
+                    }
                 }
-            }
+
         });
 
         Button btnCancel = alert.findViewById(R.id.btnCancel);
@@ -238,6 +243,7 @@ public class MenuDrinkFragment extends Fragment {
 
         alertDialog.show();
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

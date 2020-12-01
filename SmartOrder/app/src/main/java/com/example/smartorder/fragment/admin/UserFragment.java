@@ -102,7 +102,12 @@ public class UserFragment extends Fragment {
                                     }
                                 });
                             }
-                        })
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
                         .create().show();
             }
 

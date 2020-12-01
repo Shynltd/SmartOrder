@@ -71,7 +71,6 @@ public class MenuFoodFragment extends Fragment {
     }
 
 
-
     private void initView(View view) {
         rvListMenuFood = (RecyclerView) view.findViewById(R.id.rvListMenuFood);
     }
@@ -82,7 +81,7 @@ public class MenuFoodFragment extends Fragment {
             @Override
             public void deleteFood(int position, String id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa món ăn"+listFoods.get(position).getName()+" không?")
+                builder.setMessage("Bạn có muốn xóa món ăn" + listFoods.get(position).getName() + " không?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -100,13 +99,17 @@ public class MenuFoodFragment extends Fragment {
                                     }
                                 });
                             }
-                        })
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                })
                         .create().show();
             }
 
             @Override
             public void updateFood(int position, List<ListFood> listFoods) {
-
                 dialogUpdateFoods();
             }
         });
@@ -127,7 +130,8 @@ public class MenuFoodFragment extends Fragment {
             menuFoodAdapter.notifyDataSetChanged();
         }
     }
-    private void dialogUpdateFoods(){
+
+    private void dialogUpdateFoods() {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_menu, null);
         alertDialog.setView(alert);

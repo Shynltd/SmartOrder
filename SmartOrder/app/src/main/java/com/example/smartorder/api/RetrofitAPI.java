@@ -52,13 +52,40 @@ public interface RetrofitAPI {
     );
 
     @Multipart
-    @PUT("user/update/{id}")
+    @PUT("menu/update/{id}")
     Call<ServerResponse> updateDrink(
-                                     @Part("name") String name,
-                                     @Part("price") Integer price,
-                                     @Part("amount") Integer amount,
-                                     @Part("type") String type,
-                                     @Part MultipartBody.Part file);
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part("amount") Integer amount,
+            @Part("type") String type,
+            @Part MultipartBody.Part file);
+
+    @Multipart
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateDrinkNoImage(
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part("amount") Integer amount,
+            @Part("type") String type);
+
+    @Multipart
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateFood(
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part("type") String type,
+            @Part MultipartBody.Part file);
+
+    @Multipart
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateFoodNoImage(
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part("type") String type);
 
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);

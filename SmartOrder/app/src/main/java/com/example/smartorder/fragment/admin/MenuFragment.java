@@ -169,7 +169,7 @@ public class MenuFragment extends Fragment {
                     Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
                 }else {
                     String tenmon = edtTenMon.getText().toString();
-                    Integer pricae = Integer.parseInt(edtPrice.getText().toString());
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);
@@ -182,7 +182,7 @@ public class MenuFragment extends Fragment {
                         amonut = Integer.parseInt(edAmonut.getText().toString().trim());
                     }
 
-                    retrofitAPI.createFood(tenmon,pricae,amonut,type,filePart)
+                    retrofitAPI.createFood(tenmon,price,amonut,type,filePart)
                             .enqueue(new Callback<ServerResponse>() {
                                 @Override
                                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
