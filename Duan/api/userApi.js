@@ -123,7 +123,7 @@ module.exports.postCreateUser = async (req, res) => {
         let passWord = "123456";
         let role = req.body.role.substring(1, req.body.role.length - 1);
         let fullName = req.body.fullName.substring(1, req.body.fullName.length - 1);
-        let indentityCardNumber = req.body.soCMND;
+        let indentityCardNumber = req.body.indentityCardNumber;
         let address = req.body.address.substring(1, req.body.address.length - 1);
         let age = req.body.age;
         let avatar = null;
@@ -133,7 +133,7 @@ module.exports.postCreateUser = async (req, res) => {
             avatar = avatarName;
         }
         const users = new user({passWord, role, fullName, indentityCardNumber, phone, address, age, avatar});
-        users.save.then((resolve, reject) => {
+        users.save().then((resolve, reject) => {
             if (resolve) {
                 res.status(200).json({message: `Register new user successfully`})
             } else if (reject) {

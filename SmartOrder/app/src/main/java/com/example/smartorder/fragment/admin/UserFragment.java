@@ -80,7 +80,6 @@ public class UserFragment extends Fragment {
 
             @Override
             public void deleteUser(int position, String id) {
-                //Sam Official
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setMessage("Bạn có muốn nhân viên " + userList.get(position).getFullName() + " không ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {

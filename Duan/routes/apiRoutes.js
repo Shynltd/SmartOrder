@@ -38,6 +38,6 @@ router.post('/bill/create', authMiddle.verifyToken, billApi.postOrder);
 router.get('/bill/listUnpaid', authMiddle.verifyToken, billApi.getListBillUnpaid);
 router.get('/bill/listPaid', authMiddle.verifyToken, billApi.getListBillPaid);
 router.get('/bill/billOne/:billCode', authMiddle.verifyToken, billApi.getListBillOneFromBill);
-router.post('/bill/paid/:id', authMiddle.verifyToken,billApi.postPaid);
+router.post('/bill/paid/:billCode', authMiddle.verifyToken,billApi.postPaid);
 
 module.exports = router;

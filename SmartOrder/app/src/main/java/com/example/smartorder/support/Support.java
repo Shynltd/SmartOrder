@@ -18,6 +18,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.smartorder.R;
 
+import java.text.DecimalFormat;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -38,6 +40,13 @@ public class Support {
         animation.setStartOffset(offSet);
         animation.setDuration(duration);
         return animation;
+    }
+
+
+    public static String decimalFormat(Integer money) {
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        return decimalFormat.format(money);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

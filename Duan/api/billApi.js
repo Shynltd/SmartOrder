@@ -28,9 +28,9 @@ module.exports.getListBillPaid = async (req, res) => {
     }
 }
 module.exports.postPaid = async (req, res) => {
-    let {id} = req.params;
+    let {billCode}  = req.params;
     let {nameCashier} = req.body;
-    let paid = await bill.findOneAndUpdate({_id: id}, {
+    let paid = await bill.findOneAndUpdate({billCode}, {
         $set: {
             nameCashier,
             status: "Đã thanh toán"

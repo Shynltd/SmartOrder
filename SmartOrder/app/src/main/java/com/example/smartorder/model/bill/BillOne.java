@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class BillOne {
 
-    @SerializedName("_id")
-    @Expose
-    private String id;
     @SerializedName("billCode")
     @Expose
     private String billCode;
@@ -30,17 +27,8 @@ public class BillOne {
     @SerializedName("totalMoney")
     @Expose
     private Integer totalMoney;
-    @SerializedName("__v")
-    @Expose
-    private Integer v;
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getBillCode() {
         return billCode;
@@ -98,12 +86,13 @@ public class BillOne {
         this.totalMoney = totalMoney;
     }
 
-    public Integer getV() {
-        return v;
+    public BillOne(String billCode, String image, Integer sl, String name, Integer price, String type, Integer totalMoney) {
+        this.billCode = billCode;
+        this.image = image;
+        this.sl = sl;
+        this.name = name;
+        this.price = price;
+        this.type = type;
+        this.totalMoney = totalMoney;
     }
-
-    public void setV(Integer v) {
-        this.v = v;
-    }
-
 }

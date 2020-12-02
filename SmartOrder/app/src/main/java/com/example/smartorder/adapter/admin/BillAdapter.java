@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
 import com.example.smartorder.model.bill.Bill;
+import com.example.smartorder.support.Support;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -45,8 +46,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         holder.tvStatus.setText(billList.get(position).getStatus());
         String[] date = billList.get(position).getDateBill().split("@");
         holder.tvDate.setText(date[0]);
-        DecimalFormat decimalFormat= new DecimalFormat("###,###,###");
-        holder.tvTotalPrice.setText(decimalFormat.format(billList.get(position).getTotalPrice())+" VNĐ");
+
+        holder.tvTotalPrice.setText(Support.decimalFormat(billList.get(position).getTotalPrice())+" VNĐ");
         if (billList.get(position).getStatus().equalsIgnoreCase("Đã thanh toán")){
             holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.tv_status_paid));
         }

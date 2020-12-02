@@ -20,7 +20,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/CashierFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/PayBillFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_pay_bill.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/authApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/authApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/menuApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/menuApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/tableApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/tableApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/userApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/userApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/billController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/billController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/bill.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/bill.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/menubillone.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/menubillone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/table.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/apiRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/apiRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tableRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tableRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/common/nav.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/common/nav.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/menu/createMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/createMenu.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/menu/listMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/listMenu.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/menu/updateMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/updateMenu.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/table/createTables.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/createTables.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/table/listTable.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/listTable.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/table/updateTable.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/updateTable.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/user/createUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/createUser.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/user/infoUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/infoUser.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/user/listUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/listUser.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/CashierActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/CashierActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/UserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/UserFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_cashier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_cashier.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_staff.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_staff.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +77,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1i3S3YYyMqkcKDqcSmNpWro4Pq7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">

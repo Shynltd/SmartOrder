@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -42,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     private ConstraintLayout form;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,29 +52,35 @@ public class LoginActivity extends AppCompatActivity {
         initPermission();
         setAnimation();
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
+        validateForm();
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               if(edtPhone.getText().toString().isEmpty()||edtPassword.getText().toString().isEmpty()){
-                   Toast.makeText(LoginActivity.this,"Please Enter Phone or Password",Toast.LENGTH_SHORT).show();
-               } else {
-                   retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
-                       @Override
-                       public void onResponse(Call<Auth> call, Response<Auth> response) {
-                           Auth auth = response.body();
-                           checkLogin(auth);
+                if (edtPhone.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Please Enter Phone or Password", Toast.LENGTH_SHORT).show();
+                } else {
+                    retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
+                        @Override
+                        public void onResponse(Call<Auth> call, Response<Auth> response) {
+                            Auth auth = response.body();
+                            checkLogin(auth);
 
-                       }
-                       @Override
-                       public void onFailure(Call<Auth> call, Throwable t) {
-                           Log.e("onFailure", t.getMessage());
-                       }
-                   });
-               }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Auth> call, Throwable t) {
+                            Log.e("onFailure", t.getMessage());
+                        }
+                    });
+                }
             }
         });
 
+
+    }
+
+    private void validateForm() {
 
     }
 
@@ -125,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getSharedPreferences(SharedPreferences sharedPreferences) {
         edtPhone.setText(sharedPreferences.getString("phone", ""));
-        edtPhone.setSelection(sharedPreferences.getString("phone","").length());
+        edtPhone.setSelection(sharedPreferences.getString("phone", "").length());
         edtPassword.setText(sharedPreferences.getString("password", ""));
         chkRemember.setChecked(sharedPreferences.getBoolean("checked", false));
 
@@ -151,9 +158,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void setAnimation(){
-        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.form_login_translate_bottom_to_top,1000,0));
-        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.logo_translate_top_to_bottom,1000,0));
-        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.btn_login_alpha_hide_to_show,1000,1100));
+    private void setAnimation() {
+        form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.form_login_translate_bottom_to_top, 1000, 0));
+        imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.logo_translate_top_to_bottom, 1000, 0));
+        btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.btn_login_alpha_hide_to_show, 1000, 1100));
     }
 }

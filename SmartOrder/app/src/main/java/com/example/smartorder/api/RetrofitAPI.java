@@ -111,9 +111,6 @@ public interface RetrofitAPI {
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);
 
-    @DELETE("menu/delete/{id}")
-    Call<ServerResponse> deleteFood(@Path("id") String id);
-
 
     //User
     @GET("user")
@@ -133,11 +130,6 @@ public interface RetrofitAPI {
             @Part("role") String role,
             @Part MultipartBody.Part file
     );
-
-
-    //    @PUT("user/update/{id}")
-//    Call<ServerResponse> updateUser(@Path("id") String id,
-//                                    @Body User user);
 
     @Multipart
     @PUT("user/update/{id}")
@@ -197,8 +189,8 @@ public interface RetrofitAPI {
     Call<List<BillOne>> getDetailBill(@Path("billCode") String billCode);
 
     @FormUrlEncoded
-    @POST("bill/paid/{id}")
-    Call<ServerResponse> payBill(@Path("id") String id,
+    @POST("bill/paid/{billCode}")
+    Call<ServerResponse> payBill(@Path("billCode") String billCode,
                                  @Field("nameCashier") String name);
 
     //Staff
