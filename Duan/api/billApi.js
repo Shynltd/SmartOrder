@@ -1,15 +1,20 @@
 let bill = require('../model/bill');
 let billOne = require('../model/menubillone');
+let menu = require('../model/menu');
 
-// module.exports.getListMenu = async (req, res) => {
-//     let listFood = await menu.find({type: "Food"});
-//     let listDrink = await menu.find({type: "Drink"});
-//     res.json({listFood, listDrink});
-// }
 module.exports.getListBillUnpaid = async (req, res) => {
     let findListUnpaid = await bill.find({status: "Chưa thanh toán"});
     if (findListUnpaid) {
         res.json(findListUnpaid);
+    } else {
+        res.status(500).json({message: 'Fail'});
+    }
+}
+module.exports.getListBillOneFromBill = async (req, res) => {
+    let {billCode} = req.params;
+    let findListBillOneFromBill = await billOne.find({billCode});
+    if (findListBillOneFromBill) {
+        res.json(findListBillOneFromBill);
     } else {
         res.status(500).json({message: 'Fail'});
     }
@@ -32,7 +37,7 @@ module.exports.postPaid = async (req, res) => {
         },
     }, {new: true});
     if (paid) {
-        res.status(200).json({message: 'Thanh toán thành công'});
+        res.status(200).json({message: `Đã thanh toán hóa đơn ${paid.billCode}`});
     } else {
         res.status(500).json({message: 'Thanh toán thất bại'});
     }
@@ -44,12 +49,26 @@ module.exports.postOrder = async (req, res) => {
     let status = "Chưa thanh toán";
     let findBill = await bill.findOne({tableCode, status});
     if (findBill) {
+        UpdateOrder:{
         let billCode = findBill.billCode;
         let {list_menu} = req.body;
         for (let i = 0; i < list_menu.length; i++) {
             let {name} = list_menu[i];
             let findFoodOrder = await billOne.findOne({name, billCode});
             if (findFoodOrder) {
+                if (findFoodOrder.type == "Drink"){
+                    let findDrink = await menu.findOne({name: name});
+                    if (findDrink.amount < list_menu[i].sl) {
+                        res.status(201).json({message: `Số lượng ${name} còn lại không đủ`});
+                        break UpdateOrder;
+                    } else {
+                        await menu.findOneAndUpdate({name: name}, {
+                            $set: {
+                                amount: findDrink.amount - list_menu[i].sl
+                            }
+                        }, {new: true})
+                    }
+                }
                 let sl = findFoodOrder.sl + list_menu[i].sl;
                 let totalMoney = findFoodOrder.price * sl;
                 await billOne.findOneAndUpdate({_id: findFoodOrder._id}, {
@@ -64,6 +83,19 @@ module.exports.postOrder = async (req, res) => {
                 let {image} = list_menu[i];
                 let {price} = list_menu[i];
                 let {type} = list_menu[i];
+                if (type == "Drink"){
+                    let findDrink = await menu.findOne({name: name});
+                    if (findDrink.amount < sl) {
+                        res.status(201).json({message: `Số lượng ${name} còn lại không đủ`});
+                        break UpdateOrder;
+                    } else {
+                        await menu.findOneAndUpdate({name: name}, {
+                            $set: {
+                                amount: findDrink.amount - sl
+                            }
+                        }, {new: true})
+                    }
+                }
                 let totalMoney = price * sl;
                 let add = new billOne({billCode, image, sl, name, price, type, totalMoney});
                 add.save();
@@ -84,7 +116,11 @@ module.exports.postOrder = async (req, res) => {
                 res.status(500).json({message: 'Fail'})
             }
         });
+
+
+        }
     } else {
+        CreateNew:{
         let currentdate = new Date();
         let list = await bill.find({});
         let listCount = list.length + 1;
@@ -96,6 +132,20 @@ module.exports.postOrder = async (req, res) => {
             let {name} = list_menu[i];
             let {price} = list_menu[i];
             let {type} = list_menu[i];
+            if (type == "Drink") {
+                let findDrink = await menu.findOne({name: name});
+                if (findDrink.amount < sl) {
+                    res.status(201).json({message: `Số lượng ${name} còn lại không đủ`});
+                    break CreateNew;
+                } else {
+                    await menu.findOneAndUpdate({name: name}, {
+                        $set: {
+                            amount: findDrink.amount - sl
+                        }
+                    }, {new: true})
+                }
+
+            }
             let totalMoney = price * sl;
             let add = new billOne({billCode, image, sl, name, price, type, totalMoney});
             add.save();
@@ -109,6 +159,7 @@ module.exports.postOrder = async (req, res) => {
                 res.status(500).json({message: 'Fail'})
             }
         });
+    }
     }
 }
 

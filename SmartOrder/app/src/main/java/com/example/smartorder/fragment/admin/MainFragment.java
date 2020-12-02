@@ -70,7 +70,7 @@ public class MainFragment extends Fragment {
                     case R.id.profile:
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         ProfileFragment profileFragment = new ProfileFragment();
-                        transaction.setCustomAnimations(R.anim.list_food_bottom_to_top, 0).add(R.id.frq, profileFragment).commit();
+                        transaction.setCustomAnimations(R.anim.list_food_bottom_to_top, 0).add(R.id.frq, profileFragment, Constants.fragmentProfile).commit();
                         break;
                     case R.id.logOut:
                         Intent intent = new Intent(getActivity(), LoginActivity.class);

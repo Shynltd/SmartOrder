@@ -16,6 +16,7 @@ import com.example.smartorder.R;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.callback.CallBackInfoUser;
 import com.example.smartorder.model.user.User;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -36,6 +37,8 @@ public class ProfileFragment extends Fragment {
     private TextView tvSAge;
     private TextView tvSAddress;
     private TextView tvSCMND;
+    private CallBackInfoUser callBackInfoUser;
+    private User user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +51,9 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 EditProfileFragment editProfileFragment = new EditProfileFragment();
-                transaction.setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left, R.anim.admin_fragment_main_translate_exit_right_to_left).add(R.id.frq, editProfileFragment).commit();
+                callBackInfoUser = editProfileFragment;
+                callBackInfoUser.getInfoUser(user);
+                transaction.setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left, R.anim.admin_fragment_main_translate_exit_right_to_left).add(R.id.frq, editProfileFragment,Constants.fragmentEditProfile).commit();
             }
         });
         imgDown.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +72,7 @@ public class ProfileFragment extends Fragment {
         retrofitAPI.getInfoUser(Constants.idLogin).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
+                 user = response.body();
                 Glide.with(getContext()).load(Constants.LINK + user.getAvatar()).into(imgAvatar);
                 tvNameUser.setText(user.getFullName());
                 tvSName.setText(user.getFullName());
@@ -76,7 +81,6 @@ public class ProfileFragment extends Fragment {
                 tvSAddress.setText(user.getAddress());
                 tvSAge.setText(user.getAge() + "");
                 tvSCMND.setText(user.getIndentityCardNumber() + "");
-
             }
 
             @Override

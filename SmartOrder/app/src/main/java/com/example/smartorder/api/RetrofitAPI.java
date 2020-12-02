@@ -1,12 +1,9 @@
 package com.example.smartorder.api;
 
-import androidx.annotation.IntRange;
 
 import com.example.smartorder.model.bill.Bill;
-import com.example.smartorder.model.callback.CallbackTalble;
+import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.login.Auth;
-import com.example.smartorder.model.menu.ListDrink;
-import com.example.smartorder.model.menu.ListFood;
 import com.example.smartorder.model.menu.ListMenuOrder;
 import com.example.smartorder.model.menu.MenuOrder;
 import com.example.smartorder.model.response.ServerResponse;
@@ -17,11 +14,11 @@ import com.example.smartorder.model.menu.Menu;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -31,11 +28,37 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface RetrofitAPI {
+
+    //All
+    @FormUrlEncoded
+    @PUT("user/update/changePass/{id}")
+    Call<ServerResponse> changePass(@Path("id") String id,
+                                    @Field("currentpass") String currentPass,
+                                    @Field("newpass") String newPass);
+
+    @Multipart
+    @PUT("user/update/info/{id}")
+    Call<ServerResponse> updateInfoNoImage(@Path("id") String id,
+                                           @Part("fullName") String fullName,
+                                           @Part("phone") String phone,
+                                           @Part("age") Integer age,
+                                           @Part("address") String address);
+
+    @Multipart
+    @PUT("user/update/info/{id}")
+    Call<ServerResponse> updateInfo(@Path("id") String id,
+                                           @Part("fullName") String fullName,
+                                           @Part("phone") String phone,
+                                           @Part("age") Integer age,
+                                           @Part("address") String address,
+                                           @Part MultipartBody.Part file);
+
     //Login
     @FormUrlEncoded
     @POST("login")
     Call<Auth> checkLogin(@Field("phone") String phone,
                           @Field("password") String passWord);
+
 
     //Menu
     @GET("menu")
@@ -93,6 +116,7 @@ public interface RetrofitAPI {
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteFood(@Path("id") String id);
 
+
     //User
     @GET("user")
     Call<List<User>> getAllUser();
@@ -136,30 +160,32 @@ public interface RetrofitAPI {
     @DELETE("table/delete/{id}")
     Call<ServerResponse> deleteTable(@Path("id") String id);
 
+
     //Bill
     @GET("bill")
     Call<List<Menu>> getAllBill();
 
-    @POST("bill/create")
-    Call<ServerResponse> createBill(@Body ListMenuOrder listMenuOrder);
+    @GET("bill/listPaid")
+    Call<List<Bill>> getListPaid();
+
+    @GET("bill/billOne/{billCode}")
+    Call<List<BillOne>> getDetailBill(@Path("billCode") String billCode);
 
     @FormUrlEncoded
     @POST("bill/paid/{id}")
     Call<ServerResponse> payBill(@Path("id") String id,
                                  @Field("nameCashier") String name);
 
-    @GET("bill/listPaid")
-    Call<List<Bill>> getListPaid();
-
-    @GET("bill/listUnpaid")
-    Call<List<Bill>> getListUnpaid();
-
-    //staff
+    //Staff
     @GET("menus")
     Call<List<MenuOrder>> getAllMenuOrder();
 
-    @FormUrlEncoded
     @POST("bill/create")
-    Call<ServerResponse> order(@Field("tableCodes") String tableCodes);
+    Call<ServerResponse> createBill(@Body ListMenuOrder listMenuOrder);
+
+
+    //Cashier
+    @GET("bill/listUnpaid")
+    Call<List<Bill>> getListUnpaid();
 
 }

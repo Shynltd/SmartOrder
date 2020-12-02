@@ -164,10 +164,10 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if(edAmonut.getText().toString().isEmpty()||edtTenMon.getText().toString().isEmpty()||
-                        edtPrice.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
-                }else {
+                if (edtTenMon.getText().toString().isEmpty() ||
+                        edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else {
                     String tenmon = edtTenMon.getText().toString();
                     Integer price = Integer.parseInt(edtPrice.getText().toString());
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
@@ -182,14 +182,14 @@ public class MenuFragment extends Fragment {
                         amonut = Integer.parseInt(edAmonut.getText().toString().trim());
                     }
 
-                    retrofitAPI.createFood(tenmon,price,amonut,type,filePart)
+                    retrofitAPI.createFood(tenmon, price, amonut, type, filePart)
                             .enqueue(new Callback<ServerResponse>() {
                                 @Override
                                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                     Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                     alertDialog.dismiss();
-//                   FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                   fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
+                                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                    fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
                                 }
 
                                 @Override

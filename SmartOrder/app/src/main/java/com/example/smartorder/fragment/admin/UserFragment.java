@@ -3,7 +3,6 @@ package com.example.smartorder.fragment.admin;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,10 +30,8 @@ import com.example.smartorder.adapter.admin.UserAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.model.response.ServerResponse;
-import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
-import com.google.android.material.textfield.TextInputEditText;
 import com.melnykov.fab.FloatingActionButton;
 
 
@@ -67,7 +64,7 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_staff, container, false);
+        View view = inflater.inflate(R.layout.fragment_user, container, false);
         initView(view);
         return view;
     }

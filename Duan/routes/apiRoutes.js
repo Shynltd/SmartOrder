@@ -17,6 +17,8 @@ router.get('/user/:id', authMiddle.verifyToken, userApi.getUserInfo);
 router.post('/user/create', authMiddle.verifyToken, userApi.postCreateUser);
 router.delete('/user/delete/:id', authMiddle.verifyToken, userApi.deleteUser);
 router.put('/user/update/:id', authMiddle.verifyToken, userApi.updateUser);
+router.put('/user/update/info/:id', authMiddle.verifyToken, userApi.updateInfoUser);
+router.put('/user/update/changePass/:id', authMiddle.verifyToken, userApi.changePassword);
 
 //menu
 router.get('/menu', authMiddle.verifyToken, menuApi.getListMenu);
@@ -35,6 +37,7 @@ router.put('/table/update/:id', authMiddle.verifyToken, tableApi.postUpdate);
 router.post('/bill/create', authMiddle.verifyToken, billApi.postOrder);
 router.get('/bill/listUnpaid', authMiddle.verifyToken, billApi.getListBillUnpaid);
 router.get('/bill/listPaid', authMiddle.verifyToken, billApi.getListBillPaid);
+router.get('/bill/billOne/:billCode', authMiddle.verifyToken, billApi.getListBillOneFromBill);
 router.post('/bill/paid/:id', authMiddle.verifyToken,billApi.postPaid);
 
 module.exports = router;

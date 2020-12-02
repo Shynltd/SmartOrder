@@ -4,7 +4,7 @@ let menu = require('../model/menu');
 
 module.exports.getAllBills = async (req, res) => {
     let allBills = await billone.find();
-    console.log(allBills);
+    res.render('bill/listBill', {allBills});
 }
 module.exports.getCreateBill = async (req, res) => {
     let allMenu = await menu.find();
