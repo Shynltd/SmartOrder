@@ -2,10 +2,23 @@ let bill = require('../model/bill');
 let billone = require('../model/menubillone');
 let menu = require('../model/menu');
 
+
 module.exports.getAllBills = async (req, res) => {
-    let allBills = await billone.find();
-    res.render('bill/listBill', {allBills});
+
+    let Bills = await bill.find();
+    console.log(Bills);
+    res.render('bill/listBill', {bills: Bills});
+
 }
+
+module.exports.getBills = async (req, res) => {
+    let id = req.params.billCode;
+    let bills = await bill.findOne({billCode: id}).catch((err) => {
+    });
+    let billones = await billone.find({billCode: id});
+    res.render('bill/detail', {bills, billones});
+}
+
 module.exports.getCreateBill = async (req, res) => {
     let allMenu = await menu.find();
     res.render('bill/createBill', {allMenu, err: false})
