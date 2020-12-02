@@ -1,8 +1,8 @@
 package com.example.smartorder.constants;
 
 public class Constants {
-//    public static final String URL = "http://103.143.208.133:2000/api/";
-//    public static final String LINK = "http://103.143.208.133:2000";
+    public static final String URL = "http://103.143.208.133:2000/api/";
+    public static final String LINK = "http://103.143.208.133:2000";
     public static String TOKEN = "";
     public static String NameUser = "";
     public static String AvatarUser = "";
@@ -13,7 +13,7 @@ public class Constants {
     public static String fragmentPayBill = "fragment_pay_bill";
     public static String cashierFragmet= "fragment_cashier";
 
-    public static final String URL = "http://192.168.1.3:2000/api/";
-    public static final String LINK = "http://192.168.1.3:2000";
+//    public static final String URL = "http://192.168.1.3:2000/api/";
+//    public static final String LINK = "http://192.168.1.3:2000";
 
 }

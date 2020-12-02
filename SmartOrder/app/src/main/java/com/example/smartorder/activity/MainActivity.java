@@ -17,4 +17,8 @@ public class MainActivity extends AppCompatActivity {
         Support.replaceFragment(getSupportFragmentManager(), R.id.frq, new MainFragment(), false, 0, 0);
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
 }

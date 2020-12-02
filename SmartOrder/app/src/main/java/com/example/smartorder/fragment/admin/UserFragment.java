@@ -254,7 +254,6 @@ public class UserFragment extends Fragment {
         alertDialog.setView(alert);
         alertDialog.setTitle("Chỉnh sửa thông tin nhân viên");
         alertDialog.setCancelable(false);
-
         imgAvatar = alert.findViewById(R.id.imgAvatar);
 
         EditText edtFullName = alert.findViewById(R.id.edtNameUser);
