@@ -199,7 +199,9 @@ public class MenuFoodFragment extends Fragment {
                 String tenmon = edtName.getText().toString();
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
                 String type = tvType.getText().toString();
-                if (uriImage != null) {
+                if(edtName.getText().toString().isEmpty()|| edtPrice.getText().toString().length() == 0){
+                    Toast.makeText(getContext(),"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
+                } else if (uriImage != null) {
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);

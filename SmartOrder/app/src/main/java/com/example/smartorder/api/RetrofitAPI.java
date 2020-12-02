@@ -127,12 +127,13 @@ public interface RetrofitAPI {
     Call<ServerResponse> createUser(
             @Part("fullName") String fullName,
             @Part("phone") String phone,
-            @Part("soCMND") Integer cmnd,
+            @Part("indentityCardNumber") Integer indentityCardNumber,
             @Part("age") Integer age,
             @Part("address") String address,
             @Part("role") String role,
             @Part MultipartBody.Part file
     );
+
 
     //    @PUT("user/update/{id}")
 //    Call<ServerResponse> updateUser(@Path("id") String id,
@@ -144,12 +145,24 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("fullName") String fullName,
             @Part("phone") String phone,
-            @Part("soCMND") Integer cmnd,
+            @Part("indentityCardNumber") Integer indentityCardNumber,
             @Part("age") Integer age,
             @Part("address") String address,
             @Part("role") String role,
             @Part MultipartBody.Part file
     );
+    @Multipart
+    @PUT("user/update/{id}")
+    Call<ServerResponse> updateUserNoImage(
+            @Path("id") String id,
+            @Part("fullName") String fullName,
+            @Part("phone") String phone,
+            @Part("indentityCardNumber") Integer indentityCardNumber,
+            @Part("age") Integer age,
+            @Part("address") String address,
+            @Part("role") String role
+    );
+
 
 
     @DELETE("user/delete/{id}")

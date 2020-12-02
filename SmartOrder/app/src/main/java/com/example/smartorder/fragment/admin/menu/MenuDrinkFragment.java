@@ -211,7 +211,9 @@ public class MenuDrinkFragment extends Fragment {
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
                 String type = tvType.getText().toString();
                 Integer amount = Integer.parseInt(edAmonut.getText().toString());
-                if (uriImage != null) {
+                if(edtTenMon.getText().toString().isEmpty()||edtPrice.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(),"Vui lòng nhập đủ thông tin",Toast.LENGTH_SHORT).show();
+                } else if (uriImage != null) {
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);

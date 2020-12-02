@@ -351,6 +351,22 @@ public class UserFragment extends Fragment {
                             Log.e("onFailure: ", t.getMessage());
                         }
                     });
+                } else {
+                    retrofitAPI.updateUserNoImage(user.getId(), fullName, phone, cmnd, age, address, role).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            alertDialog.dismiss();
+                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                            fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            Log.e("onFailure: ", t.getMessage());
+                        }
+                    });
+
                 }
             }
 
