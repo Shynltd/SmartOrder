@@ -191,6 +191,7 @@ public class MenuFoodFragment extends Fragment {
 
         Button btnUpdate = alert.findViewById(R.id.btnAddFood);
         btnUpdate.setText("Chỉnh sửa");
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
