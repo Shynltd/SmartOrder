@@ -1,18 +1,13 @@
 package com.example.smartorder.api;
 
-import androidx.annotation.IntRange;
-
 import com.example.smartorder.model.bill.Bill;
-import com.example.smartorder.model.callback.CallbackTalble;
 import com.example.smartorder.model.login.Auth;
-import com.example.smartorder.model.menu.ListDrink;
-import com.example.smartorder.model.menu.ListFood;
 import com.example.smartorder.model.menu.ListMenuOrder;
+import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.menu.MenuOrder;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
-import com.example.smartorder.model.menu.Menu;
 
 import java.util.List;
 
@@ -21,7 +16,6 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
-import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -112,9 +106,23 @@ public interface RetrofitAPI {
             @Part MultipartBody.Part file
     );
 
+    //    @PUT("user/update/{id}")
+//    Call<ServerResponse> updateUser(@Path("id") String id,
+//                                    @Body User user);
+
+    @Multipart
     @PUT("user/update/{id}")
-    Call<ServerResponse> updateUser(@Path("id") String id,
-                                    @Body User user);
+    Call<ServerResponse> updateUser(
+            @Path("id") String id,
+            @Part("fullName") String fullName,
+            @Part("phone") String phone,
+            @Part("soCMND") Integer cmnd,
+            @Part("age") Integer age,
+            @Part("address") String address,
+            @Part("role") String role,
+            @Part MultipartBody.Part file
+    );
+
 
     @DELETE("user/delete/{id}")
     Call<ServerResponse> deleteUser(@Path("id") String id);
