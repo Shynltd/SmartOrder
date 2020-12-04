@@ -59,15 +59,14 @@ public interface RetrofitAPI {
 
 
     //Menu
-    @GET("menu")
-    Call<Menu> getAllMenu();
+    @GET("menus")
+    Call<List<Menu>> getAllMenu();
 
     @Multipart
     @POST("menu/create")
     Call<ServerResponse> createFood(
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("amount") Integer amount,
             @Part("type") String type,
             @Part MultipartBody.Part file
     );
@@ -78,7 +77,7 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("amount") Integer amount,
+            @Part("status") boolean status,
             @Part("type") String type,
             @Part MultipartBody.Part file);
 
@@ -88,7 +87,7 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("amount") Integer amount,
+            @Part("status") boolean status,
             @Part("type") String type);
 
     @Multipart
@@ -167,8 +166,7 @@ public interface RetrofitAPI {
 
     @FormUrlEncoded
     @POST("table/create")
-    Call<ServerResponse> createTable(@Field("tableCode") int tableCode,
-                                     @Field("tableSeats") int tableSeats);
+    Call<ServerResponse> createTable(@Field("tableSeats") int tableSeats);
 
     @PUT("table/update/{id}")
     Call<ServerResponse> updateTable(@Path("id") String id,
@@ -179,8 +177,8 @@ public interface RetrofitAPI {
 
 
     //Bill
-    @GET("bill")
-    Call<List<Menu>> getAllBill();
+//    @GET("bill")
+//    Call<List<Menu>> getAllBill();
 
     @GET("bill/listPaid")
     Call<List<Bill>> getListPaid();

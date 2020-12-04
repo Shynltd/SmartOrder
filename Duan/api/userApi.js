@@ -139,7 +139,6 @@ module.exports.postCreateUser = async (req, res) => {
             } else if (reject) {
                 res.status(201).json({message: `Error is ${reject.toString()}`});
             }
-        }
-        );
+        });
     }
 }

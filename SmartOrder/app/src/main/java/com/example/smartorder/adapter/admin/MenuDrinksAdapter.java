@@ -1,6 +1,7 @@
 package com.example.smartorder.adapter.admin;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,24 +11,24 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.menu.ListDrink;
-import com.example.smartorder.model.table.Table;
+import com.example.smartorder.model.menu.Menu;
 
 import java.util.List;
 
 public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.MenuHolder> {
-    private List<ListDrink> listDrinks;
+    private List<Menu> menuListDrinks;
     private Context context;
     private OnClickListener onClickListener;
 
 
-    public MenuDrinksAdapter(List<ListDrink> listDrinks, Context context, OnClickListener listener) {
-        this.listDrinks = listDrinks;
+    public MenuDrinksAdapter(List<Menu> menuListDrinks, Context context, OnClickListener listener) {
+        this.menuListDrinks = menuListDrinks;
         this.context = context;
         this.onClickListener =listener;
     }
@@ -41,10 +42,16 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-        Glide.with(context).load(Constants.LINK + listDrinks.get(position).getImage()).into(holder.imgLogo);
-        holder.tvNameMenu.setText(listDrinks.get(position).getName());
-        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price)+ listDrinks.get(position).getPrice());
-        holder.tvAmountMenu.setText(context.getString(R.string.text_adapter_amount) + listDrinks.get(position).getAmount());
+        Glide.with(context).load(Constants.LINK + menuListDrinks.get(position).getImage()).into(holder.imgLogo);
+        holder.tvNameMenu.setText(menuListDrinks.get(position).getName());
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price)+ menuListDrinks.get(position).getPrice());
+        if (menuListDrinks.get(position).getStatus()) {
+            holder.tvAmountMenu.setText("Trạng thái: Còn Hàng" );
+            holder.tvAmountMenu.setTextColor(ContextCompat.getColor(context,R.color.tv_status_paid));
+        } else {
+            holder.tvAmountMenu.setText("Trạng thái: Hết Hàng");
+            holder.tvAmountMenu.setTextColor(ContextCompat.getColor(context,R.color.tv_status_unpaid));
+        }
         holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,10 +62,10 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-                                onClickListener.deleteDrink(position,listDrinks.get(position).getId());
+                                onClickListener.deleteDrink(position,menuListDrinks.get(position).getId());
                                 break;
                             case R.id.update:
-                                onClickListener.updateDrink(position,listDrinks);
+                                onClickListener.updateDrink(position);
                                 break;
                         }
                         return false;
@@ -71,8 +78,8 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
 
     @Override
     public int getItemCount() {
-        if (listDrinks == null) return 0;
-        return listDrinks.size();
+        if (menuListDrinks == null) return 0;
+        return menuListDrinks.size();
     }
 
 
@@ -92,6 +99,6 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
     }
     public interface OnClickListener {
         void  deleteDrink (int position ,String id);
-        void  updateDrink(int position , List<ListDrink> listDrinks);
+        void  updateDrink(int position );
     }
 }

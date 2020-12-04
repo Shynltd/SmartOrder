@@ -4,43 +4,42 @@ let uniqid = require('uniqid');
 module.exports.getListMenu = async (req, res) => {
     let listFood = await menu.find({type: "Food"});
     let listDrink = await menu.find({type: "Drink"});
-    res.json({listFood, listDrink});
+    let listOther = await menu.find({type: "Other"});
+    res.json({listFood, listDrink, listOther});
 }
 module.exports.getListMenuAll = async (req, res) => {
     let findMenu = await menu.find({});
     if (findMenu) {
         res.json(findMenu);
     } else {
-        res.status(500).json({message: 'Get Menu Fail'});
+        res.status(201).json({message: 'Lấy danh sách món ăn thất bại'});
     }
 }
 module.exports.postCreate = async (req, res) => {
     let name = req.body.name.substring(1, req.body.name.length - 1);
-    let type = req.body.type.substring(1, req.body.type.length - 1);
-    let price = req.body.price;
-    let amount = null;
-    if (type == "Drink") {
-        amount = req.body.amount;
-    }
-    let image = null;
-    if (req.files) {
-        let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
-        req.files.avatar.mv(`./uploads${avatarName}`);
-        image = avatarName;
+    let checkName = await menu.findOne({name:name});
+    if (checkName) {
+        res.status(201).json({message: `Tên món ăn bị trùng`});
+    } else {
+        let type = req.body.type.substring(1, req.body.type.length - 1);
+        let price = req.body.price;
+        let image = null;
+        if (req.files) {
+            let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
+            req.files.avatar.mv(`./uploads${avatarName}`);
+            image = avatarName;
+        }
+        const menus = new menu({name, type, price, image});
+        menus.save().then((resolve, reject) => {
+            if (resolve) {
+                res.status(200).json({message: `Thêm món ăn thành công`})
+            } else if (reject) {
+                res.status(201).json({message: `Thêm món ăn thất bại`});
+            }
+        });
     }
 
-    const menus = new menu({name, type, price, amount, image});
-    menus.save((err) => {
-        if (err) {
-            res.status(500).json({
-                message: `Error is ${err}`
-            });
-        } else {
-            res.status(200).json({
-                message: `Add new food successfully`
-            });
-        }
-    });
+
 }
 module.exports.postUpdate = async (req, res) => {
     let findFood = await menu.findById(req.params.id);
@@ -51,23 +50,29 @@ module.exports.postUpdate = async (req, res) => {
             req.files.avatar.mv(`./uploads${avatarName}`);
             image = avatarName;
         }
-        let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
-            $set: {
-                name: req.body.name.substring(1, req.body.name.length - 1),
-                type: req.body.type.substring(1, req.body.type.length - 1),
-                amount: req.body.amount,
-                price: req.body.price,
-                image: image,
-
-            },
-        }, {new: true});
-        if (updated) {
-            res.status(200).json({message: 'Food Updated'})
+        let name = req.body.name.substring(1, req.body.name.length - 1);
+        let checkName = await menu.find({name});
+        if (checkName) {
+            res.status(201).json({message: `Tên món ăn bị trùng`});
         } else {
-            res.status(500).json({message: 'Update Food Fail'})
+            let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
+                $set: {
+                    name: name,
+                    type: req.body.type.substring(1, req.body.type.length - 1),
+                    price: req.body.price,
+                    status: req.body.status,
+                    image: image,
+
+                },
+            }, {new: true});
+            if (updated) {
+                res.status(200).json({message: 'Cập nhật thành công'})
+            } else {
+                res.status(201).json({message: 'Cập nhật thất bại'})
+            }
         }
     } else {
-        res.status(500).json({message: 'Food does not exist'})
+        res.status(201).json({message: 'Món ăn không tồn tại'})
     }
 }
 module.exports.deleteMenu = async (req, res) => {
@@ -75,11 +80,11 @@ module.exports.deleteMenu = async (req, res) => {
     if (findFood) {
         const deleteMenu = await menu.findOneAndRemove({_id: req.params.id});
         if (deleteMenu) {
-            res.status(200).json({message: 'Food Deleted'})
+            res.status(200).json({message: `Đã xóa ${findFood.name}`})
         } else {
-            res.status(500).json({message: 'Delete Food Fail'})
+            res.status(201).json({message: 'Xóa món ăn thất bại'})
         }
     } else {
-        res.status(500).json({message: 'Food does not exist'})
+        res.status(201).json({message: 'Món ăn không tồn tại'})
     }
 }

@@ -6,12 +6,13 @@ module.exports.getListTable = async (req, res) => {
 }
 
 module.exports.postCreate = async (req, res) => {
-    let tableCode = req.body.tableCode;
+    let getTable = await table.find({});
+    let tableCode = getTable.length+1;
     let tableSeats = req.body.tableSeats;
     const addTable = new table({tableCode, tableSeats});
     addTable.save((err) => {
         if (err) {
-            res.status(500).json({
+            res.status(201).json({
                 message: `Error is ${err}`
             });
         } else {

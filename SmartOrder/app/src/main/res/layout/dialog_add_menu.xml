@@ -1,92 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:padding="@dimen/_20sdp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="@dimen/_20sdp">
 
     <TextView
-        android:padding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tên Món"/>
+        android:padding="@dimen/_5sdp"
+        android:text="Tên Món" />
+
     <EditText
+        android:id="@+id/edtNameFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/radius_item_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:id="@+id/edtNameFood"/>
+        android:inputType="text" />
+
     <TextView
-        android:padding="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Giá tiền"/>
+        android:padding="@dimen/_5sdp"
+        android:text="Giá tiền" />
+
     <EditText
-        android:background="@drawable/radius_item_user"
+        android:id="@+id/edtPriceFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:id="@+id/edtPriceFood"/>
+        android:background="@drawable/radius_item_user"
+        android:inputType="number" />
+
     <TextView
-        android:padding="@dimen/_5sdp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ảnh"/>
+        android:padding="@dimen/_5sdp"
+        android:text="Ảnh" />
+
     <ImageView
         android:id="@+id/imgAvtFood"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
-        android:src="@drawable/ic_add"
-        />
+        android:src="@drawable/ic_add" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_60sdp"
-        android:gravity="center"
-        android:orientation="horizontal">
-        <TextView
-            android:padding="@dimen/_5sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Loại"/>
-
-        <Spinner
-            android:id="@+id/spnTypeFood"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvAmountFood"
-        android:padding="@dimen/_5sdp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Số lượng"/>
-    <EditText
-        android:background="@drawable/radius_item_user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:id="@+id/edtAmountFood"/>
-    <LinearLayout
-        android:gravity="right"
-        android:layout_gravity="right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/_5sdp"
+        android:text="Loại" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rdgType"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rdFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đồ ăn" />
+
+        <RadioButton
+            android:id="@+id/rdDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="Đồ uống" />
+
+        <RadioButton
+            android:id="@+id/rdOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:text="Khác" />
+    </RadioGroup>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:gravity="right"
         android:orientation="horizontal">
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
             android:id="@+id/btnCancel"
-            android:text="Hủy" />
-        <Button
-            android:layout_margin="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Hủy" />
+
+        <Button
             android:id="@+id/btnAddFood"
-            android:text="Thêm mới"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:text="Thêm mới" />
 
     </LinearLayout>
 </LinearLayout>

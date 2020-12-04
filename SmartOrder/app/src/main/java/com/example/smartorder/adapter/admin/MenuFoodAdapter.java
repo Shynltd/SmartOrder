@@ -15,18 +15,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.menu.ListDrink;
-import com.example.smartorder.model.menu.ListFood;
+import com.example.smartorder.model.menu.Menu;
 
 import java.util.List;
 
 public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHolder> {
-    private List<ListFood> listFoods;
+    private List<Menu> menuListFood;
     private Context context;
     private OnClickListener onClickListener;
 
-    public MenuFoodAdapter(List<ListFood> listFoods, Context context, OnClickListener onClickListener) {
-        this.listFoods = listFoods;
+    public MenuFoodAdapter(List<Menu> menuListFood, Context context, OnClickListener onClickListener) {
+        this.menuListFood = menuListFood;
         this.context = context;
         this.onClickListener = onClickListener;
     }
@@ -40,9 +39,9 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
 
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
-        Glide.with(context).load(Constants.LINK+listFoods.get(position).getImage()).into(holder.imgLogo);
-        holder.tvNameMenu.setText(listFoods.get(position).getName());
-        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) +listFoods.get(position).getPrice());
+        Glide.with(context).load(Constants.LINK+menuListFood.get(position).getImage()).into(holder.imgLogo);
+        holder.tvNameMenu.setText(menuListFood.get(position).getName());
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) +menuListFood.get(position).getPrice());
         holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,10 +52,10 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-                                onClickListener.deleteFood(position,listFoods.get(position).getId());
+                                onClickListener.deleteFood(position,menuListFood.get(position).getId());
                                 break;
                             case R.id.update:
-                                onClickListener.updateFood(position, listFoods);
+                                onClickListener.updateFood(position);
                                 break;
                         }
                         return false;
@@ -69,8 +68,8 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
 
     @Override
     public int getItemCount() {
-        if (listFoods == null) return 0;
-        return listFoods.size();
+        if (menuListFood == null) return 0;
+        return menuListFood.size();
     }
 
 
@@ -90,7 +89,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
 
     public interface OnClickListener {
         void  deleteFood (int position ,String id);
-        void  updateFood (int position , List<ListFood> listFoods);
+        void  updateFood (int position);
     }
 
 }

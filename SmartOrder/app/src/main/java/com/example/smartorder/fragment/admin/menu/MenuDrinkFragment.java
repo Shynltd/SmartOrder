@@ -10,8 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,7 +30,6 @@ import com.example.smartorder.adapter.admin.MenuDrinksAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.model.menu.ListDrink;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
@@ -55,7 +52,7 @@ public class MenuDrinkFragment extends Fragment {
     private RecyclerView rvListMenuDrink;
     private MenuDrinksAdapter menuDrinksAdapter;
     private RetrofitAPI retrofitAPI;
-    private List<ListDrink> listDrinks;
+    private List<Menu> menuListDrink;
     private EditText edtTenMon;
     private EditText edtPrice;
     private EditText edAmonut;
@@ -63,56 +60,35 @@ public class MenuDrinkFragment extends Fragment {
     private Spinner spnType;
     private TextView tvAmount;
     private Button btnUpdate, btnCancel;
-
     private String type;
-
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
+
+    public MenuDrinkFragment(List<Menu> menuListDrink) {
+        this.menuListDrink = menuListDrink;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_drink, container, false);
         initView(view);
+        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        rvListDrinks();
+        Log.e( "MenuDrinkFragment: ", String.valueOf(menuListDrink.size()));
         return view;
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        rvListDrinks();
-        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        retrofitAPI.getAllMenu().enqueue(new Callback<Menu>() {
-            @Override
-            public void onResponse(Call<Menu> call, Response<Menu> response) {
-                if (response.body() != null) {
-                    List<ListDrink> drinks = response.body().getListDrink();
-                    getListDrinksFromServer(drinks);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Menu> call, Throwable t) {
-                Log.e("Error: ", t.getMessage());
-            }
-        });
-
-    }
-
 
     private void initView(View view) {
         rvListMenuDrink = (RecyclerView) view.findViewById(R.id.rvListMenuDrink);
     }
 
-
     private void rvListDrinks() {
-        listDrinks = new ArrayList<>();
-        menuDrinksAdapter = new MenuDrinksAdapter(listDrinks, getContext(), new MenuDrinksAdapter.OnClickListener() {
+        menuDrinksAdapter = new MenuDrinksAdapter(menuListDrink, getContext(), new MenuDrinksAdapter.OnClickListener() {
             @Override
             public void deleteDrink(int position, String id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa đồ uống " + listDrinks.get(position).getName() + " không ?")
+                builder.setMessage("Bạn có muốn xóa đồ uống " + menuListDrink.get(position).getName() + " không ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -140,8 +116,8 @@ public class MenuDrinkFragment extends Fragment {
             }
 
             @Override
-            public void updateDrink(int position, List<ListDrink> listDrinks) {
-                dialogUpdateDrink(position, listDrinks);
+            public void updateDrink(int position) {
+                dialogUpdateDrink(position);
             }
         });
         rvListMenuDrink.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -149,22 +125,10 @@ public class MenuDrinkFragment extends Fragment {
         rvListMenuDrink.setAdapter(menuDrinksAdapter);
     }
 
-    private void getListDrinksFromServer(List<ListDrink> drinks) {
-        for (int i = 0; i < drinks.size(); i++) {
-            String id = drinks.get(i).getId();
-            String name = drinks.get(i).getName();
-            Integer price = drinks.get(i).getPrice();
-            String image = drinks.get(i).getImage();
-            String type = drinks.get(i).getType();
-            Integer amount = drinks.get(i).getAmount();
-            listDrinks.add(new ListDrink(id, name, price, image, type, amount));
-            menuDrinksAdapter.notifyDataSetChanged();
-        }
-    }
 
-    private void dialogUpdateDrink(int position, List<ListDrink> listDrinks) {
+    private void dialogUpdateDrink(int position) {
 
-        ListDrink listDrink = listDrinks.get(position);
+        Menu menu = menuListDrink.get(position);
 
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
@@ -174,15 +138,13 @@ public class MenuDrinkFragment extends Fragment {
         alertDialog.setCancelable(false);
 
         edtTenMon = alert.findViewById(R.id.edtNameFood);
-        edtTenMon.setText(String.valueOf(listDrink.getName()));
+        edtTenMon.setText(String.valueOf(menu.getName()));
         edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edtPrice.setText(String.valueOf(listDrink.getPrice()));
-        edAmonut = alert.findViewById(R.id.edtAmountFood);
-        edAmonut.setText(String.valueOf(listDrink.getAmount()));
+        edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvType);
-        tvType.setText(String.valueOf(listDrink.getType()));
+        tvType.setText(String.valueOf(menu.getType()));
         imvFood = alert.findViewById(R.id.imgAvtFood);
-        Glide.with(getContext()).load(Constants.LINK + listDrink.getImage()).into(imvFood);
+        Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imvFood);
 
         btnCancel = alert.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -210,16 +172,16 @@ public class MenuDrinkFragment extends Fragment {
                 String tenmon = edtTenMon.getText().toString();
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
                 String type = tvType.getText().toString();
-                Integer amount = Integer.parseInt(edAmonut.getText().toString());
-                if(edtTenMon.getText().toString().isEmpty()||edtPrice.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(),"Vui lòng nhập đủ thông tin",Toast.LENGTH_SHORT).show();
+                boolean status = true;
+                if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else if (uriImage != null) {
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateDrink(listDrink.getId(), tenmon, price,amount,type, filePart).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.updateDrink(menu.getId(), tenmon, price, status, type, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -233,8 +195,8 @@ public class MenuDrinkFragment extends Fragment {
                             Log.e("onFailure: ", t.getMessage());
                         }
                     });
-                }else {
-                    retrofitAPI.updateDrinkNoImage(listDrink.getId(), tenmon, price,amount, type).enqueue(new Callback<ServerResponse>() {
+                } else {
+                    retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price, status, type).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -251,11 +213,9 @@ public class MenuDrinkFragment extends Fragment {
                 }
             }
         });
-
         alertDialog.show();
-
-
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

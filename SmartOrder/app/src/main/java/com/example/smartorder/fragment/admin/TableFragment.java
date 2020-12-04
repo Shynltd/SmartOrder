@@ -125,7 +125,7 @@ public class TableFragment extends Fragment {
     private void dialogUpdateTable(int position, List<Table> tableList) {
         Table table = tableList.get(position);
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
-        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_table, null);
+        View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_table, null);
         alertDialog.setTitle("Chỉnh sửa bàn");
         alertDialog.setView(alert);
         alertDialog.setCancelable(false);
@@ -152,7 +152,7 @@ public class TableFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
+                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -179,21 +179,17 @@ public class TableFragment extends Fragment {
         alertDialog.setTitle("Tạo mới bàn");
         alertDialog.setView(alert);
         alertDialog.setCancelable(false);
-        EditText edtTableCode = alert.findViewById(R.id.edtTableCode);
         EditText edtTableSeats = alert.findViewById(R.id.edtTableSeats);
         Button btnAddTable = alert.findViewById(R.id.btnAddTable);
         Button btnCancel = alert.findViewById(R.id.btnCancel);
         btnAddTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtTableCode.getText().toString().isEmpty()) {
-                    edtTableCode.setError("Table Code Empty");
-                } else if (edtTableSeats.getText().toString().isEmpty()) {
+                 if (edtTableSeats.getText().toString().isEmpty()) {
                     edtTableSeats.setError("Table Seats Empty");
                 } else {
-                    int tableCode = Integer.parseInt(edtTableCode.getText().toString().trim());
                     int tableSeats = Integer.parseInt(edtTableSeats.getText().toString().trim());
-                    retrofitAPI.createTable(tableCode, tableSeats).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.createTable(tableSeats).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             if (response.code() == 200) {
@@ -201,6 +197,8 @@ public class TableFragment extends Fragment {
                                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                                 ft.detach(TableFragment.this).attach(TableFragment.this).commit();
                                 alertDialog.dismiss();
+                            } else {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
 

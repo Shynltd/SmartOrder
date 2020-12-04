@@ -30,6 +30,7 @@
       <change beforePath="$PROJECT_DIR$/controller/billController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/billController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/bill.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/bill.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/menu.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/menubillone.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/menubillone.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/table.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.js" afterDir="false" />
@@ -108,13 +109,15 @@
       <change beforePath="$PROJECT_DIR$/views/user/createUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/createUser.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/user/infoUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/infoUser.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/user/listUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/listUser.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/UserFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/UserFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/CashierFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/CashierFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/profile/ChangePassFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/profile/ChangePassFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_cashier.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_cashier.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_change_pass.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_change_pass.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/anim/rotate_change_pass.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/anim/rotate_change_pass.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_menu.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_table.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_table.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,6 +275,8 @@
       <workItem from="1606809534749" duration="4312000" />
       <workItem from="1606892373688" duration="763000" />
       <workItem from="1606893251836" duration="1278000" />
+      <workItem from="1606982142657" duration="9110000" />
+      <workItem from="1607092258054" duration="708000" />
     </task>
     <servers />
   </component>

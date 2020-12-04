@@ -2,6 +2,7 @@ package com.example.smartorder.fragment.admin;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +32,7 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.TabMenuAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
 import com.google.android.material.tabs.TabLayout;
@@ -53,22 +57,21 @@ public class MenuFragment extends Fragment {
     private TabLayout tabMenu;
     private ViewPager vpMenu;
     private FloatingActionButton fabAddMenu;
-    private EditText edtTenMon;
-    private EditText edtPrice;
-    private EditText edAmonut;
-    private TextView tvAmount;
     private ImageView imvFood;
-    private Spinner spnType;
-    private Button btnAdd, btnCancel;
-
     private String type;
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
+    private List<Menu> menuListFood;
+    private List<Menu> menuListDrink;
+    private List<Menu> menuListOther;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        menuListFood = new ArrayList<>();
+        menuListDrink = new ArrayList<>();
+        menuListOther = new ArrayList<>();
     }
 
     @Override
@@ -76,20 +79,48 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         initView(view);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        vpMenu.setAdapter(new TabMenuAdapter(getFragmentManager()));
-        tabMenu.setupWithViewPager(vpMenu);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        getAllMenuFromServer();
+        vpMenu.setAdapter(new TabMenuAdapter(getFragmentManager(), menuListFood, menuListDrink, menuListOther));
+        tabMenu.setupWithViewPager(vpMenu);
         fabAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogAddMenu();
+            }
+        });
+        return view;
+    }
 
+    private void getAllMenuFromServer() {
+        retrofitAPI.getAllMenu().enqueue(new Callback<List<Menu>>() {
+            @Override
+            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
+                List<Menu> menus = response.body();
+                for (int i = 0; i < menus.size(); i++) {
+                    String id = menus.get(i).getId();
+                    String name = menus.get(i).getName();
+                    Integer price = menus.get(i).getPrice();
+                    String image = menus.get(i).getImage();
+                    String type = menus.get(i).getType();
+                    boolean status = menus.get(i).getStatus();
+                    if (type.equals("Food")) {
+                        menuListFood.add(new Menu(id, name, price, image,type,status));
+                        Log.e( "Food: ", String.valueOf(i));
+                    } else if (type.equals("Drink")) {
+                        menuListDrink.add(new Menu(id, name, price, image,type,status));
+                        Log.e( "Drink: ", String.valueOf(i));
+                    } else if (type.equals("Other")){
+                        menuListOther.add(new Menu(id, name, price, image,type,status));
+                        Log.e( "Other: ", String.valueOf(i));
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Menu>> call, Throwable t) {
+                Log.e("onFailureMenuFragment", t.getMessage());
             }
         });
     }
@@ -100,47 +131,31 @@ public class MenuFragment extends Fragment {
         alertDialog.setView(alert);
         alertDialog.setTitle("Thêm mới món ăn");
         alertDialog.setCancelable(false);
-
-        List<String> mListSpinner = new ArrayList<>();
-        mListSpinner.add("Drink");
-        mListSpinner.add("Food");
-
-        //ánh xạ view
-        tvAmount = alert.findViewById(R.id.tvAmountFood);
-        edtTenMon = alert.findViewById(R.id.edtNameFood);
-        edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edAmonut = alert.findViewById(R.id.edtAmountFood);
+        EditText edtTenMon = alert.findViewById(R.id.edtNameFood);
+        EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
         imvFood = alert.findViewById(R.id.imgAvtFood);
-        spnType = alert.findViewById(R.id.spnTypeFood);
-        btnAdd = alert.findViewById(R.id.btnAddFood);
-        btnCancel = alert.findViewById(R.id.btnCancel);
-
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(getContext(),
-                R.layout.support_simple_spinner_dropdown_item, mListSpinner);
-        spnType.setAdapter(arrayAdapter);
-
-        spnType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        RadioGroup rdgType = alert.findViewById(R.id.rdgType);
+        RadioButton rdFood = alert.findViewById(R.id.rdFood);
+        RadioButton rdDrink = alert.findViewById(R.id.rdDrink);
+        RadioButton rdOther = alert.findViewById(R.id.rdOther);
+        Button btnAdd = alert.findViewById(R.id.btnAddFood);
+        Button btnCancel = alert.findViewById(R.id.btnCancel);
+        rdgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = mListSpinner.get(position);
-                switch (position) {
-                    case 0:
-                        tvAmount.setVisibility(View.VISIBLE);
-                        edAmonut.setVisibility(View.VISIBLE);
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case 2131231001:
+                        type = "Food";
                         break;
-                    case 1:
-                        tvAmount.setVisibility(View.INVISIBLE);
-                        edAmonut.setVisibility(View.INVISIBLE);
+                    case 2131231000:
+                        type = "Drink";
+                        break;
+                    case 2131231002:
+                        type = "Other";
                         break;
                 }
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
         });
-
         imvFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,9 +179,13 @@ public class MenuFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (edtTenMon.getText().toString().isEmpty() ||
-                        edtPrice.getText().toString().isEmpty()) {
+                if (!checkValidation(edtTenMon, edtPrice)) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (rdgType.getCheckedRadioButtonId() == -1) {
+                    rdDrink.setTextColor(Color.RED);
+                    rdFood.setTextColor(Color.RED);
+                    rdOther.setTextColor(Color.RED);
+                    Toast.makeText(getActivity(), "Bạn chưa chọn loại đồ ăn", Toast.LENGTH_SHORT).show();
                 } else {
                     String tenmon = edtTenMon.getText().toString();
                     Integer price = Integer.parseInt(edtPrice.getText().toString());
@@ -175,31 +194,26 @@ public class MenuFragment extends Fragment {
                             getContext().getContentResolver().getType(uriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
-                    Integer amonut;
-                    if (type.equals("Food")) {
-                        amonut = Integer.parseInt("0");
-                    } else {
-                        amonut = Integer.parseInt(edAmonut.getText().toString().trim());
-                    }
+                    retrofitAPI.createFood(tenmon, price, type, filePart).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            if (response.code() == 200) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
+                            } else {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
 
-                    retrofitAPI.createFood(tenmon, price, amonut, type, filePart)
-                            .enqueue(new Callback<ServerResponse>() {
-                                @Override
-                                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                                    Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                    alertDialog.dismiss();
-                                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                    fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
-                                }
+                        }
 
-                                @Override
-                                public void onFailure(Call<ServerResponse> call, Throwable t) {
-                                    Log.e("onFailure: ", t.getMessage());
-
-                                }
-                            });
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
-
             }
         });
         alertDialog.show();
@@ -219,5 +233,17 @@ public class MenuFragment extends Fragment {
         tabMenu = (TabLayout) view.findViewById(R.id.tabMenu);
         vpMenu = (ViewPager) view.findViewById(R.id.vpMenu);
         fabAddMenu = (FloatingActionButton) view.findViewById(R.id.fabAddMenu);
+    }
+
+    private boolean checkValidation(EditText edtMonAn, EditText edtPrice) {
+        if (edtMonAn.getText().toString().equals("")) {
+            edtMonAn.setError("Chưa nhập tên");
+            return false;
+        }
+        if (edtPrice.getText().toString().equals("")) {
+            edtPrice.setError("Chưa nhập giá");
+            return false;
+        }
+        return true;
     }
 }

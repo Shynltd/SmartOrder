@@ -8,25 +8,33 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.smartorder.fragment.admin.menu.MenuDrinkFragment;
 import com.example.smartorder.fragment.admin.menu.MenuFoodFragment;
+import com.example.smartorder.fragment.admin.menu.MenuOtherFragment;
+import com.example.smartorder.model.menu.Menu;
+
+import java.util.List;
 
 public class TabMenuAdapter extends FragmentStatePagerAdapter {
-    private String listTab[] = {"Đồ ăn", "Đồ uống"};
+    private String listTab[] = {"Đồ ăn", "Đồ uống", "Khác"};
     private MenuDrinkFragment menuDrinkFragment;
     private MenuFoodFragment menuFoodFragment;
+    private MenuOtherFragment menuOtherFragment;
 
-    public TabMenuAdapter(@NonNull FragmentManager fm) {
+    public TabMenuAdapter(@NonNull FragmentManager fm, List<Menu> menuListFood, List<Menu> menuListDrink, List<Menu> menuListOther) {
         super(fm);
-        menuDrinkFragment = new MenuDrinkFragment();
-        menuFoodFragment = new MenuFoodFragment();
+        menuDrinkFragment = new MenuDrinkFragment(menuListDrink);
+        menuFoodFragment = new MenuFoodFragment(menuListFood);
+        menuOtherFragment = new MenuOtherFragment(menuListOther);
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        if (position == 0){
+        if (position == 0) {
             return menuFoodFragment;
-        } else if (position == 1){
+        } else if (position == 1) {
             return menuDrinkFragment;
+        } else if (position == 2) {
+            return menuOtherFragment;
         } else {
             return null;
         }
