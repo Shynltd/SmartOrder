@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -40,8 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     private ImageButton btnLogin;
     private RetrofitAPI retrofitAPI;
     private ImageView imgLogo;
-    private TextView tvLogin;
     private ConstraintLayout form;
+    private boolean exit = false;
 
 
     @Override
@@ -109,7 +110,6 @@ public class LoginActivity extends AppCompatActivity {
         chkRemember = (CheckBox) findViewById(R.id.chkRemember);
         btnLogin = (ImageButton) findViewById(R.id.btnLogin);
         imgLogo = (ImageView) findViewById(R.id.imgLogo);
-        tvLogin = (TextView) findViewById(R.id.tvLogin);
         form = (ConstraintLayout) findViewById(R.id.form);
     }
 
@@ -162,5 +162,21 @@ public class LoginActivity extends AppCompatActivity {
         form.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.form_login_translate_bottom_to_top, 1000, 0));
         imgLogo.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.logo_translate_top_to_bottom, 1000, 0));
         btnLogin.setAnimation(Support.setAnimation(LoginActivity.this, R.anim.btn_login_alpha_hide_to_show, 1000, 1100));
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (exit) {
+            super.onBackPressed();
+            return;
+        }
+        exit = true;
+        Toast.makeText(this, "Ấn lần nữa để thoát", Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                exit = false;
+            }
+        },2000);
     }
 }

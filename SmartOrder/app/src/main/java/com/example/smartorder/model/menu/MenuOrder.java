@@ -24,9 +24,9 @@ public class MenuOrder {
     @SerializedName("type")
     @Expose
     private String type;
-    @SerializedName("amount")
+    @SerializedName("status")
     @Expose
-    private Integer amount;
+    private boolean status;
 
     public String getId() {
         return id;
@@ -68,12 +68,12 @@ public class MenuOrder {
         this.image = image;
     }
 
-    public Integer getAmount() {
-        return amount;
+    public boolean getStatus() {
+        return status;
     }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public boolean isChecked() {
@@ -92,13 +92,13 @@ public class MenuOrder {
         this.sl = sl;
     }
 
-    public MenuOrder(String id, String name, Integer price, String image, String type, Integer amount) {
+    public MenuOrder(String id, String name, Integer price, String image, String type, boolean status) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.image = image;
         this.type = type;
-        this.amount = amount;
+        this.status = status;
     }
 
 

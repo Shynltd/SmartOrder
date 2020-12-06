@@ -16,4 +16,5 @@
     <color name="black_overlay">#66000000</color>
     <color name="tv_status_unpaid">#FF0000</color>
     <color name="tv_status_paid">#37FF00</color>
+    <color name="qq">#ffffff</color>
 </resources>

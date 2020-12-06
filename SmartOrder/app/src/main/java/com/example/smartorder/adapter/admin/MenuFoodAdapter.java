@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.menu.Menu;
+import com.example.smartorder.support.Support;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
         Glide.with(context).load(Constants.LINK+menuListFood.get(position).getImage()).into(holder.imgLogo);
         holder.tvNameMenu.setText(menuListFood.get(position).getName());
-        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) +menuListFood.get(position).getPrice());
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) + Support.decimalFormat(menuListFood.get(position).getPrice())+ " VNĐ");
         holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -198,6 +198,9 @@ public interface RetrofitAPI {
     @POST("bill/create")
     Call<ServerResponse> createBill(@Body ListMenuOrder listMenuOrder);
 
+    @GET("bill/billPreview/{tableCode}")
+    Call<List<BillOne>> getBillPreview(@Path("tableCode") Integer tableCode);
+
 
     //Cashier
     @GET("bill/listUnpaid")

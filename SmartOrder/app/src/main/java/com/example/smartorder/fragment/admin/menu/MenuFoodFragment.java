@@ -30,11 +30,13 @@ import com.example.smartorder.adapter.admin.MenuFoodAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.callback.CallbackListMenu;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -46,7 +48,7 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class MenuFoodFragment extends Fragment {
+public class MenuFoodFragment extends Fragment implements CallbackListMenu {
 
     private RecyclerView rvListMenuFood;
     private MenuFoodAdapter menuFoodAdapter;
@@ -56,9 +58,6 @@ public class MenuFoodFragment extends Fragment {
     private Uri uriImage = null;
     private ImageView imgFood;
 
-    public MenuFoodFragment(List<Menu> menuListFood) {
-        this.menuListFood = menuListFood;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,13 +65,40 @@ public class MenuFoodFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu_food, container, false);
         initView(view);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        menuListFood = new ArrayList<>();
         rvListFood();
-        Log.e( "MenuFoodFragment: ", String.valueOf(menuListFood.size()));
+        getAllMenuFromServer();
         return view;
     }
 
     private void initView(View view) {
         rvListMenuFood = (RecyclerView) view.findViewById(R.id.rvListMenuFood);
+    }
+
+    private void getAllMenuFromServer() {
+        retrofitAPI.getAllMenu().enqueue(new Callback<List<Menu>>() {
+            @Override
+            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
+                List<Menu> menus = response.body();
+                for (int i = 0; i < menus.size(); i++) {
+                    String id = menus.get(i).getId();
+                    String name = menus.get(i).getName();
+                    Integer price = menus.get(i).getPrice();
+                    String image = menus.get(i).getImage();
+                    String type = menus.get(i).getType();
+                    boolean status = menus.get(i).getStatus();
+                    if (type.equals("Food")) {
+                        menuListFood.add(new Menu(id, name, price, image, type, status));
+                        menuFoodAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Menu>> call, Throwable t) {
+                Log.e("onFailureMenuFragment", t.getMessage());
+            }
+        });
     }
 
     private void rvListFood() {
@@ -105,6 +131,7 @@ public class MenuFoodFragment extends Fragment {
                     }
                 }).create().show();
             }
+
             @Override
             public void updateFood(int position) {
                 dialogUpdateFoods(position);
@@ -114,7 +141,6 @@ public class MenuFoodFragment extends Fragment {
         rvListMenuFood.setHasFixedSize(true);
         rvListMenuFood.setAdapter(menuFoodAdapter);
     }
-
 
 
     private void dialogUpdateFoods(int position) {
@@ -136,7 +162,7 @@ public class MenuFoodFragment extends Fragment {
         edtAmount.setVisibility(View.INVISIBLE);
         TextView tvType = alert.findViewById(R.id.tvType);
         tvType.setText(String.valueOf(menu.getType()));
-         imgFood = alert.findViewById(R.id.imgAvtFood);
+        imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
 
         Button btnCancel = alert.findViewById(R.id.btnCancel);
@@ -166,15 +192,15 @@ public class MenuFoodFragment extends Fragment {
                 String tenmon = edtName.getText().toString();
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
                 String type = tvType.getText().toString();
-                if(edtName.getText().toString().isEmpty()|| edtPrice.getText().toString().length() == 0){
-                    Toast.makeText(getContext(),"Vui lòng nhập đủ thông tin",Toast.LENGTH_LONG).show();
+                if (edtName.getText().toString().isEmpty() || edtPrice.getText().toString().length() == 0) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
                 } else if (uriImage != null) {
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateFood(menu.getId(), tenmon, price,type, filePart).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.updateFood(menu.getId(), tenmon, price, type, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -188,7 +214,7 @@ public class MenuFoodFragment extends Fragment {
                             Log.e("onFailure: ", t.getMessage());
                         }
                     });
-                }else {
+                } else {
                     retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price, type).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -209,6 +235,7 @@ public class MenuFoodFragment extends Fragment {
 
         alertDialog.show();
     }
+
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
@@ -216,5 +243,10 @@ public class MenuFoodFragment extends Fragment {
             uriImage = uri;
             imgFood.setImageURI(uri);
         }
+    }
+
+    @Override
+    public void listMenu(List<Menu> menuList) {
+        menuListFood = menuList;
     }
 }

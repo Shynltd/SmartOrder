@@ -1,6 +1,7 @@
 package com.example.smartorder.adapter.staff;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
@@ -37,10 +39,15 @@ public class StaffTableAdapter extends RecyclerView.Adapter<StaffTableAdapter.Ta
     @Override
     public void onBindViewHolder(@NonNull TableHolder holder, int position) {
         holder.tvTableCode.setText(tableList.get(position).getTableCode() + "");
+        if (tableList.get(position).getStatus()) {
+            holder.tvTableCode.setTextColor(ContextCompat.getColor(context, R.color.tv_status_unpaid));
+        } else {
+            holder.tvTableCode.setTextColor(ContextCompat.getColor(context, R.color.white));
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClickListener.order(position);
+                onClickListener.order(position, view);
             }
         });
     }
@@ -61,7 +68,8 @@ public class StaffTableAdapter extends RecyclerView.Adapter<StaffTableAdapter.Ta
             imgTable = itemView.findViewById(R.id.imgTable);
         }
     }
+
     public interface OnClickListener {
-        void  order (int position);
+        void order(int position, View view);
     }
 }

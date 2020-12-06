@@ -39,5 +39,7 @@ router.get('/bill/listUnpaid', authMiddle.verifyToken, billApi.getListBillUnpaid
 router.get('/bill/listPaid', authMiddle.verifyToken, billApi.getListBillPaid);
 router.get('/bill/billOne/:billCode', authMiddle.verifyToken, billApi.getListBillOneFromBill);
 router.post('/bill/paid/:billCode', authMiddle.verifyToken,billApi.postPaid);
+router.get('/bill/billPreview/:tableCode', authMiddle.verifyToken,billApi.getListBillOneFromTableCode);
 
+router.get('/calc/:id', authMiddle.verifyToken, billApi.calcBill);
 module.exports = router;

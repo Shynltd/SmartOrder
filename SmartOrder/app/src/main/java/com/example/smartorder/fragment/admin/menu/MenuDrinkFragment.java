@@ -64,9 +64,6 @@ public class MenuDrinkFragment extends Fragment {
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
 
-    public MenuDrinkFragment(List<Menu> menuListDrink) {
-        this.menuListDrink = menuListDrink;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,8 +71,9 @@ public class MenuDrinkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu_drink, container, false);
         initView(view);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        menuListDrink = new ArrayList<>();
         rvListDrinks();
-        Log.e( "MenuDrinkFragment: ", String.valueOf(menuListDrink.size()));
+        getAllMenuFromServer();
         return view;
     }
 
@@ -83,6 +81,32 @@ public class MenuDrinkFragment extends Fragment {
         rvListMenuDrink = (RecyclerView) view.findViewById(R.id.rvListMenuDrink);
     }
 
+    private void getAllMenuFromServer() {
+        retrofitAPI.getAllMenu().enqueue(new Callback<List<Menu>>() {
+            @Override
+            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
+                List<Menu> menus = response.body();
+                for (int i = 0; i < menus.size(); i++) {
+                    String id = menus.get(i).getId();
+                    String name = menus.get(i).getName();
+                    Integer price = menus.get(i).getPrice();
+                    String image = menus.get(i).getImage();
+                    String type = menus.get(i).getType();
+                    boolean status = menus.get(i).getStatus();
+                    if (type.equals("Drink")) {
+                        menuListDrink.add(new Menu(id, name, price, image,type,status));
+                        menuDrinksAdapter.notifyDataSetChanged();
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Menu>> call, Throwable t) {
+                Log.e("onFailureMenuFragment", t.getMessage());
+            }
+        });
+    }
     private void rvListDrinks() {
         menuDrinksAdapter = new MenuDrinksAdapter(menuListDrink, getContext(), new MenuDrinksAdapter.OnClickListener() {
             @Override
@@ -133,10 +157,8 @@ public class MenuDrinkFragment extends Fragment {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setTitle("Chỉnh sửa thông tin món ăn");
-
         alertDialog.setView(alert);
         alertDialog.setCancelable(false);
-
         edtTenMon = alert.findViewById(R.id.edtNameFood);
         edtTenMon.setText(String.valueOf(menu.getName()));
         edtPrice = alert.findViewById(R.id.edtPriceFood);

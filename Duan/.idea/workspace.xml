@@ -109,15 +109,26 @@
       <change beforePath="$PROJECT_DIR$/views/user/createUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/createUser.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/user/infoUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/infoUser.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/user/listUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/listUser.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/StaffActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/StaffActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuFoodAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuFoodAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/StaffTableAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/StaffTableAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/BillFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/BillFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/anim/rotate_change_pass.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/anim/rotate_change_pass.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_table.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/dialog_add_table.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuDrinkFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuDrinkFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuFoodFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuFoodFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuOtherFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuOtherFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListFoodOrderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListFoodOrderFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/StaffFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/StaffFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/menu/MenuOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/menu/MenuOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/table/Table.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,17 +177,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\MOB402 - Sever\Object\Duan\views\common" />
-      <recent name="D:\MOB402 - Sever\Object\Duan\views\user" />
-      <recent name="D:\MOB402 - Sever\Object\Duan\public\stylesheets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Duan2\Duan\api" />
       <recent name="D:\Duan2\Duan\views\menu" />
       <recent name="D:\Duan2\Duan\routes" />
       <recent name="D:\Duan2\Duan\controller" />
       <recent name="D:\Duan2\Duan\public\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MOB402 - Sever\Object\Duan\views\common" />
+      <recent name="D:\MOB402 - Sever\Object\Duan\views\user" />
+      <recent name="D:\MOB402 - Sever\Object\Duan\public\stylesheets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -277,6 +288,11 @@
       <workItem from="1606893251836" duration="1278000" />
       <workItem from="1606982142657" duration="9110000" />
       <workItem from="1607092258054" duration="708000" />
+      <workItem from="1607138069899" duration="5762000" />
+      <workItem from="1607148503530" duration="5432000" />
+      <workItem from="1607163784093" duration="10891000" />
+      <workItem from="1607183590741" duration="599000" />
+      <workItem from="1607217483107" duration="3153000" />
     </task>
     <servers />
   </component>
@@ -301,10 +317,10 @@
     </ignored-roots>
   </component>
   <component name="WindowStateProjectService">
-    <state x="586" y="198" key="#Inspections" timestamp="1604658091954">
+    <state x="586" y="198" key="#Inspections" timestamp="1607143402242">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1604658091954" />
+    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1607143402242" />
     <state x="137" y="0" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605952364025">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -330,95 +346,95 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="793" y="217" key="Github.UntrackedFilesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601137908216" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1607181236853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="290" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
+    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1607181236853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="290" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1606904470871">
+    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
+    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1607181236853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="290" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606893196758" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470871" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
+    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1607181236853">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1345" height="290" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650257" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650257" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650258" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.2.bottom" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
-    <state width="1877" height="348" key="GridCell.Tab.2.center" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.2.center" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.2.left" timestamp="1606904470872">
+    <state width="1877" height="348" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.2.left" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470872" />
-    <state width="1877" height="348" key="GridCell.Tab.2.right" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.2.right" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
-    <state width="1877" height="348" key="GridCell.Tab.3.bottom" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.3.bottom" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650395" />
-    <state width="1877" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
-    <state width="1877" height="348" key="GridCell.Tab.3.center" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.3.center" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
-    <state width="1877" height="348" key="GridCell.Tab.3.left" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.3.left" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
-    <state width="1877" height="348" key="GridCell.Tab.3.right" timestamp="1606904470873">
+    <state width="1877" height="348" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
+    <state width="1877" height="348" key="GridCell.Tab.3.right" timestamp="1607181236754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1308" height="204" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1606904470873" />
+    <state width="1877" height="348" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
     <state x="461" y="164" key="SettingsEditor" timestamp="1603040069970">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="328" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606796083297" />
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603040069970" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1605582830797">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1607166294499">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605582830797" />
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607166294499" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602263452266">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

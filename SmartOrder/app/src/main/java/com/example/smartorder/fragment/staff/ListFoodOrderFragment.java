@@ -40,7 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
-    private TextView tvTableCodes;
+    private TextView tvTableCode;
     private RecyclerView rvListFoodOrder;
     private Button btnCancel;
     private Button btnOrder;
@@ -48,7 +48,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     private RetrofitAPI retrofitAPI;
     private List<MenuOrder> menuOrders;
     private MenuOrderAdapter menuOrderAdapter;
-    private int tabldeCodes;
+    private int tableCode;
     private View view;
 
     private List<MenuOrder> listMenuOder = new ArrayList<>();
@@ -72,17 +72,32 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     }
 
     private void init() {
-        tvTableCodes.setText("Bàn số " + tabldeCodes);
+        tvTableCode.setText("Bàn số " + tableCode);
+        menuOrders = new ArrayList<>();
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         rvListFoodOrder.setLayoutManager(new GridLayoutManager(view.getContext(), 1));
         rvListFoodOrder.setHasFixedSize(true);
+        menuOrderAdapter = new MenuOrderAdapter(ListFoodOrderFragment.this, menuOrders);
+        rvListFoodOrder.setAdapter(menuOrderAdapter);
         retrofitAPI.getAllMenuOrder().enqueue(new Callback<List<MenuOrder>>() {
             @Override
             public void onResponse(Call<List<MenuOrder>> call, Response<List<MenuOrder>> response) {
-                menuOrders = response.body();
-                menuOrderAdapter = new MenuOrderAdapter(ListFoodOrderFragment.this, menuOrders);
-                rvListFoodOrder.setAdapter(menuOrderAdapter);
-                menuOrderAdapter.notifyDataSetChanged();
+                List<MenuOrder> orders = response.body();
+                for (int i=0;i<orders.size();i++){
+                    String id = orders.get(i).getId();
+                    String name= orders.get(i).getName();
+                    Integer price= orders.get(i).getPrice();
+                    String image= orders.get(i).getImage();
+                    String type= orders.get(i).getType();
+                    boolean status = orders.get(i).getStatus();
+
+                        menuOrders.add(new MenuOrder(id,name,price,image,type,status));
+                        menuOrderAdapter.notifyDataSetChanged();
+
+
+                }
+
+
             }
 
             @Override
@@ -118,7 +133,6 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                 filter(editable.toString());
             }
         });
-
         btnOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,12 +140,10 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                 for (int i = 0; i < menuOrders.size(); i++) {
                     if (menuOrders.get(i).isChecked()) {
                         listMenuOder.add(menuOrders.get(i));
-
                     }
-
                 }
                 ListMenuOrder menuOrder = new ListMenuOrder();
-                menuOrder.setTableCodes(tabldeCodes);
+                menuOrder.setTableCodes(tableCode);
                 menuOrder.setMenuOrders(listMenuOder);
 
                 retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
@@ -139,13 +151,16 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                         if (response.code() == 200) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
                             if (fragment != null) {
                                 getActivity().getSupportFragmentManager().beginTransaction()
                                         .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
                                         .remove(fragment)
                                         .commit();
+                                Fragment listTableStaff = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentTableStaff);
+                                if (listTableStaff != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction().detach(listTableStaff).attach(listTableStaff).commit();
+                                }
                             }
                         } else {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -175,7 +190,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
 
 
     private void initView() {
-        tvTableCodes = (TextView) view.findViewById(R.id.tvTableCodes);
+        tvTableCode = (TextView) view.findViewById(R.id.tvTableCodes);
         rvListFoodOrder = (RecyclerView) view.findViewById(R.id.rvListFoodOrder);
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
         btnOrder = (Button) view.findViewById(R.id.btnOrder);
@@ -184,6 +199,6 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
 
     @Override
     public void getTable(Table table) {
-        this.tabldeCodes = table.getTableCode();
+        this.tableCode = table.getTableCode();
     }
 }

@@ -32,6 +32,8 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.TabMenuAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.fragment.admin.menu.MenuFoodFragment;
+import com.example.smartorder.model.callback.CallbackListMenu;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
@@ -61,17 +63,13 @@ public class MenuFragment extends Fragment {
     private String type;
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
-    private List<Menu> menuListFood;
-    private List<Menu> menuListDrink;
-    private List<Menu> menuListOther;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        menuListFood = new ArrayList<>();
-        menuListDrink = new ArrayList<>();
-        menuListOther = new ArrayList<>();
+        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+
     }
 
     @Override
@@ -79,9 +77,7 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         initView(view);
-        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        getAllMenuFromServer();
-        vpMenu.setAdapter(new TabMenuAdapter(getFragmentManager(), menuListFood, menuListDrink, menuListOther));
+        vpMenu.setAdapter(new TabMenuAdapter(getFragmentManager()));
         tabMenu.setupWithViewPager(vpMenu);
         fabAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,38 +88,7 @@ public class MenuFragment extends Fragment {
         return view;
     }
 
-    private void getAllMenuFromServer() {
-        retrofitAPI.getAllMenu().enqueue(new Callback<List<Menu>>() {
-            @Override
-            public void onResponse(Call<List<Menu>> call, Response<List<Menu>> response) {
-                List<Menu> menus = response.body();
-                for (int i = 0; i < menus.size(); i++) {
-                    String id = menus.get(i).getId();
-                    String name = menus.get(i).getName();
-                    Integer price = menus.get(i).getPrice();
-                    String image = menus.get(i).getImage();
-                    String type = menus.get(i).getType();
-                    boolean status = menus.get(i).getStatus();
-                    if (type.equals("Food")) {
-                        menuListFood.add(new Menu(id, name, price, image,type,status));
-                        Log.e( "Food: ", String.valueOf(i));
-                    } else if (type.equals("Drink")) {
-                        menuListDrink.add(new Menu(id, name, price, image,type,status));
-                        Log.e( "Drink: ", String.valueOf(i));
-                    } else if (type.equals("Other")){
-                        menuListOther.add(new Menu(id, name, price, image,type,status));
-                        Log.e( "Other: ", String.valueOf(i));
-                    }
 
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Menu>> call, Throwable t) {
-                Log.e("onFailureMenuFragment", t.getMessage());
-            }
-        });
-    }
 
     private void dialogAddMenu() {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
@@ -201,7 +166,7 @@ public class MenuFragment extends Fragment {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
                                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                fragmentTransaction.detach(MenuFragment.this).attach(MenuFragment.this).commit();
+                                fragmentTransaction.detach(new MenuFragment()).attach(new MenuFragment()).commit();
                             } else {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }

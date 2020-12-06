@@ -45,12 +45,6 @@ public class TableFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table, container, false);
         initView(view);
-        return view;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         tableList = new ArrayList<>();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
@@ -80,7 +74,7 @@ public class TableFragment extends Fragment {
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        
+
                     }
                 }).create().show();
             }
@@ -101,7 +95,8 @@ public class TableFragment extends Fragment {
                     String id = table.get(i).getId();
                     Integer tableCode = table.get(i).getTableCode();
                     Integer tableSeats = table.get(i).getTableSeats();
-                    tableList.add(new Table(id, tableCode, tableSeats));
+                    boolean status = table.get(i).getStatus();
+                    tableList.add(new Table(id, tableCode, tableSeats, status));
                     tableAdapter.notifyDataSetChanged();
                 }
 
@@ -119,8 +114,9 @@ public class TableFragment extends Fragment {
                 dialogAddTable();
             }
         });
-
+        return view;
     }
+
 
     private void dialogUpdateTable(int position, List<Table> tableList) {
         Table table = tableList.get(position);

@@ -6,7 +6,12 @@ let tableSchema = new mongoose.Schema({
     },
     tableSeats: {
         type: Number,
-        required:true
+        required: true
+    },
+    status: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 module.exports = mongoose.model('table', tableSchema, 'table');

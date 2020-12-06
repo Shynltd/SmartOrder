@@ -15,11 +15,15 @@ public class Table {
     @SerializedName("tableSeats")
     @Expose
     private Integer tableSeats;
+    @SerializedName("status")
+    @Expose
+    private boolean status;
 
-    public Table(String id, Integer tableCode, Integer tableSeats) {
+    public Table(String id, Integer tableCode, Integer tableSeats, boolean status) {
         this.id = id;
         this.tableCode = tableCode;
         this.tableSeats = tableSeats;
+        this.status = status;
     }
 
     public String getId() {
@@ -46,5 +50,11 @@ public class Table {
         this.tableSeats = tableSeats;
     }
 
+    public boolean getStatus() {
+        return status;
+    }
 
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 }

@@ -4,6 +4,7 @@ let jwt = require('jsonwebtoken');
 module.exports.checkLogin = async (req, res) => {
     let phone = req.body.phone;
     let findUser = await user.findOne({phone: phone});
+
     if (findUser) {
         let password = req.body.password;
         if (findUser.passWord === password) {
@@ -15,12 +16,12 @@ module.exports.checkLogin = async (req, res) => {
                 role: findUser.role,
                 name: findUser.fullName,
                 avatar: findUser.avatar,
-                message: 'Logged in successfully'
+                message: 'Đăng nhập thành công'
             });
         } else {
-            res.json({status: 'Fail', message: 'Wrong Password'});
+            res.json({status: 'Fail', message: 'Mật khẩu không chính xác'});
         }
     } else {
-        res.json({status: 'Fail', message: 'Account does not exist'});
+        res.json({status: 'Fail', message: 'Tài khoản không tồn tại'});
     }
 }

@@ -61,7 +61,7 @@ public class BillFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Bill>> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Log.e("onFailureBillFragment: ", t.getMessage());
             }
         });
     }

@@ -19,11 +19,11 @@ public class TabMenuAdapter extends FragmentStatePagerAdapter {
     private MenuFoodFragment menuFoodFragment;
     private MenuOtherFragment menuOtherFragment;
 
-    public TabMenuAdapter(@NonNull FragmentManager fm, List<Menu> menuListFood, List<Menu> menuListDrink, List<Menu> menuListOther) {
+    public TabMenuAdapter(@NonNull FragmentManager fm) {
         super(fm);
-        menuDrinkFragment = new MenuDrinkFragment(menuListDrink);
-        menuFoodFragment = new MenuFoodFragment(menuListFood);
-        menuOtherFragment = new MenuOtherFragment(menuListOther);
+        menuDrinkFragment = new MenuDrinkFragment();
+        menuFoodFragment = new MenuFoodFragment();
+        menuOtherFragment = new MenuOtherFragment();
     }
 
     @NonNull

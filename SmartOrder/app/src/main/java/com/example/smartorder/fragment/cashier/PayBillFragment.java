@@ -124,6 +124,7 @@ public class PayBillFragment extends Fragment {
             public void onResponse(Call<List<BillOne>> call, Response<List<BillOne>> response) {
                 List<BillOne> billOnes = response.body();
                 for (int i = 0; i < billOnes.size(); i++) {
+                    String id = billOnes.get(i).getId();
                     String billCode = billOnes.get(i).getBillCode();
                     String image = billOnes.get(i).getImage();
                     Integer sl = billOnes.get(i).getSl();
@@ -131,7 +132,7 @@ public class PayBillFragment extends Fragment {
                     Integer price = billOnes.get(i).getPrice();
                     String type = billOnes.get(i).getType();
                     Integer totalMoney = billOnes.get(i).getTotalMoney();
-                    billOneList.add(new BillOne(billCode, image, sl, name, price, type, totalMoney));
+                    billOneList.add(new BillOne(id, billCode, image, sl, name, price, type, totalMoney));
                     billOneAdapter.notifyDataSetChanged();
                 }
             }

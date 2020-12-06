@@ -6,6 +6,7 @@ var datetime = currentdate.getDate() + "/"
     + currentdate.getHours() + ":"
     + currentdate.getMinutes() + ":"
     + currentdate.getSeconds();
+
 let billSchema = new mongoose.Schema({
     billCode: {
         type: String,

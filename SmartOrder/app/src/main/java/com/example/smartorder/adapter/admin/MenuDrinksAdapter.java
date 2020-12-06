@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.menu.Menu;
+import com.example.smartorder.support.Support;
 
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
         Glide.with(context).load(Constants.LINK + menuListDrinks.get(position).getImage()).into(holder.imgLogo);
         holder.tvNameMenu.setText(menuListDrinks.get(position).getName());
-        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price)+ menuListDrinks.get(position).getPrice());
+        holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price)+ Support.decimalFormat(menuListDrinks.get(position).getPrice())+" VNĐ");
         if (menuListDrinks.get(position).getStatus()) {
             holder.tvAmountMenu.setText("Trạng thái: Còn Hàng" );
             holder.tvAmountMenu.setTextColor(ContextCompat.getColor(context,R.color.tv_status_paid));
