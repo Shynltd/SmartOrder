@@ -2,27 +2,22 @@ package com.example.smartorder.fragment.admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.activity.LoginActivity;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.ProfileFragment;
-import com.example.smartorder.fragment.admin.BillFragment;
-import com.example.smartorder.fragment.admin.MenuFragment;
-import com.example.smartorder.fragment.admin.TableFragment;
-import com.example.smartorder.fragment.admin.UserFragment;
 import com.example.smartorder.support.Support;
 
 import de.hdodenhof.circleimageview.CircleImageView;

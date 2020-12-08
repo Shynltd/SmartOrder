@@ -24,13 +24,13 @@ module.exports.getListBillOneFromTableCode = async (req, res) => {
     let {tableCode} = req.params;
     let findBillFromTableCode = await bill.findOne({tableCode, status: "Chưa thanh toán"});
     if (findBillFromTableCode) {
-       let findBillOneFromBillCode = await billOne.find({billCode:findBillFromTableCode.billCode});
-       if (findBillOneFromBillCode){
+        let findBillOneFromBillCode = await billOne.find({billCode: findBillFromTableCode.billCode});
+        if (findBillOneFromBillCode) {
             res.status(200).json(findBillOneFromBillCode);
             console.log(findBillFromTableCode);
-       } else {
-           res.status(201).json({message: 'Fail'});
-       }
+        } else {
+            res.status(201).json({message: 'Fail'});
+        }
     } else {
         res.status(201).json({message: 'Fail'});
     }
@@ -41,6 +41,14 @@ module.exports.getListBillPaid = async (req, res) => {
         res.json(findListPaid);
     } else {
         res.status(201).json({message: 'Fail'});
+    }
+}
+module.exports.getListBillUnpaid = async (req, res) => {
+    let findListUnpaid = await bill.find({status: "Chưa thanh toán"});
+    if (findListUnpaid) {
+        res.json(findListUnpaid);
+    } else {
+        res.status(500).json({message: 'Fail'});
     }
 }
 module.exports.postPaid = async (req, res) => {
@@ -146,6 +154,20 @@ module.exports.postOrder = async (req, res) => {
 
 }
 module.exports.postReturnItems = async (req, res) => {
+    let list = req.body.list_bill;
+    let billcode = "";
+    for (let i = 0; i < list.length; i++) {
+        let id = list[i]._id;
+        billcode = list[i].billCode;
+        await billOne.findOneAndUpdate({_id: id}, {
+                $set: {
+                    sl: list[i].sl,
+                    totalMoney: list[i].totalMoney
+                },
+            }, {new: true}
+        )
+    }
+    res.redirect(`/api/calc/${billcode}`)
 
 }
 
@@ -171,5 +193,21 @@ module.exports.calcBill = async (req, res) => {
             }
         });
     }
+}
+
+module.exports.thogke = async (req, res) => {
+    let getAllBill = await bill.find({});
+    let dateBill = "";
+    for (let i = 0; i < getAllBill.length; i++) {
+         dateBill = getAllBill[i].dateBill;
+
+    }
+    console.log(dateBill);
+    let split = dateBill.split("/")
+    console.log(split);
+    let date = split[0];
+    let month = split[1];
+    let year= split[2].split("@")[0];
+    console.log(`${date} / ${month} / ${year}`)
 }
 

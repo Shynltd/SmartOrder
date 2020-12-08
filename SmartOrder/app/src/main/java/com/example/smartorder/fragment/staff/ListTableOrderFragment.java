@@ -114,7 +114,7 @@ public class ListTableOrderFragment extends Fragment {
                         getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.list_food_bottom_to_top, 0).add(R.id.frmTest, listFoodOrderFragment, Constants.fragmentListFood).commit();
                         break;
                     case R.id.invoicePreview:
-                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.list_food_bottom_to_top, 0).add(R.id.frmTest, previewFragment, Constants.fragmentPreviewBill).commit();
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left, 0).add(R.id.frmTest, previewFragment, Constants.fragmentPreviewBill).commit();
                         break;
                 }
                 return false;

@@ -1,7 +1,6 @@
 package com.example.smartorder.adapter.admin;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -83,6 +82,11 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
         return menuListDrinks.size();
     }
 
+    public void filterList(List<Menu> menuDrinkFilter, Context context) {
+        menuListDrinks = menuDrinkFilter;
+        this.context = context;
+    }
+
 
     public static class MenuHolder extends RecyclerView.ViewHolder {
         private ImageView imgLogo;
@@ -102,4 +106,6 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
         void  deleteDrink (int position ,String id);
         void  updateDrink(int position );
     }
+    
+    
 }

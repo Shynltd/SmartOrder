@@ -20,115 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d5f6d16-2e1d-4878-b88c-4ccad087c7e6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/bin_www.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/authApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/authApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/menuApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/menuApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/tableApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/tableApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/userApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/userApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/billController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/billController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/userController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controller/userController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/bill.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/bill.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/menubillone.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/menubillone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/table.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/table.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/model/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/stylesheets/style.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/stylesheets/style.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/apiRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/apiRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/billRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/billRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/tableRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tableRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe160kgj72k2r-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe160kgj74yp9-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1dkkgj67mhb-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1dkkgj68h18-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1dkkgj6amj4-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1dkkgj6dwts-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1t4kgj7e1t8-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe1t4kgj7i6ym-tải xuống (1).jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj782xh-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj784d7-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj786o3-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj786zt-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78756-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787al-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787fq-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787km-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787pk-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787uu-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj787zo-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj789ei-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj789rk-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78a4u-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78aa7-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78afg-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78aqa-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78arf-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78avb-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78b8k-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78blj-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78c79-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78cu3-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8n4kgj78e90-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj78z2c-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj78zb8-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj78zxc-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj7902m-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj790cm-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj790hf-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj790mb-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj790th-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj79jfm-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe8tokgj7bw49-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhe9bwkhfyl12f-nuoc-ngot-pepsi-thai-lon-330ml.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldheb8okh4wcgf4-images.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/menus/80ldhexgkgj76xko-xuc-xich-xong-khoi2-300x200.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe1dkkgj7028q-2018-lamborghini-aventador-s-roadster-9-1504747917055-51-0-949-1600-crop-1504747942857.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe4xskge3yrei-list.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe7xckge41ya3-logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe84gkgdldkjg-gia-xe-ferrari-laferrari.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe9bwkhfyi2wj-logo-mazda.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhe9bwkhfyjwff-2018-lamborghini-aventador-s-roadster-9-1504747917055-51-0-949-1600-crop-1504747942857.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhead0kge3zqxt-list.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhead0kge40a0l-il_570xN.2007844905_j2dh.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhebpgkh8sroy3-gia-xe-ferrari-laferrari.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhebw0khexes85-118121737_714081405817803_5020529537466385917_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhec9kkhexrf6x-118121737_714081405817803_5020529537466385917_n.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhegyokgclzq3a-2018-lamborghini-aventador-s-roadster-9-1504747917055-51-0-949-1600-crop-1504747942857.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/users/80ldhegyokgcm02sm-gia-xe-ferrari-laferrari.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/common/nav.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/common/nav.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/menu/createMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/createMenu.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/menu/listMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/listMenu.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/menu/updateMenu.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/menu/updateMenu.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/table/createTables.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/createTables.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/table/listTable.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/listTable.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/table/updateTable.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/table/updateTable.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user/createUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/createUser.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user/infoUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/infoUser.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/user/listUser.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/user/listUser.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/menu/ListBillUpdate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/StaffActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/activity/StaffActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuDrinksAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuFoodAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/MenuFoodAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/admin/TabMenuAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/MenuOrderAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/StaffTableAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/adapter/staff/StaffTableAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/api/RetrofitAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/constants/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/BillFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/BillFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MenuFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MainFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/MainFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/TableFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuDrinkFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuDrinkFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuFoodFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuFoodFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuOtherFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/admin/menu/MenuOtherFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/PayBillFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/cashier/PayBillFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/BillPreviewFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/BillPreviewFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListFoodOrderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListFoodOrderFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/StaffFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/StaffFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/bill/BillOne.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/menu/MenuOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/menu/MenuOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/table/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/model/table/Table.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListTableOrderFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/java/com/example/smartorder/fragment/staff/ListTableOrderFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_drink.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_drink.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_food.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_food.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_other.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_menu_other.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_pay_bill.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_pay_bill.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_preview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_preview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_profile_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/layout/fragment_profile_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SmartOrder/app/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +60,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1i3S3YYyMqkcKDqcSmNpWro4Pq7" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -159,10 +73,11 @@
   <component name="PropertiesComponent">
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
-    <property name="javascript.nodejs.core.library.typings.version" value="12.19.8" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/api" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.15.1" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.10" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -293,6 +208,13 @@
       <workItem from="1607163784093" duration="10891000" />
       <workItem from="1607183590741" duration="599000" />
       <workItem from="1607217483107" duration="3153000" />
+      <workItem from="1607262954662" duration="234000" />
+      <workItem from="1607268497795" duration="381000" />
+      <workItem from="1607311261203" duration="3318000" />
+      <workItem from="1607326256871" duration="3768000" />
+      <workItem from="1607335919350" duration="194000" />
+      <workItem from="1607413246424" duration="1499000" />
+      <workItem from="1607422113347" duration="524000" />
     </task>
     <servers />
   </component>
@@ -315,129 +237,5 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="586" y="198" key="#Inspections" timestamp="1607143402242">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1607143402242" />
-    <state x="137" y="0" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605952364025">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="137" y="0" width="1092" height="728" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605952364025" />
-    <state x="721" y="321" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603359175954">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="721" y="321" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1603359175954" />
-    <state x="210" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605025459297">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="210" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605025459297" />
-    <state x="868" y="185" key="FileChooserDialogImpl" timestamp="1605952329831">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="868" y="185" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605952329831" />
-    <state x="1220" y="264" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1605184533353" />
-    <state x="838" y="417" key="Github.ShareDialog" timestamp="1601137892335">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="838" y="417" key="Github.ShareDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601137892335" />
-    <state x="793" y="217" key="Github.UntrackedFilesDialog" timestamp="1601137908216">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="793" y="217" key="Github.UntrackedFilesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601137908216" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom" timestamp="1607181236853">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1345" height="290" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center" timestamp="1607181236853">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1345" height="290" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left" timestamp="1607181236853">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1345" height="290" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1606893196758" />
-    <state width="1877" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right" timestamp="1607181236853">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1345" height="290" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1606893196759" />
-    <state width="1877" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236853" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.1.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.1.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650257" />
-    <state width="1877" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.1.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650257" />
-    <state width="1877" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.1.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650258" />
-    <state width="1877" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.2.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.2.center" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.2.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.2.left" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.2.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.2.right" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.2.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650381" />
-    <state width="1877" height="348" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.3.bottom" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.3.bottom/0.0.1366.728@0.0.1366.728" timestamp="1605971650395" />
-    <state width="1877" height="348" key="GridCell.Tab.3.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.3.center" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.3.center/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.center/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.3.left" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.3.left/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.left/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state width="1877" height="348" key="GridCell.Tab.3.right" timestamp="1607181236754">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1308" height="204" key="GridCell.Tab.3.right/0.0.1366.728@0.0.1366.728" timestamp="1605971650394" />
-    <state width="1877" height="348" key="GridCell.Tab.3.right/0.0.1920.1040@0.0.1920.1040" timestamp="1607181236754" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1603040069970">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="328" y="18" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606796083297" />
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1603040069970" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1607166294499">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607166294499" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1602263452266">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1602263452266" />
   </component>
 </project>

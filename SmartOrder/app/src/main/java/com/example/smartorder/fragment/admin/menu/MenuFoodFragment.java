@@ -6,14 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +17,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
@@ -54,6 +55,7 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
     private MenuFoodAdapter menuFoodAdapter;
     private List<Menu> menuListFood;
     private RetrofitAPI retrofitAPI;
+    private EditText edtSearch;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
     private Uri uriImage = null;
     private ImageView imgFood;
@@ -68,11 +70,28 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
         menuListFood = new ArrayList<>();
         rvListFood();
         getAllMenuFromServer();
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         return view;
     }
 
     private void initView(View view) {
         rvListMenuFood = (RecyclerView) view.findViewById(R.id.rvListMenuFood);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
 
     private void getAllMenuFromServer() {
@@ -99,6 +118,16 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                 Log.e("onFailureMenuFragment", t.getMessage());
             }
         });
+    }
+    private void filter(String s) {
+        List<Menu> menuDrinkFilter = new ArrayList<>();
+        for (Menu menu : menuListFood) {
+            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+                menuDrinkFilter.add(menu);
+            }
+        }
+        menuFoodAdapter.filterList(menuDrinkFilter, getActivity());
+        menuFoodAdapter.notifyDataSetChanged();
     }
 
     private void rvListFood() {

@@ -1,17 +1,17 @@
 package com.example.smartorder.fragment.admin.menu;
 
-import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.Adapter;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.MenuDrinksAdapter;
@@ -30,6 +30,7 @@ public class MenuOtherFragment extends Fragment {
     private List<Menu> menuListOther;
     private MenuDrinksAdapter menuDrinksAdapter;
     private RecyclerView rvList;
+    private EditText edtSearch;
     private RetrofitAPI retrofitAPI;
 
 
@@ -42,11 +43,28 @@ public class MenuOtherFragment extends Fragment {
         menuListOther = new ArrayList<>();
         initRecycle();
         getAllMenuFromServer();
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         return view;
     }
 
     private void initView(View view) {
         rvList = view.findViewById(R.id.rvList);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
 
     private void getAllMenuFromServer() {
@@ -74,7 +92,16 @@ public class MenuOtherFragment extends Fragment {
             }
         });
     }
-
+    private void filter(String s) {
+        List<Menu> menuDrinkFilter = new ArrayList<>();
+        for (Menu menu : menuListOther) {
+            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+                menuDrinkFilter.add(menu);
+            }
+        }
+        menuDrinksAdapter.filterList(menuDrinkFilter, getActivity());
+        menuDrinksAdapter.notifyDataSetChanged();
+    }
     private void initRecycle() {
         menuDrinksAdapter = new MenuDrinksAdapter(menuListOther, getActivity(), new MenuDrinksAdapter.OnClickListener() {
             @Override

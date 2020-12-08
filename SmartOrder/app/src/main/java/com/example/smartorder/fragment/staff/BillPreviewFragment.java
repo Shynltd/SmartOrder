@@ -1,12 +1,12 @@
 package com.example.smartorder.fragment.staff;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +18,11 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.staff.BillPreviewAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.callback.CallbackTalble;
+import com.example.smartorder.model.menu.ListBillUpdate;
+import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 import com.example.smartorder.support.Support;
 
@@ -41,7 +44,8 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
     private RecyclerView rvList;
     private int total = 0;
     private BillPreviewAdapter billPreviewAdapter;
-    private List<BillOne> billOneList ;
+    private ImageButton btnBack;
+    private List<BillOne> billOneList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,14 +61,38 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
             public void onClick(View view) {
                 total = 0;
                 for (int i = 0; i < billOneList.size(); i++) {
-                    String id = billOneList.get(i).getId();
-                    Integer sl = billOneList.get(i).getSl();
                     Integer totalMoney = billOneList.get(i).getTotalMoney();
-                    Log.e("sl: ", String.valueOf(sl));
-                    Log.e("totalMoney: ", String.valueOf(id));
                     total += totalMoney;
                 }
                 tvTotal.setText("Tổng: " + Support.decimalFormat(total) + " VNĐ");
+                ListBillUpdate listBillUpdate = new ListBillUpdate();
+                listBillUpdate.setBillOneList(billOneList);
+                retrofitAPI.returnItems(listBillUpdate).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        if (response.code() == 200) {
+                            Toast.makeText(getActivity(), "Lưu thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Log.e("onFailureBillPreView: ", t.getMessage());
+                    }
+                });
+
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment billPreViewFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentPreviewBill);
+                if (billPreViewFragment != null){
+                    getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(0,R.anim.admin_fragment_main_translate_exit_left_to_right).remove(billPreViewFragment).commit();
+                }
+
             }
         });
         return view;
@@ -85,7 +113,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
                         Integer price = billOnes.get(i).getPrice();
                         String type = billOnes.get(i).getType();
                         Integer totalMoney = billOnes.get(i).getTotalMoney();
-                        billOneList.add(new BillOne(id,billCode, image, sl, name, price, type, totalMoney));
+                        billOneList.add(new BillOne(id, billCode, image, sl, name, price, type, totalMoney));
                         billPreviewAdapter.notifyDataSetChanged();
                         total += totalMoney;
                     }
@@ -117,6 +145,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
         tvTotal = (TextView) view.findViewById(R.id.tvTotal);
         btnSave = (Button) view.findViewById(R.id.btnSave);
         rvList = (RecyclerView) view.findViewById(R.id.rvList);
+        btnBack = (ImageButton) view.findViewById(R.id.btnBack);
 
     }
 

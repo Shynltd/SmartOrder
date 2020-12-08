@@ -4,18 +4,16 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -66,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<Auth> call, Response<Auth> response) {
                             Auth auth = response.body();
                             checkLogin(auth);
-
                         }
 
                         @Override
@@ -74,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("onFailure", t.getMessage());
                         }
                     });
+
                 }
             }
         });
@@ -83,6 +81,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private void validateForm() {
 
+    }
+
+    private class Login extends AsyncTask<String,Void,String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
     }
 
     private void checkLogin(Auth auth) {

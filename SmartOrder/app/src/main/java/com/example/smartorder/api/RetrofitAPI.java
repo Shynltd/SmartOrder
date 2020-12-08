@@ -1,7 +1,8 @@
 package com.example.smartorder.api;
-import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.bill.Bill;
+import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.login.Auth;
+import com.example.smartorder.model.menu.ListBillUpdate;
 import com.example.smartorder.model.menu.ListMenuOrder;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.menu.MenuOrder;
@@ -12,7 +13,6 @@ import com.example.smartorder.model.user.User;
 import java.util.List;
 
 import okhttp3.MultipartBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -177,8 +177,8 @@ public interface RetrofitAPI {
 
 
     //Bill
-//    @GET("bill")
-//    Call<List<Menu>> getAllBill();
+    @POST("bill/return")
+    Call<ServerResponse> returnItems(@Body ListBillUpdate listBillUpdate);
 
     @GET("bill/listPaid")
     Call<List<Bill>> getListPaid();

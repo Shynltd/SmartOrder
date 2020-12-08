@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -26,6 +25,8 @@ import com.example.smartorder.model.table.Table;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -99,6 +100,20 @@ public class TableFragment extends Fragment {
                     tableList.add(new Table(id, tableCode, tableSeats, status));
                     tableAdapter.notifyDataSetChanged();
                 }
+                Collections.sort(tableList, new Comparator<Table>() {
+                    @Override
+                    public int compare(Table o1, Table o2) {
+                        if (o1.getTableCode() > o2.getTableCode()) {
+                            return 1;
+                        } else {
+                            if (o1.getTableCode() == o2.getTableCode()) {
+                                return 0;
+                            } else {
+                                return -1;
+                            }
+                        }
+                    }
+                });
 
             }
 

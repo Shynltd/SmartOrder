@@ -73,6 +73,10 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
         return menuListFood.size();
     }
 
+    public void filterList(List<Menu> menuDrinkFilter, Context context) {
+        menuListFood = menuDrinkFilter;
+        this.context = context;
+    }
 
 
     public static class MenuHolder extends RecyclerView.ViewHolder {

@@ -1,11 +1,13 @@
 package com.example.smartorder.fragment.cashier;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +21,6 @@ import com.example.smartorder.adapter.cashier.BillOneAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.fragment.admin.TableFragment;
 import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
@@ -36,10 +37,12 @@ public class PayBillFragment extends Fragment {
     private List<BillOne> billOneList;
     private BillOneAdapter billOneAdapter;
     private TextView tvBillCode;
-    private TextView tvTableCode;
+    private TextView tvTableCode, tvT, tvT2;
+    private EditText edtCoupon;
     private RecyclerView rvListBillOne;
     private TextView tvTongtien;
     private Button btnCancel;
+    private Button btnCoupon;
     private Button btnPay;
     private RetrofitAPI retrofitAPI;
     private String billCode = "";
@@ -62,7 +65,7 @@ public class PayBillFragment extends Fragment {
         getBillOne();
         tvBillCode.setText("Mã hóa đơn: " + billCode);
         tvTableCode.setText("Bàn số " + tableCode);
-        tvTongtien.setText("Total: " + Support.decimalFormat(totalMoney) + " VNĐ");
+        tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,8 +78,31 @@ public class PayBillFragment extends Fragment {
                 pay();
             }
         });
+        btnCoupon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkCoupon();
+            }
+        });
         return view;
     }
+
+    private void checkCoupon() {
+        Integer coupon = Integer.parseInt(edtCoupon.getText().toString().trim());
+        Integer lastCou;
+
+        if (coupon != 0) {
+            lastCou = totalMoney * (100 - coupon) / 100;
+            tvT.setText( Support.decimalFormat(totalMoney)+" VNĐ" );
+            tvT.setPaintFlags(tvT.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            tvT2.setVisibility(View.VISIBLE);
+            tvT2.setText(Support.decimalFormat(lastCou)+" VNĐ" );
+        }
+
+
+    }
+
+    ;
 
     private void pay() {
         retrofitAPI.payBill(billCode, Constants.NameUser).enqueue(new Callback<ServerResponse>() {
@@ -146,11 +172,16 @@ public class PayBillFragment extends Fragment {
     }
 
     private void initView(View view) {
+
         tvBillCode = (TextView) view.findViewById(R.id.tvBillCode);
         tvTableCode = (TextView) view.findViewById(R.id.tvTableCode);
+        tvT = (TextView) view.findViewById(R.id.tvT);
+        tvT2 = (TextView) view.findViewById(R.id.tvT2);
         rvListBillOne = (RecyclerView) view.findViewById(R.id.rvListBillOne);
         tvTongtien = (TextView) view.findViewById(R.id.tvTongtien);
+        edtCoupon = (EditText) view.findViewById(R.id.edtCoupon);
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
+        btnCoupon = (Button) view.findViewById(R.id.btnCoupon);
         btnPay = (Button) view.findViewById(R.id.btnPay);
 
     }

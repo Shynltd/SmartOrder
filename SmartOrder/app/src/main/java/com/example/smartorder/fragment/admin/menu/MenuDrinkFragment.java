@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +58,7 @@ public class MenuDrinkFragment extends Fragment {
     private EditText edtTenMon;
     private EditText edtPrice;
     private EditText edAmonut;
+    private EditText edtSearch;
     private ImageView imvFood;
     private Spinner spnType;
     private TextView tvAmount;
@@ -74,11 +77,39 @@ public class MenuDrinkFragment extends Fragment {
         menuListDrink = new ArrayList<>();
         rvListDrinks();
         getAllMenuFromServer();
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         return view;
+    }
+
+    private void filter(String s) {
+        List<Menu> menuDrinkFilter = new ArrayList<>();
+        for (Menu menu : menuListDrink) {
+            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+                menuDrinkFilter.add(menu);
+            }
+        }
+        menuDrinksAdapter.filterList(menuDrinkFilter, getActivity());
+        menuDrinksAdapter.notifyDataSetChanged();
     }
 
     private void initView(View view) {
         rvListMenuDrink = (RecyclerView) view.findViewById(R.id.rvListMenuDrink);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
 
     private void getAllMenuFromServer() {
