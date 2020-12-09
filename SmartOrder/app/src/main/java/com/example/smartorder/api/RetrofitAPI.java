@@ -78,7 +78,6 @@ public interface RetrofitAPI {
             @Part("name") String name,
             @Part("price") Integer price,
             @Part("status") boolean status,
-            @Part("type") String type,
             @Part MultipartBody.Part file);
 
     @Multipart
@@ -87,8 +86,7 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("status") boolean status,
-            @Part("type") String type);
+            @Part("status") boolean status);
 
     @Multipart
     @PUT("menu/update/{id}")

@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
@@ -105,22 +106,7 @@ public class MenuFragment extends Fragment {
         RadioButton rdOther = alert.findViewById(R.id.rdOther);
         Button btnAdd = alert.findViewById(R.id.btnAddFood);
         Button btnCancel = alert.findViewById(R.id.btnCancel);
-        rdgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i) {
-                    case 2131231001:
-                        type = "Food";
-                        break;
-                    case 2131231000:
-                        type = "Drink";
-                        break;
-                    case 2131231002:
-                        type = "Other";
-                        break;
-                }
-            }
-        });
+
         imvFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,12 +132,22 @@ public class MenuFragment extends Fragment {
 
                 if (!checkValidation(edtTenMon, edtPrice)) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (rdgType.getCheckedRadioButtonId() == -1) {
+                }else if (uriImage == null){
+                    imvFood.setBackgroundColor(Color.RED);
+                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
+                }else if (rdgType.getCheckedRadioButtonId() == -1) {
                     rdDrink.setTextColor(Color.RED);
                     rdFood.setTextColor(Color.RED);
                     rdOther.setTextColor(Color.RED);
                     Toast.makeText(getActivity(), "Bạn chưa chọn loại đồ ăn", Toast.LENGTH_SHORT).show();
                 } else {
+                    if (rdDrink.isChecked()){
+                        type = "Drink";
+                    } else if (rdFood.isChecked()){
+                        type = "Food";
+                    } else if (rdOther.isChecked()){
+                        type = "Other";
+                    }
                     String tenmon = edtTenMon.getText().toString();
                     Integer price = Integer.parseInt(edtPrice.getText().toString());
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
@@ -165,8 +161,13 @@ public class MenuFragment extends Fragment {
                             if (response.code() == 200) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                                fragmentTransaction.detach(new MenuFragment()).attach(new MenuFragment()).commit();
+                                Support.replaceFragment(
+                                        getFragmentManager(),
+                                        R.id.frm, new MenuFragment(),
+                                        false,
+                                        R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                        R.anim.admin_fragment_main_translate_exit_right_to_left
+                                );
                             } else {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -191,6 +192,7 @@ public class MenuFragment extends Fragment {
             Uri uri = data.getData();
             uriImage = uri;
             imvFood.setImageURI(uri);
+            imvFood.setBackgroundColor(Color.WHITE);
         }
     }
 
