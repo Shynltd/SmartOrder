@@ -96,7 +96,6 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("type") String type,
             @Part MultipartBody.Part file);
 
     @Multipart
@@ -104,8 +103,8 @@ public interface RetrofitAPI {
     Call<ServerResponse> updateFoodNoImage(
             @Path("id") String id,
             @Part("name") String name,
-            @Part("price") Integer price,
-            @Part("type") String type);
+            @Part("price") Integer price
+         );
 
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);

@@ -194,8 +194,8 @@ public class MenuDrinkFragment extends Fragment {
         edtTenMon.setText(String.valueOf(menu.getName()));
         edtPrice = alert.findViewById(R.id.edtPriceFood);
         edtPrice.setText(String.valueOf(menu.getPrice()));
-        TextView tvType = alert.findViewById(R.id.tvType);
-        tvType.setText(String.valueOf(menu.getType()));
+        TextView tvType = alert.findViewById(R.id.tvTypeFood);
+        tvType.setText("Loại : " + String.valueOf(menu.getType()));
         imvFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imvFood);
 
@@ -224,7 +224,7 @@ public class MenuDrinkFragment extends Fragment {
             public void onClick(View v) {
                 String tenmon = edtTenMon.getText().toString();
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
-                String type = tvType.getText().toString();
+//                String type = tvType.getText().toString();
                 boolean status = true;
                 if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();

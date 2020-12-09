@@ -17,6 +17,6 @@ public class Constants {
     public static String fragmentListTableOrder = "fragment_list_table_order";
 
 
-//    public static final String URL = "http://192.168.1.209:2000/api/";
-//    public static final String LINK = "http://192.168.1.209:2000";
+//    public static final String URL = "http://192.168.13.2:2000/api/";
+//    public static final String LINK = "http://192.168.13.2:2000";
 }

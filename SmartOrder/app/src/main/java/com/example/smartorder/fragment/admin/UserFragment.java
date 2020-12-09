@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.example.smartorder.adapter.admin.UserAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
@@ -60,6 +63,7 @@ public class UserFragment extends Fragment {
     private Uri mUriImage = null;
     private ImageView imgAvatar;
     private String role = "";
+    private EditText edtSearch;
 
 
     @Override
@@ -67,7 +71,34 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         initView(view);
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
         return view;
+
+    }
+    private void filter(String s) {
+        List<User> userListFilter = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getFullName().toLowerCase().contains(s.toLowerCase())) {
+                userListFilter.add(user);
+            }
+        }
+        userAdapter.filterList(userListFilter, getActivity());
+        userAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -154,6 +185,7 @@ public class UserFragment extends Fragment {
     private void initView(View view) {
         rvListUser = (RecyclerView) view.findViewById(R.id.rvListUser);
         fabAddStaff = (FloatingActionButton) view.findViewById(R.id.fabAddStaff);
+        edtSearch = (EditText) view.findViewById(R.id.edtSearch);
     }
 
 
