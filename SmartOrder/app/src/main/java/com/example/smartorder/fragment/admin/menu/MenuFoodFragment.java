@@ -184,13 +184,9 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
         edtName.setText(String.valueOf(menu.getName()));
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
         edtPrice.setText(String.valueOf(menu.getPrice()));
-        EditText edtAmount = alert.findViewById(R.id.edtAmountFood);
-        TextView tvAmount = alert.findViewById(R.id.tvAmountFood);
-        tvAmount.setVisibility(View.INVISIBLE);
-        edtAmount.setText("0");
-        edtAmount.setVisibility(View.INVISIBLE);
-        TextView tvType = alert.findViewById(R.id.tvType);
-        tvType.setText(String.valueOf(menu.getType()));
+        TextView tvType = alert.findViewById(R.id.tvTypeFood);
+        tvType.setText("Loại : " + String.valueOf(menu.getType()));
+
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
 
@@ -220,7 +216,6 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
             public void onClick(View v) {
                 String tenmon = edtName.getText().toString();
                 Integer price = Integer.parseInt(edtPrice.getText().toString());
-                String type = tvType.getText().toString();
                 if (edtName.getText().toString().isEmpty() || edtPrice.getText().toString().length() == 0) {
                     Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
                 } else if (uriImage != null) {
@@ -229,7 +224,7 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                             getContext().getContentResolver().getType(uriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateFood(menu.getId(), tenmon, price, type, filePart).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.updateFood(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -244,7 +239,7 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                         }
                     });
                 } else {
-                    retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price, type).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

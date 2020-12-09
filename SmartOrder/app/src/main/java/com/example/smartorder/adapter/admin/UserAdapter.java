@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.table.Table;
 import com.example.smartorder.model.user.User;
 
@@ -73,6 +74,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         return userList.size();
     }
 
+    public void filterList(List<User> userFilter, Context context) {
+        userList= userFilter;
+        this.context = context;
+    }
 
     public static class UserHolder extends RecyclerView.ViewHolder {
         private ImageView imgUser;

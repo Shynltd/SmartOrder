@@ -15,7 +15,7 @@
         android:id="@+id/edtNameFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/radius_item_user"
+        android:background="@drawable/radius_item_dialg"
         android:inputType="text" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:id="@+id/edtPriceFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/radius_item_user"
+        android:background="@drawable/radius_item_dialg"
         android:inputType="number" />
 
     <TextView

@@ -6,10 +6,14 @@
     android:orientation="vertical"
     tools:context=".fragment.admin.menu.MenuOtherFragment">
 <EditText
+    android:layout_margin="10dp"
+    android:background="@drawable/radius_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:hint="@string/text_search"
+    android:textSize="@dimen/_10sdp"
    android:id="@+id/edtSearch"
-   android:hint="@string/text_search"/>
+   />
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"

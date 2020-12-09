@@ -169,9 +169,8 @@ module.exports.postReturnItems = async (req, res) => {
     }
     res.redirect(`/api/calc/${billcode}`)
 
+
 }
-
-
 module.exports.calcBill = async (req, res) => {
     let {id} = req.params;
     let d = await billOne.find({billCode: id});

@@ -51,14 +51,13 @@ module.exports.postUpdate = async (req, res) => {
             image = avatarName;
         }
         let name = req.body.name.substring(1, req.body.name.length - 1);
-        let checkName = await menu.find({name});
+        let checkName = await menu.findOne({name});
         if (checkName) {
             res.status(201).json({message: `Tên món ăn bị trùng`});
         } else {
             let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
                 $set: {
                     name: name,
-                    type: req.body.type.substring(1, req.body.type.length - 1),
                     price: req.body.price,
                     status: req.body.status,
                     image: image,

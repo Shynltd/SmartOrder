@@ -20,6 +20,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:layout_margin="@dimen/_10sdp"
+        android:text="@string/text_search"
+        android:background="@drawable/radius_search"
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

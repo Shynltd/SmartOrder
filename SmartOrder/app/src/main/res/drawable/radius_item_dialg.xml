@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-
     <!-- Màu nền-->
     <solid
-        android:color="#FBEFFB">
+        android:color="#F2F2F2">
     </solid>
 
     <!-- Đường viền-->
     <stroke
         android:width="2dp"
-        android:color="#F8E0F7"/>
+        android:color="#F2F2F2"/>
 
     <!-- Thuộc tính căn chỉnh-->
     <padding

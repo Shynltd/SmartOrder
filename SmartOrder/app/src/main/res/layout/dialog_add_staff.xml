@@ -19,7 +19,7 @@
             android:id="@+id/edtNameUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_item_user" />
+            android:background="@drawable/radius_item_dialg" />
 
         <TextView
             android:layout_width="match_parent"
@@ -32,7 +32,7 @@
             android:id="@+id/edtPhoneUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_item_user" />
+            android:background="@drawable/radius_item_dialg" />
 
         <TextView
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
             android:id="@+id/edtAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_item_user" />
+            android:background="@drawable/radius_item_dialg" />
 
         <TextView
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
             android:id="@+id/edtAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_item_user" />
+            android:background="@drawable/radius_item_dialg" />
 
         <TextView
             android:layout_width="match_parent"
@@ -70,7 +70,7 @@
             android:id="@+id/edtCmnd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/radius_item_user" />
+            android:background="@drawable/radius_item_dialg" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_60sdp"
