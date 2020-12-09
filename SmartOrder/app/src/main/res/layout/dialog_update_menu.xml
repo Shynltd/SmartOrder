@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="Tên Món"/>
     <EditText
-        android:background="@drawable/radius_item_user"
+        android:background="@drawable/radius_item_dialg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="Giá tiền"/>
     <EditText
-        android:background="@drawable/radius_item_user"
+        android:background="@drawable/radius_item_dialg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
@@ -65,7 +65,7 @@
         android:layout_height="wrap_content"
         android:text="Số lượng"/>
     <EditText
-        android:background="@drawable/radius_item_user"
+        android:background="@drawable/radius_item_dialg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number"

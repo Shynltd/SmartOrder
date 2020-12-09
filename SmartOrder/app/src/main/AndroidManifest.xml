@@ -16,10 +16,14 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.SmartOrder">
-        <activity android:name=".activity.CashierActivity"></activity>
-        <activity android:name=".activity.StaffActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.CashierActivity"
+            android:screenOrientation="portrait"> </activity>
+        <activity android:name=".activity.StaffActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.LoginActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

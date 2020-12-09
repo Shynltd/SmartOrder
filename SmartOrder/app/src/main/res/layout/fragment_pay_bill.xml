@@ -12,14 +12,14 @@
         android:id="@+id/tvBillCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_margin="@dimen/_10sdp"
         android:text="Mã hóa đơn" />
 
     <TextView
         android:id="@+id/tvTableCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp"
+        android:layout_margin="@dimen/_10sdp"
         android:text="Bàn số 1" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="%"
-                android:textSize="@dimen/_20sdp"
+                android:textSize="@dimen/_15sdp"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="@dimen/_4sdp"/>
         </RelativeLayout>
@@ -57,8 +57,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_19sdp"
-            android:layout_weight="2"
-            android:text="Kiểm tra" />
+            android:layout_weight="1"
+            android:textSize="@dimen/_6sdp"
+            android:text="Disconut" />
     </LinearLayout>
 
     <RelativeLayout
@@ -80,7 +81,8 @@
             android:layout_margin="@dimen/_8sdp"
             android:layout_toRightOf="@id/tvTongtien"
             android:text="10000"
-            android:textSize="@dimen/_20sdp" />
+            android:textStyle="bold"
+            android:textSize="@dimen/_15sdp" />
 
         <TextView
             android:id="@+id/tvT2"
@@ -89,8 +91,8 @@
             android:layout_below="@id/tvT"
             android:layout_margin="@dimen/_8sdp"
             android:layout_toRightOf="@id/tvTongtien"
-            android:text=""
-            android:textSize="@dimen/_20sdp"
+            android:text="12000"
+            android:textSize="@dimen/_15sdp"
             android:visibility="gone" />
     </RelativeLayout>
 

@@ -4,11 +4,16 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
-<EditText
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="@string/text_search"
-    android:id="@+id/edtSearch"/>
+
+   <EditText
+       android:layout_margin="10dp"
+       android:background="@drawable/radius_search"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="@string/text_search"
+       android:textSize="@dimen/_10sdp"
+       android:id="@+id/edtSearch"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListMenuFood"
         android:layout_width="match_parent"

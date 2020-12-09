@@ -8,5 +8,5 @@
     <string name="text_adapter_amount">\Số lượng: \</string>
     <string name="text_adapter_price">\Giá: \</string>
     <string name="tittle_tab_food">Đồ ăn</string>
-    <string name="text_search">Nhập vào để tìm kiếm</string>
+    <string name="text_search">Nhập để tìm kiếm</string>
 </resources>

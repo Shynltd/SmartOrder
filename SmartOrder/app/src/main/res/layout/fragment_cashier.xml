@@ -25,7 +25,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 app:civ_border_color="@color/purple_700"
-                app:civ_border_width="@dimen/_2sdp"
+                app:civ_border_width="@dimen/_1sdp"
                 android:src="@color/design_default_color_primary"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/_30sdp"
@@ -33,10 +33,13 @@
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <EditText
+        android:background="@drawable/radius_search"
+        android:layout_margin="@dimen/_10sdp"
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search" />
+        android:textSize="@dimen/_13sdp"
+        android:hint="@string/text_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListBillUnpaid"
