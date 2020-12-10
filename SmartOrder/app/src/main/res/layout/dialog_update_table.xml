@@ -11,6 +11,7 @@
         android:text="Mã số bàn" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/edtTableCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -23,6 +24,7 @@
         android:text="Số lượng ghế" />
 
     <EditText
+        android:inputType="number"
         android:id="@+id/edtTableSeats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

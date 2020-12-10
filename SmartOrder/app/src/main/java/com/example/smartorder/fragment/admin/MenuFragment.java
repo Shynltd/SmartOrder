@@ -206,8 +206,7 @@ public class MenuFragment extends Fragment {
         if (edtMonAn.getText().toString().equals("")) {
             edtMonAn.setError("Chưa nhập tên");
             return false;
-        }
-        if (edtPrice.getText().toString().equals("")) {
+        } else if (edtPrice.getText().toString().equals("")) {
             edtPrice.setError("Chưa nhập giá");
             return false;
         }

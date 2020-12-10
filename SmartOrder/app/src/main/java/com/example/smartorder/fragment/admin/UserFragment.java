@@ -3,6 +3,7 @@ package com.example.smartorder.fragment.admin;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -243,14 +244,12 @@ public class UserFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-                if (edtPhone.getText().toString().isEmpty() || edtAddress.getText().toString().isEmpty() ||
-                        edtAge.getText().toString().isEmpty() || edtFullName.getText().toString().isEmpty()
-                        || edtCmnd.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if(edtPhone.getText().toString().length()<10 ||edtPhone.getText().toString().length()>11  ){
-                    Toast.makeText(getContext(), "Phone have 10-11 number. Please try again",
-                            Toast.LENGTH_SHORT).show();
-                } else {
+               if(!checkValidate(edtFullName,edtPhone,edtAge,edtAddress,edtCmnd)) {
+                   Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+               } else if (mUriImage == null){
+                   imgAvatar.setBackgroundColor(Color.RED);
+                   Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
+               } else if(mUriImage !=null){
                     String fullName = edtFullName.getText().toString().trim();
                     String phone = edtPhone.getText().toString().trim();
                     Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
@@ -349,24 +348,23 @@ public class UserFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String fullName = edtFullName.getText().toString().trim();
-                String phone = edtPhone.getText().toString().trim();
-                Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
-                Integer age = Integer.parseInt(edtAge.getText().toString().trim());
-                String address = edtAddress.getText().toString().trim();
-                if (edtPhone.getText().toString().isEmpty() || edtAddress.getText().toString().isEmpty() ||
-                        edtAge.getText().toString().isEmpty() || edtFullName.getText().toString().isEmpty()
-                        || edtCMND.getText().toString().isEmpty()) {
+                if(!checkValidate(edtFullName,edtPhone,edtAge,edtAddress,edtCMND)) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                }  else if(edtPhone.getText().toString().length()<10 ||edtPhone.getText().toString().length()>11  ){
-                    Toast.makeText(getContext(), "Phone have 10-11 number. Please try again",
-                            Toast.LENGTH_SHORT).show();
+                } else if (mUriImage == null){
+                    imgAvatar.setBackgroundColor(Color.RED);
+                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
                 } else if (mUriImage != null) {
+                    String fullName = edtFullName.getText().toString().trim();
+                    String phone = edtPhone.getText().toString().trim();
+                    Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
+                    Integer age = Integer.parseInt(edtAge.getText().toString().trim());
+                    String address = edtAddress.getText().toString().trim();
                     File file = new File(Support.getPathFromUri(getContext(), mUriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(mUriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
+
                     retrofitAPI.updateUser(user.getId(), fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -382,6 +380,12 @@ public class UserFragment extends Fragment {
                         }
                     });
                 } else {
+                    String fullName = edtFullName.getText().toString().trim();
+                    String phone = edtPhone.getText().toString().trim();
+                    Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
+                    Integer age = Integer.parseInt(edtAge.getText().toString().trim());
+                    String address = edtAddress.getText().toString().trim();
+
                     retrofitAPI.updateUserNoImage(user.getId(), fullName, phone, cmnd, age, address, role).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -405,6 +409,30 @@ public class UserFragment extends Fragment {
         alertDialog.show();
     }
 
+
+    private boolean checkValidate(EditText edFullName, EditText edtPhone, EditText edtAge,
+                                  EditText edtAddress, EditText edtCMND){
+        if(edFullName.getText().toString().isEmpty()){
+            edFullName.setError("Chưa nhập họ tên");
+            return false;
+        } else if(edtPhone.getText().toString().isEmpty()){
+            edtPhone.setError("Chưa nhập tuổi");
+            return false;
+        } else if(edtPhone.getText().toString().length()>10 || edtPhone.getText().toString().length()<10) {
+            edtPhone.setError("SDT chỉ gồm 10 số");
+            return false;
+        }  else if(edtAge.getText().toString().isEmpty()){
+            edtAge.setError("Chưa nhập tuổi");
+            return false;
+        } else if(edtAddress.getText().toString().isEmpty()){
+            edtAddress.setError("Chưa nhập địa chỉ");
+            return false;
+        }else if(edtCMND.getText().toString().isEmpty()){
+            edtCMND.setError("Chưa nhập số CMND");
+            return false;
+        }
+        return true;
+    }
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {

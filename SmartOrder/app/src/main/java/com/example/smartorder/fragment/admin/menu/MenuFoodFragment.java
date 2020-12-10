@@ -3,6 +3,7 @@ package com.example.smartorder.fragment.admin.menu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -214,11 +215,14 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String tenmon = edtName.getText().toString();
-                Integer price = Integer.parseInt(edtPrice.getText().toString());
-                if (edtName.getText().toString().isEmpty() || edtPrice.getText().toString().length() == 0) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_LONG).show();
+                if (!checkValidation(edtName, edtPrice)) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (uriImage == null) {
+                    imgFood.setBackgroundColor(Color.RED);
+                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
                 } else if (uriImage != null) {
+                    String tenmon = edtName.getText().toString();
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);
@@ -239,6 +243,8 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                         }
                     });
                 } else {
+                    String tenmon = edtName.getText().toString();
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
                     retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -255,9 +261,21 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                     });
                 }
             }
+
         });
 
         alertDialog.show();
+    }
+
+    private boolean checkValidation(EditText edtMonAn, EditText edtPrice) {
+        if (edtMonAn.getText().toString().equals("")) {
+            edtMonAn.setError("Chưa nhập tên");
+            return false;
+        } else if (edtPrice.getText().toString().isEmpty()) {
+            edtPrice.setError("Chưa nhập giá");
+            return false;
+        }
+        return true;
     }
 
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

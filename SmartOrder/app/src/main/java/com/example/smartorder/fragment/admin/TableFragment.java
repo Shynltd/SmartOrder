@@ -150,9 +150,9 @@ public class TableFragment extends Fragment {
         btnUpdateTable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edtTableCode.getText().toString().isEmpty()||edtTableSeats.getText().toString().isEmpty()){
+                if(!checkValidate(edtTableCode,edtTableSeats)){
                     Toast.makeText(getContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     table.setTableCode(Integer.valueOf(edtTableCode.getText().toString()));
                     table.setTableSeats(Integer.valueOf(edtTableSeats.getText().toString()));
                     retrofitAPI.updateTable(table.getId(), table).enqueue(new Callback<ServerResponse>() {
@@ -176,6 +176,17 @@ public class TableFragment extends Fragment {
             }
         });
         alertDialog.show();
+    }
+
+    private boolean checkValidate(EditText edTableCode, EditText edtSeats) {
+        if(edTableCode.getText().toString().isEmpty()){
+            edTableCode.setError("Chưa nhập số bàn");
+            return false;
+        } else if(edtSeats.getText().toString().isEmpty()){
+            edtSeats.setError("Chưa nhập số ghế");
+            return false;
+        }
+        return true;
     }
 
     private void initView(View view) {

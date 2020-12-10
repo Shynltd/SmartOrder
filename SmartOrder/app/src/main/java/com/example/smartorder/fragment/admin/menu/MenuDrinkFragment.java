@@ -3,6 +3,7 @@ package com.example.smartorder.fragment.admin.menu;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -186,9 +187,10 @@ public class MenuDrinkFragment extends Fragment {
 
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
-        alertDialog.setTitle("Chỉnh sửa thông tin món ăn");
+        alertDialog.setTitle("Cập nhật thông tin món ăn");
         alertDialog.setView(alert);
         alertDialog.setCancelable(false);
+
         edtTenMon = alert.findViewById(R.id.edtNameFood);
         edtTenMon.setText(String.valueOf(menu.getName()));
         edtPrice = alert.findViewById(R.id.edtPriceFood);
@@ -221,12 +223,15 @@ public class MenuDrinkFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                String tenmon = edtTenMon.getText().toString();
-                Integer price = Integer.parseInt(edtPrice.getText().toString());
-                boolean status = true;
-                if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                if (!checkValidation(edtTenMon, edtPrice)) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (uriImage == null){
+                    imvFood.setBackgroundColor(Color.RED);
+                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
                 } else if (uriImage != null) {
+                    String tenmon = edtTenMon.getText().toString();
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
+                    boolean status = true;
                     File file = new File(Support.getPathFromUri(getContext(), uriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(
                             getContext().getContentResolver().getType(uriImage)), file);
@@ -247,6 +252,9 @@ public class MenuDrinkFragment extends Fragment {
                         }
                     });
                 } else {
+                    String tenmon = edtTenMon.getText().toString();
+                    Integer price = Integer.parseInt(edtPrice.getText().toString());
+                    boolean status = true;
                     retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price, status).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -265,6 +273,18 @@ public class MenuDrinkFragment extends Fragment {
             }
         });
         alertDialog.show();
+    }
+
+    //Validate
+    private boolean checkValidation(EditText edtMonAn, EditText edtPrice) {
+        if (edtMonAn.getText().toString().equals("")) {
+            edtMonAn.setError("Chưa nhập tên");
+            return false;
+        } else if (edtPrice.getText().toString().isEmpty()) {
+            edtPrice.setError("Chưa nhập giá");
+            return false;
+        }
+        return true;
     }
 
     @Override
