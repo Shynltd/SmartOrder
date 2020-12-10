@@ -83,4 +83,9 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.TableHolder>
         void  delete (int position ,String id);
         void  update (int position , List<Table> tableList);
     }
+    public void addData(List<Table> tables){
+        int last_size = tableList.size();
+        tableList.addAll(tables);
+        notifyItemRangeChanged(last_size, tables.size());
+    }
 }

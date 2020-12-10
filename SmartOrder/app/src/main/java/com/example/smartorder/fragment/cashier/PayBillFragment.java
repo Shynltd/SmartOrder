@@ -25,9 +25,12 @@ import com.example.smartorder.model.bill.BillOne;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +51,9 @@ public class PayBillFragment extends Fragment {
     private String billCode = "";
     private Integer tableCode;
     private Integer totalMoney;
+    private Integer coupon = 0;
+    private Integer lastTotal = totalMoney;
+    private Socket socket;
 
     public PayBillFragment(String billCode, Integer tableCode, Integer totalMoney) {
         this.billCode = billCode;
@@ -63,6 +69,11 @@ public class PayBillFragment extends Fragment {
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         initRecycleView();
         getBillOne();
+        try {
+            socket = IO.socket(Constants.LINK+"/").connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         tvBillCode.setText("Mã hóa đơn: " + billCode);
         tvTableCode.setText("Bàn số " + tableCode);
         tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
@@ -88,35 +99,32 @@ public class PayBillFragment extends Fragment {
     }
 
     private void checkCoupon() {
-        Integer coupon = Integer.parseInt(edtCoupon.getText().toString().trim());
-        Integer lastCou;
+        coupon = Integer.parseInt(edtCoupon.getText().toString().trim());
+
 
         if (coupon != 0) {
-            lastCou = totalMoney * (100 - coupon) / 100;
-            tvT.setText( Support.decimalFormat(totalMoney)+" VNĐ" );
-            tvT.setPaintFlags(tvT.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+            lastTotal = totalMoney * (100 - coupon) / 100;
+            tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
+            tvT.setPaintFlags(tvT.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             tvT2.setVisibility(View.VISIBLE);
-            tvT2.setText(Support.decimalFormat(lastCou)+" VNĐ" );
+            tvT2.setText(Support.decimalFormat(lastTotal) + " VNĐ");
         }
-
-
     }
-
-    ;
-
     private void pay() {
-        retrofitAPI.payBill(billCode, Constants.NameUser).enqueue(new Callback<ServerResponse>() {
+        retrofitAPI.payBill(billCode, Constants.NameUser, coupon, lastTotal).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.code() == 200) {
+                    socket.emit("payy","Xong");
+                    socket.disconnect();
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    Fragment payBillFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentPayBill);
+                    Fragment payBillFrament = getFragmentManager().findFragmentByTag(Constants.fragmentPayBill);
                     if (payBillFrament != null) {
-                        getActivity().getSupportFragmentManager().beginTransaction().remove(payBillFrament).commit();
+                        getFragmentManager().beginTransaction().remove(payBillFrament).commit();
                     }
-                    Fragment cashierFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.cashierFragmet);
+                    Fragment cashierFragment = getFragmentManager().findFragmentByTag(Constants.cashierFragmet);
                     if (cashierFragment != null) {
-                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
                         ft.detach(cashierFragment).attach(cashierFragment).commit();
                     }
                 }
@@ -172,7 +180,6 @@ public class PayBillFragment extends Fragment {
     }
 
     private void initView(View view) {
-
         tvBillCode = (TextView) view.findViewById(R.id.tvBillCode);
         tvTableCode = (TextView) view.findViewById(R.id.tvTableCode);
         tvT = (TextView) view.findViewById(R.id.tvT);
@@ -183,6 +190,5 @@ public class PayBillFragment extends Fragment {
         btnCancel = (Button) view.findViewById(R.id.btnCancel);
         btnCoupon = (Button) view.findViewById(R.id.btnCoupon);
         btnPay = (Button) view.findViewById(R.id.btnPay);
-
     }
 }

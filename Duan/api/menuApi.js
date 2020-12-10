@@ -17,7 +17,7 @@ module.exports.getListMenuAll = async (req, res) => {
 }
 module.exports.postCreate = async (req, res) => {
     let name = req.body.name.substring(1, req.body.name.length - 1);
-    let checkName = await menu.findOne({name:name});
+    let checkName = await menu.findOne({name: name});
     if (checkName) {
         res.status(201).json({message: `Tên món ăn bị trùng`});
     } else {
@@ -51,25 +51,22 @@ module.exports.postUpdate = async (req, res) => {
             image = avatarName;
         }
         let name = req.body.name.substring(1, req.body.name.length - 1);
-        let checkName = await menu.findOne({name});
-        if (checkName) {
-            res.status(201).json({message: `Tên món ăn bị trùng`});
-        } else {
-            let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
-                $set: {
-                    name: name,
-                    price: req.body.price,
-                    status: req.body.status,
-                    image: image,
 
-                },
-            }, {new: true});
-            if (updated) {
-                res.status(200).json({message: 'Cập nhật thành công'})
-            } else {
-                res.status(201).json({message: 'Cập nhật thất bại'})
-            }
+        let updated = await menu.findOneAndUpdate({_id: req.params.id}, {
+            $set: {
+                name: name,
+                price: req.body.price,
+                image: image,
+                status: true
+
+            },
+        }, {new: true});
+        if (updated) {
+            res.status(200).json({message: 'Cập nhật thành công'})
+        } else {
+            res.status(201).json({message: 'Cập nhật thất bại'})
         }
+
     } else {
         res.status(201).json({message: 'Món ăn không tồn tại'})
     }

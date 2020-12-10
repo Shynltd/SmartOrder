@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,12 +30,22 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.ProfileFragment;
+import com.example.smartorder.fragment.staff.StaffFragment;
 import com.example.smartorder.model.bill.Bill;
+import com.example.smartorder.support.Support;
+import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +59,7 @@ public class CashierFragment extends Fragment {
     private RetrofitAPI retrofitAPI;
     private CircleImageView imgProfile;
     private androidx.appcompat.widget.Toolbar toolbar;
+    private Socket socket;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,6 +77,33 @@ public class CashierFragment extends Fragment {
         });
         initRecycle();
         getDataFromServer();
+        try {
+            socket = IO.socket(Constants.LINK+"/").connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        //Nhận từ server về
+        socket.on("reload", new Emitter.Listener() {
+            @Override
+            public void call(Object... args) {
+                JSONObject jsonObject = (JSONObject) args[0];
+                try {
+                    boolean reload = jsonObject.getBoolean("reload");
+                    if (reload){
+                        socket.disconnect();
+                        try {
+                            getActivity().finish();
+                            getActivity().startActivity(getActivity().getIntent());
+                        }catch (Exception e){
+                            Log.d("TAG", "call: "+e.getMessage());
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

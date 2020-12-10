@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.BillOne;
+import com.example.smartorder.support.Support;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class BillOneAdapter extends RecyclerView.Adapter<BillOneAdapter.BillOneH
     public void onBindViewHolder(@NonNull BillOneHolder holder, int position) {
         holder.tvName.setText(billOneList.get(position).getName());
         holder.tvSl.setText(billOneList.get(position).getSl() + "");
-        holder.tvTotal.setText(billOneList.get(position).getTotalMoney() + "");
+        holder.tvTotal.setText(Support.decimalFormat(billOneList.get(position).getTotalMoney())+" VNĐ");
         Glide.with(context).load(Constants.LINK + billOneList.get(position).getImage()).into(holder.imgLogo);
     }
 

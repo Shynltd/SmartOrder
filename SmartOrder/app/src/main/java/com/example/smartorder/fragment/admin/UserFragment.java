@@ -44,6 +44,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -72,6 +74,15 @@ public class UserFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         initView(view);
+        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        initRecycleView();
+        getAllUser();
+        fabAddStaff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogAddStaff();
+            }
+        });
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -88,68 +99,12 @@ public class UserFragment extends Fragment {
                 filter(s.toString());
             }
         });
+
         return view;
 
     }
-    private void filter(String s) {
-        List<User> userListFilter = new ArrayList<>();
-        for (User user : userList) {
-            if (user.getFullName().toLowerCase().contains(s.toLowerCase())) {
-                userListFilter.add(user);
-            }
-        }
-        userAdapter.filterList(userListFilter, getActivity());
-        userAdapter.notifyDataSetChanged();
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        userList = new ArrayList<>();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rvListUser.setLayoutManager(linearLayoutManager);
-        userAdapter = new UserAdapter(getContext(), userList, new UserAdapter.OnClickListener() {
-
-            @Override
-            public void deleteUser(int position, String id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn nhân viên " + userList.get(position).getFullName() + " không ?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                retrofitAPI.deleteUser(id).enqueue(new Callback<ServerResponse>() {
-                                    @Override
-                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(UserFragment.this).attach(UserFragment.this).commit();
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                })
-                        .create().show();
-            }
-
-            @Override
-            public void updateUser(int position, List<User> userList) {
-                dialogUpdateUser(position, userList);
-            }
-
-
-        });
-        rvListUser.setHasFixedSize(true);
-        rvListUser.setAdapter(userAdapter);
-        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+    private void getAllUser() {
         retrofitAPI.getAllUser().enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -174,14 +129,69 @@ public class UserFragment extends Fragment {
                 Log.e("onFailure: ", t.getMessage());
             }
         });
-        fabAddStaff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogAddStaff();
-            }
-        });
-
     }
+
+    private void initRecycleView() {
+        userList = new ArrayList<>();
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        rvListUser.setLayoutManager(linearLayoutManager);
+        userAdapter = new UserAdapter(getContext(), userList, new UserAdapter.OnClickListener() {
+            @Override
+            public void deleteUser(int position, String id) {
+                dialogDeleteUser(id, position);
+            }
+
+            @Override
+            public void updateUser(int position, List<User> userList) {
+                dialogUpdateUser(position, userList);
+            }
+
+
+        });
+        rvListUser.setHasFixedSize(true);
+        rvListUser.setAdapter(userAdapter);
+    }
+
+    private void dialogDeleteUser(String id, int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setMessage("Bạn có muốn nhân viên " + userList.get(position).getFullName() + " không ?")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        retrofitAPI.deleteUser(id).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                ft.detach(UserFragment.this).attach(UserFragment.this).commit();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                            }
+                        });
+                    }
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        })
+                .create().show();
+    }
+
+    private void filter(String s) {
+        List<User> userListFilter = new ArrayList<>();
+        for (User user : userList) {
+            if (user.getFullName().toLowerCase().contains(s.toLowerCase())) {
+                userListFilter.add(user);
+            }
+        }
+        userAdapter.filterList(userListFilter, getActivity());
+        userAdapter.notifyDataSetChanged();
+    }
+
 
     private void initView(View view) {
         rvListUser = (RecyclerView) view.findViewById(R.id.rvListUser);

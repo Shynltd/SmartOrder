@@ -52,7 +52,7 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
             holder.tvAmountMenu.setText("Trạng thái: Hết Hàng");
             holder.tvAmountMenu.setTextColor(ContextCompat.getColor(context,R.color.tv_status_unpaid));
         }
-        holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, holder.imgLogo);

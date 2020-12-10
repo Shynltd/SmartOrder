@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -210,6 +212,7 @@ public class MenuFragment extends Fragment {
             edtPrice.setError("Chưa nhập giá");
             return false;
         }
+
         return true;
     }
 }
