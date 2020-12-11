@@ -35,7 +35,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     @NonNull
     @Override
     public BillHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_bill, parent, false);
+//        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_bill, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_bill2, parent, false);
+
         return new BillHolder(view);
     }
 
@@ -44,8 +46,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         holder.tvBillCode.setText(billList.get(position).getBillCode());
         holder.tvTableCode.setText(billList.get(position).getTableCode()+"");
         holder.tvStatus.setText(billList.get(position).getStatus());
-        String[] date = billList.get(position).getDateBill().split("@");
-        holder.tvDate.setText(date[0]);
+//        String[] date = billList.get(position).getDateBill().split("@");
+//        holder.tvDate.setText(date[0]);
 
         holder.tvTotalPrice.setText(Support.decimalFormat(billList.get(position).getTotalPrice())+" VNĐ");
         if (billList.get(position).getStatus().equalsIgnoreCase("Đã thanh toán")){
@@ -67,15 +69,20 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     }
 
     public static class BillHolder extends RecyclerView.ViewHolder {
-        private TextView tvBillCode, tvTableCode, tvTotalPrice, tvStatus, tvDate;
+//        private TextView tvBillCode, tvTableCode, tvTotalPrice, tvStatus, tvDate;
 
+        private TextView tvBillCode, tvTableCode, tvTotalPrice, tvStatus;
         public BillHolder(@NonNull View itemView) {
             super(itemView);
+//            tvBillCode = itemView.findViewById(R.id.tvBillCode);
+//            tvTableCode = itemView.findViewById(R.id.tvTableCode);
+//            tvTotalPrice = itemView.findViewById(R.id.tvTotalPrice);
+//            tvStatus = itemView.findViewById(R.id.tvStatus);
+//            tvDate = itemView.findViewById(R.id.tvDate);
             tvBillCode = itemView.findViewById(R.id.tvBillCode);
             tvTableCode = itemView.findViewById(R.id.tvTableCode);
             tvTotalPrice = itemView.findViewById(R.id.tvTotalPrice);
             tvStatus = itemView.findViewById(R.id.tvStatus);
-            tvDate = itemView.findViewById(R.id.tvDate);
         }
     }
     public interface onItemClick{
