@@ -56,7 +56,6 @@ public class TableFragment extends Fragment {
         initView(view);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         initRecycleView();
-        tableAdapter.notifyDataSetChanged();
         retrofitAPI.getAllTable().enqueue(new Callback<List<Table>>() {
             @Override
             public void onResponse(Call<List<Table>> call, Response<List<Table>> response) {
@@ -117,13 +116,15 @@ public class TableFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(TableFragment.this).attach(TableFragment.this).commit();
+                                        Fragment tableFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentTable);
+                                        if (tableFragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(tableFragment).replace(R.id.frm, new TableFragment(), Constants.fragmentTable).commit();
+                                        }
                                     }
 
                                     @Override
                                     public void onFailure(Call<ServerResponse> call, Throwable t) {
-
+                                        Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -144,38 +145,6 @@ public class TableFragment extends Fragment {
         rvListTable.setHasFixedSize(true);
         rvListTable.setAdapter(tableAdapter);
     }
-
-//    private Emitter.Listener getTest  = new Emitter.Listener() {
-//        @Override
-//        public void call(Object... args) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    JSONObject jsonObject = (JSONObject) args[0];
-//                    tableList.clear();
-//                    try {
-//                        JSONArray table =  jsonObject.getJSONArray("data");
-//                        for (int i = 0; i < table.length(); i++) {
-//                            String id = table.getJSONObject(i).getString("_id");
-//                            Integer tableCode = table.getJSONObject(i).getInt("tableCode");
-//                            Integer tableSeats = table.getJSONObject(i).getInt("tableSeats");
-//                            boolean status = table.getJSONObject(i).getBoolean("status");
-//                            tableList.add(new Table(id, tableCode, tableSeats, status));
-//                            tableAdapter.notifyDataSetChanged();
-//                        }
-//                    } catch (Exception e) {
-//                        Log.e( "Exception: ", e.getMessage());
-//                    }
-//
-//                }
-//            }).start();
-//
-//
-//
-//
-//        }
-//
-//    };
 
 
     private void dialogUpdateTable(int position, List<Table> tableList) {
@@ -205,7 +174,10 @@ public class TableFragment extends Fragment {
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             alertDialog.dismiss();
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            getActivity().getSupportFragmentManager().beginTransaction().detach(TableFragment.this).attach(TableFragment.this).commit();
+                            Fragment tableFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentTable);
+                            if (tableFragment != null) {
+                                getActivity().getSupportFragmentManager().beginTransaction().remove(tableFragment).replace(R.id.frm, new TableFragment(), Constants.fragmentTable).commit();
+                            }
                         }
 
                         @Override
@@ -263,9 +235,11 @@ public class TableFragment extends Fragment {
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             if (response.code() == 200) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                ft.detach(TableFragment.this).attach(TableFragment.this).commit();
                                 alertDialog.dismiss();
+                                Fragment tableFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentTable);
+                                if (tableFragment != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction().remove(tableFragment).replace(R.id.frm, new TableFragment(), Constants.fragmentTable).commit();
+                                }
                             } else {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -273,7 +247,7 @@ public class TableFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailureTableFragment", t.getMessage());
+                            Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

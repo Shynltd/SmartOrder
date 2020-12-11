@@ -122,11 +122,11 @@
                 android:text="Hủy" />
 
             <Button
-                android:id="@+id/btnAddUser"
+                android:id="@+id/btnUpdateUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
-                android:text="Thêm mới" />
+                android:text="Lưu" />
 
         </LinearLayout>
 

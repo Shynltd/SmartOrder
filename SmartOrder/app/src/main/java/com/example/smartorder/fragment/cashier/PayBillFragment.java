@@ -120,12 +120,7 @@ public class PayBillFragment extends Fragment {
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Fragment payBillFrament = getFragmentManager().findFragmentByTag(Constants.fragmentPayBill);
                     if (payBillFrament != null) {
-                        getFragmentManager().beginTransaction().remove(payBillFrament).commit();
-                    }
-                    Fragment cashierFragment = getFragmentManager().findFragmentByTag(Constants.cashierFragmet);
-                    if (cashierFragment != null) {
-                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                        ft.detach(cashierFragment).attach(cashierFragment).commit();
+                        getFragmentManager().beginTransaction().remove(payBillFrament).replace(R.id.frq, new CashierFragment(), Constants.fragmentCashier).commit();
                     }
                 }
             }

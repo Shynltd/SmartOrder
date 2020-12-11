@@ -35,7 +35,10 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.TabMenuAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
+import com.example.smartorder.fragment.admin.menu.MenuDrinkFragment;
 import com.example.smartorder.fragment.admin.menu.MenuFoodFragment;
+import com.example.smartorder.fragment.admin.menu.MenuOtherFragment;
 import com.example.smartorder.model.callback.CallbackListMenu;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
@@ -71,7 +74,6 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
 
     }
 
@@ -80,7 +82,8 @@ public class MenuFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         initView(view);
-        vpMenu.setAdapter(new TabMenuAdapter(getFragmentManager()));
+        retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        vpMenu.setAdapter(new TabMenuAdapter(getActivity().getSupportFragmentManager()));
         tabMenu.setupWithViewPager(vpMenu);
         fabAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +93,6 @@ public class MenuFragment extends Fragment {
         });
         return view;
     }
-
 
 
     private void dialogAddMenu() {
@@ -133,20 +135,20 @@ public class MenuFragment extends Fragment {
             public void onClick(View v) {
 
                 if (!checkValidation(edtTenMon, edtPrice)) {
-                }else if (uriImage == null){
+                } else if (uriImage == null) {
                     imvFood.setBackgroundColor(Color.RED);
                     Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-                }else if (rdgType.getCheckedRadioButtonId() == -1) {
+                } else if (rdgType.getCheckedRadioButtonId() == -1) {
                     rdDrink.setTextColor(Color.RED);
                     rdFood.setTextColor(Color.RED);
                     rdOther.setTextColor(Color.RED);
                     Toast.makeText(getActivity(), "Bạn chưa chọn loại đồ ăn", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (rdDrink.isChecked()){
+                    if (rdDrink.isChecked()) {
                         type = "Drink";
-                    } else if (rdFood.isChecked()){
+                    } else if (rdFood.isChecked()) {
                         type = "Food";
-                    } else if (rdOther.isChecked()){
+                    } else if (rdOther.isChecked()) {
                         type = "Other";
                     }
                     String tenmon = edtTenMon.getText().toString();
@@ -162,13 +164,10 @@ public class MenuFragment extends Fragment {
                             if (response.code() == 200) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                                 alertDialog.dismiss();
-                                Support.replaceFragment(
-                                        getFragmentManager(),
-                                        R.id.frm, new MenuFragment(),
-                                        false,
-                                        R.anim.admin_fragment_main_translate_enter_right_to_left,
-                                        R.anim.admin_fragment_main_translate_exit_right_to_left
-                                );
+                                Fragment menuFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentMenu);
+                                if (menuFragment != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction().remove(menuFragment).replace(R.id.frm, new MenuFragment(), Constants.fragmentMenu).commit();
+                                }
                             } else {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -177,7 +176,7 @@ public class MenuFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

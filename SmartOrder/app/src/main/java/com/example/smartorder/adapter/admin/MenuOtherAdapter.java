@@ -36,7 +36,7 @@ public class MenuOtherAdapter extends RecyclerView.Adapter<MenuOtherAdapter.Menu
     @NonNull
     @Override
     public MenuHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_menu_drinks, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_menu_other, parent, false);
         return new MenuHolder(view);
     }
 

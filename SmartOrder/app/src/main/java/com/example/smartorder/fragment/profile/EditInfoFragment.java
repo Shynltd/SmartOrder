@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.EditProfileFragment;
+import com.example.smartorder.fragment.ProfileFragment;
 import com.example.smartorder.fragment.admin.MenuFragment;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.user.User;
@@ -49,6 +51,7 @@ public class EditInfoFragment extends Fragment {
     private TextInputEditText tvAge;
     private TextInputEditText tvAddress;
     private ImageButton btnSaveChange;
+    private ImageButton btnBack;
     private Uri mUriImage = null;
     private final int REQUEST_CODE_LOAD_IMAGE = 1;
     private User user;
@@ -80,6 +83,19 @@ public class EditInfoFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 updateInfo();
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment editProfileFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
+                if (editProfileFragment != null) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
+                                    R.anim.admin_fragment_main_translate_exit_left_to_right)
+                            .remove(editProfileFragment)
+                            .commit();
+                }
             }
         });
         return view;
@@ -172,6 +188,7 @@ public class EditInfoFragment extends Fragment {
         tvAge = (TextInputEditText) view.findViewById(R.id.tvAge);
         tvAddress = (TextInputEditText) view.findViewById(R.id.tvAddress);
         btnSaveChange = (ImageButton) view.findViewById(R.id.btnSaveChange);
+        btnBack = (ImageButton) view.findViewById(R.id.btnBack);
     }
 
     @Override

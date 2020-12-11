@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.cashier.CashierFragment">
+    android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/_40sdp"
@@ -32,18 +30,16 @@
                 android:id="@+id/imgProfile"/>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
-    <EditText
-        android:background="@drawable/radius_search"
-        android:layout_margin="@dimen/_10sdp"
-        android:id="@+id/edtSearch"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_13sdp"
-        android:hint="@string/text_search" />
+        app:tabMode="fixed" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvListBillUnpaid"
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/vpMenu"
+        />
 
 </LinearLayout>

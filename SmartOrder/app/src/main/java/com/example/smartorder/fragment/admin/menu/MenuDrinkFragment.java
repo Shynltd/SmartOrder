@@ -33,6 +33,7 @@ import com.example.smartorder.adapter.admin.MenuDrinksAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
+import com.example.smartorder.model.callback.CallbackListMenu;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
@@ -184,7 +185,6 @@ public class MenuDrinkFragment extends Fragment {
     private void dialogUpdateDrink(int position) {
 
         Menu menu = menuListDrink.get(position);
-
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setTitle("Cập nhật thông tin món ăn");

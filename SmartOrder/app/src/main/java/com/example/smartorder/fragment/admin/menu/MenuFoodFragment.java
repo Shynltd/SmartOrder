@@ -50,7 +50,7 @@ import retrofit2.Response;
 
 import static android.app.Activity.RESULT_OK;
 
-public class MenuFoodFragment extends Fragment implements CallbackListMenu {
+public class MenuFoodFragment extends Fragment {
 
     private RecyclerView rvListMenuFood;
     private MenuFoodAdapter menuFoodAdapter;
@@ -278,8 +278,4 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
         }
     }
 
-    @Override
-    public void listMenu(List<Menu> menuList) {
-        menuListFood = menuList;
-    }
 }

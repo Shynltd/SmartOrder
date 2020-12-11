@@ -72,6 +72,10 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                         if (response.code() == 200) {
                             Toast.makeText(getActivity(), "Lưu thành công", Toast.LENGTH_SHORT).show();
+                            Fragment billPreViewFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentPreviewBill);
+                            if (billPreViewFragment != null){
+                                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(0,R.anim.admin_fragment_main_translate_exit_left_to_right).remove(billPreViewFragment).commit();
+                            }
                         } else {
                             Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -79,7 +83,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
 
                     @Override
                     public void onFailure(Call<ServerResponse> call, Throwable t) {
-                        Log.e("onFailureBillPreView: ", t.getMessage());
+                        Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -126,7 +130,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
 
             @Override
             public void onFailure(Call<List<BillOne>> call, Throwable t) {
-                Log.e("onFailureBillPreview: ", t.getMessage());
+                Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

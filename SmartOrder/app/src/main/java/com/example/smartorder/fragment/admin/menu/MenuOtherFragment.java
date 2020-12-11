@@ -35,6 +35,7 @@ import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.fragment.admin.MenuFragment;
 import com.example.smartorder.fragment.admin.UserFragment;
+import com.example.smartorder.model.callback.CallbackListMenu;
 import com.example.smartorder.model.menu.Menu;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
@@ -188,7 +189,7 @@ public class MenuOtherFragment extends Fragment {
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
         edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " + String.valueOf(menu.getType()));
+        tvType.setText("Loại : " + menu.getType());
 
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);

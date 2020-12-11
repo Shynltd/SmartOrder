@@ -126,7 +126,7 @@ public class UserFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -162,13 +162,15 @@ public class UserFragment extends Fragment {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                ft.detach(UserFragment.this).attach(UserFragment.this).commit();
+                                Fragment userFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentUser);
+                                if (userFragment != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction().remove(userFragment).replace(R.id.frm, new UserFragment(), Constants.fragmentUser).commit();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<ServerResponse> call, Throwable t) {
-
+                                Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -254,12 +256,12 @@ public class UserFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View view) {
-               if(!checkValidate(edtFullName,edtPhone,edtAge,edtAddress,edtCmnd)) {
-                   Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-               } else if (mUriImage == null){
-                   imgAvatar.setBackgroundColor(Color.RED);
-                   Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-               } else if(mUriImage !=null){
+                if (!checkValidate(edtFullName, edtPhone, edtAge, edtAddress, edtCmnd)) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (mUriImage == null) {
+                    imgAvatar.setBackgroundColor(Color.RED);
+                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
+                } else if (mUriImage != null) {
                     String fullName = edtFullName.getText().toString().trim();
                     String phone = edtPhone.getText().toString().trim();
                     Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
@@ -274,14 +276,14 @@ public class UserFragment extends Fragment {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                             Fragment userFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentUser);
-                            if (userFragment != null){
-                                getActivity().getSupportFragmentManager().beginTransaction().remove(userFragment).replace(R.id.frm, new UserFragment(),Constants.fragmentUser).commit();
+                            if (userFragment != null) {
+                                getActivity().getSupportFragmentManager().beginTransaction().remove(userFragment).replace(R.id.frm, new UserFragment(), Constants.fragmentUser).commit();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -298,24 +300,17 @@ public class UserFragment extends Fragment {
         alertDialog.setTitle("Chỉnh sửa thông tin nhân viên");
         alertDialog.setCancelable(false);
         imgAvatar = alert.findViewById(R.id.imgAvatar);
-
         EditText edtFullName = alert.findViewById(R.id.edtNameUser);
         edtFullName.setText(String.valueOf(user.getFullName()));
-
         EditText edtPhone = alert.findViewById(R.id.edtPhoneUser);
         edtPhone.setText(String.valueOf(user.getPhone()));
-
         EditText edtCMND = alert.findViewById(R.id.edtCmnd);
         edtCMND.setText(String.valueOf(user.getIndentityCardNumber()));
-
         EditText edtAge = alert.findViewById(R.id.edtAge);
         edtAge.setText(String.valueOf(user.getAge()));
-
         EditText edtAddress = alert.findViewById(R.id.edtAddress);
         edtAddress.setText(String.valueOf(user.getAddress()));
-
         Glide.with(getContext()).load(Constants.LINK + user.getAvatar()).into(imgAvatar);
-
         Spinner spnRole = (Spinner) alert.findViewById(R.id.spnRole);
         List<String> roles = new ArrayList<>();
         roles.add("Admin");
@@ -354,97 +349,97 @@ public class UserFragment extends Fragment {
             }
         });
 
-        Button btnUpdate = alert.findViewById(R.id.btnAddUser);
-        btnUpdate.setText("Cập nhật");
+        Button btnUpdate = alert.findViewById(R.id.btnUpdateUser);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-                if(!checkValidate(edtFullName,edtPhone,edtAge,edtAddress,edtCMND)) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (mUriImage == null){
-                    imgAvatar.setBackgroundColor(Color.RED);
-                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-                } else if (mUriImage != null) {
-                    String fullName = edtFullName.getText().toString().trim();
-                    String phone = edtPhone.getText().toString().trim();
-                    Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
-                    Integer age = Integer.parseInt(edtAge.getText().toString().trim());
-                    String address = edtAddress.getText().toString().trim();
-                    File file = new File(Support.getPathFromUri(getContext(), mUriImage));
-                    RequestBody requestBody = RequestBody.create(MediaType.parse(
-                            getContext().getContentResolver().getType(mUriImage)), file);
-                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                            "avatar", file.getName(), requestBody);
-
-                    retrofitAPI.updateUser(user.getId(), fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                if (!checkValidate(edtFullName, edtPhone, edtAge, edtAddress, edtCMND)) {
                 } else {
-                    String fullName = edtFullName.getText().toString().trim();
-                    String phone = edtPhone.getText().toString().trim();
-                    Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
-                    Integer age = Integer.parseInt(edtAge.getText().toString().trim());
-                    String address = edtAddress.getText().toString().trim();
+                    if (mUriImage != null) {
+                        String fullName = edtFullName.getText().toString().trim();
+                        String phone = edtPhone.getText().toString().trim();
+                        Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
+                        Integer age = Integer.parseInt(edtAge.getText().toString().trim());
+                        String address = edtAddress.getText().toString().trim();
+                        File file = new File(Support.getPathFromUri(getContext(), mUriImage));
+                        RequestBody requestBody = RequestBody.create(MediaType.parse(
+                                getContext().getContentResolver().getType(mUriImage)), file);
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                                "avatar", file.getName(), requestBody);
 
-                    retrofitAPI.updateUserNoImage(user.getId(), fullName, phone, cmnd, age, address, role).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
-                        }
+                        retrofitAPI.updateUser(user.getId(), fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
+                            }
 
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        String fullName = edtFullName.getText().toString().trim();
+                        String phone = edtPhone.getText().toString().trim();
+                        Integer cmnd = Integer.parseInt(edtCMND.getText().toString().trim());
+                        Integer age = Integer.parseInt(edtAge.getText().toString().trim());
+                        String address = edtAddress.getText().toString().trim();
 
+                        retrofitAPI.updateUserNoImage(user.getId(), fullName, phone, cmnd, age, address, role).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                Fragment userFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentUser);
+                                if (userFragment != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction().remove(userFragment).replace(R.id.frm, new UserFragment(), Constants.fragmentUser).commit();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+                    }
                 }
             }
 
         });
-
         alertDialog.show();
     }
 
 
     private boolean checkValidate(EditText edFullName, EditText edtPhone, EditText edtAge,
-                                  EditText edtAddress, EditText edtCMND){
-        if(edFullName.getText().toString().isEmpty()){
+                                  EditText edtAddress, EditText edtCMND) {
+        if (edFullName.getText().toString().trim().isEmpty()) {
             edFullName.setError("Chưa nhập họ tên");
             return false;
-        } else if(edtPhone.getText().toString().isEmpty()){
+        } else if (edtPhone.getText().toString().trim().isEmpty()) {
             edtPhone.setError("Chưa nhập tuổi");
             return false;
-        } else if(edtPhone.getText().toString().length()>10 || edtPhone.getText().toString().length()<10) {
+        } else if (edtPhone.getText().toString().trim().length() != 10) {
             edtPhone.setError("SDT chỉ gồm 10 số");
             return false;
-        }  else if(edtAge.getText().toString().isEmpty()){
+        } else if (edtAge.getText().toString().trim().isEmpty()) {
             edtAge.setError("Chưa nhập tuổi");
             return false;
-        } else if(edtAddress.getText().toString().isEmpty()){
+        } else if (edtAddress.getText().toString().trim().isEmpty()) {
             edtAddress.setError("Chưa nhập địa chỉ");
             return false;
-        }else if(edtCMND.getText().toString().isEmpty()){
-            edtCMND.setError("Chưa nhập số CMND");
+        } else if (edtCMND.getText().toString().trim().length() != 9) {
+            edtCMND.setError("Số CMND phải là 9 hoặc 12 số");
             return false;
         }
         return true;
     }
+
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
