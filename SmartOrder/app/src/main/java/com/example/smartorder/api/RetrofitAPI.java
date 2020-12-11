@@ -101,9 +101,26 @@ public interface RetrofitAPI {
             @Part("name") String name,
             @Part("price") Integer price
          );
+    @Multipart
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateOther(
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price,
+            @Part MultipartBody.Part file);
+
+    @Multipart
+    @PUT("menu/update/{id}")
+    Call<ServerResponse> updateOtherNoImage(
+            @Path("id") String id,
+            @Part("name") String name,
+            @Part("price") Integer price
+    );
 
     @DELETE("menu/delete/{id}")
     Call<ServerResponse> deleteDrink(@Path("id") String id);
+    @DELETE("menu/delete/{id}")
+    Call<ServerResponse> deleteOther(@Path("id") String id);
 
 
     //User
