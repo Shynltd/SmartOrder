@@ -217,69 +217,63 @@ public class MenuDrinkFragment extends Fragment {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_LOAD_IMAGE);
             }
         });
-
         btnUpdate = alert.findViewById(R.id.btnAddFood);
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
-<<<<<<< Updated upstream
                 if (!checkValidation(edtTenMon, edtPrice)) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (uriImage == null){
+                } else if (uriImage == null) {
                     imvFood.setBackgroundColor(Color.RED);
                     Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-=======
-                String tenmon = edtTenMon.getText().toString();
-                Integer price = Integer.parseInt(edtPrice.getText().toString());
-                if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
->>>>>>> Stashed changes
-                } else if (uriImage != null) {
-                    String tenmon = edtTenMon.getText().toString();
-                    Integer price = Integer.parseInt(edtPrice.getText().toString());
-                    boolean status = true;
-                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
-                    RequestBody requestBody = RequestBody.create(MediaType.parse(
-                            getContext().getContentResolver().getType(uriImage)), file);
-                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                            "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateDrink(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
-                        }
 
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
-                        }
-                    });
-                } else {
-<<<<<<< Updated upstream
-                    String tenmon = edtTenMon.getText().toString();
-                    Integer price = Integer.parseInt(edtPrice.getText().toString());
-                    boolean status = true;
-                    retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price, status).enqueue(new Callback<ServerResponse>() {
-=======
-                    retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
->>>>>>> Stashed changes
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
-                        }
+                    if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
+                        Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                    } else if (uriImage != null) {
+                        String tenmon = edtTenMon.getText().toString();
+                        Integer price = Integer.parseInt(edtPrice.getText().toString());
+                        boolean status = true;
+                        File file = new File(Support.getPathFromUri(getContext(), uriImage));
+                        RequestBody requestBody = RequestBody.create(MediaType.parse(
+                                getContext().getContentResolver().getType(uriImage)), file);
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                                "avatar", file.getName(), requestBody);
+                        retrofitAPI.updateDrink(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                            }
 
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailureNoImage: ", t.getMessage());
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Log.e("onFailure: ", t.getMessage());
+                            }
+                        });
+                    } else {
+                        String tenmon = edtTenMon.getText().toString();
+                        Integer price = Integer.parseInt(edtPrice.getText().toString());
+                        boolean status = true;
+
+                        retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Log.e("onFailureNoImage: ", t.getMessage());
+                            }
+                        });
+                    }
                 }
             }
         });
