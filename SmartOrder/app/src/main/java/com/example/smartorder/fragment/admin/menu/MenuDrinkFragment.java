@@ -223,11 +223,18 @@ public class MenuDrinkFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+<<<<<<< Updated upstream
                 if (!checkValidation(edtTenMon, edtPrice)) {
                     Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else if (uriImage == null){
                     imvFood.setBackgroundColor(Color.RED);
                     Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
+=======
+                String tenmon = edtTenMon.getText().toString();
+                Integer price = Integer.parseInt(edtPrice.getText().toString());
+                if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+>>>>>>> Stashed changes
                 } else if (uriImage != null) {
                     String tenmon = edtTenMon.getText().toString();
                     Integer price = Integer.parseInt(edtPrice.getText().toString());
@@ -237,7 +244,7 @@ public class MenuDrinkFragment extends Fragment {
                             getContext().getContentResolver().getType(uriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                             "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateDrink(menu.getId(), tenmon, price, status, filePart).enqueue(new Callback<ServerResponse>() {
+                    retrofitAPI.updateDrink(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -252,10 +259,14 @@ public class MenuDrinkFragment extends Fragment {
                         }
                     });
                 } else {
+<<<<<<< Updated upstream
                     String tenmon = edtTenMon.getText().toString();
                     Integer price = Integer.parseInt(edtPrice.getText().toString());
                     boolean status = true;
                     retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price, status).enqueue(new Callback<ServerResponse>() {
+=======
+                    retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+>>>>>>> Stashed changes
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

@@ -20,15 +20,23 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.TableAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
+import com.google.gson.JsonObject;
 import com.melnykov.fab.FloatingActionButton;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,48 +54,11 @@ public class TableFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table, container, false);
         initView(view);
+//        Socket socket = Constants.socket();
+//        socket.on("getAllTable", getTest);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        tableList = new ArrayList<>();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
-        rvListTable.setLayoutManager(gridLayoutManager);
-        tableAdapter = new TableAdapter(getContext(), tableList, new TableAdapter.OnClickListener() {
-            @Override
-            public void delete(int position, String id) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa bàn số " + tableList.get(position).getTableCode() + " không ?")
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                retrofitAPI.deleteTable(id).enqueue(new Callback<ServerResponse>() {
-                                    @Override
-                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(TableFragment.this).attach(TableFragment.this).commit();
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                    }
-                }).create().show();
-            }
-
-            @Override
-            public void update(int position, List<Table> tableList) {
-                dialogUpdateTable(position, tableList);
-
-            }
-        });
-        rvListTable.setHasFixedSize(true);
-        rvListTable.setAdapter(tableAdapter);
+        initRecycleView();
+        tableAdapter.notifyDataSetChanged();
         retrofitAPI.getAllTable().enqueue(new Callback<List<Table>>() {
             @Override
             public void onResponse(Call<List<Table>> call, Response<List<Table>> response) {
@@ -132,6 +103,82 @@ public class TableFragment extends Fragment {
         return view;
     }
 
+    private void initRecycleView() {
+        tableList = new ArrayList<>();
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);
+        rvListTable.setLayoutManager(gridLayoutManager);
+        tableAdapter = new TableAdapter(getContext(), tableList, new TableAdapter.OnClickListener() {
+            @Override
+            public void delete(int position, String id) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setMessage("Bạn có muốn xóa bàn số " + tableList.get(position).getTableCode() + " không ?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                retrofitAPI.deleteTable(id).enqueue(new Callback<ServerResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                                        ft.detach(TableFragment.this).attach(TableFragment.this).commit();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                }).create().show();
+            }
+
+            @Override
+            public void update(int position, List<Table> tableList) {
+                dialogUpdateTable(position, tableList);
+
+            }
+        });
+        rvListTable.setHasFixedSize(true);
+        rvListTable.setAdapter(tableAdapter);
+    }
+
+//    private Emitter.Listener getTest  = new Emitter.Listener() {
+//        @Override
+//        public void call(Object... args) {
+//            new Thread(new Runnable() {
+//                @Override
+//                public void run() {
+//                    JSONObject jsonObject = (JSONObject) args[0];
+//                    tableList.clear();
+//                    try {
+//                        JSONArray table =  jsonObject.getJSONArray("data");
+//                        for (int i = 0; i < table.length(); i++) {
+//                            String id = table.getJSONObject(i).getString("_id");
+//                            Integer tableCode = table.getJSONObject(i).getInt("tableCode");
+//                            Integer tableSeats = table.getJSONObject(i).getInt("tableSeats");
+//                            boolean status = table.getJSONObject(i).getBoolean("status");
+//                            tableList.add(new Table(id, tableCode, tableSeats, status));
+//                            tableAdapter.notifyDataSetChanged();
+//                        }
+//                    } catch (Exception e) {
+//                        Log.e( "Exception: ", e.getMessage());
+//                    }
+//
+//                }
+//            }).start();
+//
+//
+//
+//
+//        }
+//
+//    };
+
 
     private void dialogUpdateTable(int position, List<Table> tableList) {
         Table table = tableList.get(position);
@@ -158,7 +205,9 @@ public class TableFragment extends Fragment {
                     retrofitAPI.updateTable(table.getId(), table).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            alertDialog.dismiss();
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            getActivity().getSupportFragmentManager().beginTransaction().detach(TableFragment.this).attach(TableFragment.this).commit();
                         }
 
                         @Override

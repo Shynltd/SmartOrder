@@ -3,8 +3,41 @@ var debug = require('debug')('duan:server');
 var http = require('http');
 var port = normalizePort(process.env.PORT || '2000');
 app.set('port', port);
-
+let user = require('../model/user');
+let table = require('../model/table');
 var server = http.createServer(app);
+
+let io = require('socket.io')(server);
+
+io.on('connection', client => {
+
+    // let getAllTable = await table.find({});
+    // console.log(getAllTable);
+    // io.sockets.emit('getAllTable', {data: getAllTable})
+    console.log('Có người kết nối ' + client.id)
+    //
+    // console.log(user.getAllUser)
+    // client.on('disconnect', () => {
+    //     console.log('user disconnected');
+    // });
+    client.on('order', status => {
+
+        console.log(status);
+        if (status === "Xong") {
+            io.sockets.emit('reload', {reload: true});
+        }
+    });
+    client.on('payy', status => {
+
+        console.log(status+" 1");
+        if (status === "Xong") {
+            io.sockets.emit('reloadTable', {reload: true});
+        }
+    });
+
+
+})
+
 
 server.listen(port, () => {
     console.log(`Sever running at http://localhost:${port}`)

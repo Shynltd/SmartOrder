@@ -54,6 +54,15 @@ module.exports.getListBillUnpaid = async (req, res) => {
 module.exports.postPaid = async (req, res) => {
     let {billCode} = req.params;
     let {nameCashier} = req.body;
+    if (req.body.discount != 0) {
+        await bill.findOneAndUpdate({billCode}, {
+            $set: {
+                discount: req.body.discount,
+                totalPrice : req.body.totalMoney
+            },
+        }, {new: true});
+    }
+
     let paid = await bill.findOneAndUpdate({billCode}, {
         $set: {
             nameCashier,
@@ -198,7 +207,7 @@ module.exports.thogke = async (req, res) => {
     let getAllBill = await bill.find({});
     let dateBill = "";
     for (let i = 0; i < getAllBill.length; i++) {
-         dateBill = getAllBill[i].dateBill;
+        dateBill = getAllBill[i].dateBill;
 
     }
     console.log(dateBill);
@@ -206,7 +215,7 @@ module.exports.thogke = async (req, res) => {
     console.log(split);
     let date = split[0];
     let month = split[1];
-    let year= split[2].split("@")[0];
+    let year = split[2].split("@")[0];
     console.log(`${date} / ${month} / ${year}`)
 }
 

@@ -30,6 +30,11 @@ let billSchema = new mongoose.Schema({
         required: true,
         default: datetime
     },
+    discount:{
+      type: Number,
+      required:true,
+      default: 0
+    },
     status: {
         type: String,
         required: true

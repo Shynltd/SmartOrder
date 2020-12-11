@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,11 @@ import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.login.Auth;
 import com.example.smartorder.support.Support;
 
+import java.net.URISyntaxException;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
     private boolean exit = false;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
         initView();
         initPermission();
         setAnimation();
+
+
+
+
+
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
         validateForm();
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);

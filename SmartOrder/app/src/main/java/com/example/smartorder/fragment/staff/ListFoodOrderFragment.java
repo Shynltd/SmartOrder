@@ -29,9 +29,12 @@ import com.example.smartorder.model.menu.MenuOrder;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +50,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     private MenuOrderAdapter menuOrderAdapter;
     private int tableCode;
     private View view;
+    private Socket socket;
 
     private List<MenuOrder> listMenuOder = new ArrayList<>();
 
@@ -59,6 +63,11 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
         btnCancel = view.findViewById(R.id.btnCancel);
         initView();
         init();
+        try {
+            socket = IO.socket(Constants.LINK + "/").connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
         return view;
     }
 
@@ -74,18 +83,15 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
             @Override
             public void onResponse(Call<List<MenuOrder>> call, Response<List<MenuOrder>> response) {
                 List<MenuOrder> orders = response.body();
-                for (int i=0;i<orders.size();i++){
+                for (int i = 0; i < orders.size(); i++) {
                     String id = orders.get(i).getId();
-                    String name= orders.get(i).getName();
-                    Integer price= orders.get(i).getPrice();
-                    String image= orders.get(i).getImage();
-                    String type= orders.get(i).getType();
+                    String name = orders.get(i).getName();
+                    Integer price = orders.get(i).getPrice();
+                    String image = orders.get(i).getImage();
+                    String type = orders.get(i).getType();
                     boolean status = orders.get(i).getStatus();
-
-                        menuOrders.add(new MenuOrder(id,name,price,image,type,status));
-                        menuOrderAdapter.notifyDataSetChanged();
-
-
+                    menuOrders.add(new MenuOrder(id, name, price, image, type, status));
+                    menuOrderAdapter.notifyDataSetChanged();
                 }
 
 
@@ -141,6 +147,8 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                     @Override
                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                         if (response.code() == 200) {
+                            socket.emit("order", "Xong");
+                            socket.disconnect();
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
                             if (fragment != null) {
@@ -148,10 +156,8 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                                         .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
                                         .remove(fragment)
                                         .commit();
-                                Fragment listTableStaff = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentTableStaff);
-                                if (listTableStaff != null) {
-                                    getActivity().getSupportFragmentManager().beginTransaction().detach(listTableStaff).attach(listTableStaff).commit();
-                                }
+                                getFragmentManager().beginTransaction().replace(R.id.frq, new StaffFragment()).commit();
+
                             }
                         } else {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

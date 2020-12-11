@@ -43,7 +43,7 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
         Glide.with(context).load(Constants.LINK+menuListFood.get(position).getImage()).into(holder.imgLogo);
         holder.tvNameMenu.setText(menuListFood.get(position).getName());
         holder.tvPriceMenu.setText(context.getString(R.string.text_adapter_price) + Support.decimalFormat(menuListFood.get(position).getPrice())+ " VNĐ");
-        holder.tvNameMenu.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, holder.imgLogo);

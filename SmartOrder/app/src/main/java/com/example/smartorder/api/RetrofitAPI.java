@@ -77,7 +77,6 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
-            @Part("status") boolean status,
             @Part MultipartBody.Part file);
 
     @Multipart
@@ -85,8 +84,7 @@ public interface RetrofitAPI {
     Call<ServerResponse> updateDrinkNoImage(
             @Path("id") String id,
             @Part("name") String name,
-            @Part("price") Integer price,
-            @Part("status") boolean status);
+            @Part("price") Integer price);
 
     @Multipart
     @PUT("menu/update/{id}")
@@ -186,7 +184,9 @@ public interface RetrofitAPI {
     @FormUrlEncoded
     @POST("bill/paid/{billCode}")
     Call<ServerResponse> payBill(@Path("billCode") String billCode,
-                                 @Field("nameCashier") String name);
+                                 @Field("nameCashier") String name,
+                                 @Field("discount") Integer dis,
+                                 @Field("totalMoney") Integer total);
 
     //Staff
     @GET("menus")
