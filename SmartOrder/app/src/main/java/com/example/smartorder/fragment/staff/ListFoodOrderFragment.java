@@ -90,8 +90,10 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                     String image = orders.get(i).getImage();
                     String type = orders.get(i).getType();
                     boolean status = orders.get(i).getStatus();
-                    menuOrders.add(new MenuOrder(id, name, price, image, type, status));
-                    menuOrderAdapter.notifyDataSetChanged();
+                    if (status) {
+                        menuOrders.add(new MenuOrder(id, name, price, image, type, status));
+                        menuOrderAdapter.notifyDataSetChanged();
+                    }
                 }
 
 

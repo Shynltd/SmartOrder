@@ -120,6 +120,7 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
             }
         });
     }
+
     private void filter(String s) {
         List<Menu> menuDrinkFilter = new ArrayList<>();
         for (Menu menu : menuListFood) {
@@ -172,7 +173,6 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
         rvListMenuFood.setAdapter(menuFoodAdapter);
     }
 
-
     private void dialogUpdateFoods(int position) {
         Menu menu = menuListFood.get(position);
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
@@ -180,17 +180,14 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
         alertDialog.setView(alert);
         alertDialog.setTitle("Chỉnh sửa thông tin Món ăn");
         alertDialog.setCancelable(false);
-
         EditText edtName = alert.findViewById(R.id.edtNameFood);
         edtName.setText(String.valueOf(menu.getName()));
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
         edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " + String.valueOf(menu.getType()));
-
+        tvType.setText("Loại : " +menu.getType());
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
-
         Button btnCancel = alert.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,7 +195,6 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                 alertDialog.dismiss();
             }
         });
-
         imgFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -208,7 +204,6 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE_LOAD_IMAGE);
             }
         });
-
         Button btnUpdate = alert.findViewById(R.id.btnAddFood);
         btnUpdate.setText("Chỉnh sửa");
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -216,54 +211,50 @@ public class MenuFoodFragment extends Fragment implements CallbackListMenu {
             @Override
             public void onClick(View v) {
                 if (!checkValidation(edtName, edtPrice)) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (uriImage == null) {
-                    imgFood.setBackgroundColor(Color.RED);
-                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-                } else if (uriImage != null) {
-                    String tenmon = edtName.getText().toString();
-                    Integer price = Integer.parseInt(edtPrice.getText().toString());
-                    File file = new File(Support.getPathFromUri(getContext(), uriImage));
-                    RequestBody requestBody = RequestBody.create(MediaType.parse(
-                            getContext().getContentResolver().getType(uriImage)), file);
-                    MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                            "avatar", file.getName(), requestBody);
-                    retrofitAPI.updateFood(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
-                        }
-
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
-                        }
-                    });
                 } else {
-                    String tenmon = edtName.getText().toString();
-                    Integer price = Integer.parseInt(edtPrice.getText().toString());
-                    retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
-                        @Override
-                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
-                        }
+                    if (uriImage != null) {
+                        String tenmon = edtName.getText().toString();
+                        Integer price = Integer.parseInt(edtPrice.getText().toString());
+                        File file = new File(Support.getPathFromUri(getContext(), uriImage));
+                        RequestBody requestBody = RequestBody.create(MediaType.parse(
+                                getContext().getContentResolver().getType(uriImage)), file);
+                        MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                                "avatar", file.getName(), requestBody);
+                        retrofitAPI.updateFood(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
+                            }
 
-                        @Override
-                        public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailureNoImage: ", t.getMessage());
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    } else {
+                        String tenmon = edtName.getText().toString();
+                        Integer price = Integer.parseInt(edtPrice.getText().toString());
+                        retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+                            @Override
+                            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                alertDialog.dismiss();
+                                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                                fragmentTransaction.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
+                            }
+
+                            @Override
+                            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
-
         });
-
         alertDialog.show();
     }
 

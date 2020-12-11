@@ -56,20 +56,15 @@ public class LoginActivity extends AppCompatActivity {
         initView();
         initPermission();
         setAnimation();
-
-
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
-        validateForm();
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (edtPhone.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập SDT", Toast.LENGTH_SHORT).show();
-                    edtPhone.setError("Không bỏ trống");
+                    edtPhone.setError("Vui lòng nhập SDT");
                 } else if(edtPassword.getText().toString().isEmpty()){
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập Password", Toast.LENGTH_SHORT).show();
-                    edtPassword.setError("Không bỏ trống");
+                    edtPassword.setError("Vui lòng nhập Password");
                 }else {
                     retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
                         @Override
@@ -80,35 +75,14 @@ public class LoginActivity extends AppCompatActivity {
 
                         @Override
                         public void onFailure(Call<Auth> call, Throwable t) {
-                            Log.e("onFailure", t.getMessage());
+                            Toast.makeText(LoginActivity.this, "Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
         });
-
-
     }
 
-    private void validateForm() {
-
-    }
-
-    private class Login extends AsyncTask<String,Void,String>{
-
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-        }
-    }
 
     private void checkLogin(Auth auth) {
         if (auth.getStatus().equalsIgnoreCase("OK")) {

@@ -86,44 +86,24 @@ public class MainFragment extends Fragment {
             public boolean onItemSelect(int i) {
                 switch (i) {
                     case 0:
-                        Support.replaceFragment(
-                                getFragmentManager(),
-                                R.id.frm, new MenuFragment(),
-                                false,
-                                R.anim.admin_fragment_main_translate_enter_right_to_left,
-                                R.anim.admin_fragment_main_translate_exit_right_to_left
-                        );
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left).replace( R.id.frm, new MenuFragment(),Constants.fragmentMenu).commit();
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Quản lý món ăn");
                         break;
                     case 1:
-                        Support.replaceFragment(
-                                getFragmentManager(),
-                                R.id.frm, new TableFragment(),
-                                false,
-                                R.anim.admin_fragment_main_translate_enter_right_to_left,
-                                R.anim.admin_fragment_main_translate_exit_right_to_left
-                        );
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left).replace( R.id.frm, new TableFragment(),Constants.fragmentTable).commit();
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Quản lý bàn");
 
                         break;
                     case 2:
-                        Support.replaceFragment(
-                                getFragmentManager(),
-                                R.id.frm, new UserFragment(),
-                                false,
-                                R.anim.admin_fragment_main_translate_enter_right_to_left,
-                                R.anim.admin_fragment_main_translate_exit_right_to_left
-                        );
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations( R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left).replace( R.id.frm, new UserFragment(),Constants.fragmentUser).commit();
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Quản lý nhân viên");
                         break;
                     case 3:
-                        Support.replaceFragment(
-                                getFragmentManager(),
-                                R.id.frm, new BillFragment(),
-                                false,
-                                R.anim.admin_fragment_main_translate_enter_right_to_left,
-                                R.anim.admin_fragment_main_translate_exit_right_to_left
-                        );
+                        getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_main_translate_enter_right_to_left,
+                                R.anim.admin_fragment_main_translate_exit_right_to_left).replace( R.id.frm, new BillFragment(),Constants.fragmentBill).commit();
                         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Quản lý hóa đơn");
                         break;
 

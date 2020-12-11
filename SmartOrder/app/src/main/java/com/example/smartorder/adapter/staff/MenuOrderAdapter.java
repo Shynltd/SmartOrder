@@ -49,7 +49,11 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
     @Override
     public void onBindViewHolder(@NonNull MenuHolder holder, int position) {
         MenuOrder menuOrder = menuOrders.get(position);
-
+//        if (!menuOrder.getStatus()){
+//            holder.tvNameMenu.setTextColor(Color.RED);
+//            holder.tvPriceMenu.setTextColor(Color.RED);
+//            holder.chkOrder.setVisibility(View.GONE);
+//        }
         Glide.with(context.getContext()).load(Constants.LINK+menuOrders.get(position).getImage()).into(holder.imgFoodOrder);
             if (menuOrder.getSl() > 0) {
                 holder.tvSl.setText(menuOrder.getSl() + "");
@@ -98,11 +102,7 @@ public class MenuOrderAdapter extends RecyclerView.Adapter<MenuOrderAdapter.Menu
         });
 
         holder.tvNameMenu.setText(menuOrder.getName());
-        if (!menuOrder.getStatus()){
-            holder.tvNameMenu.setTextColor(Color.RED);
-            holder.tvPriceMenu.setTextColor(Color.RED);
-            holder.chkOrder.setVisibility(View.GONE);
-        }
+
         holder.tvPriceMenu.setText("Giá: "+Support.decimalFormat(menuOrder.getPrice())+" VNĐ");
     }
 

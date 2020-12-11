@@ -1,5 +1,5 @@
 let user = require('../model/user');
-
+var md5 = require('md5');
 
 module.exports.getLogin =  (req, res) => {
     res.render('login', {error:false});
@@ -9,7 +9,7 @@ module.exports.checkLogin = async (req, res) => {
     let phone = req.body.phone;
     let findUser = await user.findOne({phone : phone });
     if (findUser){
-        let password = req.body.password;
+        let password = md5(req.body.password);
         if (findUser.passWord === password){
             if (findUser.role === 'Admin'){
                 res.cookie('id',findUser._id,{

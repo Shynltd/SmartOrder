@@ -273,13 +273,15 @@ public class UserFragment extends Fragment {
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                             Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
-                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                            fragmentTransaction.detach(UserFragment.this).attach(UserFragment.this).commit();
+                            Fragment userFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentUser);
+                            if (userFragment != null){
+                                getActivity().getSupportFragmentManager().beginTransaction().remove(userFragment).replace(R.id.frm, new UserFragment(),Constants.fragmentUser).commit();
+                            }
                         }
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
+                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -386,7 +388,7 @@ public class UserFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
+                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -407,7 +409,7 @@ public class UserFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Log.e("onFailure: ", t.getMessage());
+                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -449,6 +451,7 @@ public class UserFragment extends Fragment {
             Uri uri = data.getData();
             mUriImage = uri;
             imgAvatar.setImageURI(uri);
+            imgAvatar.setBackgroundColor(Color.WHITE);
 
         }
     }

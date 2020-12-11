@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -85,7 +86,7 @@ public class ProfileFragment extends Fragment {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

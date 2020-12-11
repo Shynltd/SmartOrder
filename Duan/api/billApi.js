@@ -8,7 +8,7 @@ module.exports.getListBillUnpaid = async (req, res) => {
     if (findListUnpaid) {
         res.json(findListUnpaid);
     } else {
-        res.status(500).json({message: 'Fail'});
+        res.status(201).json({message: 'Fail'});
     }
 }
 module.exports.getListBillOneFromBill = async (req, res) => {

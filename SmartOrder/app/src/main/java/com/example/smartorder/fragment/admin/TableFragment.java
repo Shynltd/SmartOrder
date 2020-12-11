@@ -54,8 +54,6 @@ public class TableFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_table, container, false);
         initView(view);
-//        Socket socket = Constants.socket();
-//        socket.on("getAllTable", getTest);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         initRecycleView();
         tableAdapter.notifyDataSetChanged();
@@ -90,7 +88,7 @@ public class TableFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Table>> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -212,7 +210,7 @@ public class TableFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

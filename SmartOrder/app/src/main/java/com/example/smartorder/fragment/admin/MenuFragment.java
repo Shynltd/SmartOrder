@@ -133,7 +133,6 @@ public class MenuFragment extends Fragment {
             public void onClick(View v) {
 
                 if (!checkValidation(edtTenMon, edtPrice)) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 }else if (uriImage == null){
                     imvFood.setBackgroundColor(Color.RED);
                     Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
@@ -178,7 +177,7 @@ public class MenuFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<ServerResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

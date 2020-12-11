@@ -125,19 +125,19 @@ public class MenuDrinkFragment extends Fragment {
                     String type = menus.get(i).getType();
                     boolean status = menus.get(i).getStatus();
                     if (type.equals("Drink")) {
-                        menuListDrink.add(new Menu(id, name, price, image,type,status));
+                        menuListDrink.add(new Menu(id, name, price, image, type, status));
                         menuDrinksAdapter.notifyDataSetChanged();
                     }
-
                 }
             }
 
             @Override
             public void onFailure(Call<List<Menu>> call, Throwable t) {
-                Log.e("onFailureMenuFragment", t.getMessage());
+                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void rvListDrinks() {
         menuDrinksAdapter = new MenuDrinksAdapter(menuListDrink, getContext(), new MenuDrinksAdapter.OnClickListener() {
             @Override
@@ -223,17 +223,10 @@ public class MenuDrinkFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!checkValidation(edtTenMon, edtPrice)) {
-                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (uriImage == null) {
-                    imvFood.setBackgroundColor(Color.RED);
-                    Toast.makeText(getContext(), "Bạn chưa chọn ảnh", Toast.LENGTH_SHORT).show();
-
-                    if (edtTenMon.getText().toString().isEmpty() || edtPrice.getText().toString().isEmpty()) {
-                        Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-                    } else if (uriImage != null) {
+                } else {
+                    if (uriImage != null) {
                         String tenmon = edtTenMon.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        boolean status = true;
                         File file = new File(Support.getPathFromUri(getContext(), uriImage));
                         RequestBody requestBody = RequestBody.create(MediaType.parse(
                                 getContext().getContentResolver().getType(uriImage)), file);
@@ -250,14 +243,12 @@ public class MenuDrinkFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                                Log.e("onFailure: ", t.getMessage());
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
                         String tenmon = edtTenMon.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        boolean status = true;
-
                         retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
 
                             @Override
@@ -270,7 +261,7 @@ public class MenuDrinkFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                                Log.e("onFailureNoImage: ", t.getMessage());
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -280,7 +271,7 @@ public class MenuDrinkFragment extends Fragment {
         alertDialog.show();
     }
 
-    //Validate
+
     private boolean checkValidation(EditText edtMonAn, EditText edtPrice) {
         if (edtMonAn.getText().toString().equals("")) {
             edtMonAn.setError("Chưa nhập tên");

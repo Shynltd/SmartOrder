@@ -1,6 +1,8 @@
 let user = require('../model/user');
 let uniqid = require('uniqid');
 
+var md5 = require('md5');
+
 module.exports.getUser = async (req, res) => {
     let findAllUser = await user.find();
     res.render('user/listUser', {users: findAllUser});
@@ -52,8 +54,8 @@ module.exports.updateUser = async (req, res) => {
             avatar.mv(`./uploads/${filename}`)
             avatar = filename;
         }
-        let password = req.body.password;
-        let password2 = req.body.password2;
+        let password = md5(req.body.password);
+        let password2 = md5(req.body.password2);
         if (password === password2 && findUser.passWord === password) {
             let updated = await user.findOneAndUpdate({_id: userId}, {
                 fullName,
@@ -77,10 +79,10 @@ module.exports.changePassword = async (req, res) => {
     let userId = req.params.id;
     let findUser = await user.findById(userId);
     if (findUser) {
-        let password = req.body.currentpass;
+        let password = md5(req.body.currentpass);
         if (password === findUser.passWord) {
-            let newPassword = req.body.newpass;
-            let confirmPassword = req.body.confirmpass;
+            let newPassword = md5(req.body.newpass);
+            let confirmPassword = md5(req.body.confirmpass);
             if (newPassword === confirmPassword) {
                 let updated = await user.findOneAndUpdate({_id: userId}, {
                     passWord: newPassword,
@@ -111,7 +113,7 @@ module.exports.postCreateUser = async (req, res) => {
     if (checkPhone) {
         res.render('user/createUser', {err: true, msg: "Số điện thoại này đã tồn tại"});
     } else {
-        let passWord = "123456";
+        let passWord = md5("123456");
         let role = req.body.role;
         let fullName = req.body.fullName;
         let indentityCardNumber = req.body.soCMND;

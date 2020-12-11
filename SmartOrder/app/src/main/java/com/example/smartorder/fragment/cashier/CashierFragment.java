@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
@@ -143,7 +144,7 @@ public class CashierFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Bill>> call, Throwable t) {
-                Log.e( "CashierActivity: ", t.getMessage());
+                Toast.makeText(getActivity(),"Lỗi hệ thống "+ t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -171,6 +172,7 @@ public class CashierFragment extends Fragment {
         toolbar = view.findViewById(R.id.toolbar);
         imgProfile = (CircleImageView) view.findViewById(R.id.imgProfile);
     }
+
     private void showCustomPopupMenu(View view) {
         PopupMenu popupMenu = new PopupMenu(getActivity(), view);
         popupMenu.inflate(R.menu.my_menu);

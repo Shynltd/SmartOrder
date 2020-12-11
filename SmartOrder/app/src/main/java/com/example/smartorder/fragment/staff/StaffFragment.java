@@ -144,10 +144,7 @@ public class StaffFragment extends Fragment {
                 try {
                     boolean reload = jsonObject.getBoolean("reload");
                     if (reload) {
-                        //null fragment
                         socket.disconnect();
-                        // ko tim thay activity ms đau
-                        //chừ giải quyết sao ta.. activity mà ko thấy thì toang rr
                         try {
                             getActivity().finish();
                             getActivity().startActivity(getActivity().getIntent());

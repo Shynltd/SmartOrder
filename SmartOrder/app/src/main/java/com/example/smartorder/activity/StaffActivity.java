@@ -39,17 +39,6 @@ import retrofit2.Response;
 
 public class StaffActivity extends AppCompatActivity {
 
-
-    private androidx.appcompat.widget.Toolbar toolbar;
-    private RecyclerView rvListTableStaff;
-    private FloatingActionButton fabAddTable;
-    private RetrofitAPI retrofitAPI;
-    private StaffTableAdapter staffTableAdapter;
-    private List<Table> tableList;
-    private CircleImageView imgProfile;
-    private LinearLayout lnlTest;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
