@@ -56,9 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtPhone.getText().toString().isEmpty() || edtPassword.getText().toString().isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please Enter Phone or Password", Toast.LENGTH_SHORT).show();
-                } else {
+                if (edtPhone.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập SDT", Toast.LENGTH_SHORT).show();
+                    edtPhone.setError("Không bỏ trống");
+                } else if(edtPassword.getText().toString().isEmpty()){
+                    Toast.makeText(LoginActivity.this, "Vui lòng nhập Password", Toast.LENGTH_SHORT).show();
+                    edtPassword.setError("Không bỏ trống");
+                }else {
                     retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
                         @Override
                         public void onResponse(Call<Auth> call, Response<Auth> response) {
