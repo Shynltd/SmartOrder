@@ -185,10 +185,12 @@ public class UserFragment extends Fragment {
 
     private void filter(String s) {
         List<User> userListFilter = new ArrayList<>();
+
         for (User user : userList) {
             if (user.getFullName().toLowerCase().contains(s.toLowerCase())) {
                 userListFilter.add(user);
             }
+
         }
         userAdapter.filterList(userListFilter, getActivity());
         userAdapter.notifyDataSetChanged();
