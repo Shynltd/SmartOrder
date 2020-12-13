@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Bàn số 1"
-        android:textSize="@dimen/_30sdp"
+        android:textStyle="bold"
+        android:textSize="@dimen/_20sdp"
         app:layout_constraintBottom_toTopOf="@id/edtSearch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -21,7 +22,7 @@
 
     <EditText
         android:layout_margin="@dimen/_10sdp"
-        android:text="@string/text_search"
+        android:hint="@string/text_search"
         android:background="@drawable/radius_search"
         android:id="@+id/edtSearch"
         android:layout_width="match_parent"

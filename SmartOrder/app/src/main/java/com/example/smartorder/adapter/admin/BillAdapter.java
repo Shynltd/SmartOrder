@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
 import com.example.smartorder.model.bill.Bill;
+import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
 
 import java.text.DecimalFormat;
@@ -31,6 +32,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         this.billList = billList;
         this.onItemClick = onItemClick;
     }
+    public void filterList(List<Bill> billFilter, Context context) {
+        billList = billFilter;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -44,7 +49,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     @Override
     public void onBindViewHolder(@NonNull BillHolder holder, int position) {
         holder.tvBillCode.setText(billList.get(position).getBillCode());
-        holder.tvTableCode.setText(billList.get(position).getTableCode()+"");
+        holder.tvTableCode.setText("Bàn số: "+ billList.get(position).getTableCode()+"");
         holder.tvStatus.setText(billList.get(position).getStatus());
 //        String[] date = billList.get(position).getDateBill().split("@");
 //        holder.tvDate.setText(date[0]);

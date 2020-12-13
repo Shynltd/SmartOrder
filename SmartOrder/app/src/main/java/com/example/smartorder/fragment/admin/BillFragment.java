@@ -1,10 +1,13 @@
 package com.example.smartorder.fragment.admin;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -31,6 +34,7 @@ public class BillFragment extends Fragment {
     private List<Bill> billList;
     private BillAdapter billAdapter;
     private RetrofitAPI retrofitAPI;
+    private EditText edtSearch;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +43,35 @@ public class BillFragment extends Fragment {
         initView(view);
         initRecycleView();
         callResponse();
+        edtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+
         return view;
+    }
+
+    private void filter(String s) {
+        List<Bill> billFilter = new ArrayList<>();
+        for(Bill bill : billList){
+            if(bill.getBillCode().toLowerCase().contains(s.toLowerCase())){
+                billFilter.add(bill);
+            }
+        }
+        billAdapter.filterList(billFilter,getActivity());
+        billAdapter.notifyDataSetChanged();
     }
 
     private void callResponse() {
@@ -75,7 +107,7 @@ public class BillFragment extends Fragment {
 
             }
         });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
         rvListBill.setLayoutManager(gridLayoutManager);
         rvListBill.setHasFixedSize(true);
         rvListBill.setAdapter(billAdapter);
@@ -84,5 +116,6 @@ public class BillFragment extends Fragment {
     private void initView(View view) {
         rvListBill = (RecyclerView) view.findViewById(R.id.rvListBill);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        edtSearch = view.findViewById(R.id.edtSearch);
     }
 }
