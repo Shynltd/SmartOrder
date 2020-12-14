@@ -25,6 +25,7 @@
         }
         body{
             background-image: linear-gradient(deepskyblue,lightpink);
+            min-height: 100vh;
         }
 
 
@@ -33,15 +34,17 @@
         .menu-block {
             text-align: center;
             border-radius: 25px;
-            background-color: whitesmoke;
+
             box-shadow: 5px 5px 20px black;
 
         }
 
         .menu-content {
-            border-top: 1px solid black;
+            border-radius: 25px;
+            background-color: whitesmoke;
             padding: 10px;
             height: auto;
+            margin-bottom: 10px;
         }
 
         .dish-content {
@@ -155,6 +158,14 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
                     <div class="page-section">
                         <h1 class="page-title" style="margin-top: 20px">Food Menu</h1>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 m-3">
+                            <form action="" method="get">
+                                <input type="text" name="keyword" placeholder="Nhập Từ Khóa">
+                                <input type="submit" value="Tìm Kiếm" class="btn-sm btn-primary ">
+                            </form>
+                        </div>
                     </div>
                     <ul class="nav justify-content-end" id="myTab">
                         <li class="nav-tabs show active" style="margin: 0px">

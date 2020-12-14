@@ -4,10 +4,10 @@ let menu = require('../model/menu');
 
 
 module.exports.getAllBills = async (req, res) => {
-
-    let Bills = await bill.find();
+    let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
+    let Bills = await bill.find({billCode: new RegExp(keyword, 'i')});
     console.log(Bills);
-    res.render('bill/listBill', {bills: Bills});
+    res.render('bill/listBill', {bills: Bills , keyword});
 
 }
 

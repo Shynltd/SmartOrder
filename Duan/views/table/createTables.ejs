@@ -25,6 +25,7 @@
         }
         body{
             background-image: linear-gradient(deepskyblue,lightpink);
+            min-height: 100vh;
         }
 
 
@@ -150,15 +151,15 @@ margin-bottom: 20px;
 
     <h2 class="container" style="text-align: center">Thêm mới bàn</h2>
     <br>
-    <form method="post" action="/tables/create" class="form container" enctype="multipart/form-data">
+    <form method="post" action="/tables/create" class="form container" onsubmit="return validateForm()" enctype="multipart/form-data">
         <div class="form-group">
-            <h6><label for="formGroupExampleInput">Số bàn</label></h6>
-            <input type="number" class="form-control" id="formGroupExampleInput" name="tableCode" value="<%=findAllTables.length +1 %>" placeholder="Bàn số">
+            <input type="number" class="form-control" id="formGroupExampleInput" name="tableCode" value="<%=findAllTables.length +1 %>" hidden >
         </div>
 
         <div class="form-group" id="formAmount" >
             <h6><label for="formGroupExampleInput">Số ghế</label></h6>
             <input type="Number" class="form-control"  name="tableSeats" placeholder="Số ghế">
+            <span id="tableSeats-err" class="validate-err text-danger"></span>
         </div>
         <% if (err){%>
             <div class="alert alert-danger" role="alert">
@@ -177,5 +178,21 @@ margin-bottom: 20px;
 
 
 </div>
+<script>
+    function validateForm(){
+        // validate data
+        let isValid = true;
+        $('.validate-err ').text("");
+        // kiểm tra từng thành phần, nếu thiếu thành phần nào thì isValid => false
+        let tableSeats = $('[name="tableSeats"]').val();
+
+        if(parseInt(tableSeats)<0|| tableSeats.length<=0){
+            $('#tableSeats-err').text("Hãy nhập số ghế( số ghế phải lớn hơn 0)");
+            isValid = false;
+        }
+        return isValid;
+    }
+
+</script>
 </body>
 </html>
