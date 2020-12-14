@@ -142,36 +142,40 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                         listMenuOder.add(menuOrders.get(i));
                     }
                 }
-                ListMenuOrder menuOrder = new ListMenuOrder();
-                menuOrder.setTableCodes(tableCode);
-                menuOrder.setMenuOrders(listMenuOder);
+                if (listMenuOder.size() > 0) {
+                    ListMenuOrder menuOrder = new ListMenuOrder();
+                    menuOrder.setTableCodes(tableCode);
+                    menuOrder.setMenuOrders(listMenuOder);
 
-                retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
-                    @Override
-                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                        if (response.code() == 200) {
-                            socket.emit("order", "Xong");
-                            socket.disconnect();
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                            Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
-                            if (fragment != null) {
-                                getActivity().getSupportFragmentManager().beginTransaction()
-                                        .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
-                                        .remove(fragment)
-                                        .commit();
-                                getFragmentManager().beginTransaction().replace(R.id.frq, new StaffFragment()).commit();
+                    retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
+                        @Override
+                        public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                            if (response.code() == 200) {
+                                socket.emit("order", "Xong");
+                                socket.disconnect();
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentListFood);
+                                if (fragment != null) {
+                                    getActivity().getSupportFragmentManager().beginTransaction()
+                                            .setCustomAnimations(0, R.anim.list_food_top_to_bottom)
+                                            .remove(fragment)
+                                            .commit();
+                                    getFragmentManager().beginTransaction().replace(R.id.frq, new StaffFragment()).commit();
 
+                                }
+                            } else {
+                                Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        } else {
-                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ServerResponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ServerResponse> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(getActivity(), "Bạn chưa chọn món", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
