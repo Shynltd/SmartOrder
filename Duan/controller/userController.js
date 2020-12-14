@@ -4,8 +4,9 @@ let uniqid = require('uniqid');
 var md5 = require('md5');
 
 module.exports.getUser = async (req, res) => {
-    let findAllUser = await user.find();
-    res.render('user/listUser', {users: findAllUser});
+    let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
+    let findAllUser = await user.find({fullName: new RegExp(keyword, 'i')});
+    res.render('user/listUser', {users: findAllUser, keyword});
 }
 module.exports.getUserInfo = async (req, res) => {
     let id = req.params.id;

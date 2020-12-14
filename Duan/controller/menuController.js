@@ -2,9 +2,10 @@ let uniqid = require("uniqid");
 let menu = require('../model/menu');
 
 module.exports.getListMenu = async (req, res) => {
-    let listFood = await menu.find({type: "Food"});
-    let listDrink = await menu.find({type: "Drink"});
-    res.render('menu/listMenu', {listFood, listDrink});
+    let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
+    let listFood = await menu.find({type: "Food", name: new RegExp(keyword, 'i')});
+    let listDrink = await menu.find({type: "Drink", name: new RegExp(keyword, 'i')});
+    res.render('menu/listMenu', {listFood, listDrink, keyword});
 }
 module.exports.getCreate = (req, res) => {
     res.render('menu/createMenu', {err: false})
