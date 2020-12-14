@@ -2,6 +2,7 @@ package com.example.smartorder.adapter.admin;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         this.billList = billList;
         this.onItemClick = onItemClick;
     }
+
     public void filterList(List<Bill> billFilter, Context context) {
         billList = billFilter;
         this.context = context;
@@ -49,12 +51,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     @Override
     public void onBindViewHolder(@NonNull BillHolder holder, int position) {
         holder.tvBillCode.setText(billList.get(position).getBillCode());
-        holder.tvTableCode.setText("Bàn số: "+ billList.get(position).getTableCode()+"");
+        holder.tvTableCode.setText("Bàn số: " + billList.get(position).getTableCode() + "");
         holder.tvStatus.setText(billList.get(position).getStatus());
+        Log.e("onBindViewHolder: ", billList.get(position).getStatus());
 //        String[] date = billList.get(position).getDateBill().split("@");
 //        holder.tvDate.setText(date[0]);
 
-        holder.tvTotalPrice.setText(Support.decimalFormat(billList.get(position).getTotalPrice())+" VNĐ");
+        holder.tvTotalPrice.setText(Support.decimalFormat(billList.get(position).getTotalPrice()) + " VNĐ");
         if (billList.get(position).getStatus().equalsIgnoreCase("Đã thanh toán")){
             holder.tvStatus.setTextColor(ContextCompat.getColor(context, R.color.tv_status_paid));
         }
@@ -77,6 +80,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
 //        private TextView tvBillCode, tvTableCode, tvTotalPrice, tvStatus, tvDate;
 
         private TextView tvBillCode, tvTableCode, tvTotalPrice, tvStatus;
+
         public BillHolder(@NonNull View itemView) {
             super(itemView);
 //            tvBillCode = itemView.findViewById(R.id.tvBillCode);
@@ -90,7 +94,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
             tvStatus = itemView.findViewById(R.id.tvStatus);
         }
     }
-    public interface onItemClick{
+
+    public interface onItemClick {
         void onClick(int pos);
     }
 }

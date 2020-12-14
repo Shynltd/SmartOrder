@@ -84,11 +84,11 @@ public class ChangePassFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
-            edtComfirmPass.setError("Mật khẩu nhập lại k chính xác");
+            edtComfirmPass.setError("Mật khẩu nhập lại không chính xác");
         }
     }
 

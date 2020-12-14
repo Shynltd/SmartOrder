@@ -134,7 +134,7 @@ public class StaffFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Table>> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
         socket.on("reloadTable", new Emitter.Listener() {

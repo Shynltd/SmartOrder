@@ -39,8 +39,10 @@ import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.support.Support;
 
 import java.io.File;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -74,6 +76,7 @@ public class MenuDrinkFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu_drink, container, false);
         initView(view);
+        Log.e("onCreateView: ","onCreateView" );
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         menuListDrink = new ArrayList<>();
         rvListDrinks();
@@ -97,10 +100,11 @@ public class MenuDrinkFragment extends Fragment {
         return view;
     }
 
+
     private void filter(String s) {
         List<Menu> menuDrinkFilter = new ArrayList<>();
         for (Menu menu : menuListDrink) {
-            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+            if (Support.deAccent(menu.getName()).toLowerCase().contains(s.toLowerCase())) {
                 menuDrinkFilter.add(menu);
             }
         }
@@ -293,4 +297,45 @@ public class MenuDrinkFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.e("onActivityCreated: ","onActivityCreated" );
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("onStart: ","onStart" );
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("onResume: ","onResume" );
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e("onPause: ","onPause" );
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.e("onStop: ","onStop" );
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("onDestroyView: ","onDestroyView" );
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e("onDestroy: ","onDestroy" );
+    }
 }

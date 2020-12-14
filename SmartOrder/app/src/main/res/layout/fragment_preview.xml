@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/white"
     tools:context=".fragment.staff.BillPreviewFragment">
 
@@ -32,16 +31,19 @@
         android:layout_height="wrap_content"
         android:text="Total:"
         android:id="@+id/tvTotal"
+        android:textColor="#E15C27"
         android:textSize="@dimen/_25sdp"
         app:layout_constraintBottom_toTopOf="@id/btnSave"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lưu"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:background="@drawable/bg_btn_save"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <ImageButton

@@ -187,7 +187,7 @@ public class UserFragment extends Fragment {
         List<User> userListFilter = new ArrayList<>();
 
         for (User user : userList) {
-            if (user.getFullName().toLowerCase().contains(s.toLowerCase())) {
+            if (Support.deAccent(user.getFullName()).toLowerCase().contains(s.toLowerCase())) {
                 userListFilter.add(user);
             }
 

@@ -4,7 +4,7 @@
     android:layout_height="@dimen/_50sdp"
     android:layout_margin="@dimen/_10sdp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgLogo"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp" />
@@ -12,45 +12,50 @@
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_toRightOf="@id/imgLogo"
-        android:gravity="center"
         android:text="Tên món ăn" />
 
     <TextView
         android:id="@+id/tvTotal"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/imgLogo"
+        android:layout_below="@id/tvName"
+        android:textColor="#E15C27"
+        android:layout_marginLeft="@dimen/_10sdp"
         android:text="Total:" />
 
     <ImageButton
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
         android:id="@+id/btnTang"
-        android:layout_toLeftOf="@id/tvTotal"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="@dimen/_10sdp"
-        android:background="@drawable/chevron_right_50px"/>
+        android:layout_toRightOf="@id/tvSl"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_below="@id/tvTotal"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:background="@drawable/plus_24px"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
         android:gravity="center"
-        android:layout_toLeftOf="@id/btnTang"
+        android:layout_toRightOf="@id/btnGiam"
         android:layout_centerInParent="true"
         android:textStyle="bold"
-        android:layout_marginRight="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_below="@id/tvTotal"
+        android:layout_marginLeft="@dimen/_20sdp"
         android:id="@+id/tvSl"/>
     <ImageButton
         android:layout_width="@dimen/_15sdp"
         android:layout_height="@dimen/_15sdp"
         android:id="@+id/btnGiam"
-        android:layout_toLeftOf="@id/tvSl"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="@dimen/_8sdp"
-        android:background="@drawable/chevron_left_50px"/>
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_toRightOf="@id/imgLogo"
+        android:layout_below="@id/tvTotal"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:background="@drawable/minus_80px"/>
 
 </RelativeLayout>

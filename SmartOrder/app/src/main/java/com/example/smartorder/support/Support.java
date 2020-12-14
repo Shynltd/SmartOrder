@@ -19,6 +19,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.smartorder.R;
 
 import java.text.DecimalFormat;
+import java.text.Normalizer;
+import java.util.regex.Pattern;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -47,6 +49,11 @@ public class Support {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         return decimalFormat.format(money);
 
+    }
+    public static String deAccent(String str) {
+        String nfdNormalizedString = Normalizer.normalize(str, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(nfdNormalizedString).replaceAll("");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

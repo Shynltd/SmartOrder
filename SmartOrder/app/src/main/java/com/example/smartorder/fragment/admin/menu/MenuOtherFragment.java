@@ -125,7 +125,7 @@ public class MenuOtherFragment extends Fragment {
     private void filter(String s) {
         List<Menu> menuOtherFilter = new ArrayList<>();
         for (Menu menu : menuListOther) {
-            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+            if (Support.deAccent(menu.getName()).toLowerCase().contains(s.toLowerCase())) {
                 menuOtherFilter.add(menu);
             }
         }

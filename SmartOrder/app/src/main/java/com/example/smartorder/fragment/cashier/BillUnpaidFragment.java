@@ -3,6 +3,8 @@ package com.example.smartorder.fragment.cashier;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
@@ -60,7 +62,6 @@ public class BillUnpaidFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bill_unpaid, container, false);
         initView(view);
-
 
         initRecycle();
         getDataFromServer();
@@ -146,7 +147,7 @@ public class BillUnpaidFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frq, new PayBillFragment(billCode, tableCode, totalPrice), Constants.fragmentPayBill).commit();
             }
         });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
         rvListBillUnpaid.setLayoutManager(gridLayoutManager);
         rvListBillUnpaid.setHasFixedSize(true);
         rvListBillUnpaid.setAdapter(billAdapter);
@@ -157,5 +158,16 @@ public class BillUnpaidFragment extends Fragment {
         rvListBillUnpaid = (RecyclerView) view.findViewById(R.id.rvListBillUnpaid);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
 
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

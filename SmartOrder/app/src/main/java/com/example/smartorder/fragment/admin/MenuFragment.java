@@ -67,15 +67,11 @@ public class MenuFragment extends Fragment {
     private FloatingActionButton fabAddMenu;
     private ImageView imvFood;
     private String type;
+    private TabMenuAdapter tabMenuAdapter;
     private Uri uriImage = null;
     private int REQUEST_CODE_LOAD_IMAGE = 01234;
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,7 +79,8 @@ public class MenuFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         initView(view);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        vpMenu.setAdapter(new TabMenuAdapter(getActivity().getSupportFragmentManager()));
+        tabMenuAdapter = new TabMenuAdapter(getActivity().getSupportFragmentManager());
+        vpMenu.setAdapter(tabMenuAdapter);
         tabMenu.setupWithViewPager(vpMenu);
         fabAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override

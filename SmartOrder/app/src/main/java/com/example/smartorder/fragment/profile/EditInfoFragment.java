@@ -133,7 +133,7 @@ public class EditInfoFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         } else {
@@ -167,7 +167,7 @@ public class EditInfoFragment extends Fragment {
 
                 @Override
                 public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -127,7 +127,7 @@ public class PayBillFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
+                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -168,8 +168,7 @@ public class PayBillFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<BillOne>> call, Throwable t) {
-                Log.e("onFailure: ", t.getMessage());
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

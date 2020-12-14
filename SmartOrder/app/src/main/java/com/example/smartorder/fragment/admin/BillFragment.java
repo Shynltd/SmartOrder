@@ -19,6 +19,7 @@ import com.example.smartorder.R;
 import com.example.smartorder.adapter.admin.BillAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
+import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.Bill;
 
 import java.util.ArrayList;
@@ -104,7 +105,7 @@ public class BillFragment extends Fragment {
         billAdapter = new BillAdapter(getContext(), billList, new BillAdapter.onItemClick() {
             @Override
             public void onClick(int pos) {
-
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_view_bill_scale_enter,0).add(R.id.frq, new ViewBillFragment(billList.get(pos)), Constants.fragmentViewBill).commit();
             }
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);

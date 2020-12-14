@@ -28,6 +28,7 @@ import com.example.smartorder.model.menu.ListMenuOrder;
 import com.example.smartorder.model.menu.MenuOrder;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.table.Table;
+import com.example.smartorder.support.Support;
 
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -168,7 +169,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
 
                     @Override
                     public void onFailure(Call<ServerResponse> call, Throwable t) {
-                        Log.e("onFailure: ", t.getMessage());
+                        Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -179,7 +180,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
     private void filter(String toString) {
         List<MenuOrder> menuOrderFilter = new ArrayList<>();
         for (MenuOrder order : menuOrders) {
-            if (order.getName().toLowerCase().contains(toString.toLowerCase())) {
+            if (Support.deAccent(order.getName()).toLowerCase().contains(toString.toLowerCase())) {
                 menuOrderFilter.add(order);
             }
         }

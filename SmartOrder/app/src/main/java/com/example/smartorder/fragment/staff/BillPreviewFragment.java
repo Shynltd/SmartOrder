@@ -38,7 +38,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
 
 
     private TextView tvTableCode, tvTotal;
-    private Button btnSave;
+    private ImageButton btnSave;
     private Integer tableCode;
     private RetrofitAPI retrofitAPI;
     private RecyclerView rvList;
@@ -147,7 +147,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
     private void initView(View view) {
         tvTableCode = (TextView) view.findViewById(R.id.tvTableCode);
         tvTotal = (TextView) view.findViewById(R.id.tvTotal);
-        btnSave = (Button) view.findViewById(R.id.btnSave);
+        btnSave = (ImageButton) view.findViewById(R.id.btnSave);
         rvList = (RecyclerView) view.findViewById(R.id.rvList);
         btnBack = (ImageButton) view.findViewById(R.id.btnBack);
 

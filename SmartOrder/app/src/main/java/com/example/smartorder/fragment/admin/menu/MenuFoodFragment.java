@@ -124,7 +124,7 @@ public class MenuFoodFragment extends Fragment {
     private void filter(String s) {
         List<Menu> menuDrinkFilter = new ArrayList<>();
         for (Menu menu : menuListFood) {
-            if (menu.getName().toLowerCase().contains(s.toLowerCase())) {
+            if (Support.deAccent(menu.getName()).toLowerCase().contains(s.toLowerCase())) {
                 menuDrinkFilter.add(menu);
             }
         }

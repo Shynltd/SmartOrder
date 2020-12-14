@@ -18,10 +18,11 @@ public class Constants {
 //    public static final String URL = "http://192.168.1.209:2000/api/";
 //    public static final String LINK = "http://192.168.1.209:2000";
 
-//    public static final String URL = "http://192.168.1.3:2000/api/";
+    //    public static final String URL = "http://192.168.1.3:2000/api/";
 //    public static final String LINK = "http://192.168.1.3:2000";
     public static String fragmentBill = "fragment_bill";
     public static String fragmentUser = "fragment_user";
-    public static String fragmentMenu= "fragment_menu";
-    public static String fragmentTable= "fragment_table";
+    public static String fragmentMenu = "fragment_menu";
+    public static String fragmentTable = "fragment_table";
+    public static String fragmentViewBill = "fragment_view_bill";
 }
