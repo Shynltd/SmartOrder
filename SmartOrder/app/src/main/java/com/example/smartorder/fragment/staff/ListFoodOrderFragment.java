@@ -146,7 +146,7 @@ public class ListFoodOrderFragment extends Fragment implements CallbackTalble {
                     ListMenuOrder menuOrder = new ListMenuOrder();
                     menuOrder.setTableCodes(tableCode);
                     menuOrder.setMenuOrders(listMenuOder);
-
+                    menuOrder.setNameOrder(Constants.NameUser);
                     retrofitAPI.createBill(menuOrder).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

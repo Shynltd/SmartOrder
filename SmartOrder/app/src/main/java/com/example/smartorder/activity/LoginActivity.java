@@ -113,6 +113,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void setSharedPreferences(SharedPreferences sharedPreferences) {
+        //        Auth auth = new Auth();
+//        String aut = new Gson().toJson(auth);
+//        Auth auth1 = new Gson().fromJson(aut,Auth.class);
         if (chkRemember.isChecked()) {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("phone", edtPhone.getText().toString().trim());

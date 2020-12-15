@@ -1,6 +1,7 @@
 package com.example.smartorder.fragment.admin.menu;
 
 import android.app.AlertDialog;
+import android.companion.WifiDeviceFilter;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -71,6 +72,8 @@ public class MenuFoodFragment extends Fragment {
         menuListFood = new ArrayList<>();
         rvListFood();
         getAllMenuFromServer();
+
+
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -185,7 +188,7 @@ public class MenuFoodFragment extends Fragment {
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
         edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " +menu.getType());
+        tvType.setText("Loại : " + menu.getType());
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
         Button btnCancel = alert.findViewById(R.id.btnCancel);
@@ -231,7 +234,7 @@ public class MenuFoodFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     } else {
@@ -248,7 +251,7 @@ public class MenuFoodFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

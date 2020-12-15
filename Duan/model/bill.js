@@ -16,6 +16,10 @@ let billSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    nameOrder: {
+        type: String,
+        required: true,
+    },
     tableCode: {
         type: Number,
         required: true,

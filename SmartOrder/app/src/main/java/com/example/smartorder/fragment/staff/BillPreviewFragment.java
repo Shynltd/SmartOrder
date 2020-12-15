@@ -89,6 +89,7 @@ public class BillPreviewFragment extends Fragment implements CallbackTalble {
 
             }
         });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
