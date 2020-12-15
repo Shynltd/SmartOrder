@@ -20,23 +20,27 @@ import java.util.List;
 
 public class TabMenuAdapter extends FragmentPagerAdapter {
     private String listTab[] = {"Đồ ăn", "Đồ uống", "Khác"};
-
+    private MenuFoodFragment menuFoodFragment ;
+    private MenuDrinkFragment menuDrinkFragment ;
+    private MenuOtherFragment menuOtherFragment ;
 
     public TabMenuAdapter(@NonNull FragmentManager fm) {
         super(fm);
+        menuFoodFragment = new MenuFoodFragment();
+        menuDrinkFragment = new MenuDrinkFragment();
+        menuOtherFragment = new MenuOtherFragment();
 
     }
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.e( "getItem1: ", String.valueOf(getCount()));
         if (position == 0) {
-            return new MenuFoodFragment();
+            return menuFoodFragment;
         } else if (position == 1) {
-            return new MenuDrinkFragment();
+            return menuDrinkFragment;
         } else if (position == 2) {
-            return new MenuOtherFragment();
+            return menuOtherFragment;
         } else {
             return null;
         }

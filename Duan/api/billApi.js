@@ -128,7 +128,6 @@ module.exports.postOrder = async (req, res) => {
             let findBill = await bill.findOne({tableCode, status: "Chưa thanh toán"});
             if (findBill) {
                 let billCode = findBill.billCode;
-                console.log(billCode);
                 let {list_menu} = req.body;
                 for (let i = 0; i < list_menu.length; i++) {
                     let {name} = list_menu[i];
@@ -181,7 +180,7 @@ module.exports.postReturnItems = async (req, res) => {
 
 }
 module.exports.calcBill = async (req, res) => {
-    let {id} = req.params;
+    let id = req.params.id;
     let d = await billOne.find({billCode: id});
     let b = await bill.findOne({billCode: id});
     let totalPrice = 0;

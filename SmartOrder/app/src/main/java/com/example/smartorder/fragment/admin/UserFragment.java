@@ -269,9 +269,11 @@ public class UserFragment extends Fragment {
                     Integer cmnd = Integer.valueOf(edtCmnd.getText().toString().trim());
                     Integer age = Integer.valueOf(edtAge.getText().toString().trim());
                     String address = edtAddress.getText().toString().trim();
+
                     File file = new File(Support.getPathFromUri(getContext(), mUriImage));
                     RequestBody requestBody = RequestBody.create(MediaType.parse(getContext().getContentResolver().getType(mUriImage)), file);
                     MultipartBody.Part filePart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBody);
+
                     retrofitAPI.createUser(fullName, phone, cmnd, age, address, role, filePart).enqueue(new Callback<ServerResponse>() {
                         @Override
                         public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -442,6 +444,7 @@ public class UserFragment extends Fragment {
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_LOAD_IMAGE && resultCode == RESULT_OK && data != null) {
