@@ -20,6 +20,8 @@ import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.Bill;
 import com.example.smartorder.model.bill.BillOne;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ import retrofit2.Response;
 
 public class ViewBillFragment extends Fragment implements View.OnClickListener {
     private Bill bill;
-    private TextView tvTableCode;
+    private TextView tvTableCode, tvTotalMoney,tvCashier,tvDate;
     private ImageButton btnClose;
     private RetrofitAPI retrofitAPI;
     private List<BillOne> billOneList;
@@ -46,8 +48,18 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_view_bill, container, false);
         initView(view);
+
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
-        tvTableCode.setText(String.valueOf(bill.getTableCode()));
+        tvTableCode.setText("Bàn số: " +String.valueOf(bill.getTableCode()));
+        tvCashier.setText("Thu ngân: "+String.valueOf(bill.getNameCashier()));
+
+        DecimalFormat formatter= new DecimalFormat("#,###");
+        double total = Double.parseDouble(String.valueOf(bill.getTotalPrice()));
+        String toTalFormat = formatter.format(total);
+        tvTotalMoney.setText("Thanh toán: "+toTalFormat+" VND");
+
+        tvDate.setText("Ngày HD: "+String.valueOf(bill.getDateBill()));
+
         initRecycleView();
         getBillOne();
         btnClose.setOnClickListener(this);
@@ -58,6 +70,9 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
         tvTableCode = (TextView) view.findViewById(R.id.tvTableCode);
         btnClose = (ImageButton) view.findViewById(R.id.btnClose);
         rvList = (RecyclerView) view.findViewById(R.id.rvList);
+        tvTotalMoney = view.findViewById(R.id.tvTotalMoney);
+        tvCashier = view.findViewById(R.id.tvNameCashier);
+        tvDate = view.findViewById(R.id.tvDate);
     }
 
     private void initRecycleView() {
