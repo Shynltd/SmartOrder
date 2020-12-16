@@ -25,7 +25,29 @@ public class Bill {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("nameOrder")
+    @Expose
+    private String nameOrder;
+    @SerializedName("discount")
+    @Expose
+    private int discount;
 
+
+    public String getNameOrder() {
+        return nameOrder;
+    }
+
+    public void setNameOrder(String nameOrder) {
+        this.nameOrder = nameOrder;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
+    }
 
     public String getDateBill() {
         return dateBill;
@@ -83,7 +105,17 @@ public class Bill {
         this.status = status;
     }
 
-    public Bill(String dateBill, String id, String billCode, String nameCashier, Integer tableCode, Integer totalPrice, String status) {
+//    public Bill(String dateBill, String id, String billCode, String nameCashier, Integer tableCode, Integer totalPrice, String status) {
+//        this.dateBill = dateBill;
+//        this.id = id;
+//        this.billCode = billCode;
+//        this.nameCashier = nameCashier;
+//        this.tableCode = tableCode;
+//        this.totalPrice = totalPrice;
+//        this.status = status;
+//    }
+
+    public Bill(String dateBill, String id, String billCode, String nameCashier, Integer tableCode, Integer totalPrice, String status, String nameOrder, int discount) {
         this.dateBill = dateBill;
         this.id = id;
         this.billCode = billCode;
@@ -91,5 +123,7 @@ public class Bill {
         this.tableCode = tableCode;
         this.totalPrice = totalPrice;
         this.status = status;
+        this.nameOrder = nameOrder;
+        this.discount = discount;
     }
 }

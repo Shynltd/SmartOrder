@@ -124,7 +124,9 @@ public class BillUnpaidFragment extends Fragment {
                     Integer tableCode = bills.get(i).getTableCode();
                     Integer totalPrice = bills.get(i).getTotalPrice();
                     String status = bills.get(i).getStatus();
-                    billList.add(new Bill(dateBill, id, billCode, nameCashier, tableCode, totalPrice, status));
+                    String nameOrder = bills.get(i).getNameOrder();
+                    Integer discount = bills.get(i).getDiscount();
+                    billList.add(new Bill(dateBill, id, billCode, nameCashier, tableCode, totalPrice, status,nameOrder,discount));
                     billAdapter.notifyDataSetChanged();
                 }
             }

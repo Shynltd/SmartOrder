@@ -27,6 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/rvList"/>
     <TextView
+        android:layout_marginLeft="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Total:"

@@ -3,6 +3,7 @@
     android:background="@drawable/radius_item_user"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_50sdp">
 
@@ -13,7 +14,7 @@
         android:id="@+id/imgLogo"
         />
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_50sdp"
         android:id="@+id/tvName"
         android:gravity="center"

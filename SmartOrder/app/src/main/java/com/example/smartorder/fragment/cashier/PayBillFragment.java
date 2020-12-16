@@ -75,7 +75,7 @@ public class PayBillFragment extends Fragment {
             e.printStackTrace();
         }
         tvBillCode.setText("Mã hóa đơn: " + billCode);
-        tvTableCode.setText("Bàn số " + tableCode);
+        tvTableCode.setText("Bàn số: " + tableCode);
         tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override

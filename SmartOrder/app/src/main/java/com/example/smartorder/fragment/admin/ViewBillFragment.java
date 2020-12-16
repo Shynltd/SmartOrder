@@ -1,6 +1,7 @@
 package com.example.smartorder.fragment.admin;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.Bill;
 import com.example.smartorder.model.bill.BillOne;
+import com.example.smartorder.support.Support;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -32,7 +34,7 @@ import retrofit2.Response;
 
 public class ViewBillFragment extends Fragment implements View.OnClickListener {
     private Bill bill;
-    private TextView tvTableCode, tvTotalMoney,tvCashier,tvDate;
+    private TextView tvTableCode, tvTotalMoney,tvCashier,tvDate, tvNameOrder, tvDiscount, tvTotal;
     private ImageButton btnClose;
     private RetrofitAPI retrofitAPI;
     private List<BillOne> billOneList;
@@ -52,11 +54,23 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         tvTableCode.setText("Bàn số: " +String.valueOf(bill.getTableCode()));
         tvCashier.setText("Thu ngân: "+String.valueOf(bill.getNameCashier()));
+        tvNameOrder.setText("Order: "+String.valueOf(bill.getNameOrder()));
+
+        int discount = Integer.parseInt(String.valueOf(bill.getDiscount()));
+        int TotalMoney = Integer.parseInt(String.valueOf(bill.getTotalPrice()));
+        int Total = TotalMoney * 100 / (100-discount);
+        int discountMoney = Total *discount/100;
 
         DecimalFormat formatter= new DecimalFormat("#,###");
-        double total = Double.parseDouble(String.valueOf(bill.getTotalPrice()));
-        String toTalFormat = formatter.format(total);
-        tvTotalMoney.setText("Thanh toán: "+toTalFormat+" VND");
+        String totalFormat = formatter.format(Total);
+        String disconutFormat = formatter.format(discountMoney);
+        tvDiscount.setText("Giảm giá: " +disconutFormat+" VND");
+        tvTotal.setText("Tổng tiền: " +totalFormat +" VND");
+
+
+        double totalMoney = Double.parseDouble(String.valueOf(bill.getTotalPrice()));
+        String toTalMoneyFormat = formatter.format(totalMoney);
+        tvTotalMoney.setText("Thanh toán: "+toTalMoneyFormat+" VND");
 
         tvDate.setText("Ngày HD: "+String.valueOf(bill.getDateBill()));
 
@@ -73,6 +87,9 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
         tvTotalMoney = view.findViewById(R.id.tvTotalMoney);
         tvCashier = view.findViewById(R.id.tvNameCashier);
         tvDate = view.findViewById(R.id.tvDate);
+        tvNameOrder = view.findViewById(R.id.tvNameOrder);
+        tvDiscount = view.findViewById(R.id.tvDiscount);
+        tvTotal = view.findViewById(R.id.tvTotal);
     }
 
     private void initRecycleView() {
