@@ -2,7 +2,8 @@
 <RelativeLayout
     android:background="@drawable/radius_item_user"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="@dimen/_10sdp" android:layout_width="match_parent"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/_50sdp">
 
     <de.hdodenhof.circleimageview.CircleImageView

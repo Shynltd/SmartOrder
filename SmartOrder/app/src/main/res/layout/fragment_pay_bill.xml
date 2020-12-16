@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:layout_margin="@dimen/_10sdp"
+    android:background="@drawable/radius_item_dialg"
     android:orientation="vertical"
     tools:context=".fragment.cashier.PayBillFragment">
 
@@ -12,24 +13,28 @@
         android:id="@+id/tvBillCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
+        android:textStyle="bold"
+        android:textSize="@dimen/_12sdp"
         android:text="Mã hóa đơn" />
 
     <TextView
+        android:textStyle="bold"
+        android:textSize="@dimen/_12sdp"
         android:id="@+id/tvTableCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:text="Bàn số 1" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListBillOne"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
+        android:layout_height="@dimen/_230sdp"
         android:layout_margin="@dimen/_8sdp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_8sdp"
         android:orientation="horizontal"
@@ -38,7 +43,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="20">
+            android:layout_weight="23">
             <EditText
                 android:id="@+id/edtCoupon"
                 android:layout_width="match_parent"
@@ -57,9 +62,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_19sdp"
-            android:layout_weight="1"
-            android:textSize="@dimen/_6sdp"
-            android:text="Disconut" />
+            android:textSize="@dimen/_8sdp"
+            android:text="Giảm giá" />
     </LinearLayout>
 
     <RelativeLayout
@@ -71,8 +75,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
-            android:text="Total:"
-            android:textSize="@dimen/_20sdp" />
+            android:text="Tổng thanh toán:"
+            android:textSize="@dimen/_12sdp" />
 
         <TextView
             android:id="@+id/tvT"
@@ -82,7 +86,7 @@
             android:layout_toRightOf="@id/tvTongtien"
             android:text="10000"
             android:textStyle="bold"
-            android:textSize="@dimen/_15sdp" />
+            android:textSize="@dimen/_13sdp" />
 
         <TextView
             android:id="@+id/tvT2"
@@ -92,15 +96,17 @@
             android:layout_margin="@dimen/_8sdp"
             android:layout_toRightOf="@id/tvTongtien"
             android:text="12000"
-            android:textSize="@dimen/_15sdp"
+            android:textSize="@dimen/_13sdp"
             android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="3">
+        android:weightSum="2">
 
         <Button
             android:id="@+id/btnCancel"
