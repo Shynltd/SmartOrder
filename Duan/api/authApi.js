@@ -7,13 +7,13 @@ module.exports.checkLogin = async (req, res) => {
     let findUser = await user.findOne({phone: phone});
 
     if (findUser) {
-        let password =md5(req.body.password);
+        let password = md5(req.body.password);
         if (findUser.passWord === password) {
-            const token = jwt.sign({id: findUser._id}, 'duan', {algorithm: 'HS256', expiresIn:60*60*24});
+            const token = jwt.sign({id: findUser._id}, 'duan', {algorithm: 'HS256', expiresIn: 60 * 60 * 24});
             res.json({
                 status: 'OK',
                 token,
-                id:findUser._id,
+                id: findUser._id,
                 role: findUser.role,
                 name: findUser.fullName,
                 avatar: findUser.avatar,

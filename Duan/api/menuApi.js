@@ -1,12 +1,6 @@
 let menu = require('../model/menu');
 let uniqid = require('uniqid');
 
-module.exports.getListMenu = async (req, res) => {
-    let listFood = await menu.find({type: "Food"});
-    let listDrink = await menu.find({type: "Drink"});
-    let listOther = await menu.find({type: "Other"});
-    res.json({listFood, listDrink, listOther});
-}
 module.exports.getListMenuAll = async (req, res) => {
     let findMenu = await menu.find({});
     if (findMenu) {

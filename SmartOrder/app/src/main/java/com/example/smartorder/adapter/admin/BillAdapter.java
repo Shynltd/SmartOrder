@@ -42,7 +42,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     @NonNull
     @Override
     public BillHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.rv_list_bill, parent, false);
         View view = LayoutInflater.from(context).inflate(R.layout.rv_list_bill2, parent, false);
 
         return new BillHolder(view);
@@ -53,7 +52,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         holder.tvBillCode.setText(billList.get(position).getBillCode());
         holder.tvTableCode.setText("Bàn số: " + billList.get(position).getTableCode() + "");
         holder.tvStatus.setText(billList.get(position).getStatus());
-        Log.e("onBindViewHolder: ", billList.get(position).getStatus());
         String[] date = billList.get(position).getDateBill().split("@");
         holder.tvDate.setText(date[0]);
 

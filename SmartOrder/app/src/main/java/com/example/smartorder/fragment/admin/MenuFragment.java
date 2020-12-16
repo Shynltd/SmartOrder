@@ -79,6 +79,7 @@ public class MenuFragment extends Fragment {
         initView(view);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         vpMenu.setAdapter(new TabMenuAdapter(getActivity().getSupportFragmentManager()));
+        vpMenu.setOffscreenPageLimit(3);
         tabMenu.setupWithViewPager(vpMenu);
         fabAddMenu.setOnClickListener(new View.OnClickListener() {
             @Override

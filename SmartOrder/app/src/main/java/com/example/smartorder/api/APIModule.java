@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -24,8 +25,12 @@ public class APIModule {
                     Request request =chain.request().newBuilder().addHeader("Authorization", Constants.TOKEN).build();
                 return chain.proceed(request);
             }
-        }).build();
-
+        }).retryOnConnectionFailure(true)
+          .readTimeout(30000, TimeUnit.MILLISECONDS)
+          .writeTimeout(30000,TimeUnit.MILLISECONDS)
+          .callTimeout(30000,TimeUnit.MILLISECONDS)
+          .connectTimeout(30000,TimeUnit.MILLISECONDS)
+          .build();
         return client;
     }
 

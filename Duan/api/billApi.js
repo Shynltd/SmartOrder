@@ -58,7 +58,7 @@ module.exports.postPaid = async (req, res) => {
         await bill.findOneAndUpdate({billCode}, {
             $set: {
                 discount: req.body.discount,
-                totalPrice : req.body.totalMoney
+                totalPrice: req.body.totalMoney
             },
         }, {new: true});
     }
@@ -95,9 +95,16 @@ module.exports.postOrder = async (req, res) => {
     if (checkTable) {
         if (!checkTable.status) {
             let currentdate = new Date();
+            let datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
             let list = await bill.find({});
             let listCount = list.length + 1;
             let billCode = "HD" + tableCode.toString() + currentdate.getDate() + (currentdate.getMonth() + 1) + currentdate.getFullYear() + listCount.toString();
+            let {nameOrder} = req.body;
             let {list_menu} = req.body;
             for (let i = 0; i < list_menu.length; i++) {
                 let {image} = list_menu[i];
@@ -110,7 +117,7 @@ module.exports.postOrder = async (req, res) => {
                 add.save();
                 totalPrice += totalMoney;
             }
-            let addBill = new bill({billCode, nameCashier, tableCode, totalPrice, status});
+            let addBill = new bill({billCode,dateBill:datetime, nameCashier, nameOrder, tableCode, totalPrice, status});
             await table.findOneAndUpdate({_id: checkTable._id}, {
                     $set: {
                         status: true
@@ -200,21 +207,5 @@ module.exports.calcBill = async (req, res) => {
             }
         });
     }
-}
-
-module.exports.thogke = async (req, res) => {
-    let getAllBill = await bill.find({});
-    let dateBill = "";
-    for (let i = 0; i < getAllBill.length; i++) {
-        dateBill = getAllBill[i].dateBill;
-
-    }
-    console.log(dateBill);
-    let split = dateBill.split("/")
-    console.log(split);
-    let date = split[0];
-    let month = split[1];
-    let year = split[2].split("@")[0];
-    console.log(`${date} / ${month} / ${year}`)
 }
 

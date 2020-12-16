@@ -21,7 +21,6 @@ router.put('/user/update/info/:id', authMiddle.verifyToken, userApi.updateInfoUs
 router.put('/user/update/changePass/:id', authMiddle.verifyToken, userApi.changePassword);
 
 //menu
-router.get('/menu', authMiddle.verifyToken, menuApi.getListMenu);
 router.get('/menus', authMiddle.verifyToken, menuApi.getListMenuAll);
 router.post('/menu/create', authMiddle.verifyToken, menuApi.postCreate);
 router.delete('/menu/delete/:id', authMiddle.verifyToken, menuApi.deleteMenu);
@@ -44,6 +43,4 @@ router.post('/bill/return', authMiddle.verifyToken,billApi.postReturnItems);
 
 router.get('/calc/:id', authMiddle.verifyToken, billApi.calcBill);
 
-
-router.get('/thogke', billApi.thogke);
 module.exports = router;
