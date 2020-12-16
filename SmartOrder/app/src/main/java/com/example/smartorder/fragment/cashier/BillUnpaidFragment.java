@@ -105,10 +105,21 @@ public class BillUnpaidFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                   filter(editable.toString());
             }
         });
         return view;
+    }
+
+    private void filter(String s) {
+        List<Bill> billFilter = new ArrayList<>();
+        for(Bill bill : billList){
+            if(bill.getBillCode().toLowerCase().contains(s.toLowerCase())){
+                billFilter.add(bill);
+            }
+        }
+        billAdapter.filterList(billFilter,getActivity());
+        billAdapter.notifyDataSetChanged();
     }
     private void getDataFromServer() {
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);

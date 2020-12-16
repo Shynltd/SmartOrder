@@ -154,7 +154,7 @@ public class UserFragment extends Fragment {
 
     private void dialogDeleteUser(String id, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        builder.setMessage("Bạn có muốn nhân viên " + userList.get(position).getFullName() + " không ?")
+        builder.setMessage("Bạn có muốn xóa nhân viên " + userList.get(position).getFullName() + " không ?")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

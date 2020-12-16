@@ -17,6 +17,7 @@
         android:hint="@string/text_search" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="@dimen/_5sdp"
         android:id="@+id/rvListBillUnpaid"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

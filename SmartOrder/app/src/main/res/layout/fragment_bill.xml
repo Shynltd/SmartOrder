@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.admin.BillFragment">
 
@@ -11,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@drawable/radius_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +22,7 @@
         android:hint="@string/text_search"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_margin="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
         android:id="@+id/rvListBill"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
