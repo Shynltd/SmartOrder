@@ -34,7 +34,7 @@ import retrofit2.Response;
 
 public class ViewBillFragment extends Fragment implements View.OnClickListener {
     private Bill bill;
-    private TextView tvTableCode, tvTotalMoney, tvCashier, tvDate, tvNameOrder, tvDiscount, tvTotal;
+    private TextView tvTableCode, tvTotalMoney, tvCashier, tvDate, tvNameOrder, tvDiscount, tvTotal, tvBillCode;
     private ImageButton btnClose;
     private RetrofitAPI retrofitAPI;
     private List<BillOne> billOneList;
@@ -52,6 +52,7 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
         initView(view);
 
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
+        tvBillCode.setText("Mã HD: "+bill.getBillCode());
         tvTableCode.setText("Bàn số: " + bill.getTableCode());
         tvCashier.setText("Thu ngân: " + bill.getNameCashier());
         tvNameOrder.setText("Order: " + bill.getNameOrder());
@@ -79,6 +80,8 @@ public class ViewBillFragment extends Fragment implements View.OnClickListener {
         tvNameOrder = view.findViewById(R.id.tvNameOrder);
         tvDiscount = view.findViewById(R.id.tvDiscount);
         tvTotal = view.findViewById(R.id.tvTotal);
+        tvBillCode = view.findViewById(R.id.tvBillCode);
+
     }
 
     private void initRecycleView() {
