@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -23,6 +25,8 @@ import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.Bill;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -36,6 +40,7 @@ public class BillFragment extends Fragment {
     private BillAdapter billAdapter;
     private RetrofitAPI retrofitAPI;
     private EditText edtSearch;
+    private CheckBox chkToday;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,6 +49,28 @@ public class BillFragment extends Fragment {
         initView(view);
         initRecycleView();
         callResponse();
+        chkToday.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    Date currentTime = Calendar.getInstance().getTime();
+                    List<Bill> billFilter = new ArrayList<>();
+                    for(Bill bill : billList){
+                        int dateBill = Integer.parseInt(bill.getDateBill().split("/")[0]);
+                        int date = currentTime.getDate();
+                        if(dateBill == date){
+                            billFilter.add(bill);
+                            Log.e("chay vao: ", String.valueOf(billFilter.size()));
+                        }
+                    }
+                    billAdapter.filterList(billFilter,getActivity());
+                    billAdapter.notifyDataSetChanged();
+                } else {
+                    billAdapter.filterList(billList,getActivity());
+                    billAdapter.notifyDataSetChanged();
+                }
+            }
+        });
         edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -106,8 +133,8 @@ public class BillFragment extends Fragment {
         billList = new ArrayList<>();
         billAdapter = new BillAdapter(getContext(), billList, new BillAdapter.onItemClick() {
             @Override
-            public void onClick(int pos) {
-                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_view_bill_scale_enter,0).add(R.id.frq, new ViewBillFragment(billList.get(pos)), Constants.fragmentViewBill).commit();
+            public void onClick(Bill bill) {
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_view_bill_scale_enter,0).add(R.id.frq, new ViewBillFragment(bill), Constants.fragmentViewBill).commit();
             }
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
@@ -120,5 +147,6 @@ public class BillFragment extends Fragment {
         rvListBill = (RecyclerView) view.findViewById(R.id.rvListBill);
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         edtSearch = view.findViewById(R.id.edtSearch);
+        chkToday = view.findViewById(R.id.chkToday);
     }
 }

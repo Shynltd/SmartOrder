@@ -153,10 +153,10 @@ public class BillUnpaidFragment extends Fragment {
         billList = new ArrayList<>();
         billAdapter = new BillAdapter(getActivity(), billList, new BillAdapter.onItemClick() {
             @Override
-            public void onClick(int pos) {
-                String billCode = billList.get(pos).getBillCode();
-                Integer tableCode = billList.get(pos).getTableCode();
-                Integer totalPrice = billList.get(pos).getTotalPrice();
+            public void onClick(Bill bill) {
+                String billCode = bill.getBillCode();
+                Integer tableCode = bill.getTableCode();
+                Integer totalPrice = bill.getTotalPrice();
                 getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frq, new PayBillFragment(billCode, tableCode, totalPrice), Constants.fragmentPayBill).commit();
             }
         });

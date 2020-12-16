@@ -62,7 +62,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClick.onClick(position);
+                onItemClick.onClick(billList.get(position));
             }
         });
 
@@ -89,6 +89,6 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.BillHolder> {
     }
 
     public interface onItemClick {
-        void onClick(int pos);
+        void onClick(Bill bill);
     }
 }

@@ -2,7 +2,6 @@ package com.example.smartorder.fragment.cashier;
 
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,7 +38,7 @@ public class PayBillFragment extends Fragment {
     private List<BillOne> billOneList;
     private BillOneAdapter billOneAdapter;
     private TextView tvBillCode;
-    private TextView tvTableCode, tvT, tvT2;
+    private TextView tvTableCode, tvGiamGia, tvThanhToan;
     private EditText edtCoupon;
     private RecyclerView rvListBillOne;
     private TextView tvTongtien;
@@ -70,13 +68,14 @@ public class PayBillFragment extends Fragment {
         initRecycleView();
         getBillOne();
         try {
-            socket = IO.socket(Constants.LINK+"/").connect();
+            socket = IO.socket(Constants.LINK + "/").connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         tvBillCode.setText("Mã hóa đơn: " + billCode);
-        tvTableCode.setText("Bàn số: " + tableCode);
-        tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
+        tvTableCode.setText("Bàn số " + tableCode);
+        tvTongtien.setText("Tổng tiền: " + Support.decimalFormat(totalMoney) + " VNĐ");
+        tvThanhToan.setText("Thanh toán: " + Support.decimalFormat(totalMoney) + " VNĐ");
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,22 +99,21 @@ public class PayBillFragment extends Fragment {
 
     private void checkCoupon() {
         coupon = Integer.parseInt(edtCoupon.getText().toString().trim());
-
-
         if (coupon != 0) {
-            lastTotal = totalMoney * (100 - coupon) / 100;
-            tvT.setText(Support.decimalFormat(totalMoney) + " VNĐ");
-            tvT.setPaintFlags(tvT.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            tvT2.setVisibility(View.VISIBLE);
-            tvT2.setText(Support.decimalFormat(lastTotal) + " VNĐ");
+            Integer giamGia = totalMoney * coupon / 100;
+            tvGiamGia.setText("Giảm giá: " + Support.decimalFormat(giamGia) + " VNĐ" );
+//            tvGiamGia.setPaintFlags(tvGiamGia.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+            lastTotal = totalMoney - giamGia;
+            tvThanhToan.setText("Thanh toán: "+Support.decimalFormat(lastTotal) + " VNĐ");
         }
     }
+
     private void pay() {
         retrofitAPI.payBill(billCode, Constants.NameUser, coupon, lastTotal).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if (response.code() == 200) {
-                    socket.emit("payy","Xong");
+                    socket.emit("payy", "Xong");
                     socket.disconnect();
                     Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Fragment payBillFrament = getFragmentManager().findFragmentByTag(Constants.fragmentPayBill);
@@ -127,7 +125,7 @@ public class PayBillFragment extends Fragment {
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -168,7 +166,7 @@ public class PayBillFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<BillOne>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -176,8 +174,8 @@ public class PayBillFragment extends Fragment {
     private void initView(View view) {
         tvBillCode = (TextView) view.findViewById(R.id.tvBillCode);
         tvTableCode = (TextView) view.findViewById(R.id.tvTableCode);
-        tvT = (TextView) view.findViewById(R.id.tvT);
-        tvT2 = (TextView) view.findViewById(R.id.tvT2);
+        tvGiamGia = (TextView) view.findViewById(R.id.tvGiamGia);
+        tvThanhToan = (TextView) view.findViewById(R.id.tvThanhToan);
         rvListBillOne = (RecyclerView) view.findViewById(R.id.rvListBillOne);
         tvTongtien = (TextView) view.findViewById(R.id.tvTongtien);
         edtCoupon = (EditText) view.findViewById(R.id.edtCoupon);

@@ -74,7 +74,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         return userList.size();
     }
 
-    public void filterList(List<User> userFilter, Context context) {
+        public void filterList(List<User> userFilter, Context context) {
         userList= userFilter;
         this.context = context;
     }

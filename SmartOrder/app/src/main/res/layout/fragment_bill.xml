@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:layout_gravity="center"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.admin.BillFragment">
@@ -13,13 +12,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="15dp"
+        android:layout_margin="@dimen/_10sdp"
         android:background="@drawable/radius_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_10sdp"
         android:id="@+id/edtSearch"
         android:hint="@string/text_search"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hóa đơn hôm nay"
+        android:id="@+id/chkToday"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:padding="@dimen/_5sdp"
