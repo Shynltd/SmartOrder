@@ -81,17 +81,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
+
         <View
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/black" />
+
         <LinearLayout
             android:padding="@dimen/_5sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:gravity="center"
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="wrap_content"
                 android:text="Tên món"/>
@@ -100,10 +103,12 @@
                 android:layout_height="wrap_content"
                 android:text="SL"/>
             <TextView
+                android:gravity="right"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
                 android:text="Đ.Giá"/>
             <TextView
+                android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Thành tiền"/>
@@ -128,6 +133,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="@color/black" />
+
         <TextView
             android:layout_gravity="right"
             android:padding="@dimen/_5sdp"
@@ -137,6 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvTotal"/>
+
         <TextView
             android:layout_gravity="right"
             android:padding="@dimen/_5sdp"
@@ -145,6 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvDiscount"/>
+
         <View
             android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="match_parent"

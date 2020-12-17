@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartorder.R;
 import com.example.smartorder.adapter.cashier.BillOneAdapter;
+import com.example.smartorder.adapter.cashier.OneBillAdapter;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
@@ -36,7 +37,8 @@ import retrofit2.Response;
 public class PayBillFragment extends Fragment {
 
     private List<BillOne> billOneList;
-    private BillOneAdapter billOneAdapter;
+//    private BillOneAdapter billOneAdapter;
+    private OneBillAdapter billOneAdapter;
     private TextView tvBillCode;
     private TextView tvTableCode, tvGiamGia, tvThanhToan;
     private EditText edtCoupon;
@@ -139,7 +141,7 @@ public class PayBillFragment extends Fragment {
 
     private void initRecycleView() {
         billOneList = new ArrayList<>();
-        billOneAdapter = new BillOneAdapter(getActivity(), billOneList);
+        billOneAdapter = new OneBillAdapter(getActivity(), billOneList);
         rvListBillOne.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvListBillOne.setHasFixedSize(true);
         rvListBillOne.setAdapter(billOneAdapter);

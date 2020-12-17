@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvSl"/>
     <TextView
+        android:gravity="right"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="wrap_content"
         android:id="@+id/tvPrice"/>
