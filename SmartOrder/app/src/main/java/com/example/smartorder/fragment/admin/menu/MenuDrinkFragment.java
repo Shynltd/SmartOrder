@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -203,7 +204,12 @@ public class MenuDrinkFragment extends Fragment {
         tvType.setText("Loại : " + menu.getType());
         imvFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imvFood);
-
+        RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
+        if (menu.getStatus()) {
+            rdTrue.setChecked(true);
+        } else {
+            rdFalse.setChecked(true);
+        }
         btnCancel = alert.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -226,6 +232,12 @@ public class MenuDrinkFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                boolean status = true;
+                if (rdTrue.isChecked()) {
+                    status = true;
+                } else if (rdFalse.isChecked()) {
+                    status = false;
+                }
                 if (!checkValidation(edtTenMon, edtPrice)) {
                 } else {
                     if (uriImage != null) {
@@ -236,7 +248,7 @@ public class MenuDrinkFragment extends Fragment {
                                 getContext().getContentResolver().getType(uriImage)), file);
                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                                 "avatar", file.getName(), requestBody);
-                        retrofitAPI.updateDrink(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateDrink(menu.getId(), tenmon, status,price, filePart).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -253,7 +265,7 @@ public class MenuDrinkFragment extends Fragment {
                     } else {
                         String tenmon = edtTenMon.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon,status, price).enqueue(new Callback<ServerResponse>() {
 
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

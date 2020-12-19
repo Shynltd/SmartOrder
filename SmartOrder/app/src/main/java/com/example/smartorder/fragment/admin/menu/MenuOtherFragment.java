@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -146,12 +147,15 @@ public class MenuOtherFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(MenuOtherFragment.this).attach(MenuOtherFragment.this).commit();
+                                        Fragment menuFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentMenu);
+                                        if (menuFragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(menuFragment).replace(R.id.frm, new MenuFragment(), Constants.fragmentMenu).commit();
+                                        }
                                     }
 
                                     @Override
                                     public void onFailure(Call<ServerResponse> call, Throwable t) {
+                                        Toast.makeText(getActivity(), "Lỗi hệ thống " + t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -190,7 +194,12 @@ public class MenuOtherFragment extends Fragment {
         edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
         tvType.setText("Loại : " + menu.getType());
-
+        RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
+        if (menu.getStatus()) {
+            rdTrue.setChecked(true);
+        } else {
+            rdFalse.setChecked(true);
+        }
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
 
@@ -218,9 +227,16 @@ public class MenuOtherFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                boolean status = true;
+                if (rdTrue.isChecked()) {
+                    status = true;
+                } else if (rdFalse.isChecked()) {
+                    status = false;
+                }
                 if (!checkValidation(edtName, edtPrice)) {
                 } else {
                     if (uriImage != null) {
+
                         String tenmon = edtName.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
                         File file = new File(Support.getPathFromUri(getContext(), uriImage));
@@ -228,7 +244,7 @@ public class MenuOtherFragment extends Fragment {
                                 getContext().getContentResolver().getType(uriImage)), file);
                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                                 "avatar", file.getName(), requestBody);
-                        retrofitAPI.updateOther(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateOther(menu.getId(), tenmon, price, status, filePart).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -237,8 +253,6 @@ public class MenuOtherFragment extends Fragment {
                                 if (menuFragment != null) {
                                     getActivity().getSupportFragmentManager().beginTransaction().remove(menuFragment).replace(R.id.frm, new MenuFragment(), Constants.fragmentMenu).commit();
                                 }
-//                            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-//                            fragmentTransaction.detach(MenuOtherFragment.this).attach(MenuOtherFragment.this).commit();
                             }
 
                             @Override
@@ -249,7 +263,7 @@ public class MenuOtherFragment extends Fragment {
                     } else {
                         String tenmon = edtName.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        retrofitAPI.updateOtherNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateOtherNoImage(menu.getId(), tenmon, status, price).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

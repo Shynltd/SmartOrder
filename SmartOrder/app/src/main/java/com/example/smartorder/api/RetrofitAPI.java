@@ -76,6 +76,7 @@ public interface RetrofitAPI {
     Call<ServerResponse> updateDrink(
             @Path("id") String id,
             @Part("name") String name,
+            @Part("status") boolean status,
             @Part("price") Integer price,
             @Part MultipartBody.Part file);
 
@@ -84,6 +85,7 @@ public interface RetrofitAPI {
     Call<ServerResponse> updateDrinkNoImage(
             @Path("id") String id,
             @Part("name") String name,
+            @Part("status") boolean status,
             @Part("price") Integer price);
 
     @Multipart
@@ -107,6 +109,7 @@ public interface RetrofitAPI {
             @Path("id") String id,
             @Part("name") String name,
             @Part("price") Integer price,
+            @Part("status") boolean status,
             @Part MultipartBody.Part file);
 
     @Multipart
@@ -114,6 +117,7 @@ public interface RetrofitAPI {
     Call<ServerResponse> updateOtherNoImage(
             @Path("id") String id,
             @Part("name") String name,
+            @Part("status") boolean status,
             @Part("price") Integer price
     );
 

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -189,6 +190,11 @@ public class MenuFoodFragment extends Fragment {
         edtPrice.setText(String.valueOf(menu.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
         tvType.setText("Loại : " + menu.getType());
+        RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
+        TextView tvStatus = alert.findViewById(R.id.tvStatus);
+        tvStatus.setVisibility(View.GONE);
+        rdTrue.setVisibility(View.GONE);
+        rdFalse.setVisibility(View.GONE);
         imgFood = alert.findViewById(R.id.imgAvtFood);
         Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
         Button btnCancel = alert.findViewById(R.id.btnCancel);
@@ -213,6 +219,12 @@ public class MenuFoodFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                boolean status = true;
+                if (rdTrue.isChecked()) {
+                    status = true;
+                } else if (rdFalse.isChecked()) {
+                    status = false;
+                }
                 if (!checkValidation(edtName, edtPrice)) {
                 } else {
                     if (uriImage != null) {

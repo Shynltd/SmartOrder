@@ -44,7 +44,7 @@ public class MainFragment extends Fragment {
                 showCustomPopupMenu(view);
             }
         });
-        Support.replaceFragment(getFragmentManager(), R.id.frm, new MenuFragment(), false, 0, 0);
+        getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.frm, new MenuFragment(),Constants.fragmentMenu).commit();
         getFragmentItem();
         return view;
 

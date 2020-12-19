@@ -39,6 +39,10 @@ module.exports.postUpdate = async (req, res) => {
     let findFood = await menu.findById(req.params.id);
     if (findFood) {
         let image = findFood.image;
+        let status = req.body.status;
+        if (findFood.type == "Food"){
+            status = true;
+        }
         if (req.files) {
             let avatarName = "/menus/" + uniqid() + "-" + req.files.avatar.name;
             req.files.avatar.mv(`./uploads${avatarName}`);
@@ -51,7 +55,7 @@ module.exports.postUpdate = async (req, res) => {
                 name: name,
                 price: req.body.price,
                 image: image,
-                status: true
+                status: status,
 
             },
         }, {new: true});
