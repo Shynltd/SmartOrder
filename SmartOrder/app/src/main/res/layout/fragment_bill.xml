@@ -20,11 +20,24 @@
         android:id="@+id/edtSearch"
         android:hint="@string/text_search"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hóa đơn hôm nay"
-        android:id="@+id/chkToday"/>
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hóa đơn hôm nay"
+            android:id="@+id/chkToday"/>
+        <TextView
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:textStyle="bold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doanh số:"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:padding="@dimen/_5sdp"
