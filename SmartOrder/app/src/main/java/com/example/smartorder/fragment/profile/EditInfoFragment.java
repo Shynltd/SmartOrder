@@ -4,27 +4,21 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.QuickContactBadge;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.smartorder.R;
 import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
-import com.example.smartorder.fragment.EditProfileFragment;
-import com.example.smartorder.fragment.ProfileFragment;
-import com.example.smartorder.fragment.admin.MenuFragment;
 import com.example.smartorder.model.response.ServerResponse;
 import com.example.smartorder.model.user.User;
 import com.example.smartorder.support.Support;
@@ -103,73 +97,77 @@ public class EditInfoFragment extends Fragment {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void updateInfo() {
-        String name = tvName.getText().toString().trim();
-        String phone = tvPhone.getText().toString().trim();
-        String address = tvAddress.getText().toString().trim();
-        Integer age = Integer.parseInt(tvAge.getText().toString().trim());
-        if (mUriImage == null) {
-            retrofitAPI.updateInfoNoImage(Constants.idLogin, name, phone, age, address).enqueue(new Callback<ServerResponse>() {
-                @Override
-                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                    if (response.code() == 200) {
-                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        Fragment editProfileFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
-                        if (editProfileFragment != null) {
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
-                                            R.anim.admin_fragment_main_translate_exit_left_to_right)
-                                    .remove(editProfileFragment)
-                                    .commit();
-                            Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
-                            if (profileFrament != null){
-                                getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
-                            }
-
-                        }
-                    } else {
-                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+        if (!checkValidate(tvName, tvAge, tvPhone, tvAddress)) {
+            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
-            File file = new File(Support.getPathFromUri(getContext(), mUriImage));
-            RequestBody requestBody = RequestBody.create(MediaType.parse(
-                    getContext().getContentResolver().getType(mUriImage)), file);
-            MultipartBody.Part filePart = MultipartBody.Part.createFormData(
-                    "avatar", file.getName(), requestBody);
-            retrofitAPI.updateInfo(Constants.idLogin, name, phone, age, address, filePart).enqueue(new Callback<ServerResponse>() {
-                @Override
-                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                    if (response.code() == 200) {
-                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
-                        if (fragment != null) {
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
-                                            R.anim.admin_fragment_main_translate_exit_left_to_right)
-                                    .remove(fragment)
-                                    .commit();
-                            Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
-                            if (profileFrament != null){
-                                getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
+            String name = tvName.getText().toString().trim();
+            String phone = tvPhone.getText().toString().trim();
+            String address = tvAddress.getText().toString().trim();
+            Integer age = Integer.parseInt(tvAge.getText().toString().trim());
+            if (mUriImage == null) {
+                retrofitAPI.updateInfoNoImage(Constants.idLogin, name, phone, age, address).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        if (response.code() == 200) {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Fragment editProfileFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
+                            if (editProfileFragment != null) {
+                                getActivity().getSupportFragmentManager().beginTransaction()
+                                        .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
+                                                R.anim.admin_fragment_main_translate_exit_left_to_right)
+                                        .remove(editProfileFragment)
+                                        .commit();
+                                Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
+                                if (profileFrament != null) {
+                                    getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
+                                }
+
                             }
-
+                        } else {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
 
-                @Override
-                public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                File file = new File(Support.getPathFromUri(getContext(), mUriImage));
+                RequestBody requestBody = RequestBody.create(MediaType.parse(
+                        getContext().getContentResolver().getType(mUriImage)), file);
+                MultipartBody.Part filePart = MultipartBody.Part.createFormData(
+                        "avatar", file.getName(), requestBody);
+                retrofitAPI.updateInfo(Constants.idLogin, name, phone, age, address, filePart).enqueue(new Callback<ServerResponse>() {
+                    @Override
+                    public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                        if (response.code() == 200) {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                            Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
+                            if (fragment != null) {
+                                getActivity().getSupportFragmentManager().beginTransaction()
+                                        .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
+                                                R.anim.admin_fragment_main_translate_exit_left_to_right)
+                                        .remove(fragment)
+                                        .commit();
+                                Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
+                                if (profileFrament != null) {
+                                    getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
+                                }
+
+                            }
+                        } else {
+                            Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ServerResponse> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Lỗi hệ thống" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
         }
     }
 
@@ -189,6 +187,25 @@ public class EditInfoFragment extends Fragment {
         tvAddress = (TextInputEditText) view.findViewById(R.id.tvAddress);
         btnSaveChange = (ImageButton) view.findViewById(R.id.btnSaveChange);
         btnBack = (ImageButton) view.findViewById(R.id.btnBack);
+    }
+
+    private boolean checkValidate(TextInputEditText tvName, TextInputEditText tvAge,
+                                  TextInputEditText tvPhone, TextInputEditText tvAddress) {
+
+        if (tvName.getText().toString().trim().isEmpty()) {
+            tvName.setError("Chưa nhập họ tên");
+            return false;
+        } else if (tvPhone.getText().toString().trim().isEmpty()) {
+            tvPhone.setError("Chưa nhập số điện thoại");
+            return false;
+        } else if (tvAge.getText().toString().trim().isEmpty()) {
+            tvAge.setError("Chưa nhập tuổi");
+            return false;
+        } else if (tvAddress.getText().toString().trim().isEmpty()) {
+            tvAddress.setError("Chưa nhập địa chỉ");
+            return false;
+        }
+        return true;
     }
 
     @Override

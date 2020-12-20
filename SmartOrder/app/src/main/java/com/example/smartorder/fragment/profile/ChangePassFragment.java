@@ -55,41 +55,47 @@ public class ChangePassFragment extends Fragment {
     }
 
     private void changePass() {
-        String currentPass = edtCurrentPass.getText().toString().trim();
-        String newPass = edtNewPass.getText().toString().trim();
-        String confirmPass = edtComfirmPass.getText().toString().trim();
-        if (confirmPass.equals(newPass)) {
-            retrofitAPI.changePass(user.getId(),currentPass,newPass).enqueue(new Callback<ServerResponse>() {
-                @Override
-                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                    if (response.code() == 200) {
-                        Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                        Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
-                        if (fragment != null) {
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
-                                            R.anim.admin_fragment_main_translate_exit_left_to_right)
-                                    .remove(fragment)
-                                    .commit();
-                            Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
-                            if (profileFrament != null){
-                                getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
-                            }
+       if(!checkValidate(edtCurrentPass,edtNewPass,edtComfirmPass)){
+           Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+       } else{
+           String newPass = edtNewPass.getText().toString().trim();
+           String confirmPass = edtComfirmPass.getText().toString().trim();
+           String currentPass = edtCurrentPass.getText().toString().trim();
+           if(currentPass.equals(newPass)||newPass.equals(currentPass)){
+               Toast.makeText(getContext(), "Mật khẩu cũ và mới không được trùng nhau", Toast.LENGTH_SHORT).show();
+           } else if (confirmPass.equals(newPass)) {
+               retrofitAPI.changePass(user.getId(),currentPass,newPass).enqueue(new Callback<ServerResponse>() {
+                   @Override
+                   public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                       if (response.code() == 200) {
+                           Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                           Fragment fragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentEditProfile);
+                           if (fragment != null) {
+                               getActivity().getSupportFragmentManager().beginTransaction()
+                                       .setCustomAnimations(R.anim.admin_fragment_main_translate_enter_left_to_right,
+                                               R.anim.admin_fragment_main_translate_exit_left_to_right)
+                                       .remove(fragment)
+                                       .commit();
+                               Fragment profileFrament = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentProfile);
+                               if (profileFrament != null){
+                                   getFragmentManager().beginTransaction().detach(profileFrament).attach(profileFrament).commit();
+                               }
 
-                        }
-                    } else {
-                        Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+                           }
+                       } else {
+                           Toast.makeText(getActivity(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                       }
+                   }
 
-                @Override
-                public void onFailure(Call<ServerResponse> call, Throwable t) {
-                    Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        } else {
-            edtComfirmPass.setError("Mật khẩu nhập lại không chính xác");
-        }
+                   @Override
+                   public void onFailure(Call<ServerResponse> call, Throwable t) {
+                       Toast.makeText(getActivity(), "Lỗi hệ thống" +t.getMessage(), Toast.LENGTH_SHORT).show();
+                   }
+               });
+           } else if(!confirmPass.equals(newPass)||newPass.equals(confirmPass)){
+               Toast.makeText(getContext(),"Mật khẩu không trùng",Toast.LENGTH_LONG).show();
+           }
+       }
     }
 
     private void initView(View view) {
@@ -98,5 +104,18 @@ public class ChangePassFragment extends Fragment {
         edtNewPass = (EditText) view.findViewById(R.id.edtNewPass);
         edtComfirmPass = (EditText) view.findViewById(R.id.edtComfirmPass);
         btnChangePass = (ImageButton) view.findViewById(R.id.btnChangePass);
+    }
+    private boolean checkValidate(EditText edtCurrentPass, EditText edtNewPass, EditText edtComfirmPass){
+        if (edtCurrentPass.getText().toString().trim().isEmpty()) {
+            edtCurrentPass.setError("Chưa nhập mật khẩu cũ");
+            return false;
+        } else if (edtNewPass.getText().toString().trim().isEmpty()) {
+            edtNewPass.setError("Chưa nhập mật khẩu mới");
+            return false;
+        } else if (edtComfirmPass.getText().toString().trim().isEmpty()) {
+            edtComfirmPass.setError("Chưa nhập xác nhận lại mật khẩu");
+            return false;
+        }
+        return true;
     }
 }

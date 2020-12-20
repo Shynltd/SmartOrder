@@ -359,6 +359,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!checkValidate(edtFullName, edtPhone, edtAge, edtAddress, edtCMND)) {
+                    Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 } else {
                     if (mUriImage != null) {
                         String fullName = edtFullName.getText().toString().trim();

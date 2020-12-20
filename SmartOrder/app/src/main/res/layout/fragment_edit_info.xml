@@ -57,22 +57,6 @@
                 android:hint="Họ và tên" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvloPhone"
-            android:layout_width="@dimen/_250sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvloName">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tvPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:hint="Số điện thoại" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvloAge"
@@ -90,7 +74,22 @@
                 android:background="@color/white"
                 android:hint="Tuổi" />
         </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tvloPhone"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvloName">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tvPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:hint="Số điện thoại" />
+        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tvloAddress"
             android:layout_width="@dimen/_250sdp"
