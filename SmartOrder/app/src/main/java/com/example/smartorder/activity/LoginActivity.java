@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        Support.hideSoftKeyboard(LoginActivity.this);
         initPermission();
         setAnimation();
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));
@@ -62,9 +63,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (edtPhone.getText().toString().isEmpty()) {
-                    edtPhone.setError("Vui lòng nhập SDT");
+                    edtPhone.setError("Vui lòng nhập số điện thoại");
                 } else if(edtPassword.getText().toString().isEmpty()){
-                    edtPassword.setError("Vui lòng nhập Password");
+                    edtPassword.setError("Vui lòng nhập mật khẩu");
                 }else {
                     retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
                         @Override
