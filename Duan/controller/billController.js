@@ -6,9 +6,11 @@ let menu = require('../model/menu');
 module.exports.getAllBills = async (req, res) => {
     let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
     let Bills = await bill.find({billCode: new RegExp(keyword, 'i')});
-    console.log(Bills);
-    res.render('bill/listBill', {bills: Bills , keyword});
-
+    var page = parseInt(req.query.page) || 1;
+    var perPage = 8;
+    var start = (page - 1) * perPage;
+    var end = page * perPage;
+    res.render('bill/listBill', {bills: Bills.slice(start,end) , keyword});
 }
 
 module.exports.getBills = async (req, res) => {

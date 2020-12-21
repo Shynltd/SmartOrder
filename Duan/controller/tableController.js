@@ -3,7 +3,11 @@ let table = require('../model/table');
 module.exports.getListTable = async (req, res) => {
     let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
     let listTable = await table.find();
-    res.render('table/listTable', {listTable});
+    var page = parseInt(req.query.page) || 1;
+    var perPage = 8;
+    var start = (page - 1) * perPage;
+    var end = page * perPage;
+    res.render('table/listTable', {listTable: listTable.slice(start,end)});
 }
 module.exports.getCreate = async (req, res) => {
 
