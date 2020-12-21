@@ -201,6 +201,7 @@ public class UserFragment extends Fragment {
         rvListUser = (RecyclerView) view.findViewById(R.id.rvListUser);
         fabAddStaff = (FloatingActionButton) view.findViewById(R.id.fabAddStaff);
         edtSearch = (EditText) view.findViewById(R.id.edtSearch);
+        fabAddStaff.attachToRecyclerView(rvListUser);
     }
 
 

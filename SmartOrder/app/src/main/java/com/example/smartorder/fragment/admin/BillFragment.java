@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import com.example.smartorder.api.APIModule;
 import com.example.smartorder.api.RetrofitAPI;
 import com.example.smartorder.constants.Constants;
 import com.example.smartorder.model.bill.Bill;
+import com.example.smartorder.support.Support;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +43,7 @@ public class BillFragment extends Fragment {
     private RetrofitAPI retrofitAPI;
     private EditText edtSearch;
     private CheckBox chkToday;
+    private TextView tvDoanhSo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +56,7 @@ public class BillFragment extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
+                    int total =0;
                     Date currentTime = Calendar.getInstance().getTime();
                     List<Bill> billFilter = new ArrayList<>();
                     for(Bill bill : billList){
@@ -60,12 +64,17 @@ public class BillFragment extends Fragment {
                         int date = currentTime.getDate();
                         if(dateBill == date){
                             billFilter.add(bill);
-                            Log.e("chay vao: ", String.valueOf(billFilter.size()));
                         }
                     }
                     billAdapter.filterList(billFilter,getActivity());
                     billAdapter.notifyDataSetChanged();
+                    for (int i = 0; i<billFilter.size();i++){
+                        total+=billFilter.get(i).getTotalPrice();
+                    }
+                    tvDoanhSo.setVisibility(View.VISIBLE);
+                    tvDoanhSo.setText("Doanh số: " + Support.decimalFormat(total)+" VNĐ");
                 } else {
+                    tvDoanhSo.setVisibility(View.INVISIBLE);
                     billAdapter.filterList(billList,getActivity());
                     billAdapter.notifyDataSetChanged();
                 }
@@ -148,5 +157,6 @@ public class BillFragment extends Fragment {
         retrofitAPI = APIModule.getInstance().create(RetrofitAPI.class);
         edtSearch = view.findViewById(R.id.edtSearch);
         chkToday = view.findViewById(R.id.chkToday);
+        tvDoanhSo = view.findViewById(R.id.tvDoanhSo);
     }
 }
