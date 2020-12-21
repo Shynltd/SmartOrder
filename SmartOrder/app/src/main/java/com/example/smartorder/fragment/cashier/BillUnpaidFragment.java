@@ -157,7 +157,7 @@ public class BillUnpaidFragment extends Fragment {
                 String billCode = bill.getBillCode();
                 Integer tableCode = bill.getTableCode();
                 Integer totalPrice = bill.getTotalPrice();
-                getActivity().getSupportFragmentManager().beginTransaction().add(R.id.frq, new PayBillFragment(billCode, tableCode, totalPrice), Constants.fragmentPayBill).commit();
+                getActivity().getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.admin_fragment_view_bill_scale_enter,0).add(R.id.frq, new PayBillFragment(billCode, tableCode, totalPrice), Constants.fragmentPayBill).commit();
             }
         });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
