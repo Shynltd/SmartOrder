@@ -1,7 +1,7 @@
 let table = require('../model/table');
 
 module.exports.getListTable = async (req, res) => {
-    let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
+    let keyword = req.query.keyword === undefined ? "" : req.query.keyword;
     let listTable = await table.find();
     var page = parseInt(req.query.page) || 1;
     var perPage = 8;
