@@ -99,6 +99,8 @@ public class EditInfoFragment extends Fragment {
     private void updateInfo() {
         if (!checkValidate(tvName, tvAge, tvPhone, tvAddress)) {
             Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else if(!(tvPhone.getText().toString().length() ==10)){
+            Toast.makeText(getContext(), "SDT có 10 chữ số. Vui lòng nhập lại", Toast.LENGTH_SHORT).show();
         } else {
             String name = tvName.getText().toString().trim();
             String phone = tvPhone.getText().toString().trim();

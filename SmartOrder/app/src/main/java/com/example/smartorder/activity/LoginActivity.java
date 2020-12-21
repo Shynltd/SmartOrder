@@ -47,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView imgLogo;
     private ConstraintLayout form;
     private boolean exit = false;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (edtPhone.getText().toString().isEmpty()) {
-                    edtPhone.setError("Vui lòng nhập số điện thoại");
-                } else if(edtPassword.getText().toString().isEmpty()){
-                    edtPassword.setError("Vui lòng nhập mật khẩu");
+                if(!checkValidate(edtPhone,edtPassword)){
+                    Toast.makeText(LoginActivity.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_LONG).show();
+                } else if(!(edtPhone.getText().toString().length()==10)){
+                    Toast.makeText(LoginActivity.this,"SDT có 10 chữ số",Toast.LENGTH_LONG).show();
                 }else {
                     retrofitAPI.checkLogin(edtPhone.getText().toString().trim(), edtPassword.getText().toString().trim()).enqueue(new Callback<Auth>() {
                         @Override
@@ -102,6 +101,17 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(LoginActivity.this, auth.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private boolean checkValidate(EditText edtPhone,EditText edtPassword){
+        if (edtPhone.getText().toString().isEmpty()) {
+            edtPhone.setError("Vui lòng nhập SDT");
+            return false;
+        } else if(edtPassword.getText().toString().isEmpty()){
+            edtPassword.setError("Vui lòng nhập mật khẩu");
+            return false;
+        }
+        return true;
     }
 
     private void initView() {
