@@ -53,10 +53,10 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-                                onClickListener.deleteFood(position,menuListFood.get(position).getId());
+                                onClickListener.deleteFood(menuListFood.get(position),menuListFood.get(position).getId());
                                 break;
                             case R.id.update:
-                                onClickListener.updateFood(position);
+                                onClickListener.updateFood(menuListFood.get(position));
                                 break;
                         }
                         return false;
@@ -93,8 +93,8 @@ public class MenuFoodAdapter extends RecyclerView.Adapter<MenuFoodAdapter.MenuHo
     }
 
     public interface OnClickListener {
-        void  deleteFood (int position ,String id);
-        void  updateFood (int position);
+        void  deleteFood (Menu menuFood ,String id);
+        void  updateFood (Menu menuFood);
     }
 
 }

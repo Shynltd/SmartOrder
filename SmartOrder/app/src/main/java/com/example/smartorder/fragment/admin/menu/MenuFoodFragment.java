@@ -140,9 +140,9 @@ public class MenuFoodFragment extends Fragment {
     private void rvListFood() {
         menuFoodAdapter = new MenuFoodAdapter(menuListFood, getContext(), new MenuFoodAdapter.OnClickListener() {
             @Override
-            public void deleteFood(int position, String id) {
+            public void deleteFood(Menu menuFood, String id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa món ăn" + menuListFood.get(position).getName() + " không?")
+                builder.setMessage("Bạn có muốn xóa món ăn" + menuFood.getName() + " không?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -150,13 +150,15 @@ public class MenuFoodFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(MenuFoodFragment.this).attach(MenuFoodFragment.this).commit();
+                                        Fragment menuFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentMenu);
+                                        if (menuFragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(menuFragment).replace(R.id.frm, new MenuFragment(), Constants.fragmentMenu).commit();
+                                        }
                                     }
 
                                     @Override
                                     public void onFailure(Call<ServerResponse> call, Throwable t) {
-
+                                        Toast.makeText(getActivity(), "Lỗi hệ thống: "+t.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -169,8 +171,8 @@ public class MenuFoodFragment extends Fragment {
             }
 
             @Override
-            public void updateFood(int position) {
-                dialogUpdateFoods(position);
+            public void updateFood(Menu menuFood) {
+                dialogUpdateFoods(menuFood);
             }
         });
         rvListMenuFood.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -178,26 +180,25 @@ public class MenuFoodFragment extends Fragment {
         rvListMenuFood.setAdapter(menuFoodAdapter);
     }
 
-    private void dialogUpdateFoods(int position) {
-        Menu menu = menuListFood.get(position);
+    private void dialogUpdateFoods(Menu menuFood) {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setView(alert);
         alertDialog.setTitle("Chỉnh sửa thông tin Món ăn");
         alertDialog.setCancelable(false);
         EditText edtName = alert.findViewById(R.id.edtNameFood);
-        edtName.setText(String.valueOf(menu.getName()));
+        edtName.setText(String.valueOf(menuFood.getName()));
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edtPrice.setText(String.valueOf(menu.getPrice()));
+        edtPrice.setText(String.valueOf(menuFood.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " + menu.getType());
+        tvType.setText("Loại : " + menuFood.getType());
         RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
         TextView tvStatus = alert.findViewById(R.id.tvStatus);
         tvStatus.setVisibility(View.GONE);
         rdTrue.setVisibility(View.GONE);
         rdFalse.setVisibility(View.GONE);
         imgFood = alert.findViewById(R.id.imgAvtFood);
-        Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
+        Glide.with(getContext()).load(Constants.LINK + menuFood.getImage()).into(imgFood);
         Button btnCancel = alert.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,7 +237,7 @@ public class MenuFoodFragment extends Fragment {
                                 getContext().getContentResolver().getType(uriImage)), file);
                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                                 "avatar", file.getName(), requestBody);
-                        retrofitAPI.updateFood(menu.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateFood(menuFood.getId(), tenmon, price, filePart).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -255,7 +256,7 @@ public class MenuFoodFragment extends Fragment {
                     } else {
                         String tenmon = edtName.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        retrofitAPI.updateFoodNoImage(menu.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateFoodNoImage(menuFood.getId(), tenmon, price).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

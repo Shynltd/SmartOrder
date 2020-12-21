@@ -148,9 +148,9 @@ public class MenuDrinkFragment extends Fragment {
     private void rvListDrinks() {
         menuDrinksAdapter = new MenuDrinksAdapter(menuListDrink, getContext(), new MenuDrinksAdapter.OnClickListener() {
             @Override
-            public void deleteDrink(int position, String id) {
+            public void deleteDrink(Menu menuDrink, String id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa đồ uống " + menuListDrink.get(position).getName() + " không ?")
+                builder.setMessage("Bạn có muốn xóa đồ uống " + menuDrink.getName() + " không ?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -158,8 +158,10 @@ public class MenuDrinkFragment extends Fragment {
                                     @Override
                                     public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
-                                        FragmentTransaction ft = getFragmentManager().beginTransaction();
-                                        ft.detach(MenuDrinkFragment.this).attach(MenuDrinkFragment.this).commit();
+                                        Fragment menuFragment = getActivity().getSupportFragmentManager().findFragmentByTag(Constants.fragmentMenu);
+                                        if (menuFragment != null) {
+                                            getActivity().getSupportFragmentManager().beginTransaction().remove(menuFragment).replace(R.id.frm, new MenuFragment(), Constants.fragmentMenu).commit();
+                                        }
 
                                     }
 
@@ -178,8 +180,8 @@ public class MenuDrinkFragment extends Fragment {
             }
 
             @Override
-            public void updateDrink(int position) {
-                dialogUpdateDrink(position);
+            public void updateDrink(Menu menuDrink) {
+                dialogUpdateDrink(menuDrink);
             }
         });
         rvListMenuDrink.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -188,9 +190,7 @@ public class MenuDrinkFragment extends Fragment {
     }
 
 
-    private void dialogUpdateDrink(int position) {
-
-        Menu menu = menuListDrink.get(position);
+    private void dialogUpdateDrink(Menu menuDrink) {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setTitle("Cập nhật thông tin món ăn");
@@ -198,15 +198,15 @@ public class MenuDrinkFragment extends Fragment {
         alertDialog.setCancelable(false);
 
         edtTenMon = alert.findViewById(R.id.edtNameFood);
-        edtTenMon.setText(String.valueOf(menu.getName()));
+        edtTenMon.setText(String.valueOf(menuDrink.getName()));
         edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edtPrice.setText(String.valueOf(menu.getPrice()));
+        edtPrice.setText(String.valueOf(menuDrink.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " + menu.getType());
+        tvType.setText("Loại : " + menuDrink.getType());
         imvFood = alert.findViewById(R.id.imgAvtFood);
-        Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imvFood);
+        Glide.with(getContext()).load(Constants.LINK + menuDrink.getImage()).into(imvFood);
         RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
-        if (menu.getStatus()) {
+        if (menuDrink.getStatus()) {
             rdTrue.setChecked(true);
         } else {
             rdFalse.setChecked(true);
@@ -249,7 +249,7 @@ public class MenuDrinkFragment extends Fragment {
                                 getContext().getContentResolver().getType(uriImage)), file);
                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                                 "avatar", file.getName(), requestBody);
-                        retrofitAPI.updateDrink(menu.getId(), tenmon, status,price, filePart).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateDrink(menuDrink.getId(), tenmon, status,price, filePart).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -268,7 +268,7 @@ public class MenuDrinkFragment extends Fragment {
                     } else {
                         String tenmon = edtTenMon.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        retrofitAPI.updateDrinkNoImage(menu.getId(), tenmon,status, price).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateDrinkNoImage(menuDrink.getId(), tenmon,status, price).enqueue(new Callback<ServerResponse>() {
 
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {

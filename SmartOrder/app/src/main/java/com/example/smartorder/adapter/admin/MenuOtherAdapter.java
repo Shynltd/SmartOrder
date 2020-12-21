@@ -62,10 +62,10 @@ public class MenuOtherAdapter extends RecyclerView.Adapter<MenuOtherAdapter.Menu
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-                                onClickListener.deleteOther(position,menuListOther.get(position).getId());
+                                onClickListener.deleteOther(menuListOther.get(position),menuListOther.get(position).getId());
                                 break;
                             case R.id.update:
-                                onClickListener.updateOther(position);
+                                onClickListener.updateOther(menuListOther.get(position));
                                 break;
                         }
                         return false;
@@ -103,8 +103,8 @@ public class MenuOtherAdapter extends RecyclerView.Adapter<MenuOtherAdapter.Menu
         }
     }
     public interface OnClickListener {
-        void  deleteOther (int position ,String id);
-        void  updateOther (int position );
+        void  deleteOther (Menu menuOther ,String id);
+        void  updateOther (Menu menuOther);
     }
     
     

@@ -137,9 +137,9 @@ public class MenuOtherFragment extends Fragment {
     private void initRecycle() {
         menuOtherAdapter = new MenuOtherAdapter(menuListOther, getActivity(), new MenuOtherAdapter.OnClickListener() {
             @Override
-            public void deleteOther(int position, String id) {
+            public void deleteOther(Menu menuOther, String id) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Bạn có muốn xóa món ăn" + menuListOther.get(position).getName() + " không?")
+                builder.setMessage("Bạn có muốn xóa món ăn" + menuOther.getName() + " không?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -168,9 +168,9 @@ public class MenuOtherFragment extends Fragment {
             }
 
             @Override
-            public void updateOther(int position) {
+            public void updateOther(Menu menuOther) {
 
-                dialogUpdateOthers(position);
+                dialogUpdateOthers(menuOther);
             }
         });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -180,8 +180,7 @@ public class MenuOtherFragment extends Fragment {
         menuOtherAdapter.notifyDataSetChanged();
     }
 
-    private void dialogUpdateOthers(int position) {
-        Menu menu = menuListOther.get(position);
+    private void dialogUpdateOthers(Menu menuOther) {
         AlertDialog alertDialog = new AlertDialog.Builder(getContext()).create();
         View alert = LayoutInflater.from(getContext()).inflate(R.layout.dialog_update_menu, null);
         alertDialog.setView(alert);
@@ -189,19 +188,19 @@ public class MenuOtherFragment extends Fragment {
         alertDialog.setCancelable(false);
 
         EditText edtName = alert.findViewById(R.id.edtNameFood);
-        edtName.setText(String.valueOf(menu.getName()));
+        edtName.setText(String.valueOf(menuOther.getName()));
         EditText edtPrice = alert.findViewById(R.id.edtPriceFood);
-        edtPrice.setText(String.valueOf(menu.getPrice()));
+        edtPrice.setText(String.valueOf(menuOther.getPrice()));
         TextView tvType = alert.findViewById(R.id.tvTypeFood);
-        tvType.setText("Loại : " + menu.getType());
+        tvType.setText("Loại : " + menuOther.getType());
         RadioButton rdTrue = alert.findViewById(R.id.rdTrue), rdFalse = alert.findViewById(R.id.rdFalse);
-        if (menu.getStatus()) {
+        if (menuOther.getStatus()) {
             rdTrue.setChecked(true);
         } else {
             rdFalse.setChecked(true);
         }
         imgFood = alert.findViewById(R.id.imgAvtFood);
-        Glide.with(getContext()).load(Constants.LINK + menu.getImage()).into(imgFood);
+        Glide.with(getContext()).load(Constants.LINK + menuOther.getImage()).into(imgFood);
 
         Button btnCancel = alert.findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -244,7 +243,7 @@ public class MenuOtherFragment extends Fragment {
                                 getContext().getContentResolver().getType(uriImage)), file);
                         MultipartBody.Part filePart = MultipartBody.Part.createFormData(
                                 "avatar", file.getName(), requestBody);
-                        retrofitAPI.updateOther(menu.getId(), tenmon, price, status, filePart).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateOther(menuOther.getId(), tenmon, price, status, filePart).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
@@ -263,7 +262,7 @@ public class MenuOtherFragment extends Fragment {
                     } else {
                         String tenmon = edtName.getText().toString();
                         Integer price = Integer.parseInt(edtPrice.getText().toString());
-                        retrofitAPI.updateOtherNoImage(menu.getId(), tenmon, status, price).enqueue(new Callback<ServerResponse>() {
+                        retrofitAPI.updateOtherNoImage(menuOther.getId(), tenmon, status, price).enqueue(new Callback<ServerResponse>() {
                             @Override
                             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                                 Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();

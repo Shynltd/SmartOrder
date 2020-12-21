@@ -62,10 +62,10 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
                     public boolean onMenuItemClick(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
                             case R.id.delete:
-                                onClickListener.deleteDrink(position,menuListDrinks.get(position).getId());
+                                onClickListener.deleteDrink(menuListDrinks.get(position),menuListDrinks.get(position).getId());
                                 break;
                             case R.id.update:
-                                onClickListener.updateDrink(position);
+                                onClickListener.updateDrink(menuListDrinks.get(position));
                                 break;
                         }
                         return false;
@@ -103,8 +103,8 @@ public class MenuDrinksAdapter extends RecyclerView.Adapter<MenuDrinksAdapter.Me
         }
     }
     public interface OnClickListener {
-        void  deleteDrink (int position ,String id);
-        void  updateDrink(int position );
+        void  deleteDrink (Menu menuDrink ,String id);
+        void  updateDrink(Menu menuDrink );
     }
     
     
