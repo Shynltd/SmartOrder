@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class EditInfoFragment extends Fragment {
     private TextInputEditText tvPhone;
     private TextInputEditText tvAge;
     private TextInputEditText tvAddress;
-    private ImageButton btnSaveChange;
+    private Button btnSaveChange;
     private ImageButton btnBack;
     private Uri mUriImage = null;
     private final int REQUEST_CODE_LOAD_IMAGE = 1;
@@ -187,7 +188,7 @@ public class EditInfoFragment extends Fragment {
         tvPhone = (TextInputEditText) view.findViewById(R.id.tvPhone);
         tvAge = (TextInputEditText) view.findViewById(R.id.tvAge);
         tvAddress = (TextInputEditText) view.findViewById(R.id.tvAddress);
-        btnSaveChange = (ImageButton) view.findViewById(R.id.btnSaveChange);
+        btnSaveChange = (Button) view.findViewById(R.id.btnSaveChange);
         btnBack = (ImageButton) view.findViewById(R.id.btnBack);
     }
 

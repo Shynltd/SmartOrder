@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -31,7 +32,7 @@ public class ChangePassFragment extends Fragment {
     private EditText edtCurrentPass;
     private EditText edtNewPass;
     private EditText edtComfirmPass;
-    private ImageButton btnChangePass;
+    private Button btnChangePass;
     private RetrofitAPI retrofitAPI;
 
     public ChangePassFragment(User user) {
@@ -103,7 +104,7 @@ public class ChangePassFragment extends Fragment {
         edtCurrentPass = (EditText) view.findViewById(R.id.edtCurrentPass);
         edtNewPass = (EditText) view.findViewById(R.id.edtNewPass);
         edtComfirmPass = (EditText) view.findViewById(R.id.edtComfirmPass);
-        btnChangePass = (ImageButton) view.findViewById(R.id.btnChangePass);
+        btnChangePass = (Button) view.findViewById(R.id.btnChangePass);
     }
     private boolean checkValidate(EditText edtCurrentPass, EditText edtNewPass, EditText edtComfirmPass){
         if (edtCurrentPass.getText().toString().trim().isEmpty()) {

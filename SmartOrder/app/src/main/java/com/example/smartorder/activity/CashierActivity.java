@@ -15,7 +15,7 @@ public class CashierActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cashier);
-        Support.hideSoftKeyboard(CashierActivity.this);
+//        Support.hideSoftKeyboard(CashierActivity.this);
         getSupportFragmentManager().beginTransaction().replace(R.id.frq, new CashierFragment(), Constants.fragmentCashier).commit();
     }
 
