@@ -68,9 +68,9 @@ module.exports.updateUser = async (req, res) => {
                 indentityCardNumber
             })
             if (updated) {
-                res.redirect('/users/info/' + findUser._id);
+                res.redirect('/users');
             } else {
-                res.error(404);
+                res.redirect('/users/info/' + findUser._id);
             }
         }
     }

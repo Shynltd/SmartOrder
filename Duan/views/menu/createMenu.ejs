@@ -127,11 +127,7 @@
                     <option value="Food">Thức ăn</option>
                 </select>
             </div>
-            <div class="form-group col-md-3" id="formAmount">
-                <h6><label for="formGroupExampleInput">Số lượng</label></h6>
-                <input type="Number" class="form-control" name="amount" placeholder="Số lượng">
-                <span id="amount-err" class="validate-err text-danger"></span>
-            </div>
+
         </div>
         <div class="row">
             <div class="form-group col-md-6">
@@ -197,10 +193,7 @@
             $('#image-err').text("Hãy kiểm tra đúng định dạng ảnh (gif|jpg|png)");
             isValid = false;
         }
-        if(parseInt(amount)<0|| amount.length<=0){
-            $('#amount-err').text("Hãy nhập số lượng");
-            isValid = false;
-        }
+
         if(parseInt(price)<0|| price.length<=0){
             $('#price-err').text("Hãy nhập giá");
             isValid = false;

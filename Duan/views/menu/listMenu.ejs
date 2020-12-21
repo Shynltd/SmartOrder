@@ -23,12 +23,11 @@
             bottom: 140px;
             right: 120px;
         }
-        body{
-            background-image: linear-gradient(deepskyblue,lightpink);
+
+        body {
+            background-image: linear-gradient(deepskyblue, lightpink);
             min-height: 100vh;
         }
-
-
 
 
         .menu-block {
@@ -63,37 +62,33 @@
             }
 
         }
-        .pagination > li > a
-        {
+
+        .pagination > li > a {
             background-color: white;
             color: green
         }
 
-        .page-item.active .page-link
-        {
-            background-color:green;
-            border-color:green
+        .page-item.active .page-link {
+            background-color: green;
+            border-color: green
         }
 
         .pagination > li > a:focus,
         .pagination > li > a:hover,
         .pagination > li > span:focus,
-        .pagination > li > span:hover
-        {
-            color: green;
+        .pagination > li > span:hover {
+            color: wheat;
             background-color: green;
             border-color: #ddd;
         }
 
-        .pagination > .active > a
-        {
+        .pagination > .active > a {
             color: green;
             background-color: green;
             border: solid 1px green;
         }
 
-        .pagination > .active > a:hover
-        {
+        .pagination > .active > a:hover {
             background-color: green;
             border: solid 1px green;
         }
@@ -193,8 +188,10 @@
                     <div class="row justify-content-lg-end">
                         <div class="col-4 m-3">
                             <form action="" method="get">
-                                <input type="text" name="keyword" placeholder="Nhập Từ Khóa">
-                                <input type="submit" value="Tìm Kiếm" class="btn-sm btn-primary ">
+                                <input type="text" name="keyword" style="border-radius: 10px; "
+                                       placeholder="Nhập Từ Khóa">
+                                <input type="submit" value="Tìm Kiếm" style="border-radius: 10px; "
+                                       class="btn-sm btn-primary ">
                             </form>
                         </div>
                     </div>
@@ -245,7 +242,7 @@
                     </div>
                     <ul class="pagination justify-content-center">
                         <li class="page-item"><a class="page-link" href="/menus?page=1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/menus?page=2">2</a></li>
+                        <li class="page-item"><a class="page-link active" href="/menus?page=2">2</a></li>
                         <li class="page-item"><a class="page-link" href="/menus?page=3">3</a></li>
                         <li class="page-item"><a class="page-link" href="/menus?page=4">4</a></li>
                         <li class="page-item"><a class="page-link" href="/menus?page=5">5</a></li>
@@ -256,7 +253,6 @@
                         <li class="page-item"><a class="page-link" href="/menus?page=10">10</a></li>
                     </ul>
                 </div>
-
 
 
                 <div class="tab-pane fade " id="drink" role="tabpanel">
@@ -302,15 +298,17 @@
                 </div>
 
 
+                <form method="get" action="/menus/create">
+                    <button class="kc_fab_main_btn" type="submit">+</button>
+                </form>
 
-        <form method="get" action="/menus/create">
-            <button class="kc_fab_main_btn" type="submit">+</button>
-        </form>
 
+                <!-- Kết thúc phần nội dung chính -->
 
-        <!-- Kết thúc phần nội dung chính -->
-
+            </div>
+        </div>
     </div>
 </div>
+
 </body>
 </html>

@@ -20,8 +20,9 @@
             border-radius: 25px;
             box-shadow: 5px 5px 20px black;
         }
-        body{
-            background-image: linear-gradient(deepskyblue,lightpink);
+
+        body {
+            background-image: linear-gradient(deepskyblue, lightpink);
             min-height: 100vh;
         }
     </style>
@@ -111,7 +112,8 @@
     <!-- Phần menu chính -->
     <h2 class="container" style="text-align: center; margin-top: 20px">Thêm mới nhân viên</h2>
     <br>
-    <form method="post" action="/users/create" class="form container" onsubmit="return validateForm()" enctype="multipart/form-data">
+    <form method="post" action="/users/create" class="form container" onsubmit="return validateForm()"
+          enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-5">
                 <h6><label for="formGroupExampleInput">Số điện thoại</label></h6>
@@ -142,21 +144,21 @@
             </div>
         </div>
         <div class="row">
-        <div class="form-group col-md-6">
-            <h6><label for="formGroupExampleInput">Chức vụ</label></h6>
-            <select class="form-control" name="role" id="select">
-                <option value="Admin">Admin</option>
-                <option value="Staff">Staff</option>
-                <option value="Cashier">Cashier</option>
-            </select>
-        </div>
+            <div class="form-group col-md-6">
+                <h6><label for="formGroupExampleInput">Chức vụ</label></h6>
+                <select class="form-control" name="role" id="select">
+                    <option value="Admin">Admin</option>
+                    <option value="Staff">Staff</option>
+                    <option value="Cashier">Cashier</option>
+                </select>
+            </div>
 
 
-        <div class="form-group col-md-6">
-            <h6><label for="formGroupExampleInput">Avatar</label></h6>
-            <input type="file" class="form-control" id="formGroupExampleInput" name="avatar">
-            <span id="avatar-err" class="validate-err text-danger"></span>
-        </div>
+            <div class="form-group col-md-6">
+                <h6><label for="formGroupExampleInput">Avatar</label></h6>
+                <input type="file" class="form-control" id="formGroupExampleInput" name="avatar">
+                <span id="avatar-err" class="validate-err text-danger"></span>
+            </div>
         </div>
         <% if (err){ %>
             <div class="alert alert-danger" role="alert">
@@ -173,7 +175,7 @@
     <!-- Kết thúc phần nội dung chính -->
 </div>
 <script>
-    function validateForm(){
+    function validateForm() {
         // validate data
         let isValid = true;
         $('.validate-err ').text("");
@@ -184,31 +186,31 @@
         let address = $('[name="address"]').val();
         let soCMND = $('[name="soCMND"]').val();
 
-        if(phone.length < 4){
+        if (phone.length < 4) {
             $('#phone-err').text("Hãy nhập số điện thoại");
             isValid = false;
         }
 
-        if(fullName.length < 4){
+        if (fullName.length < 4) {
             $('#fullName-err').text("Hãy nhập tên đầy đủ");
             isValid = false;
         }
-        if($('[name="avatar"]').get(0).files.length === 0){
+        if ($('[name="avatar"]').get(0).files.length === 0) {
             $('#avatar-err').text("Hãy chọn file ảnh đại diện");
             isValid = false;
-        }else if(checkfileImageType(`[name="avatar"]`) == false){
+        } else if (checkfileImageType(`[name="avatar"]`) == false) {
             $('#avatar-err').text("Hãy kiểm tra đúng định dạng ảnh (gif|jpg|png)");
             isValid = false;
         }
-        if(address.length < 4){
+        if (address.length < 4) {
             $('#address-err').text("Hãy nhập địa chỉ");
             isValid = false;
         }
-        if(parseInt(soCMND)<0|| soCMND.length<=0){
+        if (parseInt(soCMND) < 0 || soCMND.length <= 0) {
             $('#soCMND-err').text("Hãy nhập số CMND");
             isValid = false;
         }
-        if(parseInt(age)<0|| age.length<=0){
+        if (parseInt(age) < 0 || age.length <= 0) {
             $('#age-err').text("Hãy nhập tuổi");
             isValid = false;
         }

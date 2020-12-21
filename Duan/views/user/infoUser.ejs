@@ -14,10 +14,11 @@
             padding: 1%;
             margin-top: 1%;
             border-radius: 25px;
-            background: #92badd;
+
             margin-bottom: 20px;
         }
-        body{
+
+        body {
             padding-bottom: 20px;
             min-height: 100vh;
         }
@@ -126,8 +127,9 @@
             font-weight: 600;
             color: #0062cc;
         }
-        body{
-            background-image: linear-gradient(deepskyblue,lightpink);
+
+        body {
+            background-image: linear-gradient(deepskyblue, lightpink);
         }
 
     </style>
@@ -253,7 +255,7 @@
                         <a><%= userIf.indentityCardNumber %></a>
                     </div>
                     <ul class="nav" id="myTab" style="margin-left: 40px">
-                        <li class="nav-item" style="margin: 0px">
+                        <li class="nav-item show active" style="margin: 0px">
                             <a class="nav-link " id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                                aria-controls="profile" aria-selected="true">Chỉnh sửa hồ sơ</a>
                         </li>
@@ -266,8 +268,8 @@
                 <div class="col-md-8" style="margin-top: 20px">
 
                     <div class="tab-content profile-tab" id="myTabContent">
-                        <div class="tab-pane fade " id="profile" role="tabpanel">
-                            <form class="form" method="post">
+                        <div class="tab-pane show active " id="profile" role="tabpanel">
+                            <form class="form" method="post" >
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-xs-4 m-2">
@@ -349,6 +351,7 @@
                                             <label for="password"><h6>Mật khẩu</h6></label>
                                             <input type="password" class="form-control" name="password" id="password"
                                                    placeholder="Password" title="enter your password.">
+                                            <span id="pass-err" class="validate-err text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -356,6 +359,7 @@
                                             <label for="password2"><h6>Nhập lại mật khẩu</h6></label>
                                             <input type="password" class="form-control" name="password2" id="password2"
                                                    placeholder="Confirm password" title="enter your password2.">
+                                            <span id="repass-err" class="validate-err text-danger"></span>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -367,7 +371,7 @@
                                             <a href="/users" class="btn btn-lg btn-danger" type="reset"><i
                                                         class="glyphicon glyphicon-repeat"></i>
                                                 Huỷ
-                                            </a >
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

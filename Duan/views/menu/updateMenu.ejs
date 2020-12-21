@@ -11,7 +11,6 @@
     <style>
 
 
-
         .form {
             margin: 0px auto;
             margin-bottom: 20px;
@@ -22,8 +21,9 @@
             border-radius: 25px;
             box-shadow: 5px 5px 20px black;
         }
-        body{
-            background-image: linear-gradient(deepskyblue,lightpink);
+
+        body {
+            background-image: linear-gradient(deepskyblue, lightpink);
             min-height: 100vh;
         }
     </style>
@@ -114,7 +114,8 @@
     <!-- Phần nội dung chính -->
     <h2 class="container" style="text-align: center">Sửa thông tin món ăn</h2>
     <br>
-    <form method="post" action="/menus/<%= findFood._id %>/update" class="form container" enctype="multipart/form-data">
+    <form method="post" action="/menus/<%= findFood._id %>/update" onsubmit="return validateForm()"
+          class="form container" enctype="multipart/form-data">
         <div class="row">
             <div class="form-group col-md-6">
                 <h6><label for="formGroupExampleInput">Tên món ăn</label></h6>
@@ -138,13 +139,8 @@
                     </option>
                 </select>
             </div>
-            <div class="form-group col-md-3" id="formAmount" <% if (findFood.type == "Food") { %> hidden<% } %>>
-                <h6><label for="formGroupExampleInput">Số lượng</label></h6>
-                <input type="Number" class="form-control" name="amount" placeholder="Số lượng"
-                       value="<%= findFood.amount %>">
-                <span id="amount-err" class="validate-err text-danger"></span>
-            </div>
-            </div>
+
+        </div>
 
         <div class="row">
             <div class="form-group col-md-6">
@@ -155,7 +151,8 @@
             </div>
             <div class="form-group col-md-6">
                 <h6><label for="formGroupExampleInput">Image</label></h6>
-                <input type="file" class="form-control" id="formGroupExampleInput" name="image">
+                <input type="file" class="form-control" id="formGroupExampleInput" name="image"
+                       value="<%= findFood.image %>">
                 <span id="image-err" class="validate-err text-danger"></span>
             </div>
         </div>
@@ -190,7 +187,7 @@
 </div>
 </div>
 <script>
-    function validateForm(){
+    function validateForm() {
         // validate data
         let isValid = true;
         $('.validate-err ').text("");
@@ -200,22 +197,19 @@
         let price = $('[name="price"]').val();
 
 
-        if(name.length < 4){
+        if (name.length < 4) {
             $('#name-err').text("Hãy nhập tên món ăn");
             isValid = false;
         }
-        if($('[name="image"]').get(0).files.length === 0){
+        if ($('[name="image"]').get(0).files.length === 0) {
             $('#image-err').text("Hãy chọn file ảnh");
             isValid = false;
-        }else if(checkfileImageType(`[name="image"]`) == false){
+        } else if (checkfileImageType(`[name="image"]`) == false) {
             $('#image-err').text("Hãy kiểm tra đúng định dạng ảnh (gif|jpg|png)");
             isValid = false;
         }
-        if(parseInt(amount)<0|| amount.length<=0){
-            $('#amount-err').text("Hãy nhập số lượng");
-            isValid = false;
-        }
-        if(parseInt(price)<0|| price.length<=0){
+
+        if (parseInt(price) < 0 || price.length <= 0) {
             $('#price-err').text("Hãy nhập giá");
             isValid = false;
         }
