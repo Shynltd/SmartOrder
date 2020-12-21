@@ -45,19 +45,21 @@ public class BillPreviewAdapter extends RecyclerView.Adapter<BillPreviewAdapter.
         holder.tvSl.setText(billOnes.getSl() + "");
         holder.tvName.setText(billOnes.getName());
         holder.tvTotal.setText(Support.decimalFormat(billOnes.getTotalMoney()) + " VNĐ");
-        holder.btnTang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int sl = Integer.parseInt(holder.tvSl.getText().toString());
-                sl += 1;
-                holder.tvSl.setText(String.valueOf(sl));
-                billOneList.get(position).setSl(sl);
-                int totalMoney = sl * billOneList.get(position).getPrice();
-                holder.tvTotal.setText(Support.decimalFormat(totalMoney) + " VNĐ");
-                billOneList.get(position).setTotalMoney(totalMoney);
-                Log.e("check: ", String.valueOf(billOneList.get(position).getSl()));
-            }
-        });
+//        holder.btnTang.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                int sl = Integer.parseInt(holder.tvSl.getText().toString());
+//                sl += 1;
+//                holder.tvSl.setText(String.valueOf(sl));
+//                billOneList.get(position).setSl(sl);
+//                int totalMoney = sl * billOneList.get(position).getPrice();
+//                holder.tvTotal.setText(Support.decimalFormat(totalMoney) + " VNĐ");
+//                billOneList.get(position).setTotalMoney(totalMoney);
+//            }
+//        });
+        if (billOnes.getType().equals("Food")){
+            holder.btnGiam.setVisibility(View.INVISIBLE);
+        }
         holder.btnGiam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,7 +72,6 @@ public class BillPreviewAdapter extends RecyclerView.Adapter<BillPreviewAdapter.
                 int totalMoney = sl * billOneList.get(position).getPrice();
                 holder.tvTotal.setText(Support.decimalFormat(sl * billOneList.get(position).getPrice()) + " VNĐ");
                 billOneList.get(position).setTotalMoney(totalMoney);
-                Log.e("check: ", String.valueOf(billOneList.get(position).getSl()));
             }
         });
     }
@@ -86,7 +87,7 @@ public class BillPreviewAdapter extends RecyclerView.Adapter<BillPreviewAdapter.
         private ImageView imgLogo;
         private TextView tvName;
         private TextView tvTotal;
-        private ImageButton btnTang;
+//        private ImageButton btnTang;
         private TextView tvSl;
         private ImageButton btnGiam;
 
@@ -95,7 +96,7 @@ public class BillPreviewAdapter extends RecyclerView.Adapter<BillPreviewAdapter.
             imgLogo = (ImageView) itemView.findViewById(R.id.imgLogo);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvTotal = (TextView) itemView.findViewById(R.id.tvTotal);
-            btnTang = (ImageButton) itemView.findViewById(R.id.btnTang);
+//            btnTang = (ImageButton) itemView.findViewById(R.id.btnTang);
             tvSl = (TextView) itemView.findViewById(R.id.tvSl);
             btnGiam = (ImageButton) itemView.findViewById(R.id.btnGiam);
         }
