@@ -137,6 +137,11 @@
                             <% } %>
                                                          value="Food">Thức ăn
                     </option>
+                    <option
+                    <% if (findFood.type == "Other") { %> selected
+                            <% } %>
+                                                         value="Other">Khác
+                    </option>
                 </select>
             </div>
 

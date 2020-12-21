@@ -154,9 +154,11 @@
         <div class="jumbotron">
             <h1 class="display-6">Mã hoá đơn: <%= bills.billCode %></h1>
             <h3 class="display-6">Ngày giờ: <%= bills.dateBill %></h3>
+            <h3 class="display-6">Nhân viên: <%= bills.nameOrder %></h3>
+            <h3 class="display-6">Thu ngân: <%= bills.nameCashier %></h3>
             <h3 class="display-6">Số bàn: <%= bills.tableCode %></h3>
             <h3 class="display-6" style="color: #00B7FF">Tổng giá: <%= bills.totalPrice %></h3>
-            <h3 class="display-6" style="color: red">Trạng thái: <%= bills.status %></h3>
+            <h3 class="display-6" style="color: green">Trạng thái: <%= bills.status %></h3>
             <table class="table table-stripped">
                 <thead align="center">
                 <th>Tên món ăn</th>

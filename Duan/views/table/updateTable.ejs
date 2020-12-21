@@ -155,6 +155,7 @@
             <h6><label for="formGroupExampleInput">Số bàn</label></h6>
             <input type="number" class="form-control" id="formGroupExampleInput" name="tableCode"
                    value="<%= findTable.tableCode %>" placeholder="Bàn số">
+            <span id="tableCodes-err" class="validate-err text-danger"></span>
         </div>
 
         <div class="form-group" id="formAmount">
@@ -186,8 +187,12 @@
         let isValid = true;
         $('.validate-err ').text("");
         // kiểm tra từng thành phần, nếu thiếu thành phần nào thì isValid => false
+        let tableCode = $('[name="tableCode"]').val();
         let tableSeats = $('[name="tableSeats"]').val();
-
+        if(parseInt(tableCode)<0|| tableCode.length<=0){
+            $('#tableCodes-err').text("Hãy nhập số bàn( số bàn phải lớn hơn 0)");
+            isValid = false;
+        }
         if(parseInt(tableSeats)<0|| tableSeats.length<=0){
             $('#tableSeats-err').text("Hãy nhập số ghế( số ghế phải lớn hơn 0)");
             isValid = false;
