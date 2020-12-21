@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        Support.hideSoftKeyboard(LoginActivity.this);
         initPermission();
         setAnimation();
         getSharedPreferences(getSharedPreferences("dataLogin", MODE_PRIVATE));

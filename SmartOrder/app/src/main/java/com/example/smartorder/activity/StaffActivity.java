@@ -43,6 +43,7 @@ public class StaffActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff);
+        Support.hideSoftKeyboard(StaffActivity.this);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frq, new StaffFragment(), Constants.fragmentTableStaff).commit();
 
