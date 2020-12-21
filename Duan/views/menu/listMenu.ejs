@@ -205,6 +205,10 @@
                             <a class="nav-link " id="home-tab" data-toggle="tab" href="#drink" role="tab"
                                aria-controls="changePassword" aria-selected="true">Đồ uống</a>
                         </li>
+                        <li class="nav-tabs" style="margin: 0px">
+                            <a class="nav-link " id="home-tab" data-toggle="tab" href="#other" role="tab"
+                               aria-controls="changePassword" aria-selected="true">Khác</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -226,7 +230,7 @@
                                             <h5 class="dish-title"><a
                                                         href="/menus/<%= listFood[i]._id %>/update"><%= listFood[i].name %></a>
                                             </h5>
-                                            <span class="dish-meta"> Type: <%= listFood[i].type %></span>
+
                                             <div class="dish-price">
                                                 <p>Giá: <%= listFood[i].price %>đ</p>
                                             </div>
@@ -270,12 +274,54 @@
                                             <h5 class="dish-title"><a
                                                         href="/menus/<%= listDrink[i]._id %>/update"><%= listDrink[i].name %></a>
                                             </h5>
-                                            <span class="dish-meta">Số lượng: <%= listDrink[i].amount %></span>
+
                                             <div class="dish-price">
                                                 <p>Giá: <%= listDrink[i].price %>đ</p>
                                             </div>
                                             <a onclick="return confirm('Bạn có muốn xóa đồ uống này')"
                                                href="/menus/<%= listDrink[i]._id %>/delete"
+                                               class="btn btn-sm btn-danger ">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="/menus?page=1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=2">2</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=3">3</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=4">4</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=5">5</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=6">6</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=7">7</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=8">8</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=9">9</a></li>
+                        <li class="page-item"><a class="page-link" href="/menus?page=10">10</a></li>
+                    </ul>
+                </div>
+
+                <div class="tab-pane fade " id="other" role="tabpanel">
+                    <div class="menu-block">
+                        <h4 class="menu-title">Khác</h4>
+                        <% for (var i = 0; i < listOther.length; i++){ %>
+                            <div class="menu-content">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                        <div class="dish-img"><a href="#"><img src="<%= listOther[i].image %>" alt=""
+                                                                               width="250px" height="200px"></a></div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <div class="dish-content">
+                                            <h5 class="dish-title"><a
+                                                        href="/menus/<%= listOther[i]._id %>/update"><%= listOther[i].name %></a>
+                                            </h5>
+
+                                            <div class="dish-price">
+                                                <p>Giá: <%= listOther[i].price %>đ</p>
+                                            </div>
+                                            <a onclick="return confirm('Bạn có muốn xóa đồ uống này')"
+                                               href="/menus/<%= listOther[i]._id %>/delete"
                                                class="btn btn-sm btn-danger ">Delete</a>
                                         </div>
                                     </div>

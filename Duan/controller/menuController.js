@@ -5,12 +5,13 @@ module.exports.getListMenu = async (req, res) => {
     let keyword = req.query.keyword == undefined ? "" : req.query.keyword;
     let listFood = await menu.find({type: "Food", name: new RegExp(keyword, 'i')});
     let listDrink = await menu.find({type: "Drink", name: new RegExp(keyword, 'i')});
+    let listOther = await menu.find({type: "Other", name: new RegExp(keyword, 'i')});
     var page = parseInt(req.query.page) || 1;
     var perPage = 4;
     var start = (page - 1) * perPage;
     var end = page * perPage;
     console.log(listFood.slice(start, end));
-    res.render('menu/listMenu', {listFood:listFood.slice(start, end), listDrink:listDrink.slice(start, end), keyword});
+    res.render('menu/listMenu', {listFood:listFood.slice(start, end), listDrink:listDrink.slice(start, end),listOther:listOther.slice(start, end), keyword});
 }
 module.exports.getCreate = (req, res) => {
     res.render('menu/createMenu', {err: false})

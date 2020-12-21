@@ -61,37 +61,33 @@
         #item_User:hover {
             background: deepskyblue;
         }
-        .pagination > li > a
-        {
+
+        .pagination > li > a {
             background-color: white;
             color: green
         }
 
-        .page-item.active .page-link
-        {
-            background-color:green;
-            border-color:green
+        .page-item.active .page-link {
+            background-color: green;
+            border-color: green
         }
 
         .pagination > li > a:focus,
         .pagination > li > a:hover,
         .pagination > li > span:focus,
-        .pagination > li > span:hover
-        {
+        .pagination > li > span:hover {
             color: green;
             background-color: green;
             border-color: #ddd;
         }
 
-        .pagination > .active > a
-        {
+        .pagination > .active > a {
             color: green;
             background-color: green;
             border: solid 1px green;
         }
 
-        .pagination > .active > a:hover
-        {
+        .pagination > .active > a:hover {
             background-color: green;
             border: solid 1px green;
         }
@@ -202,16 +198,18 @@
                             <h6 class="mb-0 mt-0">Số bàn : <%= listTable[i].tableCode %></h6>
                             <span>Chỗ ngồi : <%= listTable[i].tableSeats %></span>
                             <div>
-                            <a href="/tables/<%= listTable[i]._id %>/delete"
-                               onclick="return confirm('Bạn có muốn xóa bàn này')" class="btn btn-danger btn-sm">Xóa</a>
-                            <a href="/tables/<%= listTable[i]._id %>/update" class="btn btn-sm btn-primary">Cập nhật</a>
+                                <a href="/tables/<%= listTable[i]._id %>/delete"
+                                   onclick="return confirm('Bạn có muốn xóa bàn này')"
+                                   class="btn btn-danger btn-sm">Xóa</a>
+                                <a href="/tables/<%= listTable[i]._id %>/update" class="btn btn-sm btn-primary">Cập
+                                    nhật</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-        </div>
 
-        <% } %>
-    </div>
+            <% } %>
+        </div>
         <ul class="pagination justify-content-center">
             <li class="page-item"><a class="page-link" href="/tables?page=1">1</a></li>
             <li class="page-item"><a class="page-link" href="/tables?page=2">2</a></li>
@@ -225,16 +223,22 @@
             <li class="page-item"><a class="page-link" href="/tables?page=10">10</a></li>
         </ul>
 
-</div>
+    </div>
 
 </div>
 <form method="get" action="/tables/create">
     <button class="kc_fab_main_btn" type="submit">+</button>
 </form>
-
-
-<!-- Kết thúc phần nội dung chính -->
-
+<script>
+    $('#demo').pagination({
+        dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 195],
+    callback: function(data, pagination) {
+        // template method of yourself
+        var html = template(data);
+        dataContainer.html(html);
+    }
+    })
+</script>
 
 </div>
 </body>
