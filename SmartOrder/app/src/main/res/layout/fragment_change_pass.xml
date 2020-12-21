@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
-            android:text="Current Pass"
+            android:text="Mật khẩu cũ"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
         <EditText
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
-            android:text="New Pass"
+            android:text="Mật khẩu mới"
             app:layout_constraintTop_toBottomOf="@id/edtCurrentPass" />
 
         <EditText
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_20sdp"
             android:gravity="center"
-            android:text="Comfirm Pass"
+            android:text="Nhập lại mật khẩu mới"
             app:layout_constraintTop_toBottomOf="@id/edtNewPass" />
 
         <EditText
@@ -104,17 +104,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvComfirmPass" />
 
-        <ImageButton
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnChangePass"-->
+<!--            android:layout_width="@dimen/_240sdp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_30sdp"-->
+<!--            android:background="@drawable/bg_btn_save_change_pass"-->
+<!--            android:gravity="center"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/edtComfirmPass" />-->
+
+
+        <Button
             android:id="@+id/btnChangePass"
-            android:layout_width="@dimen/_240sdp"
+            android:text="Lưu"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
-            android:background="@drawable/bg_btn_save_change_pass"
+            android:backgroundTint="@color/bg_bottombar"
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edtComfirmPass" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

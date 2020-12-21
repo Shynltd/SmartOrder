@@ -107,14 +107,24 @@
                 android:hint="Địa chỉ" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnSaveChange"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="@dimen/_30sdp"-->
+<!--            android:background="@drawable/btn_update_profile"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/tvloAddress" />-->
+        <Button
             android:id="@+id/btnSaveChange"
+            android:text="Lưu thay đổi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_30sdp"
-            android:background="@drawable/btn_update_profile"
             app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/teal_700"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvloAddress" />
+            app:layout_constraintTop_toBottomOf="@id/tvloAddress"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
